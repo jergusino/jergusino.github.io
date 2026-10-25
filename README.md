@@ -18,7 +18,7 @@ If the repository has another name (for example `portfolio`), set `baseurl: "/po
 Every project is one file in `_projects/`. The easy way:
 
 ```bash
-tools/new-project.sh "Názov projektu" video      # video | motion | design | code
+tools/new-project.sh "Názov projektu"
 ```
 
 It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/projects/`, newest first; a click opens its page. No other file needs to change.
@@ -30,7 +30,7 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 | Field | Required | What it does |
 |---|---|---|
 | `title` | yes | Headline of the page and the row in the list |
-| `type` | yes | `video`, `motion`, `design` or `code` (defined in `_data/types.yml`) |
+| `type` | yes | `design` (the site publishes design work only; defined in `_data/types.yml`) |
 | `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the project** until that day |
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |

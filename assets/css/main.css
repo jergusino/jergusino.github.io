@@ -143,7 +143,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 .quiet-line { font: inherit; font-size: clamp(1.4rem, 2.4vw, 2.6rem); text-align: center; }
 
 /* ── Project list ──────────────────────────────────────────────────────────── */
-.list { padding: 0 var(--F4); }
+.list { padding: 0 var(--F); }   /* same left edge as the title */
 
 .filters { display: flex; flex-wrap: wrap; gap: 0.4em 1.8em; padding: 0 0 calc(var(--F) * 2); margin-top: var(--F4); }
 .filters[hidden], .empty[hidden] { display: none; }
@@ -159,7 +159,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--F);
-  padding-bottom: calc((100vw - 2 * var(--F4)) / 4 * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
+  padding-bottom: calc((100vw - 2 * var(--F)) / 4 * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
 }
 .pcard[hidden] { display: none; }
 .pcard:nth-child(4n+2), .pcard:nth-child(4n+4) { transform: translateY(calc(50% + var(--F) / 2)); }
@@ -180,12 +180,12 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 @media (prefers-reduced-motion: reduce) { .pcard a::before { transition: none; } }
 @media (max-width: 999px) {
-  .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 3 * 0.72 + var(--F)); }
+  .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F)) / 3 * 0.72 + var(--F)); }
   .pcard:nth-child(4n+2), .pcard:nth-child(4n+4) { transform: none; }
   .pcard:nth-child(3n+2) { transform: translateY(calc(50% + var(--F) / 2)); }
 }
 @media (max-width: 640px) {
-  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 2 * 0.72 + var(--F)); }
+  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F)) / 2 * 0.72 + var(--F)); }
   .pcard:nth-child(3n+2) { transform: none; }
   .pcard:nth-child(2n) { transform: translateY(calc(50% + var(--F) / 2)); }
 }

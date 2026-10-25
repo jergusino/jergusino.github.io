@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Usage: tools/new-project.sh "Názov projektu" video|motion|design|code
+# Usage: tools/new-project.sh "Názov projektu"
 set -euo pipefail
-title="${1:?Usage: tools/new-project.sh \"Názov projektu\" video|motion|design|code}"
-type="${2:?Give a type: video, motion, design or code}"
-case "$type" in video|motion|design|code) ;; *) echo "Type must be video, motion, design or code"; exit 1;; esac
+title="${1:?Usage: tools/new-project.sh \"Názov projektu\"}"
+type="${2:-design}"
+case "$type" in design) ;; *) echo "Only design projects are published on this site"; exit 1;; esac
 
 slug=$(python3 - "$title" <<'PY'
 import re, sys, unicodedata
