@@ -151,7 +151,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 /* ── Project list ──────────────────────────────────────────────────────────── */
 .list { padding: 0 var(--F); }   /* same left edge as the title */
 
-.controls { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em calc(var(--F) * 3); padding: 0 0 calc(var(--F) * 2); margin-top: var(--F4); }
+.controls { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em calc(var(--F) * 3); padding: 0 0 calc(var(--F) * 2); margin-top: calc(var(--F) * 2); }
 .controls[hidden], .empty[hidden] { display: none; }
 .ctl { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2em 1.2em; }
 .ctl-l { color: var(--yellow); }                     /* Yellow marks what is a pointer: the caption of each control */
