@@ -235,12 +235,12 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 /* ── Footer: quiet, one small centred thing ────────────────────────────────── */
 .foot {
   min-height: 0;
-  display: grid; place-content: center; justify-items: center; text-align: center; gap: 0.6em;
-  padding: calc(var(--F) * 6) var(--F) calc(var(--F) * 12);
+  display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 0.6em;
+  margin-top: calc(var(--F) * 6); padding: 0 0 calc(var(--F) * 12);
 }
-.foot::before {                                      /* a short Yellow bar, the bar of the logo, as the divider */
-  content: ""; display: block; width: calc(var(--F) * 5); height: calc(var(--F) * 0.7);
-  background: var(--yellow); margin-bottom: calc(var(--F) * 4);
+.foot::before {                                      /* a thin Yellow line across the page as the divider */
+  content: ""; display: block; justify-self: stretch; height: 2px; background: var(--yellow);
+  margin-bottom: calc(var(--F) * 4);
 }
 .handle { font-size: clamp(1.3rem, calc(100vw / 30), 3.4rem); line-height: 1; overflow-wrap: anywhere; }
 .handle a:hover, .handle a:focus-visible { color: var(--yellow); }
