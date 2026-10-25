@@ -4,7 +4,7 @@
   {% unless p.placeholder %}
   {% assign th = p.thumb | default: p.cover %}
   {% if th %}
-  <li class="pcard" data-type="{{ p.type }}">
+  <li class="pcard" data-type="{{ p.type }}" data-date="{{ p.date | date: '%Y%m%d' }}" data-title="{{ p.title | escape }}" data-search="{{ p.title | append: ' ' | append: p.type | downcase | escape }}">
     <a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}">
       <img src="{{ th | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy">
     </a>

@@ -7,7 +7,7 @@ layout: default
 {% assign acc = "" %}
 {% for c in accents %}{% if u contains c %}{% assign acc = "has-accent" %}{% endif %}{% endfor %}
 
-<section class="hero hero--page {{ acc }}">
+<section class="hero hero--page hero--project {{ acc }}">
   <div class="lockup">
     {% assign lead_text = page.lead | default: t.lead %}
     {% include lead.html text=lead_text %}

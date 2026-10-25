@@ -20,12 +20,23 @@ summary: "Dizajn a plagáty od Jergušina."
     {% for p in site.projects %}{% if p.type == t.key and p.placeholder != true %}{% assign has = true %}{% endif %}{% endfor %}
     {% if has %}{% assign present = present | append: t.key | append: "," %}{% assign n = n | plus: 1 %}{% endif %}
   {% endfor %}
-  {% if n > 1 %}
-  <div class="filters" role="group" aria-label="Filter projektov" hidden>
-    <button type="button" data-filter="all" aria-pressed="true">všetko</button>
-    {% for t in site.data.types %}{% assign k = t.key | append: "," %}{% if present contains k %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endif %}{% endfor %}
+  <div class="controls" hidden>
+    <div class="ctl" role="group" aria-label="Kategória">
+      <span class="ctl-l">kategória</span>
+      <button type="button" data-filter="all" aria-pressed="true">všetko</button>
+      {% for t in site.data.types %}{% assign k = t.key | append: "," %}{% if present contains k %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endif %}{% endfor %}
+    </div>
+    <div class="ctl" role="group" aria-label="Zoradenie">
+      <span class="ctl-l">zoradiť</span>
+      <button type="button" data-sort="new" aria-pressed="true">najnovšie</button>
+      <button type="button" data-sort="old" aria-pressed="false">najstaršie</button>
+      <button type="button" data-sort="az" aria-pressed="false">A–Z</button>
+    </div>
+    <label class="ctl ctl-search">
+      <span class="ctl-l">hľadať</span>
+      <input type="search" name="q" autocomplete="off" spellcheck="false" aria-label="Hľadať v projektoch">
+    </label>
   </div>
-  {% endif %}
   {% include project-grid.html limit=100 %}
-  <p class="empty" hidden>V tejto kategórii zatiaľ nič nie je.</p>
+  <p class="empty" hidden>Nič sa nenašlo.</p>
 </section>
