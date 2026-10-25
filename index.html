@@ -15,10 +15,11 @@ description: "som Jergušino. Dizajn a plagáty."
   <h2 id="proj-h" class="quiet-line">projekty</h2>
 </section>
 
-<section class="list">
-  {% include project-grid.html limit=6 %}
-  <p class="more"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
+<section class="list wall">
+  {% include project-grid.html limit=12 %}
 </section>
+
+<a class="all" href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a>
 
 <script>
   /* the bar falls from the very top of the screen: measure how far that is, in the wordmark's own units */

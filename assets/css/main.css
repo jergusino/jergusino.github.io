@@ -207,7 +207,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .empty { padding: var(--F) 0; }
 
 /* ── Project page: one left-aligned column, 4F margin, about 70 characters wide ─ */
-.prose { margin: var(--F4) 0 0 var(--F4); max-width: min(70ch, calc(100vw - 2 * var(--F4))); }
+.prose { margin: var(--F4) 0 0 var(--F); max-width: min(70ch, calc(100vw - 2 * var(--F4))); }
 .prose > * + * { margin-top: 1em; }
 .prose a { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .prose a:hover, .prose a:focus-visible { color: var(--cream); }
@@ -231,7 +231,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .prose .links a { color: var(--cream); text-decoration: none; }
 .prose .links a:hover, .prose .links a:focus-visible { color: var(--yellow); }
 
-.back { margin: calc(var(--F) * 3) 0 0 var(--F4); }
+.back { margin: calc(var(--F) * 3) 0 0 var(--F); }
 
 /* ── Footer: quiet, one small centred thing ────────────────────────────────── */
 .foot {
@@ -274,3 +274,15 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 @media print {
   html, body { background: #fff; color: #000; }
 }
+
+
+/* home: the poster wall is cut off hard after about two rows, then one big line leads to all projects */
+.wall { --cols: 4; --cw: calc((100vw - (var(--cols) + 1) * var(--F)) / var(--cols)); max-height: calc(var(--cw) * 10 / 7 * 2.4); overflow: hidden; }
+@media (max-width: 999px) { .wall { --cols: 3; } }
+@media (max-width: 640px) { .wall { --cols: 2; } }
+.all {
+  display: flex; align-items: center; justify-content: center; gap: 0.35em;
+  padding: calc(var(--F) * 3) var(--F); background: var(--ink);
+  font-size: clamp(2.2rem, 7vw, 7rem); line-height: 1; text-align: center;
+}
+.all svg { width: 0.9em; height: auto; flex: none; }
