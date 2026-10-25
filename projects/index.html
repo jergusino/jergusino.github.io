@@ -14,10 +14,18 @@ summary: "Motion graphics, dizajn, kód a videá od Jergušina."
 </section>
 
 <section class="list">
+  {% assign present = "" %}{% assign n = 0 %}
+  {% for t in site.data.types %}
+    {% assign has = false %}
+    {% for p in site.projects %}{% if p.type == t.key and p.placeholder != true %}{% assign has = true %}{% endif %}{% endfor %}
+    {% if has %}{% assign present = present | append: t.key | append: "," %}{% assign n = n | plus: 1 %}{% endif %}
+  {% endfor %}
+  {% if n > 1 %}
   <div class="filters" role="group" aria-label="Filter projektov" hidden>
     <button type="button" data-filter="all" aria-pressed="true">všetko</button>
-    {% for t in site.data.types %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endfor %}
+    {% for t in site.data.types %}{% assign k = t.key | append: "," %}{% if present contains k %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endif %}{% endfor %}
   </div>
+  {% endif %}
   {% include project-grid.html limit=100 %}
   <p class="empty" hidden>V tejto kategórii zatiaľ nič nie je.</p>
 </section>
