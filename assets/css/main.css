@@ -118,7 +118,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 .wm-mask { line-height: 0; clip-path: inset(-100vh 0 0 0); }   /* clips the letters below the baseline, leaves the sky open for the bar */
 .wordmark { display: block; width: 100%; height: auto; overflow: visible; }
-.wm-l { fill: var(--cream); }
+.wm-l { fill: var(--cream); fill-rule: evenodd; }
 .wm-bar { fill: var(--yellow); }
 
 /* pages: script + Slithen headline */
@@ -241,7 +241,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 .wm-mask { line-height: 0; clip-path: inset(-100vh 0 0 0); }   /* clips the letters below the baseline, leaves the sky open for the bar */
 .wordmark { display: block; width: 100%; height: auto; overflow: visible; }
-.wm-l { fill: var(--cream); }
+.wm-l { fill: var(--cream); fill-rule: evenodd; }
 .wm-bar { fill: var(--yellow); }
 
 /* pages: script + Slithen headline */

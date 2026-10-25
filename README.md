@@ -73,7 +73,7 @@ Needs Ruby. Not needed to publish.
 ## Brand rules the code follows
 
 - Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
-- Wordmark drawn from Slithen outlines with the exact numbers of the guide (1019 × 262, S 114 wide, bar 46 tall, 8.5 px gaps). It is in `_includes/wordmark.svg`; `assets/img/mark.svg` is the Š mark used as favicon.
+- The wordmark is traced from the business card itself (`Front.png`), because the card's letters are edited versions of Slithen. It is in `_includes/wordmark.svg` (one path per letter); `assets/img/mark.svg` is the Š mark used as favicon. To regenerate after changing the card: `python3 -I tools/trace_card.py Front.png .`
 - Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the handle, centred).
 - Motion on the home page is copied frame by frame from `title-card-jergusino.mp4`: a short Ink hold, the letters rise one by one from the baseline, then the bar falls from the very top of the screen, overshoots 10% and settles. *i am* writes on beside the letters (the one addition). Hard cuts and masks, no fades. It is switched off for visitors who prefer reduced motion.
 - Links and filters change colour on hover and focus, never opacity.
@@ -83,7 +83,7 @@ Needs Ruby. Not needed to publish.
 - **Borisna** is a *demo* font by Koplexs Studio: free for private, non-profit use only. The site currently uses it as a personal site. If the portfolio is used to get paid work, buy the commercial licence (koplexsstudio@gmail.com) before that.
 - **Slithen** came without a licence file. Check its terms where you got it.
 - **Edwardian Script ITC** is © International Typeface Corporation / Microsoft. The file allows editable embedding, but it is a commercial font, so check that your licence covers web use.
-- The fonts in `assets/fonts/` were extended with the Slovak letters Č Ľ Ť Ň Ď Ž ľ ť ď by copying carons and apostrophes from existing letters. `tools/build_assets.py` regenerates them (and the wordmark) from the original files. Check Slovak text with `ĺ`, `ŕ`, `Ĺ`, `Ŕ`: those four letters are not in these fonts.
+- The fonts in `assets/fonts/` were extended with the Slovak letters Č Ľ Ť Ň Ď Ž ľ ť ď by copying carons and apostrophes from existing letters. `tools/build_assets.py` regenerates them from the original files. Check Slovak text with `ĺ`, `ŕ`, `Ĺ`, `Ŕ`: those four letters are not in these fonts.
 
 ## Files
 
@@ -94,5 +94,5 @@ _projects/           one Markdown file per project
 _templates/          project template (not published)
 _layouts/ _includes/ page templates, wordmark, header, footer
 assets/              css, js, fonts, images
-tools/               new-project.sh, twotone.py, build_assets.py
+tools/               new-project.sh, twotone.py, build_assets.py (fonts), trace_card.py (wordmark)
 ```

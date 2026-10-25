@@ -27,7 +27,7 @@ description: "i am Jergušino. Motion graphics, dizajn, kód a videá."
     if (!m || !b) return;
     function set() {
       var r = m.getBoundingClientRect();
-      var k = r.width / 1019;                       /* screen px per drawing unit */
+      var k = r.width / 1020;                       /* screen px per drawing unit */
       b.style.setProperty('--drop', '-' + ((r.top + window.scrollY) / k + 50).toFixed(1) + 'px');
       /* the fall takes as long as it needs to look the same on every screen: 0.4 s on a laptop, up to 0.9 s on a tall phone */
       var far = (r.top + window.scrollY) / window.innerWidth;           /* distance in screen widths */
