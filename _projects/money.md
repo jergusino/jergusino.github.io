@@ -1,6 +1,6 @@
 ---
 title: "Money"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-04-11
 summary: "Plagát Money."

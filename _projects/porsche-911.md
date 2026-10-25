@@ -1,6 +1,6 @@
 ---
 title: "Porsche 911"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-01-31
 summary: "Plagát Porsche 911."

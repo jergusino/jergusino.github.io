@@ -1,6 +1,6 @@
 ---
 title: "Le Mans"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-02-21
 summary: "Plagát Le Mans."

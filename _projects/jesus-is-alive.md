@@ -1,6 +1,6 @@
 ---
 title: "Jesus Is Alive"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-06-27
 summary: "Plagát Jesus Is Alive."

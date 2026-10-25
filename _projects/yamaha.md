@@ -1,6 +1,6 @@
 ---
 title: "Yamaha"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-03-01
 summary: "Plagát Yamaha."

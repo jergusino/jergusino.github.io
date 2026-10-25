@@ -1,6 +1,6 @@
 ---
 title: "Ninjago"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-06-27
 summary: "Plagát Ninjago."

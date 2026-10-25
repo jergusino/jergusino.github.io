@@ -1,6 +1,6 @@
 ---
 title: "Mars"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-02-06
 summary: "Plagát Mars."

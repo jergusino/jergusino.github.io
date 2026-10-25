@@ -2,8 +2,8 @@
 # Usage: tools/new-project.sh "Názov projektu"
 set -euo pipefail
 title="${1:?Usage: tools/new-project.sh \"Názov projektu\"}"
-type="${2:-design}"
-case "$type" in design) ;; *) echo "Only design projects are published on this site"; exit 1;; esac
+type="${2:-plagat}"
+grep -q "key: $type\$" "$(dirname "$0")/../_data/types.yml" || { echo "Unknown type '$type'. Add it to _data/types.yml first."; exit 1; }
 
 slug=$(python3 - "$title" <<'PY'
 import re, sys, unicodedata

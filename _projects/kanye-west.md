@@ -1,6 +1,6 @@
 ---
 title: "Kanye West"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-03-08
 summary: "Plagát Kanye West."

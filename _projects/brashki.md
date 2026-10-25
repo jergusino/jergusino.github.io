@@ -1,6 +1,6 @@
 ---
 title: "Braski"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-06-02
 summary: "Plagát Braski."

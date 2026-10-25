@@ -1,6 +1,6 @@
 ---
 title: "Tame Impala"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-01-06
 summary: "Plagát Tame Impala."

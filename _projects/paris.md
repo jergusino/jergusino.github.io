@@ -1,6 +1,6 @@
 ---
 title: "Paris"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-04-07
 summary: "Plagát Paris."

@@ -1,6 +1,6 @@
 ---
 title: "Lack"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-07-07
 summary: "Plagát Lack."

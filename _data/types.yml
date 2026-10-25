@@ -1,6 +1,6 @@
-# Project types. This site shows design work only; more types can be added here later.
-# `key` goes into a project's front matter as `type:`.
+# Project types. `key` goes into a project's front matter as `type:`.
 # `lead` is the yellow script line above the title on the project page (3 words at most, lowercase).
-- key: design
-  label: dizajn
-  lead: dizajn
+# New categories: add a block here, then use its key as `type:` in a project.
+- key: plagat
+  label: plagát
+  lead: plagát

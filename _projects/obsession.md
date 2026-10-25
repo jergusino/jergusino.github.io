@@ -1,6 +1,6 @@
 ---
 title: "Obsession"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-07-09
 summary: "Plagát Obsession."

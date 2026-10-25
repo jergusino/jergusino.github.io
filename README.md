@@ -30,7 +30,7 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 | Field | Required | What it does |
 |---|---|---|
 | `title` | yes | Headline of the page and the row in the list |
-| `type` | yes | `design` (the site publishes design work only; defined in `_data/types.yml`) |
+| `type` | yes | `plagat` (the category; new ones are added in `_data/types.yml`) |
 | `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the project** until that day |
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |

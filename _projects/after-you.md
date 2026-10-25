@@ -1,6 +1,6 @@
 ---
 title: "After You"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-05-23
 summary: "Plagát After You."

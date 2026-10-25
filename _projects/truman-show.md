@@ -1,6 +1,6 @@
 ---
 title: "The Truman Show"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-03-07
 summary: "Plagát The Truman Show."

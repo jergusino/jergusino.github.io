@@ -1,6 +1,6 @@
 ---
 title: "Backrooms"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-06-07
 summary: "Plagát Backrooms."

@@ -1,6 +1,6 @@
 ---
 title: "Fight Club"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-01-17
 summary: "Plagát Fight Club."

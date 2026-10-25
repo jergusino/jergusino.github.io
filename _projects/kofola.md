@@ -1,6 +1,6 @@
 ---
 title: "Kofola"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-03-28
 summary: "Plagát Kofola."

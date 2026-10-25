@@ -1,6 +1,6 @@
 ---
 title: "Let It Happen"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-05-09
 summary: "Plagát Let It Happen."

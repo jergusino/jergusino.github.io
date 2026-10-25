@@ -1,6 +1,6 @@
 ---
 title: "Skateboarding"
-type: design
+type: plagat
 lead: "plagát"
 date: 2026-05-17
 summary: "Plagát Skateboarding."
