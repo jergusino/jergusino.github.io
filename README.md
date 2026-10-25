@@ -61,7 +61,7 @@ Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/proje
 
 ## Change the basics
 
-Everything personal is in `_config.yml`: handle, Instagram link (the handle in the footer links to it), other social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
+Everything personal is in `_config.yml`: handle, email (shown in the footer, as on the card back), Instagram link, other social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
 
 ## Preview on your computer (optional)
 
@@ -76,9 +76,9 @@ Needs Ruby. Not needed to publish.
 
 - Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
 - The wordmark is traced from the business card itself (`Front.png`), because the card's letters are edited versions of Slithen. It is in `_includes/wordmark.svg` (one path per letter); `assets/img/mark.svg` is the Š mark used as favicon. To regenerate after changing the card: `python3 -I tools/trace_card.py Front.png .`
-- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the handle, centred).
+- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the email from the card back, centred). The nav shows the full wordmark.
 - Motion on the home page is copied frame by frame from `title-card-jergusino.mp4`: a short Ink hold, the letters rise one by one from the baseline, then the bar falls from the very top of the screen, overshoots 10% and settles. *i am* writes on beside the letters (the one addition). Hard cuts and masks, no fades. It is switched off for visitors who prefer reduced motion.
-- Links and filters change colour on hover and focus, never opacity.
+- Links and filters change colour on hover and focus, never opacity. On a poster, hover drops the Yellow bar of the logo onto its top edge (0.2 s, soft landing; it leaves in 0.1 s).
 
 ## Fonts and licences, please read
 
