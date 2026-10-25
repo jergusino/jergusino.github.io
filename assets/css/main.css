@@ -88,7 +88,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
   align-items: flex-start;
 }
 .top-mark { display: block; line-height: 0; }
-.top-mark img { width: 48px; height: 48px; }
+.top-mark img { width: 150px; height: auto; }
 .top-nav { margin-left: auto; text-align: right; }
 .top-nav a { display: block; }
 .top-nav a[aria-current] { color: var(--yellow); }
@@ -159,22 +159,35 @@ a:hover, a:focus-visible { color: var(--yellow); }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--F);
-  padding-bottom: calc((100vw - 2 * var(--F4)) / 4 * 0.72);        /* room for the half-card the even columns hang down */
+  padding-bottom: calc((100vw - 2 * var(--F4)) / 4 * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
 }
 .pcard[hidden] { display: none; }
-.pcard:nth-child(4n+2), .pcard:nth-child(4n+4) { transform: translateY(50%); }
-.pcard a { display: block; aspect-ratio: 7 / 10; }
+.pcard:nth-child(4n+2), .pcard:nth-child(4n+4) { transform: translateY(calc(50% + var(--F) / 2)); }
+.pcard a { display: block; position: relative; overflow: hidden; aspect-ratio: 7 / 10; }
 .pcard img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.pcard a:hover, .pcard a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 6px; }
+/* hover: the Yellow bar of the logo drops onto the top edge of the poster (hard-edged, no fade);
+   it leaves faster than it comes (exits accelerate). Touch screens skip it. */
+.pcard a::before {
+  content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0;
+  height: calc(var(--F) * 1.1); background: var(--yellow);
+  transform: translateY(-110%);
+  transition: transform 0.1s cubic-bezier(0.6, 0, 1, 1);
+}
+.pcard a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 6px; }
+.pcard a:focus-visible::before { transform: none; }
+@media (hover: hover) {
+  .pcard a:hover::before { transform: none; transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .pcard a::before { transition: none; } }
 @media (max-width: 999px) {
-  .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 3 * 0.72); }
+  .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 3 * 0.72 + var(--F)); }
   .pcard:nth-child(4n+2), .pcard:nth-child(4n+4) { transform: none; }
-  .pcard:nth-child(3n+2) { transform: translateY(50%); }
+  .pcard:nth-child(3n+2) { transform: translateY(calc(50% + var(--F) / 2)); }
 }
 @media (max-width: 640px) {
-  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 2 * 0.72); }
+  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: calc((100vw - 2 * var(--F4)) / 2 * 0.72 + var(--F)); }
   .pcard:nth-child(3n+2) { transform: none; }
-  .pcard:nth-child(2n) { transform: translateY(50%); }
+  .pcard:nth-child(2n) { transform: translateY(calc(50% + var(--F) / 2)); }
 }
 
 .more { padding: calc(var(--F) * 2) 0 var(--F4); }
@@ -213,7 +226,8 @@ a:hover, a:focus-visible { color: var(--yellow); }
   display: grid; place-content: center; justify-items: center; text-align: center; gap: 0.6em;
   padding: var(--F4) var(--F);
 }
-.handle { font-size: clamp(1.6rem, calc(100vw / 21), 3.4rem); line-height: 1; }
+.handle { font-size: clamp(1.3rem, calc(100vw / 30), 3.4rem); line-height: 1; overflow-wrap: anywhere; }
+.handle a:hover, .handle a:focus-visible { color: var(--yellow); }
 .handle .at { color: var(--yellow); }
 .social { font-size: var(--body); }
 .social { list-style: none; display: flex; gap: 1.4em; flex-wrap: wrap; justify-content: center; }
@@ -239,7 +253,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 
 /* ── Phones ────────────────────────────────────────────────────────────────── */
 @media (max-width: 520px) {
-  .top-mark img { width: 40px; height: 40px; }
+  .top-mark img { width: 120px; }
   .hero--page { --title-size: calc(var(--T) * 3.4); }
   .hero--projects { --title-size: calc(var(--T) * 4); }
 }

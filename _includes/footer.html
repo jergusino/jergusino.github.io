@@ -1,5 +1,5 @@
 <footer class="foot" id="kontakt">
-  <p class="handle"><a href="{{ site.instagram }}" target="_blank" rel="me noopener"><span class="at">@</span>{{ site.handle | remove_first: "@" }}</a></p>
+  <p class="handle"><a href="mailto:{{ site.email }}">{{ site.email | replace: "@", '<span class="at">@</span>' }}</a></p>
   {% if site.social.size > 0 %}
   <ul class="social">
     {% for s in site.social %}<li><a href="{{ s.url }}" rel="me noopener">{{ s.label }}</a></li>{% endfor %}
