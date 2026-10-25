@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.summary | default: site.description | escape }}">
+  <meta name="theme-color" content="#060909">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ page.summary | default: site.description | escape }}">
+  <meta property="og:image" content="{{ '/assets/img/og.png' | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/Slithen.woff' | relative_url }}" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/Borisna.woff' | relative_url }}" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body class="{{ page.body_class }}">
+  {% comment %} Two-tone filter: every pixel becomes exactly Ink or Cream (brand guide, "Images and footage"). {% endcomment %}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="twotone" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+      <feComponentTransfer>
+        <feFuncR type="discrete" tableValues="0.0235 0.9804"/>
+        <feFuncG type="discrete" tableValues="0.0353 0.9451"/>
+        <feFuncB type="discrete" tableValues="0.0353 0.8392"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+  {% include header.html %}
+
+  <main id="top">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  {% if page.filter %}<script src="{{ '/assets/js/filter.js' | relative_url }}" defer></script>{% endif %}
+</body>
+</html>

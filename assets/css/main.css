@@ -1,0 +1,253 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Jergušino: stylesheet. Built from the brand guide (v5).
+   Three colours, three fonts, nothing else.
+   No gradients, shadows, blur, transparency or fades: colour changes are hard.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Fonts ─ Slithen (headlines), Borisna (text), Edwardian Script ITC (script lead-ins).
+   Put Edwardian.woff2 / .woff / .ttf into assets/fonts/ (see README). */
+@font-face {
+  font-family: "Slithen";
+  src: url("../fonts/Slithen.woff") format("woff"), url("../fonts/Slithen.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Borisna";
+  src: url("../fonts/Borisna.woff") format("woff"), url("../fonts/Borisna.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Edwardian";
+  src: url("../fonts/Edwardian.woff2") format("woff2"), url("../fonts/Edwardian.woff") format("woff"),
+    url("../fonts/Edwardian.ttf") format("truetype");
+  font-display: swap;
+  /* pin the metrics so the gap above the wordmark is identical in every browser */
+  ascent-override: 85.06%;
+  descent-override: 32.81%;
+  line-gap-override: 0%;
+}
+
+:root {
+  /* colour */
+  --ink: #060909;
+  --cream: #faf1d6;
+  --yellow: #ffc600;
+
+  /* space and type tokens, all worked out from the width W (guide, section 5) */
+  --F: max(12px, calc(100vw / 70));          /* frame: outer margin of loud layouts */
+  --G: calc(var(--F) * 1.4);                 /* gap: script to the thing it introduces */
+  --F4: max(20px, calc(100vw * 4 / 70));     /* margin of text-heavy layouts (4F) */
+  --T: calc(100vw / 21);                     /* text token; headlines use 2T to 4T */
+
+  --f-head: "Slithen", "Impact", "Arial Narrow", sans-serif;
+  --f-text: "Borisna", Georgia, "Times New Roman", serif;
+  --f-script: "Edwardian", "Edwardian Script ITC", "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+
+  --body: clamp(1.0625rem, 0.95rem + 0.3vw, 1.375rem);   /* never below 17px */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--f-text);
+  font-size: var(--body);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
+img { display: block; max-width: 100%; height: auto; }
+::selection { background: var(--yellow); color: var(--ink); }
+
+/* Links: Cream with a Yellow marker. Hover and focus change colour, never opacity. */
+a { color: var(--cream); text-decoration: none; }
+a:hover, a:focus-visible { color: var(--yellow); }
+:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; }
+.arr { display: inline-block; width: 1.2em; height: 0.6em; fill: var(--yellow); vertical-align: 0.02em; margin-left: 0.2em; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Images are two-tone: every pixel is Ink or Cream. Own brand artwork opts out with .raw */
+.prose img, .yt img, .cover img, .gallery img { filter: url(#twotone); }
+.prose img.raw, .cover img.raw, .gallery img.raw { filter: none; }
+
+/* ── Header: the mark top-left, a small text group top-right ───────────────── */
+.top {
+  position: absolute;
+  z-index: 2;
+  top: var(--F);
+  left: var(--F);
+  right: var(--F);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.top-mark { display: block; line-height: 0; }
+.top-mark img { width: 48px; height: 48px; }
+.top-nav { margin-left: auto; text-align: right; }
+.top-nav a { display: block; }
+.top-nav a[aria-current] { color: var(--yellow); }
+
+/* ── Hero: loud, one big thing, anchored bottom-left at F ──────────────────── */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; }
+.hero--page { min-height: 72vh; min-height: 72svh; --title-size: calc(var(--T) * 3); }
+.hero--projects { --title-size: calc(var(--T) * 4); }
+
+.lockup { position: absolute; left: var(--F); right: var(--F); bottom: var(--F); }
+
+/* script lead-in: yellow, lowercase, left-aligned, G above what it introduces */
+.lead {
+  font-family: var(--f-script);
+  color: var(--yellow);
+  line-height: 1;
+  white-space: nowrap;
+  --d: 0.011em;                                     /* how far the deepest letter dips below the baseline */
+}
+.lead.desc { --d: 0.328em; }                        /* g j p q y f */
+
+/* home: the primary lockup (i am + JERGUSINO). Wordmark = W - 2F wide, 0.257 x as tall. */
+.hero--home { --wm-h: calc((100vw - 2 * var(--F)) * 0.257); }
+.hero--home .lead {
+  font-size: calc(var(--wm-h) * 0.771);           /* 0.29 x wordmark height, i-dot to baseline */
+  margin-bottom: calc(var(--G) + var(--d) - 0.24em);
+}
+.wm-mask { overflow: hidden; line-height: 0; }
+.wordmark { display: block; width: 100%; height: auto; }
+.wm-letters { fill: var(--cream); }
+.wm-bar { fill: var(--yellow); }
+
+/* pages: script + Slithen headline */
+.title {
+  font-family: var(--f-head);
+  font-weight: 400;
+  font-size: var(--title-size);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--cream);
+  overflow-wrap: anywhere;
+}
+.hero--page .lead {
+  font-size: calc(var(--title-size) * 0.54);       /* 0.29 x cap height of the headline */
+  margin-bottom: calc(var(--G) + var(--d) - 0.24em + var(--acc, 0px));
+}
+.hero--page.has-accent { --acc: calc(var(--title-size) * 0.28); }   /* clear of Š, Č, Ž... */
+
+/* ── Quiet break between sections: one centred line ────────────────────────── */
+.quiet-break { min-height: 45vh; min-height: 45svh; display: grid; place-items: center; }
+.quiet-line { font: inherit; font-size: clamp(1.4rem, 2.4vw, 2.6rem); text-align: center; }
+
+/* ── Project list ──────────────────────────────────────────────────────────── */
+.list { padding: 0 var(--F4); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 0.4em 1.8em; padding: 0 0 calc(var(--F) * 2); margin-top: var(--F4); }
+.filters[hidden], .empty[hidden] { display: none; }
+.filters button {
+  font: inherit; color: var(--cream); background: none; border: 0; padding: 0; cursor: pointer; border-radius: 0;
+}
+.filters button:hover { color: var(--yellow); }
+.filters button[aria-pressed="true"] { color: var(--yellow); }
+
+.plist { list-style: none; border-bottom: 2px solid var(--cream); }
+.prow { border-top: 2px solid var(--cream); }
+.prow[hidden] { display: none; }
+.prow a {
+  display: grid;
+  grid-template-columns: 4.5ch minmax(0, 1fr) auto auto;
+  column-gap: var(--F);
+  align-items: baseline;
+  padding: calc(var(--F) * 0.6) 0 calc(var(--F) * 1.2);
+}
+.prow-year, .prow-type { font-size: var(--body); }
+.prow-title {
+  font-family: var(--f-head);
+  font-size: calc(var(--T) * 2);
+  line-height: 0.9;
+  padding-top: 0.3em;                              /* headroom for Š, Á, Ž above the cap line */
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.prow a:hover .prow-title, .prow a:focus-visible .prow-title { color: var(--yellow); }
+.prow .arr { align-self: center; }
+
+.more { padding: calc(var(--F) * 2) 0 var(--F4); }
+.empty { padding: var(--F) 0; }
+
+@media (max-width: 760px) {
+  .prow a { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "year type arrow" "title title title"; row-gap: 0.6em; }
+  .prow-year { grid-area: year; }
+  .prow-type { grid-area: type; }
+  .prow .arr { grid-area: arrow; }
+  .prow-title { grid-area: title; font-size: calc(var(--T) * 2.6); }
+}
+
+/* ── Project page: one left-aligned column, 4F margin, about 70 characters wide ─ */
+.prose { margin: var(--F4) 0 0 var(--F4); max-width: min(70ch, calc(100vw - 2 * var(--F4))); }
+.prose > * + * { margin-top: 1em; }
+.prose a { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+.prose a:hover, .prose a:focus-visible { color: var(--cream); }
+.prose code { font-family: var(--f-text); border-bottom: 2px solid var(--cream); }
+.prose h2, .prose h3 { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; line-height: 0.9; font-size: calc(var(--T) * 1.2); margin-top: 2em; }
+
+.note { border-left: 6px solid var(--cream); padding-left: 1em; }
+
+.meta { display: grid; grid-template-columns: max-content 1fr; gap: 0.2em 1.5em; }
+.meta dt { color: var(--cream); }
+.meta dd { margin: 0; }
+
+.yt { display: block; margin-top: 2em; }
+.yt .cta { display: inline-block; margin-top: 0.6em; color: var(--cream); }
+.yt:hover .cta, .yt:focus-visible .cta { color: var(--yellow); }
+.cover, .gallery { margin-top: 2em; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--F); }
+
+.links { list-style: none; margin-top: 2em; }
+.links li + li { margin-top: 0.4em; }
+.prose .links a { color: var(--cream); text-decoration: none; }
+.prose .links a:hover, .prose .links a:focus-visible { color: var(--yellow); }
+
+.back { margin: calc(var(--F) * 3) 0 0 var(--F4); }
+
+/* ── Footer: quiet, one small centred thing ────────────────────────────────── */
+.foot {
+  min-height: 60vh; min-height: 60svh;
+  display: grid; place-content: center; justify-items: center; text-align: center; gap: 0.6em;
+  padding: var(--F4) var(--F);
+}
+.handle { font-size: clamp(1.6rem, calc(100vw / 21), 3.4rem); line-height: 1; }
+.handle .at { color: var(--yellow); }
+.mail, .social { font-size: var(--body); }
+.social { list-style: none; display: flex; gap: 1.4em; flex-wrap: wrap; justify-content: center; }
+
+/* ── Motion: the logo animation from the guide (about 1.6 s), cuts and masks only ──
+   0.2 s beat. Ink hold 2 beats, script writes on 3, wordmark rises 2, bar drops 1. */
+@keyframes write { from { clip-path: inset(-25% 100% -25% -5%); } to { clip-path: inset(-25% -5% -25% -5%); } }
+@keyframes rise { from { transform: translateY(101%); } to { transform: none; } }
+@keyframes drop {
+  from { transform: translateY(-140%); }
+  70%  { transform: translateY(10%); }
+  to   { transform: none; }
+}
+.hero--home .lead { animation: write 0.6s cubic-bezier(0.35, 0, 0.45, 1) 0.4s both; }
+.hero--home .wordmark { animation: rise 0.4s cubic-bezier(0.2, 0, 0, 1) 1s both; }
+.hero--home .wm-bar { transform-box: fill-box; animation: drop 0.2s cubic-bezier(0.2, 0, 0, 1) 1.4s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--home .lead, .hero--home .wordmark, .hero--home .wm-bar { animation: none; }
+}
+
+/* ── Phones ────────────────────────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .top-mark img { width: 40px; height: 40px; }
+  .hero--page { --title-size: calc(var(--T) * 3.4); }
+  .hero--projects { --title-size: calc(var(--T) * 4); }
+}
+
+@media print {
+  html, body { background: #fff; color: #000; }
+}

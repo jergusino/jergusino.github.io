@@ -1,0 +1,21 @@
+---
+layout: default
+body_class: home
+description: "i am Jergušino. Motion graphics, dizajn, kód a videá."
+---
+<section class="hero hero--home">
+  <h1 class="sr">Jergušino</h1>
+  <div class="lockup">
+    {% include lead.html text="i am" hidden=true %}
+    <div class="wm-mask">{% include wordmark.svg %}</div>
+  </div>
+</section>
+
+<section class="quiet-break" aria-labelledby="proj-h">
+  <h2 id="proj-h" class="quiet-line">projekty</h2>
+</section>
+
+<section class="list">
+  {% include project-list.html limit=6 %}
+  <p class="more"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
+</section>

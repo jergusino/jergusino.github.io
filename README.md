@@ -1,0 +1,98 @@
+# Jergušino: portfolio
+
+Static website built with [Jekyll](https://jekyllrb.com) and the Jergusino brand guide (v5). Ink background, Cream name, Yellow pointers. Everything is flat and hard-edged: no gradients, shadows or fades. Slovak language.
+
+GitHub Pages builds it for you. There is nothing to install to publish.
+
+## Publish on GitHub
+
+1. Create a **public** repository named exactly `jergusino.github.io` on the account `jergusino`.
+2. Push this folder to it (branch `main`).
+3. In the repository: **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`** and save.
+4. After a minute the site is at <https://jergusino.github.io>.
+
+If the repository has another name (for example `portfolio`), set `baseurl: "/portfolio"` and `url: "https://jergusino.github.io"` in `_config.yml`.
+
+## Add a project
+
+Every project is one file in `_projects/`. The easy way:
+
+```bash
+tools/new-project.sh "Názov projektu" video      # video | motion | design | code
+```
+
+It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, fill it in, commit and push. The project appears on the home page and on `/projects/`, newest first. No other file needs to change.
+
+(No Mac/Linux shell? Copy `_templates/project.md` into `_projects/` by hand and rename it.)
+
+### Front matter
+
+| Field | Required | What it does |
+|---|---|---|
+| `title` | yes | Headline of the page and the row in the list |
+| `type` | yes | `video`, `motion`, `design` or `code` (defined in `_data/types.yml`) |
+| `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the project** until that day |
+| `summary` | no | One sentence for link previews |
+| `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |
+| `youtube` | no | Video ID. Shows a two-tone thumbnail that links to YouTube (nothing from YouTube loads until a visitor clicks) |
+| `cover` / `cover_alt` | no | Main image |
+| `tools` | no | List, e.g. `[Remotion, Premiere]` |
+| `links` | no | List of `label` + `url`, shown as arrows under the text |
+| `gallery` | no | List of `src` + `alt` |
+| `placeholder` | no | `true` marks a sample project. Delete the line (or the file) for real work |
+
+The text under the front matter is Markdown.
+
+### Images
+
+Put images in `assets/img/projects/<project>/`. By the brand guide, photos are **two-tone**: the site turns every image into pure Ink and Cream automatically, in the browser. Your own artwork that already uses the brand colours (a poster, a motion frame) would lose its Yellow, so mark it as raw:
+
+```markdown
+![Plagát](/assets/img/projects/nazov/plagat.png){: .raw}
+```
+
+`tools/twotone.py` converts a file for real if you need it elsewhere (social posts).
+
+### New project type
+
+Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/projects/` picks it up.
+
+## Change the basics
+
+Everything personal is in `_config.yml`: email, handle, social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
+
+## Preview on your computer (optional)
+
+```bash
+bundle install
+bundle exec jekyll serve      # http://localhost:4000
+```
+
+Needs Ruby. Not needed to publish.
+
+## Brand rules the code follows
+
+- Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
+- Wordmark drawn from Slithen outlines with the exact numbers of the guide (1019 × 262, S 114 wide, bar 46 tall, 8.5 px gaps). It is in `_includes/wordmark.svg`; `assets/img/mark.svg` is the Š mark used as favicon.
+- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the handle, centred).
+- Motion is the guide's logo sequence in CSS: script writes on, wordmark rises through a mask, the bar drops with a small overshoot. No fades. It is switched off for visitors who prefer reduced motion.
+- Links and filters change colour on hover and focus, never opacity.
+
+## Fonts and licences, please read
+
+- **Borisna** is a *demo* font by Koplexs Studio: free for private, non-profit use only. The site currently uses it as a personal site. If the portfolio is used to get paid work, buy the commercial licence (koplexsstudio@gmail.com) before that.
+- **Slithen** came without a licence file. Check its terms where you got it.
+- **Edwardian Script ITC** is © International Typeface Corporation / Microsoft. The file allows editable embedding, but it is a commercial font, so check that your licence covers web use.
+- The fonts in `assets/fonts/` were extended with the Slovak letters Č Ľ Ť Ň Ď Ž ľ ť ď by copying carons and apostrophes from existing letters. `tools/build_assets.py` regenerates them (and the wordmark) from the original files. Check Slovak text with `ĺ`, `ŕ`, `Ĺ`, `Ŕ`: those four letters are not in these fonts.
+
+## Files
+
+```
+_config.yml          site settings
+_data/types.yml      project types
+_projects/           one Markdown file per project
+_templates/          project template (not published)
+_layouts/ _includes/ page templates, wordmark, header, footer
+assets/              css, js, fonts, images
+tools/               new-project.sh, twotone.py, build_assets.py
+```

@@ -1,0 +1,14 @@
+{% assign items = site.projects | sort: "date" | reverse %}
+<ol class="plist">
+  {% for p in items limit: include.limit %}
+  {% assign t = site.data.types | where: "key", p.type | first %}
+  <li class="prow" data-type="{{ p.type }}">
+    <a href="{{ p.url | relative_url }}">
+      <span class="prow-year">{{ p.date | date: "%Y" }}</span>
+      <span class="prow-title">{{ p.title }}</span>
+      <span class="prow-type">{{ t.label }}{% if p.placeholder %} · zástupný{% endif %}</span>
+      {% include arrow.svg %}
+    </a>
+  </li>
+  {% endfor %}
+</ol>

@@ -1,0 +1,9 @@
+{% comment %}
+  Yellow script lead-in. Lines with descenders (g j p q y f) get a little more room
+  so the yellow never touches the cream letters below.  Usage: include lead.html text="moje"
+{% endcomment %}
+{% assign d = "" %}
+{% assign letters = "g,j,p,q,y,f" | split: "," %}
+{% assign lc = include.text | downcase %}
+{% for c in letters %}{% if lc contains c %}{% assign d = " desc" %}{% endif %}{% endfor %}
+<p class="lead{{ d }}"{% if include.hidden %} aria-hidden="true"{% endif %}>{{ include.text }}</p>

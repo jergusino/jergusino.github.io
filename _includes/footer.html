@@ -1,0 +1,9 @@
+<footer class="foot" id="kontakt">
+  <p class="handle"><span class="at">@</span>{{ site.handle | remove_first: "@" }}</p>
+  <p class="mail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  {% if site.social.size > 0 %}
+  <ul class="social">
+    {% for s in site.social %}<li><a href="{{ s.url }}" rel="me noopener">{{ s.label }}</a></li>{% endfor %}
+  </ul>
+  {% endif %}
+</footer>

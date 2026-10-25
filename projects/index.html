@@ -1,0 +1,23 @@
+---
+layout: default
+title: Projekty
+body_class: projects
+permalink: /projects/
+filter: true
+summary: "Motion graphics, dizajn, kód a videá od Jergušina."
+---
+<section class="hero hero--page hero--projects">
+  <div class="lockup">
+    {% include lead.html text="moje" %}
+    <h1 class="title">Projekty</h1>
+  </div>
+</section>
+
+<section class="list">
+  <div class="filters" role="group" aria-label="Filter projektov" hidden>
+    <button type="button" data-filter="all" aria-pressed="true">všetko</button>
+    {% for t in site.data.types %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endfor %}
+  </div>
+  {% include project-list.html limit=100 %}
+  <p class="empty" hidden>V tejto kategórii zatiaľ nič nie je.</p>
+</section>

@@ -1,0 +1,45 @@
+# ── Jergušino portfolio ──────────────────────────────────────────────────────
+title: Jergušino
+description: "i am Jergušino. Motion graphics, dizajn, kód a videá."
+lang: sk
+url: "https://jergusino.github.io"   # user site: repo must be named jergusino.github.io
+baseurl: ""
+
+# Contact. Shown in the footer.
+handle: "@jergusino"
+email: "jergusino@proton.me"
+
+# Social links, shown in the footer under the handle. Empty for now.
+# Add one line per link, e.g.:
+#   - label: youtube
+#     url: https://www.youtube.com/@jergusino
+social: []
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+      body_class: project
+
+plugins:
+  - jekyll-sitemap
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  smart_quotes: ["sbquo", "lsquo", "bdquo", "ldquo"]   # Slovak quotes: „ “
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - tools
+  - node_modules
+  - vendor

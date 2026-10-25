@@ -1,0 +1,55 @@
+---
+layout: default
+---
+{% assign t = site.data.types | where: "key", page.type | first %}
+{% assign u = page.title | upcase %}
+{% assign accents = "Á,Ä,Č,Ď,É,Í,Ľ,Ĺ,Ň,Ó,Ô,Ŕ,Š,Ť,Ú,Ý,Ž" | split: "," %}
+{% assign acc = "" %}
+{% for c in accents %}{% if u contains c %}{% assign acc = "has-accent" %}{% endif %}{% endfor %}
+
+<section class="hero hero--page {{ acc }}">
+  <div class="lockup">
+    {% assign lead_text = page.lead | default: t.lead %}
+    {% include lead.html text=lead_text %}
+    <h1 class="title">{{ page.title }}</h1>
+  </div>
+</section>
+
+<article class="prose">
+  {% if page.placeholder %}
+  <p class="note">Zástupný projekt. Nahraď ho vlastným: uprav súbor <code>{{ page.path }}</code>.</p>
+  {% endif %}
+
+  <dl class="meta">
+    <dt>rok</dt><dd>{{ page.date | date: "%Y" }}</dd>
+    <dt>druh</dt><dd>{{ t.label }}</dd>
+    {% if page.tools %}<dt>nástroje</dt><dd>{{ page.tools | join: ", " }}</dd>{% endif %}
+  </dl>
+
+  {% if page.youtube %}
+  <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
+    <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
+    <span class="cta">pozrieť na YouTube {% include arrow.svg %}</span>
+  </a>
+  {% endif %}
+
+  {% if page.cover %}
+  <figure class="cover"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></figure>
+  {% endif %}
+
+  {{ content }}
+
+  {% if page.gallery %}
+  <div class="gallery">
+    {% for g in page.gallery %}<img src="{{ g.src | relative_url }}" alt="{{ g.alt }}" loading="lazy">{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if page.links %}
+  <ul class="links">
+    {% for l in page.links %}<li><a href="{{ l.url }}" rel="noopener">{{ l.label }} {% include arrow.svg %}</a></li>{% endfor %}
+  </ul>
+  {% endif %}
+</article>
+
+<p class="back"><a href="{{ '/projects/' | relative_url }}">všetky projekty</a></p>

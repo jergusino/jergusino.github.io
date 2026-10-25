@@ -1,0 +1,11 @@
+<header class="top">
+  {% if page.url != "/" %}
+  <a class="top-mark" href="{{ '/' | relative_url }}" aria-label="Jergušino, domov">
+    <img src="{{ '/assets/img/mark.svg' | relative_url }}" alt="" width="48" height="48">
+  </a>
+  {% endif %}
+  <nav class="top-nav" aria-label="Hlavná navigácia">
+    <a href="{{ '/projects/' | relative_url }}"{% if page.body_class == "projects" %} aria-current="page"{% endif %}>projekty {% include arrow.svg %}</a>
+    <a href="#kontakt">kontakt</a>
+  </nav>
+</header>
