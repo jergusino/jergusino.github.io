@@ -1,7 +1,7 @@
 ---
 title: "Ukážka: video"
 type: video
-date: 2026-10-25
+date: 2025-12-28
 placeholder: true
 summary: "Zástupný projekt typu video. Nahraď ho vlastným."
 # youtube: VIDEO_ID        # odkomentuj a vlož ID videa z adresy youtube.com/watch?v=ID

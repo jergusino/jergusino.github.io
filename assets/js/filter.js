@@ -2,7 +2,7 @@
 (function () {
   var bar = document.querySelector('.filters');
   if (!bar) return;
-  var rows = document.querySelectorAll('.prow');
+  var rows = document.querySelectorAll('.pcard');
   var buttons = bar.querySelectorAll('button');
   var empty = document.querySelector('.empty');
 

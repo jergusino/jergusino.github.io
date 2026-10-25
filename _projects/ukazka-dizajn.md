@@ -1,7 +1,7 @@
 ---
 title: "Ukážka: dizajn"
 type: design
-date: 2026-10-23
+date: 2025-12-31
 placeholder: true
 summary: "Zástupný projekt typu dizajn. Nahraď ho vlastným."
 tools: [Figma, Illustrator]

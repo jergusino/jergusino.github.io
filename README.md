@@ -21,7 +21,7 @@ Every project is one file in `_projects/`. The easy way:
 tools/new-project.sh "Názov projektu" video      # video | motion | design | code
 ```
 
-It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, fill it in, commit and push. The project appears on the home page and on `/projects/`, newest first. No other file needs to change.
+It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/projects/`, newest first; a click opens its page. No other file needs to change.
 
 (No Mac/Linux shell? Copy `_templates/project.md` into `_projects/` by hand and rename it.)
 
@@ -35,7 +35,9 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |
 | `youtube` | no | Video ID. Shows a two-tone thumbnail that links to YouTube (nothing from YouTube loads until a visitor clicks) |
-| `cover` / `cover_alt` | no | Main image |
+| `cover` / `cover_alt` | no | Main image (shown on the project page) |
+| `thumb` | no | Smaller image for the grid card (about 720 px wide). Without it the cover is used |
+| `cover_raw` | no | `true` keeps the cover in its own colours (use it for finished posters and artwork) |
 | `tools` | no | List, e.g. `[Remotion, Premiere]` |
 | `links` | no | List of `label` + `url`, shown as arrows under the text |
 | `gallery` | no | List of `src` + `alt` |

@@ -1,7 +1,7 @@
 ---
 title: "Ukážka: motion"
 type: motion
-date: 2026-10-24
+date: 2025-12-29
 placeholder: true
 summary: "Zástupný projekt typu motion graphics. Nahraď ho vlastným."
 tools: [Remotion, After Effects]

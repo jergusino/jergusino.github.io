@@ -18,6 +18,6 @@ summary: "Motion graphics, dizajn, kód a videá od Jergušina."
     <button type="button" data-filter="all" aria-pressed="true">všetko</button>
     {% for t in site.data.types %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endfor %}
   </div>
-  {% include project-list.html limit=100 %}
+  {% include project-grid.html limit=100 %}
   <p class="empty" hidden>V tejto kategórii zatiaľ nič nie je.</p>
 </section>

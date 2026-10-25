@@ -34,7 +34,7 @@ layout: default
   {% endif %}
 
   {% if page.cover %}
-  <figure class="cover"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></figure>
+  <figure class="cover"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></figure>
   {% endif %}
 
   {{ content }}

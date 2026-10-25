@@ -1,0 +1,18 @@
+{% assign items = site.projects | sort: "date" | reverse %}
+<ul class="pgrid">
+  {% for p in items limit: include.limit %}
+  {% assign t = site.data.types | where: "key", p.type | first %}
+  <li class="pcard" data-type="{{ p.type }}">
+    <a href="{{ p.url | relative_url }}">
+      {% assign th = p.thumb | default: p.cover %}
+      {% if th %}
+      <span class="pcard-img"><img src="{{ th | relative_url }}" alt="{{ p.cover_alt | default: p.title }}" width="720" height="1020" loading="lazy"></span>
+      {% else %}
+      <span class="pcard-img pcard-ph"><span>{{ t.label }}</span></span>
+      {% endif %}
+      <span class="pcard-title">{{ p.title }}</span>
+      <span class="pcard-meta">{{ p.date | date: "%Y" }} · {{ t.label }}{% if p.placeholder %} · zástupný{% endif %}</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

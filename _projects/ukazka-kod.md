@@ -1,7 +1,7 @@
 ---
 title: "Ukážka: kód"
 type: code
-date: 2026-10-22
+date: 2025-12-30
 placeholder: true
 summary: "Zástupný projekt typu kód. Nahraď ho vlastným."
 tools: [TypeScript, React]

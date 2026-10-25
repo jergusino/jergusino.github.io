@@ -153,38 +153,29 @@ a:hover, a:focus-visible { color: var(--yellow); }
 .filters button:hover { color: var(--yellow); }
 .filters button[aria-pressed="true"] { color: var(--yellow); }
 
-.plist { list-style: none; border-bottom: 2px solid var(--cream); }
-.prow { border-top: 2px solid var(--cream); }
-.prow[hidden] { display: none; }
-.prow a {
-  display: grid;
-  grid-template-columns: 4.5ch minmax(0, 1fr) auto auto;
-  column-gap: var(--F);
-  align-items: baseline;
-  padding: calc(var(--F) * 0.6) 0 calc(var(--F) * 1.2);
-}
-.prow-year, .prow-type { font-size: var(--body); }
-.prow-title {
+/* poster grid: every project is a card, a click opens its page */
+.pgrid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: calc(var(--F) * 2.5) var(--F); }
+.pcard[hidden] { display: none; }
+@media (max-width: 640px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--F) * 2) var(--F); } .pcard-title { font-size: 1.1rem; } }
+.pcard a { display: block; }
+.pcard-img { display: block; aspect-ratio: 7 / 10; background: var(--ink); }
+.pcard-img img { width: 100%; height: 100%; object-fit: cover; }
+.pcard-ph { display: grid; place-items: center; border: 2px solid var(--cream); }
+.pcard-title {
+  display: block;
+  margin-top: 0.9em;
   font-family: var(--f-head);
-  font-size: calc(var(--T) * 2);
-  line-height: 0.9;
-  padding-top: 0.3em;                              /* headroom for Š, Á, Ž above the cap line */
+  font-size: clamp(1.15rem, 1.7vw, 1.7rem);
+  line-height: 0.95;
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
-.prow a:hover .prow-title, .prow a:focus-visible .prow-title { color: var(--yellow); }
-.prow .arr { align-self: center; }
+.pcard-meta { display: block; margin-top: 0.4em; font-size: 1rem; }
+.pcard a:hover .pcard-title, .pcard a:focus-visible .pcard-title { color: var(--yellow); }
+.pcard a:hover .pcard-img, .pcard a:focus-visible .pcard-img { outline: 3px solid var(--yellow); outline-offset: 6px; }
 
 .more { padding: calc(var(--F) * 2) 0 var(--F4); }
 .empty { padding: var(--F) 0; }
-
-@media (max-width: 760px) {
-  .prow a { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "year type arrow" "title title title"; row-gap: 0.6em; }
-  .prow-year { grid-area: year; }
-  .prow-type { grid-area: type; }
-  .prow .arr { grid-area: arrow; }
-  .prow-title { grid-area: title; font-size: calc(var(--T) * 2.6); }
-}
 
 /* ── Project page: one left-aligned column, 4F margin, about 70 characters wide ─ */
 .prose { margin: var(--F4) 0 0 var(--F4); max-width: min(70ch, calc(100vw - 2 * var(--F4))); }
