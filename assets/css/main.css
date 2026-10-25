@@ -118,7 +118,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 .wm-mask { line-height: 0; clip-path: inset(-100vh 0 0 0); }   /* clips the letters below the baseline, leaves the sky open for the bar */
 .wordmark { display: block; width: 100%; height: auto; overflow: visible; }
-.wm-letters { fill: var(--cream); }
+.wm-l { fill: var(--cream); }
 .wm-bar { fill: var(--yellow); }
 
 /* pages: script + Slithen headline */
@@ -224,21 +224,24 @@ a:hover, a:focus-visible { color: var(--yellow); }
 .mail, .social { font-size: var(--body); }
 .social { list-style: none; display: flex; gap: 1.4em; flex-wrap: wrap; justify-content: center; }
 
-/* ── Motion: the logo animation from the guide (about 1.6 s), cuts and masks only ──
-   0.2 s beat. Ink hold 2 beats, script writes on 3, wordmark rises 2, bar drops 1. */
+/* ── Motion: the title-card animation, copied frame by frame from title-card-jergusino.mp4 ──
+   0.11 s of Ink, then the letters rise one by one from the baseline (a new one every 0.02 s,
+   each 0.2 s), and at 0.48 s the bar drops from the very top of the screen, overshoots 10 %
+   and settles by 0.64 s. "i am" is the one addition: it writes on beside the letters. */
 @keyframes write { from { clip-path: inset(-25% 100% -25% -5%); } to { clip-path: inset(-25% -5% -25% -5%); } }
 @keyframes rise { from { transform: translateY(101%); } to { transform: none; } }
 @keyframes drop {                                    /* --drop is set in index.html: the bar starts above the top of the screen */
-  from { transform: translateY(var(--drop, -140%)); }
-  75%  { transform: translateY(4.6px); }            /* 10% overshoot of the 46 px bar */
-  to   { transform: none; }
+  0%   { transform: translateY(var(--drop, -140%)); animation-timing-function: linear; }
+  47%  { transform: translateY(4.6px); animation-timing-function: cubic-bezier(0, 0, 0.3, 1); }   /* 10% overshoot of the 46 px bar */
+  74%  { transform: translateY(1.2px); animation-timing-function: cubic-bezier(0, 0, 0.3, 1); }
+  100% { transform: none; }
 }
-.hero--home .lead { animation: write 0.6s cubic-bezier(0.35, 0, 0.45, 1) 0.4s both; }
-.hero--home .wordmark { animation: rise 0.4s cubic-bezier(0.2, 0, 0, 1) 1s both; }
-.hero--home .wm-bar { transform-box: fill-box; animation: drop 0.3s cubic-bezier(0.2, 0, 0, 1) 1.4s both; }
+.hero--home .lead { animation: write 0.45s cubic-bezier(0.35, 0, 0.45, 1) 0.15s both; }
+.hero--home .wm-l { transform-box: fill-box; animation: rise 0.2s cubic-bezier(0.2, 0, 0, 1) calc(0.11s + var(--i) * 0.02s) both; }
+.hero--home .wm-bar { transform-box: fill-box; animation: drop 0.16s linear 0.48s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero--home .lead, .hero--home .wordmark, .hero--home .wm-bar { animation: none; }
+  .hero--home .lead, .hero--home .wm-l, .hero--home .wm-bar { animation: none; }
 }
 
 /* ── Phones ────────────────────────────────────────────────────────────────── */

@@ -75,7 +75,7 @@ Needs Ruby. Not needed to publish.
 - Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
 - Wordmark drawn from Slithen outlines with the exact numbers of the guide (1019 × 262, S 114 wide, bar 46 tall, 8.5 px gaps). It is in `_includes/wordmark.svg`; `assets/img/mark.svg` is the Š mark used as favicon.
 - Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the handle, centred).
-- Motion is the guide's logo sequence in CSS: script writes on, wordmark rises through a mask, the bar drops with a small overshoot. No fades. It is switched off for visitors who prefer reduced motion.
+- Motion on the home page is copied frame by frame from `title-card-jergusino.mp4`: a short Ink hold, the letters rise one by one from the baseline, then the bar falls from the very top of the screen, overshoots 10% and settles. *i am* writes on beside the letters (the one addition). Hard cuts and masks, no fades. It is switched off for visitors who prefer reduced motion.
 - Links and filters change colour on hover and focus, never opacity.
 
 ## Fonts and licences, please read

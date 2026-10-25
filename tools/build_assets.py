@@ -99,7 +99,8 @@ def bar_rect(x_, y_, w_, cls=None, fill=None):
 # inline version for templates (colours come from CSS)
 inline = (
     f'<svg class="wordmark" viewBox="0 0 {W} {H}" role="img" aria-label="Jergušino" xmlns="http://www.w3.org/2000/svg">'
-    f'<path class="wm-letters" d="{d_all}"/>{bar_rect(bar_x, 0, bar_w, cls="wm-bar")}</svg>\n'
+    + ''.join(f'<path class="wm-l" style="--i:{i}" d="{d}"/>' for i, d in enumerate(letters))
+    + f'{bar_rect(bar_x, 0, bar_w, cls="wm-bar")}</svg>\n'
 )
 open(os.path.join(site, '_includes', 'wordmark.svg'), 'w').write(inline)
 
