@@ -361,7 +361,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 .hero--home .lead { animation: write 0.45s cubic-bezier(0.35, 0, 0.45, 1) 0.15s both; }
 .hero--home .wm-l { transform-box: fill-box; animation: rise 0.2s cubic-bezier(0.2, 0, 0, 1) calc(0.11s + var(--i) * 0.02s) both; }
-.hero--home .wm-bar { transform-box: fill-box; animation: drop 0.4s linear 0.48s both; }
+.hero--home .wm-bar { transform-box: fill-box; animation: drop var(--dur, 0.4s) linear 0.48s both; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero--home .lead, .hero--home .wm-l, .hero--home .wm-bar { animation: none; }
