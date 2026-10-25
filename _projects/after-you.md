@@ -1,7 +1,6 @@
 ---
 title: "After You"
 type: plagat
-lead: "plagát"
 date: 2026-05-23
 summary: "Plagát After You."
 cover: /assets/img/projects/after-you/cover.jpg

@@ -1,7 +1,6 @@
 ---
 title: "Braski"
 type: plagat
-lead: "plagát"
 date: 2026-06-02
 summary: "Plagát Braski."
 cover: /assets/img/projects/brashki/cover.jpg

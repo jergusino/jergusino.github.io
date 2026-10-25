@@ -1,7 +1,6 @@
 ---
 title: "Friday I'm in Love"
 type: plagat
-lead: "plagát"
 date: 2026-04-18
 summary: "Plagát Friday I'm in Love."
 cover: /assets/img/projects/friday-im-in-love/cover.jpg

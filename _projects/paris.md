@@ -1,7 +1,6 @@
 ---
 title: "Paris"
 type: plagat
-lead: "plagát"
 date: 2026-04-07
 summary: "Plagát Paris."
 cover: /assets/img/projects/paris/cover.jpg

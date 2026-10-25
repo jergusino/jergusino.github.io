@@ -1,7 +1,6 @@
 ---
 title: "Jesus Is Alive"
 type: plagat
-lead: "plagát"
 date: 2026-06-27
 summary: "Plagát Jesus Is Alive."
 cover: /assets/img/projects/jesus-is-alive/cover.jpg

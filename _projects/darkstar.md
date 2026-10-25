@@ -1,7 +1,6 @@
 ---
 title: "Darkstar"
 type: plagat
-lead: "plagát"
 date: 2026-01-23
 summary: "Plagát Darkstar."
 cover: /assets/img/projects/darkstar/cover.jpg

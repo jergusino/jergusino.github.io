@@ -1,7 +1,6 @@
 ---
 title: "Kofola"
 type: plagat
-lead: "plagát"
 date: 2026-03-28
 summary: "Plagát Kofola."
 cover: /assets/img/projects/kofola/cover.jpg

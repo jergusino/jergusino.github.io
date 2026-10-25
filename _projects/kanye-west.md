@@ -1,7 +1,6 @@
 ---
 title: "Kanye West"
 type: plagat
-lead: "plagát"
 date: 2026-03-08
 summary: "Plagát Kanye West."
 cover: /assets/img/projects/kanye-west/cover.jpg

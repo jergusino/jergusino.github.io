@@ -1,7 +1,6 @@
 ---
 title: "Backrooms"
 type: plagat
-lead: "plagát"
 date: 2026-06-07
 summary: "Plagát Backrooms."
 cover: /assets/img/projects/backrooms/cover.jpg

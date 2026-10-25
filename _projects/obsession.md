@@ -1,7 +1,6 @@
 ---
 title: "Obsession"
 type: plagat
-lead: "plagát"
 date: 2026-07-09
 summary: "Plagát Obsession."
 cover: /assets/img/projects/obsession/cover.jpg

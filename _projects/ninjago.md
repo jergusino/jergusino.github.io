@@ -1,7 +1,6 @@
 ---
 title: "Ninjago"
 type: plagat
-lead: "plagát"
 date: 2026-06-27
 summary: "Plagát Ninjago."
 cover: /assets/img/projects/ninjago/cover.jpg

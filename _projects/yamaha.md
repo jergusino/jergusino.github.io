@@ -1,7 +1,6 @@
 ---
 title: "Yamaha"
 type: plagat
-lead: "plagát"
 date: 2026-03-01
 summary: "Plagát Yamaha."
 cover: /assets/img/projects/yamaha/cover.jpg

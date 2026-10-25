@@ -1,7 +1,6 @@
 ---
 title: "Miami"
 type: plagat
-lead: "plagát"
 date: 2026-02-14
 summary: "Plagát Miami."
 cover: /assets/img/projects/miami/cover.jpg

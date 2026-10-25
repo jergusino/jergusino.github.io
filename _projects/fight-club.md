@@ -1,7 +1,6 @@
 ---
 title: "Fight Club"
 type: plagat
-lead: "plagát"
 date: 2026-01-17
 summary: "Plagát Fight Club."
 cover: /assets/img/projects/fight-club/cover.jpg

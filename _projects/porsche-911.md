@@ -1,7 +1,6 @@
 ---
 title: "Porsche 911"
 type: plagat
-lead: "plagát"
 date: 2026-01-31
 summary: "Plagát Porsche 911."
 cover: /assets/img/projects/porsche-911/cover.jpg

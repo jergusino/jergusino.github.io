@@ -1,7 +1,6 @@
 ---
 title: "Money"
 type: plagat
-lead: "plagát"
 date: 2026-04-11
 summary: "Plagát Money."
 cover: /assets/img/projects/money/cover.jpg

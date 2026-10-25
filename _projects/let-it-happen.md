@@ -1,7 +1,6 @@
 ---
 title: "Let It Happen"
 type: plagat
-lead: "plagát"
 date: 2026-05-09
 summary: "Plagát Let It Happen."
 cover: /assets/img/projects/let-it-happen/cover.jpg
