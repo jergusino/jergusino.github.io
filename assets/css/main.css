@@ -48,7 +48,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+html { background: var(--ink); color-scheme: dark; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
@@ -221,7 +221,7 @@ a:hover, a:focus-visible { color: var(--yellow); }
 }
 .handle { font-size: clamp(1.6rem, calc(100vw / 21), 3.4rem); line-height: 1; }
 .handle .at { color: var(--yellow); }
-.mail, .social { font-size: var(--body); }
+.social { font-size: var(--body); }
 .social { list-style: none; display: flex; gap: 1.4em; flex-wrap: wrap; justify-content: center; }
 
 /* ── Motion: the title-card animation, copied frame by frame from title-card-jergusino.mp4 ──

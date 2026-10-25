@@ -59,7 +59,7 @@ Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/proje
 
 ## Change the basics
 
-Everything personal is in `_config.yml`: email, handle, social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
+Everything personal is in `_config.yml`: handle, Instagram link (the handle in the footer links to it), other social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
 
 ## Preview on your computer (optional)
 
