@@ -19,3 +19,18 @@ description: "i am Jergušino. Motion graphics, dizajn, kód a videá."
   {% include project-list.html limit=6 %}
   <p class="more"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
 </section>
+
+<script>
+  /* the bar falls from the very top of the screen: measure how far that is, in the wordmark's own units */
+  (function () {
+    var m = document.querySelector('.wm-mask'), b = document.querySelector('.wm-bar');
+    if (!m || !b) return;
+    function set() {
+      var r = m.getBoundingClientRect();
+      var k = r.width / 1019;                       /* screen px per drawing unit */
+      b.style.setProperty('--drop', '-' + ((r.top + window.scrollY) / k + 50).toFixed(1) + 'px');
+    }
+    set();
+    window.addEventListener('resize', set);
+  })();
+</script>
