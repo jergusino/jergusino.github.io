@@ -9,6 +9,6 @@ cover_alt: "Plagát Friday I'm in Love"
 cover_raw: true
 tools: [Photoshop]
 tags: [hudba, text-piesne]
-similar: [/projects/let-it-happen/, /projects/after-you/, /projects/brashki/, /projects/kanye-west/]
+similar: [/projects/let-it-happen/, /projects/after-you/, /projects/kanye-west/, /projects/money/]
 ---
 Biele rozmazané písmo Friday I'm in love obklopuje červené srdce na tyrkysovom pozadí. Medzi písmenami plávajú motýle, galaxia a postavy, ako zo sna.
