@@ -8,5 +8,7 @@ thumb: /assets/img/projects/brashki/thumb.jpg
 cover_alt: "Plagát Braski"
 cover_raw: true
 tools: [Photoshop]
+tags: [hudba, portrét]
+similar: [/projects/backrooms/, /projects/fight-club/, /projects/obsession/, /projects/skateboarding/]
 ---
 Plagát v štýle pop-artu: mriežka deviatich portrétov v modrej, žltej a ružovej na svetlom papieri. Hrubé čierne písmo Katzen hore a Braski dole ju drží ako hudobný obal.

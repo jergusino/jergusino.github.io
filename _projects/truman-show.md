@@ -8,5 +8,7 @@ thumb: /assets/img/projects/truman-show/thumb.jpg
 cover_alt: "Plagát The Truman Show"
 cover_raw: true
 tools: [Photoshop]
+tags: [film, portrét]
+similar: [/projects/backrooms/, /projects/fight-club/, /projects/obsession/, /projects/brashki/]
 ---
 Tvár Jima Carreya v zakrivenej mriežke ako cez šošovku kamery, nad ňou a pod ňou stojí modré písmo Truman Show. Mriežka zvýrazňuje pocit sledovania a uväznenia.

@@ -8,5 +8,7 @@ thumb: /assets/img/projects/backrooms/thumb.jpg
 cover_alt: "Plagát Backrooms"
 cover_raw: true
 tools: [Photoshop]
+tags: [film, portrét, horor]
+similar: [/projects/obsession/, /projects/fight-club/, /projects/truman-show/, /projects/brashki/]
 ---
 Temný plagát s mužom v zlatom svetle v zrnitom čiernožltom spracovaní. Nadpis Backrooms v žltej antikve drží celú atmosféru tiesnivého filmu.

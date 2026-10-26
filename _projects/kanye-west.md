@@ -8,5 +8,7 @@ thumb: /assets/img/projects/kanye-west/thumb.jpg
 cover_alt: "Plagát Kanye West"
 cover_raw: true
 tools: [Photoshop]
+tags: [hudba, album, kanye]
+similar: [/projects/after-you/, /projects/tame-impala/, /projects/jesus-is-alive/, /projects/brashki/]
 ---
 Tmavý plagát s portrétom Kanyea Westa, zoznamom albumov a červenou postavou za drôtenou mriežkou. Rozdelené písmo mena v krémovej a červenej dodáva celku rozbitý, módny charakter.

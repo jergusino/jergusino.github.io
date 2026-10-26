@@ -8,5 +8,7 @@ thumb: /assets/img/projects/mars/thumb.jpg
 cover_alt: "Plagát Mars"
 cover_raw: true
 tools: [Photoshop]
+tags: [miesto, vesmír]
+similar: [/projects/miami/, /projects/paris/, /projects/after-you/, /projects/backrooms/]
 ---
 Žeravé obrysové písmená MARS sa ohýbajú ako plameň nad povrchom červenej planéty. Čierne pozadie a pokrčený papier dopĺňajú meno autora a rok 2026 dole.

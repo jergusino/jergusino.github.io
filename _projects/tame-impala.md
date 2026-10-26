@@ -8,5 +8,7 @@ thumb: /assets/img/projects/tame-impala/thumb.jpg
 cover_alt: "Plagát Tame Impala"
 cover_raw: true
 tools: [Photoshop]
+tags: [hudba, album, tame-impala]
+similar: [/projects/let-it-happen/, /projects/after-you/, /projects/kanye-west/, /projects/brashki/]
 ---
 Plagát albumu Currents od Tame Impala: kovová guľa sa prepadá do vlnitého fialového povrchu s červenou čiarou. Rozbité písmo Currents a zoznam skladieb dole pripomínajú vinylový obal.

@@ -8,5 +8,7 @@ thumb: /assets/img/projects/money/thumb.jpg
 cover_alt: "Plagát Money"
 cover_raw: true
 tools: [Photoshop]
+tags: [hudba, kreslený, pop-kultúra]
+similar: [/projects/ninjago/, /projects/after-you/, /projects/brashki/, /projects/friday-im-in-love/]
 ---
 Pán Krabs zo SpongeBoba s dolárovými očami sedí v hromade peňazí pod dúhovým lúčom z albumu Pink Floyd. Veľké písmo Money a padajúce bankovky robia z plagátu pop-kultúrny mix.

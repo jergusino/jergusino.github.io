@@ -41,6 +41,8 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 | `tools` | no | List, e.g. `[Remotion, Premiere]` |
 | `links` | no | List of `label` + `url`, shown as arrows under the text |
 | `gallery` | no | List of `src` + `alt` |
+| `tags` | no | Subject words (film, hudba, auto, miesto...). Only for you; the similar-work row is set by `similar` |
+| `similar` | no | Up to 4 project addresses (`/projects/name/`) shown as "podobné práce" at the bottom. Without it the page shows other work of the same type |
 | `placeholder` | no | `true` marks a sample project. Delete the line (or the file) for real work |
 
 The text under the front matter is Markdown.
