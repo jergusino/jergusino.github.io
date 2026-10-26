@@ -51,4 +51,18 @@ layout: default
   {% endif %}
 </article>
 
+{% assign pool = site.projects | where: "type", page.type | sort: "date" | reverse %}
+{% if pool.size > 1 %}
+{% assign n = 0 %}{% assign seen = false %}{% assign done = false %}
+<section class="similar" aria-labelledby="similar-h">
+  <h2 id="similar-h" class="similar-h">podobné práce</h2>
+  <ul class="pgrid pgrid--flat">
+    {% for p in pool %}{% if seen and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% if p.url == page.url %}{% assign seen = true %}{% endif %}{% endfor %}
+    {% for p in pool %}{% if p.url == page.url %}{% assign done = true %}{% endif %}{% if done == false and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
+  </ul>
+</section>
+{% endif %}
+
 <p class="back"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
