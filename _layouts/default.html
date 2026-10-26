@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 </head>
 <body class="{{ page.body_class }}">
+  <a class="skip" href="#top">preskočiť na obsah</a>
   {% comment %} Two-tone filter: every pixel becomes exactly Ink or Cream (brand guide, "Images and footage"). {% endcomment %}
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <filter id="twotone" color-interpolation-filters="sRGB">
@@ -33,12 +34,14 @@
 
   {% include header.html %}
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     {{ content }}
   </main>
 
   {% include footer.html %}
 
+  <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+  {% if page.viewer %}<script src="{{ '/assets/js/viewer.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}
   {% if page.filter %}<script src="{{ '/assets/js/filter.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}
 </body>
 </html>

@@ -28,6 +28,7 @@ defaults:
     values:
       layout: project
       body_class: project
+      viewer: true
 
 plugins:
   - jekyll-sitemap

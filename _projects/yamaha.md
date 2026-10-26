@@ -5,6 +5,7 @@ date: 2026-03-01
 summary: "Fialovo-ružový motorkár sa nakláňa v zákrute, pred sivou fotografiou pretekárskej trate."
 cover: /assets/img/projects/yamaha/cover.jpg
 thumb: /assets/img/projects/yamaha/thumb.jpg
+color: "#fffef8"
 cover_alt: "Plagát Yamaha"
 cover_raw: true
 tools: [Photoshop]

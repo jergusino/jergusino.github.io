@@ -5,6 +5,7 @@ date: 2026-01-17
 summary: "Tvár Tylera Durdena presvitá cez roztrhnutý fialový pás papiera, pod ňou stojí obrovský nadpis Fight Club."
 cover: /assets/img/projects/fight-club/cover.jpg
 thumb: /assets/img/projects/fight-club/thumb.jpg
+color: "#fcede5"
 cover_alt: "Plagát Fight Club"
 cover_raw: true
 tools: [Photoshop]

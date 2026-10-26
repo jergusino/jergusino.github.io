@@ -5,6 +5,7 @@ date: 2026-05-17
 summary: "Skejter vo vzduchu nad žiariacim skateboardom, obklopený oranžovým obrysom pohybu na fialovo-oranžovom pozadí."
 cover: /assets/img/projects/skateboarding/cover.jpg
 thumb: /assets/img/projects/skateboarding/thumb.jpg
+color: "#191116"
 cover_alt: "Plagát Skateboarding"
 cover_raw: true
 tools: [Photoshop]

@@ -5,6 +5,7 @@ date: 2026-03-28
 summary: "Reklamný plagát s fľašou Kofoly na modrom kruhu a obrovským logom v pozadí."
 cover: /assets/img/projects/kofola/cover.jpg
 thumb: /assets/img/projects/kofola/thumb.jpg
+color: "#c7c8c3"
 cover_alt: "Plagát Kofola"
 cover_raw: true
 tools: [Photoshop]

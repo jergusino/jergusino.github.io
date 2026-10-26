@@ -302,3 +302,39 @@ body.project .back svg { width: 0.9em; height: auto; vertical-align: -0.05em; ma
 .pgrid--flat .pcard { transform: none !important; }
 @media (max-width: 999px) { .pgrid--flat .pcard:nth-child(n+4) { display: none; } }
 @media (max-width: 640px) { .pgrid--flat .pcard:nth-child(n+3) { display: none; } }
+
+/* skip link: hidden until it gets keyboard focus, then a Yellow pointer top-left */
+.skip { position: absolute; z-index: 10; left: var(--F); top: -10em; color: var(--yellow); background: var(--ink); padding: 0.3em 0; }
+.skip:focus { top: var(--F); }
+main:focus { outline: none; }
+
+/* posters show their own edge colour while the image loads (a flat colour, then a hard cut to the image) */
+.pcard a, .cover .zoom { background-color: var(--ink); }
+
+/* 404 */
+body.notfound .prose .big { font-size: clamp(1.4rem, 2.4vw, 2.6rem); line-height: 1.15; }
+body.notfound .similar { margin-top: calc(var(--F) * 6); }
+body.notfound .links svg { width: 0.9em; height: auto; margin-left: 0.2em; }
+
+/* ── Poster viewer: the poster full size on Ink, flip with arrows, close returns ───────────── */
+.cover .zoom { display: block; cursor: zoom-in; }
+.viewer {
+  position: fixed; inset: 0; z-index: 50; background: var(--ink);
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+}
+.viewer[hidden] { display: none; }
+html.viewer-open, html.viewer-open body { overflow: hidden; }
+.v-bar { display: flex; align-items: baseline; justify-content: space-between; gap: var(--F); padding: var(--F); font-size: clamp(1.1rem, 1.6vw, 1.6rem); }
+.v-title { color: var(--cream); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v-count { color: var(--cream); }
+.v-stage { position: relative; min-height: 0; margin: 0 var(--F); touch-action: pan-y; }
+.v-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; -webkit-user-select: none; user-select: none; }
+.viewer button {
+  font: inherit; color: var(--cream); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.4em;
+}
+.viewer button:hover, .viewer button:focus-visible { color: var(--yellow); }
+.viewer button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+.viewer .arr { width: 1.3em; height: auto; fill: var(--yellow); }
+.viewer .arr--back { transform: scaleX(-1); }
+@media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .viewer .arr { width: 2em; } }

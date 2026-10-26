@@ -5,6 +5,7 @@ date: 2026-04-07
 summary: "Farebný cestovný plagát Paríža: Víťazný oblúk v oranžovej a žltej pred modrým pozadím so slnečnými lúčmi."
 cover: /assets/img/projects/paris/cover.jpg
 thumb: /assets/img/projects/paris/thumb.jpg
+color: "#1b90ed"
 cover_alt: "Plagát Paris"
 cover_raw: true
 tools: [Photoshop]

@@ -33,7 +33,7 @@ layout: default
   {% endif %}
 
   {% if page.cover %}
-  <figure class="cover"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></figure>
+  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></a></figure>
   {% endif %}
 
   {{ content }}
@@ -58,15 +58,18 @@ layout: default
   <h2 id="similar-h" class="similar-h">podobné práce</h2>
   <ul class="pgrid pgrid--flat">
     {% if page.similar %}{% for u in page.similar limit: 4 %}{% assign p = site.projects | where: "url", u | first %}{% if p %}
-    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
     {% else %}
     {% for p in pool %}{% if seen and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
-    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% if p.url == page.url %}{% assign seen = true %}{% endif %}{% endfor %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% if p.url == page.url %}{% assign seen = true %}{% endif %}{% endfor %}
     {% for p in pool %}{% if p.url == page.url %}{% assign done = true %}{% endif %}{% if done == false and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
-    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
     {% endif %}
   </ul>
 </section>
 {% endif %}
 
 <p class="back"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
+
+{% assign all = site.projects | sort: "date" | reverse %}
+<script type="application/json" id="posters">[{% for p in all %}{% if p.cover and p.placeholder != true %}{"u":{{ p.url | relative_url | jsonify }},"t":{{ p.title | jsonify }},"a":{{ p.cover_alt | default: p.title | jsonify }},"c":{{ p.cover | relative_url | jsonify }},"bg":{{ p.color | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]</script>

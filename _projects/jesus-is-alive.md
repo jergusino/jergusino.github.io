@@ -5,6 +5,7 @@ date: 2026-06-27
 summary: "Čiernobiela postava padá z oblakov dymu pred textom z Biblie, nad ňou svieti červený nadpis Jesus is alive."
 cover: /assets/img/projects/jesus-is-alive/cover.jpg
 thumb: /assets/img/projects/jesus-is-alive/thumb.jpg
+color: "#171310"
 cover_alt: "Plagát Jesus Is Alive"
 cover_raw: true
 tools: [Photoshop]

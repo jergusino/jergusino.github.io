@@ -5,6 +5,7 @@ date: 2026-02-06
 summary: "Žeravé obrysové písmená MARS sa ohýbajú ako plameň nad povrchom červenej planéty."
 cover: /assets/img/projects/mars/cover.jpg
 thumb: /assets/img/projects/mars/thumb.jpg
+color: "#5d3528"
 cover_alt: "Plagát Mars"
 cover_raw: true
 tools: [Photoshop]

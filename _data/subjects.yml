@@ -1,0 +1,14 @@
+# Subjects for the "téma" filter on the Projects page. `key` matches a word in a project's `tags:`.
+# Only subjects that at least one project has are shown.
+- key: film
+  label: filmy
+- key: hudba
+  label: hudba
+- key: portrét
+  label: portréty
+- key: vozidlo
+  label: vozidlá
+- key: značka
+  label: značky
+- key: miesto
+  label: miesta
