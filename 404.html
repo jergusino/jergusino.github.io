@@ -23,7 +23,7 @@ sitemap: false
   <h2 id="new-h" class="similar-h">najnovšie plagáty</h2>
   {% assign items = site.projects | sort: "date" | reverse %}
   <ul class="pgrid pgrid--flat">
-    {% for p in items limit: 4 %}{% if p.thumb %}
+    {% for p in items limit: 6 %}{% if p.thumb %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>
     {% endif %}{% endfor %}
   </ul>

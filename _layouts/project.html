@@ -57,12 +57,12 @@ layout: default
 <section class="similar" aria-labelledby="similar-h">
   <h2 id="similar-h" class="similar-h">podobné práce</h2>
   <ul class="pgrid pgrid--flat">
-    {% if page.similar %}{% for u in page.similar limit: 4 %}{% assign p = site.projects | where: "url", u | first %}{% if p %}
+    {% if page.similar %}{% for u in page.similar limit: 6 %}{% assign p = site.projects | where: "url", u | first %}{% if p %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
     {% else %}
-    {% for p in pool %}{% if seen and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
+    {% for p in pool %}{% if seen and n < 6 and p.thumb %}{% assign n = n | plus: 1 %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% if p.url == page.url %}{% assign seen = true %}{% endif %}{% endfor %}
-    {% for p in pool %}{% if p.url == page.url %}{% assign done = true %}{% endif %}{% if done == false and n < 4 and p.thumb %}{% assign n = n | plus: 1 %}
+    {% for p in pool %}{% if p.url == page.url %}{% assign done = true %}{% endif %}{% if done == false and n < 6 and p.thumb %}{% assign n = n | plus: 1 %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
     {% endif %}
   </ul>

@@ -10,6 +10,6 @@ cover_alt: "Plagát Lack"
 cover_raw: true
 tools: [Photoshop]
 tags: [značka, predmet, reklama]
-similar: [/projects/kofola/, /projects/porsche-911/, /projects/yamaha/, /projects/after-you/]
+similar: [/projects/kofola/, /projects/porsche-911/, /projects/yamaha/, /projects/after-you/, /projects/backrooms/, /projects/brashki/]
 ---
 Parodický reklamný plagát stolíka Lack z IKEA za 14,99 dolárov, v štýle roku 1979. Žlté ohraničenie, červená hviezda s cenou a modrý kruh dodávajú retro vzhľad.

@@ -10,6 +10,6 @@ cover_alt: "Plagát Darkstar"
 cover_raw: true
 tools: [Photoshop]
 tags: [film, vozidlo, lietadlo]
-similar: [/projects/le-mans/, /projects/porsche-911/, /projects/yamaha/, /projects/backrooms/]
+similar: [/projects/le-mans/, /projects/porsche-911/, /projects/yamaha/, /projects/backrooms/, /projects/fight-club/, /projects/ninjago/]
 ---
 Retro technický plagát stíhacieho lietadla SR-72 Darkstar v fialovej a oranžovej s rastrovanými tvarmi. Dole sú v oranžovom písme technické údaje o rýchlosti a záťaži.

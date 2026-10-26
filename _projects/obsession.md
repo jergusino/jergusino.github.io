@@ -10,6 +10,6 @@ cover_alt: "Plagát Obsession"
 cover_raw: true
 tools: [Photoshop]
 tags: [film, portrét, horor]
-similar: [/projects/backrooms/, /projects/fight-club/, /projects/truman-show/, /projects/brashki/]
+similar: [/projects/backrooms/, /projects/fight-club/, /projects/truman-show/, /projects/brashki/, /projects/darkstar/, /projects/ninjago/]
 ---
 Filmový plagát z červených zrnitých tvárí poskladaných do jednej hrozivej masy na tmavomodrom pozadí. Rozmazaný biely nadpis Obsession a veta „Be careful who you wish for...“ ladia s hororovým tónom.

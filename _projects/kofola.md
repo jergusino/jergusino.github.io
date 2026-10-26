@@ -10,6 +10,6 @@ cover_alt: "Plagát Kofola"
 cover_raw: true
 tools: [Photoshop]
 tags: [značka, predmet, reklama]
-similar: [/projects/lack/, /projects/porsche-911/, /projects/yamaha/, /projects/after-you/]
+similar: [/projects/lack/, /projects/porsche-911/, /projects/yamaha/, /projects/after-you/, /projects/backrooms/, /projects/brashki/]
 ---
 Reklamný plagát s fľašou Kofoly na modrom kruhu a obrovským logom v pozadí. Slovenský slogan „Keď ju miluješ, nie je čo riešiť“ dopĺňa odrenú hnedú textúru.

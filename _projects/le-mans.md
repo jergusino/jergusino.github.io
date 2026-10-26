@@ -10,6 +10,6 @@ cover_alt: "Plagát Le Mans"
 cover_raw: true
 tools: [Photoshop]
 tags: [vozidlo, auto, motoršport]
-similar: [/projects/porsche-911/, /projects/yamaha/, /projects/darkstar/, /projects/after-you/]
+similar: [/projects/porsche-911/, /projects/yamaha/, /projects/darkstar/, /projects/after-you/, /projects/backrooms/, /projects/brashki/]
 ---
 Minimalistický plagát Le Mans '99 na pokrčenom papieri: závodné auto padá zhora do ružovkastej hmly. Dole sú v zamatovej farbe ďalšie dve autá na trati.

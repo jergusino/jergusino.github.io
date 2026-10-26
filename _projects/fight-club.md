@@ -10,6 +10,6 @@ cover_alt: "Plagát Fight Club"
 cover_raw: true
 tools: [Photoshop]
 tags: [film, portrét]
-similar: [/projects/backrooms/, /projects/obsession/, /projects/truman-show/, /projects/brashki/]
+similar: [/projects/backrooms/, /projects/obsession/, /projects/truman-show/, /projects/brashki/, /projects/darkstar/, /projects/ninjago/]
 ---
 Tvár Tylera Durdena presvitá cez roztrhnutý fialový pás papiera, pod ňou stojí obrovský nadpis Fight Club. Spodok pripomína starý plagát s krátkym popisom deja a farebnou paletou.
