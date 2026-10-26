@@ -2,10 +2,11 @@
 title: "Skateboarding"
 type: plagat
 date: 2026-05-17
-summary: "Plagát Skateboarding."
+summary: "Skejter vo vzduchu nad žiariacim skateboardom, obklopený oranžovým obrysom pohybu na fialovo-oranžovom pozadí."
 cover: /assets/img/projects/skateboarding/cover.jpg
 thumb: /assets/img/projects/skateboarding/thumb.jpg
 cover_alt: "Plagát Skateboarding"
 cover_raw: true
 tools: [Photoshop]
 ---
+Skejter vo vzduchu nad žiariacim skateboardom, obklopený oranžovým obrysom pohybu na fialovo-oranžovom pozadí. Nadpis The Art of Skateboarding rámuje scénu a dole je podpis autora s dátumom.

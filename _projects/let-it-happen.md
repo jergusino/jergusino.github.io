@@ -2,10 +2,11 @@
 title: "Let It Happen"
 type: plagat
 date: 2026-05-09
-summary: "Plagát Let It Happen."
+summary: "Svetlomodrý plagát s textúrou tlače a rozmazanými vlnami, na ktorom sa rozpadá text piesne Let It Happen."
 cover: /assets/img/projects/let-it-happen/cover.jpg
 thumb: /assets/img/projects/let-it-happen/thumb.jpg
 cover_alt: "Plagát Let It Happen"
 cover_raw: true
 tools: [Photoshop]
 ---
+Svetlomodrý plagát s textúrou tlače a rozmazanými vlnami, na ktorom sa rozpadá text piesne Let It Happen. Rozmiestnené riadky o šťastí a o tom, že človek len žije, vedú oko plagátom zhora nadol.

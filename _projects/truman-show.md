@@ -2,10 +2,11 @@
 title: "The Truman Show"
 type: plagat
 date: 2026-03-07
-summary: "Plagát The Truman Show."
+summary: "Tvár Jima Carreya v zakrivenej mriežke ako cez šošovku kamery, nad ňou a pod ňou stojí modré písmo Truman Show."
 cover: /assets/img/projects/truman-show/cover.jpg
 thumb: /assets/img/projects/truman-show/thumb.jpg
 cover_alt: "Plagát The Truman Show"
 cover_raw: true
 tools: [Photoshop]
 ---
+Tvár Jima Carreya v zakrivenej mriežke ako cez šošovku kamery, nad ňou a pod ňou stojí modré písmo Truman Show. Mriežka zvýrazňuje pocit sledovania a uväznenia.

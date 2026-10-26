@@ -2,10 +2,11 @@
 title: "Friday I'm in Love"
 type: plagat
 date: 2026-04-18
-summary: "Plagát Friday I'm in Love."
+summary: "Biele rozmazané písmo Friday I'm in love obklopuje červené srdce na tyrkysovom pozadí."
 cover: /assets/img/projects/friday-im-in-love/cover.jpg
 thumb: /assets/img/projects/friday-im-in-love/thumb.jpg
 cover_alt: "Plagát Friday I'm in Love"
 cover_raw: true
 tools: [Photoshop]
 ---
+Biele rozmazané písmo Friday I'm in love obklopuje červené srdce na tyrkysovom pozadí. Medzi písmenami plávajú motýle, galaxia a postavy, ako zo sna.

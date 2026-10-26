@@ -2,10 +2,11 @@
 title: "Yamaha"
 type: plagat
 date: 2026-03-01
-summary: "Plagát Yamaha."
+summary: "Fialovo-ružový motorkár sa nakláňa v zákrute, pred sivou fotografiou pretekárskej trate."
 cover: /assets/img/projects/yamaha/cover.jpg
 thumb: /assets/img/projects/yamaha/thumb.jpg
 cover_alt: "Plagát Yamaha"
 cover_raw: true
 tools: [Photoshop]
 ---
+Fialovo-ružový motorkár sa nakláňa v zákrute, pred sivou fotografiou pretekárskej trate. Nad ním visí dlhé čierne písmo Yamaha, ktoré akoby vytvára pruhy rýchlosti.

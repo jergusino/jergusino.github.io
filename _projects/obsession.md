@@ -2,10 +2,11 @@
 title: "Obsession"
 type: plagat
 date: 2026-07-09
-summary: "Plagát Obsession."
+summary: "Filmový plagát z červených zrnitých tvárí poskladaných do jednej hrozivej masy na tmavomodrom pozadí."
 cover: /assets/img/projects/obsession/cover.jpg
 thumb: /assets/img/projects/obsession/thumb.jpg
 cover_alt: "Plagát Obsession"
 cover_raw: true
 tools: [Photoshop]
 ---
+Filmový plagát z červených zrnitých tvárí poskladaných do jednej hrozivej masy na tmavomodrom pozadí. Rozmazaný biely nadpis Obsession a veta „Be careful who you wish for...“ ladia s hororovým tónom.
