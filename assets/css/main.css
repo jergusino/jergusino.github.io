@@ -365,14 +365,40 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
   .project-media .cover .zoom { display: block; }
 }
 
+/* carousel arrows at the sides of the whole page: previous / next project (also ← → on the keyboard).
+   They stay in the middle of the screen while you scroll; the page keeps a gutter free for them. */
+body.project { --arrow: clamp(1.6rem, 2.6vw, 2.8rem); --gut: calc(var(--arrow) + var(--F) * 1.5); }
+body.project main { padding: 0 var(--gut); }
+.page-arrow {
+  position: fixed; z-index: 3; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; padding: 1em 0; color: var(--yellow);
+}
+.page-arrow--prev { left: var(--F); }
+.page-arrow--next { right: var(--F); }
+.page-arrow .arr { width: var(--arrow); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+.page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
+.arr--back { transform: scaleX(-1); }
+@media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .viewer .arr { width: 2em; } }
+
+/* project page: on a wide screen the work stands next to the text instead of under it */
+.project-media { margin: 0 var(--F); }
+.project-media img { display: block; max-width: 100%; height: auto; }
+.project-media { margin-top: calc(var(--F) * 2); }
+.media-main > :first-child { margin-top: 0; }
+@media (min-width: 900px) {
+  .project-body {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--F) * 3);
+    align-items: center; padding: calc(var(--F) * 7) var(--F) 0 0;   /* the work is centred on the text block as a whole */
+  }
+  .project-text .hero--project { padding-top: 0; }
+  .project-body .prose { max-width: 70ch; }
+  .project-media { margin: 0; display: grid; justify-items: end; }
+  .project-media .cover img { width: auto; max-width: 100%; max-height: calc(100vh - var(--F) * 8); max-height: calc(100svh - var(--F) * 8); }
+  .project-media .cover .zoom { display: block; }
+}
+
 /* carousel arrows beside the work: previous / next project (also ← → on the keyboard) */
-.project-media { display: flex; align-items: center; justify-content: center; gap: calc(var(--F) * 0.8); }
-.media-main { flex: 0 1 auto; min-width: 0; }
-.side-arrow { flex: none; display: grid; place-items: center; padding: 0.6em 0; color: var(--yellow); }
-.side-arrow .arr { width: clamp(1.6rem, 2.6vw, 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
-.side-arrow:hover, .side-arrow:focus-visible { color: var(--cream); }
 .arr--back { transform: scaleX(-1); }
 @media (min-width: 900px) {
-  .project-media { display: flex; justify-content: flex-end; }
   .media-main { display: grid; justify-items: end; }
 }
