@@ -370,7 +370,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 .arr--back { transform: scaleX(-1); }
 
 .page-arrow { display: none; color: var(--yellow); }
-.page-arrow .arr { width: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+.page-arrow .arr { width: var(--arrow, 2rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
 .page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
 
 @media (min-width: 900px) {
@@ -378,14 +378,15 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     /* very wide, short screens: everything stays together in the middle, sized to that middle */
     --ts: min(calc(var(--T) * 3), 13vh);
     --top: min(calc(var(--F) * 7), 16vh);
-    display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto;
-    column-gap: calc(var(--F) * 2); align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: calc(var(--F) * 3); align-items: center;
     padding: var(--top) var(--F) 0;
+    position: relative;
   }
   .project-text .hero--project { padding-top: 0; }
   .project-text .hero--project .lockup { margin: 0; }
   .project-body .prose { max-width: 70ch; margin-left: 0; }
-  .project-media { margin: 0 0 0 var(--F); display: grid; justify-items: end; }
+  .project-media { margin: 0; display: grid; justify-items: end; }
   .media-main { display: grid; justify-items: end; }
   .project-media .cover .zoom { display: block; }
   /* the poster scales like the text: with the title size, but never taller than the screen */
@@ -395,7 +396,22 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     max-height: min(calc(var(--ts) * 5), calc((100svh - var(--top) - var(--F) * 2) * 0.8));
     margin: 0;
   }
-  .page-arrow { display: grid; place-items: center; padding: 1em 0; }
+  /* the arrows stand outside the column, in the margin, so the text lines up with the logo */
+  .page-arrow { display: grid; place-items: center; padding: 1em 0; position: absolute; top: calc(50% + var(--top) / 2); transform: translateY(-50%); }
+  .page-arrow--prev { right: calc(100% + var(--agap)); }
+  .page-arrow--next { left: calc(100% + var(--agap)); }
+  /* on project pages the column leaves room for the arrows on both sides (same tokens, recomputed) */
+  body.project {
+    --arrow: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem);
+    --agap: max(12px, 1.2vw);
+    --W: min(calc(100vw - (var(--arrow) + var(--agap) * 2) * 2), 190vh);
+    --W: min(calc(100vw - (var(--arrow) + var(--agap) * 2) * 2), 190svh);
+    --F: max(12px, calc(var(--W) / 70));
+    --G: calc(var(--F) * 1.4);
+    --F4: max(20px, calc(var(--W) * 4 / 70));
+    --T: calc(var(--W) / 21);
+    --ts: min(calc(var(--T) * 3), 13vh);
+  }
 }
 
 /* everything sits in the --W column, centred (only narrower than the screen on very wide, short screens) */
