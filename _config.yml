@@ -5,12 +5,12 @@ lang: sk
 url: "https://jergusino.com"   # custom domain (see CNAME)
 baseurl: ""
 
-# Contact. Shown in the footer.
+# Contact. Shown on the contact page (/kontakt/).
 handle: "@jergusino"
 instagram: "https://www.instagram.com/jergusino/"
 email: "mail@jergusino.com"
 
-# Social links, shown in the footer under the handle. Empty for now.
+# More links for the contact page, shown under Instagram. Empty for now.
 # Add one line per link, e.g.:
 #   - label: youtube
 #     url: https://www.youtube.com/@jergusino

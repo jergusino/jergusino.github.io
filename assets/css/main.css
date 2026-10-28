@@ -243,21 +243,28 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 
 .back { margin: calc(var(--F) * 3) 0 0 var(--F); }
 
-/* ── Footer: quiet, one small centred thing ────────────────────────────────── */
-.foot {
-  min-height: 0;
-  display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 0.6em;
-  margin-top: calc(var(--F) * 8); padding: 0 0 calc(var(--F) * 9);
+/* ── Contact page: loud headline, then the ways to reach me as large rows ─────
+   One column at the F edge, Cream text, Yellow only on the pointers (@, arrows, the active copy). */
+.contact { padding: calc(var(--F) * 2) var(--F) calc(var(--F) * 2); }
+.contact-intro { max-width: 34ch; font-size: clamp(1.1rem, min(2vw, 3.4vh), 2rem); line-height: 1.3; margin-bottom: calc(var(--F) * 3); }
+.contact-list { list-style: none; border-top: 1px solid var(--yellow); }
+.contact-row {
+  display: grid; grid-template-columns: minmax(7em, 14%) minmax(0, 1fr) auto; align-items: baseline; gap: var(--F);
+  padding: calc(var(--F) * 1.2) 0; border-bottom: 1px solid var(--yellow);
 }
-.foot::before {                                      /* a hairline of Yellow across the page as the divider */
-  content: ""; display: block; justify-self: stretch; height: 1px; background: var(--yellow);
-  margin-bottom: calc(var(--F) * 7);
+.contact-label { font-family: var(--f-script); color: var(--yellow); font-size: clamp(1.4rem, min(2.6vw, 4.4vh), 2.8rem); line-height: 1; }
+.contact-value { font-size: clamp(1.5rem, min(4.4vw, 7vh), 5rem); line-height: 1.05; overflow-wrap: anywhere; }
+.contact-value .at { color: var(--yellow); }
+.contact-copy, .contact-go {
+  font: inherit; font-size: clamp(1rem, 1.4vw, 1.4rem); color: var(--cream); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
 }
-.handle { font-size: clamp(1.2rem, calc(var(--W) / 38), 2.6rem); line-height: 1.2; letter-spacing: 0.01em; overflow-wrap: anywhere; }
-.handle a:hover, .handle a:focus-visible { color: var(--yellow); }
-.handle .at { color: var(--yellow); }
-.social { font-size: var(--body); }
-.social { list-style: none; display: flex; gap: 1.4em; flex-wrap: wrap; justify-content: center; }
+.contact-copy:hover, .contact-copy:focus-visible, .contact-go:hover { color: var(--yellow); }
+.contact-go .arr { width: clamp(1.6rem, 2.4vw, 2.6rem); height: auto; margin: 0; }
+.contact-row:hover .contact-value { color: var(--yellow); }
+@media (max-width: 640px) {
+  .contact-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 0.3em; }
+  .contact-label { grid-column: 1 / -1; }
+}
 
 /* ── Motion: the title-card animation, copied frame by frame from title-card-jergusino.mp4 ──
    0.11 s of Ink, then the letters rise one by one from the baseline (a new one every 0.02 s,
@@ -422,3 +429,4 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 /* everything sits in the --W column, centred (only narrower than the screen on very wide, short screens) */
 main { max-width: var(--W); margin: 0 auto; }
 .top { left: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); right: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); }
+main { padding-bottom: calc(var(--F) * 6); }   /* no footer: a little Ink after the last thing on the page */

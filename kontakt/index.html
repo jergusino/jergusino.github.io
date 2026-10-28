@@ -1,0 +1,52 @@
+---
+layout: default
+title: Kontakt
+body_class: kontakt-page
+permalink: /kontakt/
+summary: "Napíš mi: mail@jergusino.com"
+---
+<section class="hero hero--page hero--project">
+  <div class="lockup">
+    {% include lead.html text="napíš mi" %}
+    <h1 class="title">Kontakt</h1>
+  </div>
+</section>
+
+<section class="contact">
+  <p class="contact-intro">Spolupráca, plagát na objednávku alebo len otázka. Najrýchlejšie ma zastihneš mailom.</p>
+
+  <ul class="contact-list">
+    <li class="contact-row contact-row--mail">
+      <span class="contact-label">e-mail</span>
+      <a class="contact-value" href="mailto:{{ site.email }}">{{ site.email | replace: "@", '<span class="at">@</span>' }}</a>
+      <button type="button" class="contact-copy" data-copy="{{ site.email }}" hidden>kopírovať</button>
+    </li>
+    <li class="contact-row">
+      <span class="contact-label">instagram</span>
+      <a class="contact-value" href="{{ site.instagram }}" target="_blank" rel="me noopener"><span class="at">@</span>{{ site.handle | remove_first: "@" }}</a>
+      <a class="contact-go" href="{{ site.instagram }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1">{% include arrow.svg %}</a>
+    </li>
+    {% for s in site.social %}
+    <li class="contact-row">
+      <span class="contact-label">{{ s.label }}</span>
+      <a class="contact-value" href="{{ s.url }}" target="_blank" rel="me noopener">{{ s.url | remove_first: "https://" | remove_first: "www." }}</a>
+      <a class="contact-go" href="{{ s.url }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1">{% include arrow.svg %}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<script>
+  /* "kopírovať" copies the address; the button only shows where the browser can copy */
+  (function () {
+    var b = document.querySelector('.contact-copy');
+    if (!b || !navigator.clipboard) return;
+    b.hidden = false;
+    b.addEventListener('click', function () {
+      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
+        b.textContent = 'skopírované';
+        setTimeout(function () { b.textContent = 'kopírovať'; }, 1600);
+      });
+    });
+  })();
+</script>

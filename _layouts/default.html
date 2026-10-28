@@ -38,7 +38,6 @@
     {{ content }}
   </main>
 
-  {% include footer.html %}
 
   <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
   {% if page.viewer %}<script src="{{ '/assets/js/viewer.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}

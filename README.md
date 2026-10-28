@@ -66,7 +66,7 @@ Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/proje
 
 ## Change the basics
 
-Everything personal is in `_config.yml`: handle, email (shown in the footer, as on the card back), Instagram link, other social links (`social:` is empty, add `label` + `url` pairs and they appear in the footer), site address.
+Everything personal is in `_config.yml`: handle, email, Instagram link, other social links (all shown on the contact page, `kontakt/index.html`; the site has no footer) (`social:` is empty; add `label` + `url` pairs and they appear as rows on the contact page), site address.
 
 ## Preview on your computer (optional)
 
@@ -81,7 +81,7 @@ Needs Ruby. Not needed to publish.
 
 - Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
 - The wordmark is traced from the business card itself (`Front.png`), because the card's letters are edited versions of Slithen. It is in `_includes/wordmark.svg` (one path per letter); `assets/img/mark.svg` is the Š mark used as favicon. To regenerate after changing the card: `python3 -I tools/trace_card.py Front.png .`
-- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the footer is *quiet* (the email from the card back, centred). The nav shows the full wordmark.
+- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the contact page (/kontakt/) lists the email and Instagram as large rows between Yellow hairlines. The nav shows the full wordmark.
 - Motion on the home page is copied frame by frame from `title-card-jergusino.mp4`: a short Ink hold, the letters rise one by one from the baseline, then the bar falls from the very top of the screen, overshoots 10% and settles. *i am* writes on beside the letters (the one addition). Hard cuts and masks, no fades. It is switched off for visitors who prefer reduced motion.
 - A click on a poster on its page opens the viewer: full size on Ink, ← → or swipe to flip through all posters, Esc to close. On a poster page ← → also go to the previous / next poster, and on a poster wall the arrow keys move between posters. A "preskočiť na obsah" link appears on the first Tab.
 - The Projects page has a category selector, a subject selector (téma), sorting (newest, oldest, A–Z) and search, all plain text in Cream with the active choice in Yellow. The choice is kept in the address, e.g. `/projects/?tema=film&zoradit=az&q=club`. Links and filters change colour on hover and focus, never opacity. On a poster, hover drops the Yellow bar of the logo onto its top edge (0.2 s, soft landing; it leaves in 0.1 s).
@@ -100,7 +100,7 @@ _config.yml          site settings
 _data/types.yml      project types
 _projects/           one Markdown file per project
 _templates/          project template (not published)
-_layouts/ _includes/ page templates, wordmark, header, footer
+_layouts/ _includes/ page templates, wordmark, header
 assets/              css, js, fonts, images
 tools/               new-project.sh, twotone.py, build_assets.py (fonts), trace_card.py (wordmark)
 ```
