@@ -104,7 +104,8 @@ a:hover, a:focus-visible { color: var(--yellow); }
 /* one project: no tall empty stage, the title sits just under the header and the text follows */
 .hero--project { min-height: 0; padding-top: calc(var(--F) * 7); }
 .hero--project .lockup { position: static; margin: 0 var(--F); }
-body.project .prose { margin-top: calc(var(--F) * 2); }
+body.project .prose { margin-top: calc(var(--F) * 0.9 - 0.9em); }   /* (pulls up past the empty line space of the big title and the details) */   /* the details sit close under the title… */
+body.project .prose .meta + * { margin-top: calc(var(--F) * 3.2); }   /* …and the description stands apart */
 body.project .back { margin-top: calc(var(--F) * 2); }
 
 .lockup { position: absolute; left: var(--F); right: var(--F); bottom: var(--F); }
