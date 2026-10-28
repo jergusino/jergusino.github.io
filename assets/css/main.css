@@ -387,19 +387,34 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
   .page-arrow {
     display: flex; align-items: center; justify-content: center;
     position: fixed; z-index: 4; top: 0; bottom: 0; width: max(48px, 5vw);
+    overflow: hidden; color: var(--yellow); outline: none;
   }
   .page-arrow--prev { left: 0; }
   .page-arrow--next { right: 0; }
-  .page-arrow .arr { visibility: hidden; }
-  .page-arrow:hover, .page-arrow:focus-visible { background: var(--ink); }   /* an Ink strip, the full height of the screen, keeps the arrow readable over the content */
-  .page-arrow:hover .arr, .page-arrow:focus-visible .arr { visibility: visible; }
-  .page-arrow:hover, .page-arrow:focus-visible { color: var(--yellow); outline: none; }
+  /* the Ink strip and the arrow slide in from behind the screen edge (Move: soft landing; exits accelerate) */
+  .page-arrow::before { content: ""; position: absolute; inset: 0; background: var(--ink); }
+  .page-arrow::before, .page-arrow .arr {
+    transition: transform 0.2s cubic-bezier(0.6, 0, 1, 1);
+  }
+  .page-arrow--prev::before, .page-arrow--prev .arr { transform: translateX(-101%); }
+  .page-arrow--prev .arr { transform: translateX(calc(-1 * max(48px, 5vw))) scaleX(-1); }
+  .page-arrow--next::before { transform: translateX(101%); }
+  .page-arrow--next .arr { transform: translateX(max(48px, 5vw)); }
+  .page-arrow .arr { position: relative; }
+  .page-arrow:hover::before, .page-arrow:focus-visible::before { transform: none; transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1); }
+  .page-arrow:hover .arr, .page-arrow:focus-visible .arr { transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1) 0.04s; }
+  .page-arrow--prev:hover .arr, .page-arrow--prev:focus-visible .arr { transform: scaleX(-1); }
+  .page-arrow--next:hover .arr, .page-arrow--next:focus-visible .arr { transform: none; }
   .page-arrow:focus-visible .arr { outline: 2px solid var(--yellow); outline-offset: 2px; }
+}
+@media (min-width: 900px) and (hover: hover) and (prefers-reduced-motion: reduce) {
+  .page-arrow::before, .page-arrow .arr { transition: none !important; }
 }
 @media (min-width: 900px) and (min-aspect-ratio: 19/10) {
   .page-arrow { width: calc((100vw - var(--W)) / 2); top: 0; bottom: 0; }
-  .page-arrow .arr { visibility: visible; }
-  .page-arrow:hover, .page-arrow:focus-visible { background: none; }
+  .page-arrow::before { display: none; }
+  .page-arrow--prev .arr, .page-arrow--prev:hover .arr { transform: scaleX(-1); }
+  .page-arrow--next .arr, .page-arrow--next:hover .arr { transform: none; }
   .page-arrow:hover { color: var(--cream); }
 }
 
@@ -432,3 +447,4 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 main { max-width: var(--W); margin: 0 auto; }
 .top { left: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); right: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); }
 main { padding-bottom: calc(var(--F) * 6); }   /* no footer: a little Ink after the last thing on the page */
+body.project { overflow-x: clip; }   /* the page slides sideways on a swipe without a sideways scrollbar */

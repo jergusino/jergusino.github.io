@@ -22,26 +22,67 @@
   });
 })();
 
-// Project pages on touch screens: swipe left for the next project, right for the previous one
-// (the same targets as the side arrows, which are hidden on small screens).
+// Project pages on touch screens: the page follows the finger sideways. Let go past a third of the
+// screen (or flick) and it slides out and the next / previous project slides in from that side;
+// otherwise it springs back. Vertical scrolling is untouched.
 (function () {
   var prev = document.querySelector('.page-arrow--prev');
   var next = document.querySelector('.page-arrow--next');
-  if (!prev || !next) return;
-  var x0 = null, y0 = null, t0 = 0;
+  var main = document.querySelector('main');
+  if (!prev || !next || !main) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EASE_IN = 'cubic-bezier(0.6, 0, 1, 1)', EASE_OUT = 'cubic-bezier(0.2, 0, 0, 1)';
+
+  // arriving from a swipe: slide in from the side we came towards
+  try {
+    var came = sessionStorage.getItem('swipe-in');
+    sessionStorage.removeItem('swipe-in');
+    if (came && !reduce) {
+      main.style.transform = 'translateX(' + (came === 'next' ? '' : '-') + '100vw)';
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        main.style.transition = 'transform 0.4s ' + EASE_OUT;
+        main.style.transform = '';
+        setTimeout(function () { main.style.transition = ''; }, 450);
+      }); });
+    }
+  } catch (e) {}
+
+  var x0 = null, y0 = 0, t0 = 0, dx = 0, mode = null;
+  function set(x, anim) {
+    main.style.transition = anim ? 'transform ' + anim : 'none';
+    main.style.transform = x ? 'translateX(' + x + 'px)' : '';
+  }
   document.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1 || document.documentElement.classList.contains('viewer-open')) { x0 = null; return; }
-    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now(); dx = 0; mode = null;
   }, { passive: true });
-  document.addEventListener('touchend', function (e) {
+  document.addEventListener('touchmove', function (e) {
     if (x0 === null) return;
-    var t = e.changedTouches[0];
-    var dx = t.clientX - x0, dy = t.clientY - y0;
+    var mx = e.touches[0].clientX - x0, my = e.touches[0].clientY - y0;
+    if (!mode) {
+      if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+      mode = Math.abs(mx) > Math.abs(my) * 1.2 ? 'x' : 'y';
+    }
+    if (mode !== 'x') return;
+    e.preventDefault();
+    dx = mx;
+    if (!reduce) set(dx * 0.9);
+  }, { passive: false });
+  document.addEventListener('touchend', function () {
+    if (x0 === null || mode !== 'x') { x0 = null; return; }
     x0 = null;
-    if (Date.now() - t0 > 800) return;                                   // a slow drag is not a swipe
-    if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.5) return;  // mostly sideways, far enough
-    location.assign((dx < 0 ? next : prev).href);
+    var w = window.innerWidth, fast = Math.abs(dx) / Math.max(1, Date.now() - t0) > 0.5;
+    if (Math.abs(dx) > w / 3 || (fast && Math.abs(dx) > 40)) {
+      var go = dx < 0 ? 'next' : 'prev';
+      try { sessionStorage.setItem('swipe-in', go); } catch (e) {}
+      if (reduce) { location.assign((go === 'next' ? next : prev).href); return; }
+      set((dx < 0 ? -1 : 1) * w, '0.2s ' + EASE_IN);
+      setTimeout(function () { location.assign((go === 'next' ? next : prev).href); }, 190);
+    } else {
+      set(0, '0.3s ' + EASE_OUT);
+    }
   }, { passive: true });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) set(0); });   // coming back with the back button
 })();
 
 // Project pages: the title is large, so a long one (several lines) is stepped down until the whole
