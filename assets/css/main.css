@@ -355,11 +355,11 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 @media (min-width: 900px) {
   .project-body {
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--F) * 3);
-    align-items: start; padding-right: var(--F);
+    align-items: center; padding: calc(var(--F) * 7) var(--F) 0 0;   /* the work is centred on the text block as a whole */
   }
-  .project-text { position: sticky; top: 0; }
+  .project-text .hero--project { padding-top: 0; }
   .project-body .prose { max-width: 70ch; }
-  .project-media { margin: calc(var(--F) * 7) 0 0; display: grid; justify-items: end; }
+  .project-media { margin: 0; display: grid; justify-items: end; }
   .project-media > :first-child { margin-top: 0; }
   .project-media .cover img { width: auto; max-width: 100%; max-height: calc(100vh - var(--F) * 8); max-height: calc(100svh - var(--F) * 8); }
   .project-media .cover .zoom { display: block; }
