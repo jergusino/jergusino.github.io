@@ -247,13 +247,13 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .foot {
   min-height: 0;
   display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 0.6em;
-  margin-top: calc(var(--F) * 6); padding: 0 0 calc(var(--F) * 12);
+  margin-top: calc(var(--F) * 8); padding: 0 0 calc(var(--F) * 9);
 }
-.foot::before {                                      /* a thin Yellow line across the page as the divider */
-  content: ""; display: block; justify-self: stretch; height: 2px; background: var(--yellow);
-  margin-bottom: calc(var(--F) * 4);
+.foot::before {                                      /* a hairline of Yellow across the page as the divider */
+  content: ""; display: block; justify-self: stretch; height: 1px; background: var(--yellow);
+  margin-bottom: calc(var(--F) * 7);
 }
-.handle { font-size: clamp(1.3rem, calc(var(--W) / 30), 3.4rem); line-height: 1; overflow-wrap: anywhere; }
+.handle { font-size: clamp(1.2rem, calc(var(--W) / 38), 2.6rem); line-height: 1.2; letter-spacing: 0.01em; overflow-wrap: anywhere; }
 .handle a:hover, .handle a:focus-visible { color: var(--yellow); }
 .handle .at { color: var(--yellow); }
 .social { font-size: var(--body); }
@@ -357,8 +357,8 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
    Wide screens: the info on the left, the work on the right, centred on each other, with the
    previous / next arrows right beside them. Everything is sized by the width but capped by the
    screen height, so the info and the whole poster always fit on screen. */
-body.project { --ts: min(calc(var(--T) * 3), 13vh); }                 /* title size; the poster follows it */
-body.project .hero--page { --title-size: var(--ts); }
+body.project { --ts: min(calc(var(--T) * 3), 13vh); }                 /* base size; the poster follows it */
+body.project .hero--page { --title-size: calc(var(--ts) * 1.2); }   /* the title is 120% of the base */
 body.project .meta, body.project .back { font-size: clamp(1.1rem, min(2.4vw, 4vh), 2.6rem); }
 body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95rem, min(var(--body), 2.8vh), 1.375rem); }
 @media (max-width: 520px) { body.project { --ts: min(calc(var(--T) * 3.4), 13vh); } }
@@ -377,18 +377,20 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 @media (min-width: 900px) and (hover: hover) {
   .page-arrow {
     display: flex; align-items: center; justify-content: center;
-    position: fixed; z-index: 4; top: 20vh; bottom: 20vh; width: max(48px, 5vw);
+    position: fixed; z-index: 4; top: 0; bottom: 0; width: max(48px, 5vw);
   }
   .page-arrow--prev { left: 0; }
   .page-arrow--next { right: 0; }
-  .page-arrow .arr { visibility: hidden; box-sizing: content-box; padding: 0.5em 0.4em; background: var(--ink); }   /* an Ink plate keeps the arrow readable over a poster */
+  .page-arrow .arr { visibility: hidden; }
+  .page-arrow:hover, .page-arrow:focus-visible { background: var(--ink); }   /* an Ink strip, the full height of the screen, keeps the arrow readable over the content */
   .page-arrow:hover .arr, .page-arrow:focus-visible .arr { visibility: visible; }
   .page-arrow:hover, .page-arrow:focus-visible { color: var(--yellow); outline: none; }
   .page-arrow:focus-visible .arr { outline: 2px solid var(--yellow); outline-offset: 2px; }
 }
 @media (min-width: 900px) and (min-aspect-ratio: 19/10) {
   .page-arrow { width: calc((100vw - var(--W)) / 2); top: 0; bottom: 0; }
-  .page-arrow .arr { visibility: visible; background: none; }
+  .page-arrow .arr { visibility: visible; }
+  .page-arrow:hover, .page-arrow:focus-visible { background: none; }
   .page-arrow:hover { color: var(--cream); }
 }
 
