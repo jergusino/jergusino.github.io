@@ -375,7 +375,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 .project-media { margin: calc(var(--F) * 2) var(--F) 0; }
 .project-media img { display: block; max-width: 100%; height: auto; }
 .media-main > :first-child { margin-top: 0; }
-.project-media .cover img { box-sizing: content-box; padding-top: 7rem; max-height: calc((100vh - var(--F) * 2) * 0.8 - 7rem); max-height: calc((100svh - var(--F) * 2) * 0.8 - 7rem); width: auto; max-width: 80%; margin: 0 auto; }
+.project-media .cover img { max-height: calc((100vh - var(--F) * 2) * 0.8 - 7rem); max-height: calc((100svh - var(--F) * 2) * 0.8 - 7rem); width: auto; max-width: 80%; margin: 7rem auto 0; }
 .arr--back { transform: scaleX(-1); }
 
 /* previous / next arrows. On screens with empty bars at the sides (wider than 1.9 x the height) they
@@ -439,7 +439,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     max-width: 100%;
     max-height: calc(min(calc(var(--ts) * 5), calc((100vh - var(--top) - var(--F) * 2) * 0.8)) - 7rem);
     max-height: calc(min(calc(var(--ts) * 5), calc((100svh - var(--top) - var(--F) * 2) * 0.8)) - 7rem);
-    margin: 0;
+    margin: 7rem 0 0;
   }
 }
 
