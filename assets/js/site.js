@@ -45,22 +45,29 @@
 })();
 
 // Project pages: the title is large, so a long one (several lines) is stepped down until the whole
-// info (lead, title, details, description) fits on the screen.
+// info (lead, title, details, description) fits. Side by side (wide screens) the info must not be
+// taller than the poster, so the poster sits in the same place on every project page; stacked
+// (phones) it must fit on the screen.
 (function () {
   var title = document.querySelector('.project-text .title');
+  var text = document.querySelector('.project-text');
   var prose = document.querySelector('.project-text .prose');
+  var media = document.querySelector('.project-media .cover img, .project-media .media-main');
   if (!title || !prose) return;
-  function bottom() {
+  function sideBySide() { return getComputedStyle(document.querySelector('.project-body')).display === 'grid'; }
+  function tooBig() {
+    if (sideBySide() && media && media.getBoundingClientRect().height > 0) {
+      return text.getBoundingClientRect().height > media.getBoundingClientRect().height;
+    }
     var last = prose.lastElementChild || prose;
-    return last.getBoundingClientRect().bottom + window.scrollY;
+    return last.getBoundingClientRect().bottom + window.scrollY > window.innerHeight - 8;
   }
   function fit() {
     title.style.fontSize = '';
     var size = parseFloat(getComputedStyle(title).fontSize);
-    var min = size * 0.55;
-    var limit = window.innerHeight - 8;
-    while (bottom() > limit && size > min) {
-      size *= 0.94;
+    var min = size * 0.45;
+    while (tooBig() && size > min) {
+      size *= 0.95;
       title.style.fontSize = size + 'px';
     }
   }
@@ -68,5 +75,7 @@
   function later() { clearTimeout(t); t = setTimeout(fit, 80); }
   fit();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  var img = document.querySelector('.project-media .cover img');
+  if (img && !img.complete) img.addEventListener('load', fit);
   window.addEventListener('resize', later);
 })();
