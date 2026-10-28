@@ -365,7 +365,8 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
    previous / next arrows right beside them. Everything is sized by the width but capped by the
    screen height, so the info and the whole poster always fit on screen. */
 body.project { --ts: min(calc(var(--T) * 3), 13vh); }                 /* base size; the poster follows it */
-body.project .hero--page { --title-size: calc(var(--ts) * 1.2); }   /* the title is 120% of the base */
+body.project .hero--page { --title-size: calc(var(--ts) * 1.8); }   /* the title is 180% of the base */
+body.project .hero--page .lead { font-size: calc(var(--ts) * 1.2 * 0.54); }   /* the lead keeps its size */
 body.project .meta, body.project .back { font-size: clamp(1.1rem, min(2.4vw, 4vh), 2.6rem); }
 body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95rem, min(var(--body), 2.8vh), 1.375rem); }
 @media (max-width: 520px) { body.project { --ts: min(calc(var(--T) * 3.4), 13vh); } }

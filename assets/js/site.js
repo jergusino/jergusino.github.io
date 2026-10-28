@@ -43,3 +43,30 @@
     location.assign((dx < 0 ? next : prev).href);
   }, { passive: true });
 })();
+
+// Project pages: the title is large, so a long one (several lines) is stepped down until the whole
+// info (lead, title, details, description) fits on the screen.
+(function () {
+  var title = document.querySelector('.project-text .title');
+  var prose = document.querySelector('.project-text .prose');
+  if (!title || !prose) return;
+  function bottom() {
+    var last = prose.lastElementChild || prose;
+    return last.getBoundingClientRect().bottom + window.scrollY;
+  }
+  function fit() {
+    title.style.fontSize = '';
+    var size = parseFloat(getComputedStyle(title).fontSize);
+    var min = size * 0.55;
+    var limit = window.innerHeight - 8;
+    while (bottom() > limit && size > min) {
+      size *= 0.94;
+      title.style.fontSize = size + 'px';
+    }
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(fit, 80); }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener('resize', later);
+})();
