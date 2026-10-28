@@ -412,3 +412,15 @@ body.project main { padding: 0 var(--gut); }
 @media (min-width: 900px) {
   .media-main { display: grid; justify-items: end; }
 }
+
+/* project page: the text never grows past what fits on the screen next to (or above) the work.
+   Sizes follow the width as before, but are capped by the screen height. */
+body.project .hero--page { --title-size: min(calc(var(--T) * 3), 13vh); }
+body.project .meta, body.project .back { font-size: clamp(1.1rem, min(2.4vw, 4vh), 2.6rem); }
+body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95rem, min(var(--body), 2.8vh), 1.375rem); }
+@media (min-width: 900px) {
+  .project-body { padding-top: min(calc(var(--F) * 7), 16vh); }
+}
+@media (max-width: 520px) {
+  body.project .hero--page { --title-size: min(calc(var(--T) * 3.4), 13vh); }
+}
