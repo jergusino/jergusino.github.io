@@ -369,9 +369,28 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 .project-media .cover img { max-height: calc((100vh - var(--F) * 2) * 0.8); max-height: calc((100svh - var(--F) * 2) * 0.8); width: auto; max-width: 80%; margin: 0 auto; }
 .arr--back { transform: scaleX(-1); }
 
+/* previous / next arrows. On screens with empty bars at the sides (wider than 1.9 x the height) they
+   always stand in those bars. Otherwise they are hidden and cut on in front of the content when the
+   mouse comes to the left or right edge of the screen. Phones and tablets swipe instead. */
 .page-arrow { display: none; color: var(--yellow); }
-.page-arrow .arr { width: var(--arrow, 2rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
-.page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
+.page-arrow .arr { width: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+@media (min-width: 900px) and (hover: hover) {
+  .page-arrow {
+    display: flex; align-items: center; justify-content: center;
+    position: fixed; z-index: 4; top: 20vh; bottom: 20vh; width: max(48px, 5vw);
+  }
+  .page-arrow--prev { left: 0; }
+  .page-arrow--next { right: 0; }
+  .page-arrow .arr { visibility: hidden; box-sizing: content-box; padding: 0.5em 0.4em; background: var(--ink); }   /* an Ink plate keeps the arrow readable over a poster */
+  .page-arrow:hover .arr, .page-arrow:focus-visible .arr { visibility: visible; }
+  .page-arrow:hover, .page-arrow:focus-visible { color: var(--yellow); outline: none; }
+  .page-arrow:focus-visible .arr { outline: 2px solid var(--yellow); outline-offset: 2px; }
+}
+@media (min-width: 900px) and (min-aspect-ratio: 19/10) {
+  .page-arrow { width: calc((100vw - var(--W)) / 2); top: 0; bottom: 0; }
+  .page-arrow .arr { visibility: visible; background: none; }
+  .page-arrow:hover { color: var(--cream); }
+}
 
 @media (min-width: 900px) {
   .project-body {
@@ -395,22 +414,6 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     max-height: min(calc(var(--ts) * 5), calc((100vh - var(--top) - var(--F) * 2) * 0.8));
     max-height: min(calc(var(--ts) * 5), calc((100svh - var(--top) - var(--F) * 2) * 0.8));
     margin: 0;
-  }
-  /* the arrows stand outside the column, in the margin, so the text lines up with the logo */
-  .page-arrow { display: grid; place-items: center; padding: 1em 0; position: absolute; top: calc(50% + var(--top) / 2); transform: translateY(-50%); }
-  .page-arrow--prev { right: calc(100% + var(--agap)); }
-  .page-arrow--next { left: calc(100% + var(--agap)); }
-  /* on project pages the column leaves room for the arrows on both sides (same tokens, recomputed) */
-  body.project {
-    --arrow: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem);
-    --agap: max(12px, 1.2vw);
-    --W: min(calc(100vw - (var(--arrow) + var(--agap) * 2) * 2), 190vh);
-    --W: min(calc(100vw - (var(--arrow) + var(--agap) * 2) * 2), 190svh);
-    --F: max(12px, calc(var(--W) / 70));
-    --G: calc(var(--F) * 1.4);
-    --F4: max(20px, calc(var(--W) * 4 / 70));
-    --T: calc(var(--W) / 21);
-    --ts: min(calc(var(--T) * 3), 13vh);
   }
 }
 
