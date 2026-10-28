@@ -348,79 +348,50 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 .viewer .arr--back { transform: scaleX(-1); }
 @media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .viewer .arr { width: 2em; } }
 
-/* project page: on a wide screen the work stands next to the text instead of under it */
-.project-media { margin: 0 var(--F); }
-.project-media img { display: block; max-width: 100%; height: auto; }
-.project-media { margin-top: calc(var(--F) * 2); }
-.media-main > :first-child { margin-top: 0; }
-@media (min-width: 900px) {
-  .project-body {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--F) * 3);
-    align-items: center; padding: calc(var(--F) * 7) var(--F) 0 0;   /* the work is centred on the text block as a whole */
-    max-width: calc(100vh * 1.9); max-width: calc(100svh * 1.9); margin: 0 auto;   /* very wide, short screens: text and work stay together in the middle */
-    --T: calc(min(100vw, 190vh) / 21); --T: calc(min(100vw, 190svh) / 21);          /* and the title and spacing are sized to that middle, not to the whole width */
-    --F: max(12px, calc(min(100vw, 190vh) / 70)); --F: max(12px, calc(min(100vw, 190svh) / 70));
-  }
-  .project-text .hero--project { padding-top: 0; }
-  .project-body .prose { max-width: 70ch; }
-  .project-media { margin: 0; display: grid; justify-items: end; }
-  .project-media .cover img { width: auto; max-width: 100%; max-height: calc(100vh - var(--F) * 8); max-height: calc(100svh - var(--F) * 8); }
-  .project-media .cover .zoom { display: block; }
-}
-
-/* carousel arrows at the sides of the whole page: previous / next project (also ← → on the keyboard).
-   They stay in the middle of the screen while you scroll; the page keeps a gutter free for them. */
-body.project { --arrow: clamp(1.6rem, 2.6vw, 2.8rem); --gut: calc(var(--arrow) + var(--F) * 1.5); }
-body.project main { padding: 0 var(--gut); }
-.page-arrow {
-  position: fixed; z-index: 3; top: 50%; transform: translateY(-50%);
-  display: grid; place-items: center; padding: 1em 0; color: var(--yellow);
-}
-.page-arrow--prev { left: var(--F); }
-.page-arrow--next { right: var(--F); }
-.page-arrow .arr { width: var(--arrow); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
-.page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
-@media (max-width: 899px) {                       /* phones and tablets: no arrows, swipe left / right instead */
-  body.project main { padding: 0; }
-  .page-arrow { display: none; }
-}
-.arr--back { transform: scaleX(-1); }
-@media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .viewer .arr { width: 2em; } }
-
-/* project page: on a wide screen the work stands next to the text instead of under it */
-.project-media { margin: 0 var(--F); }
-.project-media img { display: block; max-width: 100%; height: auto; }
-.project-media { margin-top: calc(var(--F) * 2); }
-.media-main > :first-child { margin-top: 0; }
-@media (min-width: 900px) {
-  .project-body {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--F) * 3);
-    align-items: center; padding: calc(var(--F) * 7) var(--F) 0 0;   /* the work is centred on the text block as a whole */
-    max-width: calc(100vh * 1.9); max-width: calc(100svh * 1.9); margin: 0 auto;   /* very wide, short screens: text and work stay together in the middle */
-    --T: calc(min(100vw, 190vh) / 21); --T: calc(min(100vw, 190svh) / 21);          /* and the title and spacing are sized to that middle, not to the whole width */
-    --F: max(12px, calc(min(100vw, 190vh) / 70)); --F: max(12px, calc(min(100vw, 190svh) / 70));
-  }
-  .project-text .hero--project { padding-top: 0; }
-  .project-body .prose { max-width: 70ch; }
-  .project-media { margin: 0; display: grid; justify-items: end; }
-  .project-media .cover img { width: auto; max-width: 100%; max-height: calc(100vh - var(--F) * 8); max-height: calc(100svh - var(--F) * 8); }
-  .project-media .cover .zoom { display: block; }
-}
-
-/* carousel arrows beside the work: previous / next project (also ← → on the keyboard) */
-.arr--back { transform: scaleX(-1); }
-@media (min-width: 900px) {
-  .media-main { display: grid; justify-items: end; }
-}
-
-/* project page: the text never grows past what fits on the screen next to (or above) the work.
-   Sizes follow the width as before, but are capped by the screen height. */
-body.project .hero--page { --title-size: min(calc(var(--T) * 3), 13vh); }
+/* ── Project page ─────────────────────────────────────────────────────────────
+   Phones and tablets: title, info, then the work, one column (swipe left / right for the next project).
+   Wide screens: the info on the left, the work on the right, centred on each other, with the
+   previous / next arrows right beside them. Everything is sized by the width but capped by the
+   screen height, so the info and the whole poster always fit on screen. */
+body.project { --ts: min(calc(var(--T) * 3), 13vh); }                 /* title size; the poster follows it */
+body.project .hero--page { --title-size: var(--ts); }
 body.project .meta, body.project .back { font-size: clamp(1.1rem, min(2.4vw, 4vh), 2.6rem); }
 body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95rem, min(var(--body), 2.8vh), 1.375rem); }
+@media (max-width: 520px) { body.project { --ts: min(calc(var(--T) * 3.4), 13vh); } }
+
+.project-media { margin: calc(var(--F) * 2) var(--F) 0; }
+.project-media img { display: block; max-width: 100%; height: auto; }
+.media-main > :first-child { margin-top: 0; }
+.project-media .cover img { max-height: calc(100vh - var(--F) * 2); max-height: calc(100svh - var(--F) * 2); width: auto; margin: 0 auto; }
+.arr--back { transform: scaleX(-1); }
+
+.page-arrow { display: none; color: var(--yellow); }
+.page-arrow .arr { width: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+.page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
+
 @media (min-width: 900px) {
-  .project-body { padding-top: min(calc(var(--F) * 7), 16vh); }
-}
-@media (max-width: 520px) {
-  body.project .hero--page { --title-size: min(calc(var(--T) * 3.4), 13vh); }
+  .project-body {
+    /* very wide, short screens: everything stays together in the middle, sized to that middle */
+    --T: calc(min(100vw, 190vh) / 21); --T: calc(min(100vw, 190svh) / 21);
+    --F: max(12px, calc(min(100vw, 190vh) / 70)); --F: max(12px, calc(min(100vw, 190svh) / 70));
+    --ts: min(calc(var(--T) * 3), 13vh);
+    --top: min(calc(var(--F) * 7), 16vh);
+    display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto;
+    column-gap: calc(var(--F) * 2); align-items: center;
+    padding: var(--top) var(--F) 0;
+    max-width: calc(100vh * 1.9); max-width: calc(100svh * 1.9); margin: 0 auto;
+  }
+  .project-text .hero--project { padding-top: 0; }
+  .project-text .hero--project .lockup { margin: 0; }
+  .project-body .prose { max-width: 70ch; margin-left: 0; }
+  .project-media { margin: 0 0 0 var(--F); display: grid; justify-items: end; }
+  .media-main { display: grid; justify-items: end; }
+  .project-media .cover .zoom { display: block; }
+  /* the poster scales like the text: with the title size, but never taller than the screen */
+  .project-media .cover img {
+    max-height: min(calc(var(--ts) * 6.3), calc(100vh - var(--top) - var(--F) * 2));
+    max-height: min(calc(var(--ts) * 6.3), calc(100svh - var(--top) - var(--F) * 2));
+    margin: 0;
+  }
+  .page-arrow { display: grid; place-items: center; padding: 1em 0; }
 }

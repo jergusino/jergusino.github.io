@@ -12,10 +12,9 @@ layout: default
 {% for p in all %}{% if found and next == nil %}{% assign next = p %}{% endif %}{% if p.url == page.url %}{% assign found = true %}{% assign prev = last %}{% endif %}{% assign last = p %}{% endfor %}
 {% if prev == nil %}{% assign prev = all | last %}{% endif %}
 {% if next == nil %}{% assign next = all | first %}{% endif %}
-  {% if all.size > 1 %}<a class="page-arrow page-arrow--prev" href="{{ prev.url | relative_url }}" rel="prev" aria-label="Predchádzajúci projekt: {{ prev.title | escape }}"><svg class="arr arr--back" viewBox="0 0 24 12" width="24" height="12" aria-hidden="true" focusable="false"><path d="M0 5h18V0l6 6-6 6V7H0z"/></svg></a>{% endif %}
-  {% if all.size > 1 %}<a class="page-arrow page-arrow--next" href="{{ next.url | relative_url }}" rel="next" aria-label="Ďalší projekt: {{ next.title | escape }}"><svg class="arr" viewBox="0 0 24 12" width="24" height="12" aria-hidden="true" focusable="false"><path d="M0 5h18V0l6 6-6 6V7H0z"/></svg></a>{% endif %}
 
 <div class="project-body">
+  {% if all.size > 1 %}<a class="page-arrow page-arrow--prev" href="{{ prev.url | relative_url }}" rel="prev" aria-label="Predchádzajúci projekt: {{ prev.title | escape }}"><svg class="arr arr--back" viewBox="0 0 24 12" width="24" height="12" aria-hidden="true" focusable="false"><path d="M0 5h18V0l6 6-6 6V7H0z"/></svg></a>{% endif %}
 <div class="project-text">
 <section class="hero hero--page hero--project {{ acc }}">
   <div class="lockup">
@@ -64,6 +63,7 @@ layout: default
   {% endif %}
   </div>
 </div>
+  {% if all.size > 1 %}<a class="page-arrow page-arrow--next" href="{{ next.url | relative_url }}" rel="next" aria-label="Ďalší projekt: {{ next.title | escape }}"><svg class="arr" viewBox="0 0 24 12" width="24" height="12" aria-hidden="true" focusable="false"><path d="M0 5h18V0l6 6-6 6V7H0z"/></svg></a>{% endif %}
 </div>
 
 {% assign pool = site.projects | where: "type", page.type | sort: "date" | reverse %}
