@@ -351,7 +351,8 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 /* project page: on a wide screen the work stands next to the text instead of under it */
 .project-media { margin: 0 var(--F); }
 .project-media img { display: block; max-width: 100%; height: auto; }
-.project-media > :first-child { margin-top: calc(var(--F) * 2); }
+.project-media { margin-top: calc(var(--F) * 2); }
+.media-main > :first-child { margin-top: 0; }
 @media (min-width: 900px) {
   .project-body {
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--F) * 3);
@@ -360,7 +361,18 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
   .project-text .hero--project { padding-top: 0; }
   .project-body .prose { max-width: 70ch; }
   .project-media { margin: 0; display: grid; justify-items: end; }
-  .project-media > :first-child { margin-top: 0; }
   .project-media .cover img { width: auto; max-width: 100%; max-height: calc(100vh - var(--F) * 8); max-height: calc(100svh - var(--F) * 8); }
   .project-media .cover .zoom { display: block; }
+}
+
+/* carousel arrows beside the work: previous / next project (also ← → on the keyboard) */
+.project-media { display: flex; align-items: center; justify-content: center; gap: calc(var(--F) * 0.8); }
+.media-main { flex: 0 1 auto; min-width: 0; }
+.side-arrow { flex: none; display: grid; place-items: center; padding: 0.6em 0; color: var(--yellow); }
+.side-arrow .arr { width: clamp(1.6rem, 2.6vw, 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+.side-arrow:hover, .side-arrow:focus-visible { color: var(--cream); }
+.arr--back { transform: scaleX(-1); }
+@media (min-width: 900px) {
+  .project-media { display: flex; justify-content: flex-end; }
+  .media-main { display: grid; justify-items: end; }
 }
