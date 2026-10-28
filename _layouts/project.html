@@ -7,6 +7,8 @@ layout: default
 {% assign acc = "" %}
 {% for c in accents %}{% if u contains c %}{% assign acc = "has-accent" %}{% endif %}{% endfor %}
 
+<div class="project-body">
+<div class="project-text">
 <section class="hero hero--page hero--project {{ acc }}">
   <div class="lockup">
     {% assign lead_text = page.lead | default: t.lead %}
@@ -25,24 +27,8 @@ layout: default
     {% if page.tools %}<dt>nástroje</dt><dd>{{ page.tools | join: ", " }}</dd>{% endif %}
   </dl>
 
-  {% if page.youtube %}
-  <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
-    <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
-    <span class="cta">pozrieť na YouTube {% include arrow.svg %}</span>
-  </a>
-  {% endif %}
-
-  {% if page.cover %}
-  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></a></figure>
-  {% endif %}
 
   {{ content }}
-
-  {% if page.gallery %}
-  <div class="gallery">
-    {% for g in page.gallery %}<img src="{{ g.src | relative_url }}" alt="{{ g.alt }}" loading="lazy">{% endfor %}
-  </div>
-  {% endif %}
 
   {% if page.links %}
   <ul class="links">
@@ -50,6 +36,25 @@ layout: default
   </ul>
   {% endif %}
 </article>
+</div>
+
+<div class="project-media">
+  {% if page.youtube %}
+  <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
+    <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
+    <span class="cta">pozrieť na YouTube {% include arrow.svg %}</span>
+  </a>
+  {% endif %}
+  {% if page.cover %}
+  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></a></figure>
+  {% endif %}
+  {% if page.gallery %}
+  <div class="gallery">
+    {% for g in page.gallery %}<img src="{{ g.src | relative_url }}" alt="{{ g.alt }}" loading="lazy">{% endfor %}
+  </div>
+  {% endif %}
+</div>
+</div>
 
 {% assign pool = site.projects | where: "type", page.type | sort: "date" | reverse %}
 {% if page.similar or pool.size > 1 %}
