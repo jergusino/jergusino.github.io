@@ -2,7 +2,7 @@
 title: Jergušino
 description: "i am Jergušino. Dizajn a plagáty."
 lang: sk
-url: "https://jergusino.github.io"   # user site: repo must be named jergusino.github.io
+url: "https://jergusino.com"   # custom domain (see CNAME)
 baseurl: ""
 
 # Contact. Shown in the footer.

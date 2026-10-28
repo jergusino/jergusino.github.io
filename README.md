@@ -11,6 +11,8 @@ GitHub Pages builds it for you. There is nothing to install to publish.
 3. In the repository: **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`** and save.
 4. After a minute the site is at <https://jergusino.github.io>.
 
+The site uses the custom domain **jergusino.com** (the `CNAME` file). Cloudflare DNS points the apex at GitHub Pages and `www` at `jergusino.github.io`.
+
 If the repository has another name (for example `portfolio`), set `baseurl: "/portfolio"` and `url: "https://jergusino.github.io"` in `_config.yml`.
 
 ## Add a project
