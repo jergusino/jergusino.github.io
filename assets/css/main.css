@@ -34,10 +34,14 @@
   --yellow: #ffc600;
 
   /* space and type tokens, all worked out from the width W (guide, section 5) */
-  --F: max(12px, calc(100vw / 70));          /* frame: outer margin of loud layouts */
+  /* --W: the width the layout uses. The full screen width, except on very wide, short screens
+     (wider than 1.9 x the height), where everything stays in a centred column of that size. */
+  --W: min(100vw, 190vh);
+  --W: min(100vw, 190svh);
+  --F: max(12px, calc(var(--W) / 70));       /* frame: outer margin of loud layouts */
   --G: calc(var(--F) * 1.4);                 /* gap: script to the thing it introduces */
-  --F4: max(20px, calc(100vw * 4 / 70));     /* margin of text-heavy layouts (4F) */
-  --T: calc(100vw / 21);                     /* text token; headlines use 2T to 4T */
+  --F4: max(20px, calc(var(--W) * 4 / 70));  /* margin of text-heavy layouts (4F) */
+  --T: calc(var(--W) / 21);                  /* text token; headlines use 2T to 4T */
 
   --f-head: "Slithen", "Impact", "Arial Narrow", sans-serif;
   --f-text: "Borisna", Georgia, "Times New Roman", serif;
@@ -116,7 +120,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .lead.desc { --d: 0.328em; }                        /* g j p q y f */
 
 /* home: the primary lockup (i am + JERGUSINO). Wordmark = W - 2F wide, 0.257 x as tall. */
-.hero--home { --wm-h: calc((100vw - 2 * var(--F)) * 0.257); }
+.hero--home { --wm-h: calc((var(--W) - 2 * var(--F)) * 0.257); }
 .hero--home .lead {
   font-size: calc(var(--wm-h) * 0.771);           /* 0.29 x wordmark height, i-dot to baseline */
   margin-bottom: calc(var(--G) + var(--d) - 0.24em);
@@ -174,7 +178,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   gap: var(--F);
-  padding-bottom: calc((100vw - 2 * var(--F)) / var(--cols) * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
+  padding-bottom: calc((var(--W) - 2 * var(--F)) / var(--cols) * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
 }
 .pcard:nth-child(even) { transform: translateY(calc(50% + var(--F) / 2)); }
 .pcard a { display: block; position: relative; overflow: hidden; aspect-ratio: 7 / 10; }
@@ -213,7 +217,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .empty { padding: var(--F) 0; }
 
 /* ── Project page: one left-aligned column, 4F margin, about 70 characters wide ─ */
-.prose { margin: var(--F4) 0 0 var(--F); max-width: min(70ch, calc(100vw - 2 * var(--F4))); }
+.prose { margin: var(--F4) 0 0 var(--F); max-width: min(70ch, calc(var(--W) - 2 * var(--F4))); }
 .prose > * + * { margin-top: 1em; }
 .prose a { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .prose a:hover, .prose a:focus-visible { color: var(--cream); }
@@ -249,7 +253,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
   content: ""; display: block; justify-self: stretch; height: 2px; background: var(--yellow);
   margin-bottom: calc(var(--F) * 4);
 }
-.handle { font-size: clamp(1.3rem, calc(100vw / 30), 3.4rem); line-height: 1; overflow-wrap: anywhere; }
+.handle { font-size: clamp(1.3rem, calc(var(--W) / 30), 3.4rem); line-height: 1; overflow-wrap: anywhere; }
 .handle a:hover, .handle a:focus-visible { color: var(--yellow); }
 .handle .at { color: var(--yellow); }
 .social { font-size: var(--body); }
@@ -287,7 +291,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 
 
 /* home: the poster wall is cut off hard after about two rows, then one big line leads to all projects */
-.wall { --cols: 6; --cw: calc((100vw - (var(--cols) + 1) * var(--F)) / var(--cols)); max-height: calc(var(--cw) * 10 / 7 * 2.4); overflow: hidden; }
+.wall { --cols: 6; --cw: calc((var(--W) - (var(--cols) + 1) * var(--F)) / var(--cols)); max-height: calc(var(--cw) * 10 / 7 * 2.4); overflow: hidden; }
 @media (max-width: 1279px) { .wall { --cols: 5; } }
 @media (max-width: 999px) { .wall { --cols: 3; } }
 @media (max-width: 640px) { .wall { --cols: 2; } }
@@ -362,7 +366,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 .project-media { margin: calc(var(--F) * 2) var(--F) 0; }
 .project-media img { display: block; max-width: 100%; height: auto; }
 .media-main > :first-child { margin-top: 0; }
-.project-media .cover img { max-height: calc(100vh - var(--F) * 2); max-height: calc(100svh - var(--F) * 2); width: auto; margin: 0 auto; }
+.project-media .cover img { max-height: calc((100vh - var(--F) * 2) * 0.8); max-height: calc((100svh - var(--F) * 2) * 0.8); width: auto; max-width: 80%; margin: 0 auto; }
 .arr--back { transform: scaleX(-1); }
 
 .page-arrow { display: none; color: var(--yellow); }
@@ -372,14 +376,11 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 @media (min-width: 900px) {
   .project-body {
     /* very wide, short screens: everything stays together in the middle, sized to that middle */
-    --T: calc(min(100vw, 190vh) / 21); --T: calc(min(100vw, 190svh) / 21);
-    --F: max(12px, calc(min(100vw, 190vh) / 70)); --F: max(12px, calc(min(100vw, 190svh) / 70));
     --ts: min(calc(var(--T) * 3), 13vh);
     --top: min(calc(var(--F) * 7), 16vh);
     display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto;
     column-gap: calc(var(--F) * 2); align-items: center;
     padding: var(--top) var(--F) 0;
-    max-width: calc(100vh * 1.9); max-width: calc(100svh * 1.9); margin: 0 auto;
   }
   .project-text .hero--project { padding-top: 0; }
   .project-text .hero--project .lockup { margin: 0; }
@@ -389,9 +390,14 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
   .project-media .cover .zoom { display: block; }
   /* the poster scales like the text: with the title size, but never taller than the screen */
   .project-media .cover img {
-    max-height: min(calc(var(--ts) * 6.3), calc(100vh - var(--top) - var(--F) * 2));
-    max-height: min(calc(var(--ts) * 6.3), calc(100svh - var(--top) - var(--F) * 2));
+    max-width: 100%;
+    max-height: min(calc(var(--ts) * 5), calc((100vh - var(--top) - var(--F) * 2) * 0.8));
+    max-height: min(calc(var(--ts) * 5), calc((100svh - var(--top) - var(--F) * 2) * 0.8));
     margin: 0;
   }
   .page-arrow { display: grid; place-items: center; padding: 1em 0; }
 }
+
+/* everything sits in the --W column, centred (only narrower than the screen on very wide, short screens) */
+main { max-width: var(--W); margin: 0 auto; }
+.top { left: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); right: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); }
