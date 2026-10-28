@@ -377,6 +377,10 @@ body.project main { padding: 0 var(--gut); }
 .page-arrow--next { right: var(--F); }
 .page-arrow .arr { width: var(--arrow); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
 .page-arrow:hover, .page-arrow:focus-visible { color: var(--cream); }
+@media (max-width: 899px) {                       /* phones and tablets: no arrows, swipe left / right instead */
+  body.project main { padding: 0; }
+  .page-arrow { display: none; }
+}
 .arr--back { transform: scaleX(-1); }
 @media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .viewer .arr { width: 2em; } }
 
