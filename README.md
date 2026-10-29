@@ -104,3 +104,11 @@ _layouts/ _includes/ page templates, wordmark, header
 assets/              css, js, fonts, images
 tools/               new-project.sh, twotone.py, build_assets.py (fonts), trace_card.py (wordmark)
 ```
+
+## Návštevnosť (Google Analytics)
+
+1. V Google Analytics (analytics.google.com) vytvor účet a „Web data stream“ pre `https://jergusino.com`.
+2. Skopíruj Measurement ID (vyzerá ako `G-XXXXXXXXXX`).
+3. Vlož ho do `_config.yml` ako `google_analytics: "G-XXXXXXXXXX"` a pushni.
+
+Skript sa načíta len na živej stránke (nie pri lokálnom náhľade) a bez cookies, takže netreba cookie lištu.

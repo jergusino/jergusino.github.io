@@ -1,0 +1,16 @@
+{% comment %}
+  Google Analytics 4. Only on the live site (not when you preview locally) and only once
+  `google_analytics` in _config.yml holds a Measurement ID (G-XXXXXXXXXX).
+  Cookies are off by default (consent denied): GA counts visits without storing anything on the
+  visitor's device, so no cookie banner is needed. IP addresses are not logged by GA4.
+{% endcomment %}
+{% if site.google_analytics != "" and site.google_analytics and jekyll.environment == "production" %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}', { allow_google_signals: false });
+  </script>
+{% endif %}
