@@ -10,6 +10,6 @@ cover_alt: "Plagát Braski"
 cover_raw: true
 tools: [Photoshop]
 tags: [youtuber, portrét]
-similar: [/projects/backrooms/, /projects/fight-club/, /projects/obsession/, /projects/skateboarding/, /projects/truman-show/, /projects/after-you/]
+similar: [/projects/backrooms/, /projects/fight-club/, /projects/ill-win/, /projects/obsession/, /projects/skateboarding/, /projects/truman-show/]
 ---
 Pop-artový plagát venovaný YouTuberovi Braskimu: mriežka deviatich portrétov v modrej, žltej a ružovej na svetlom papieri. Hrubé čierne písmo Katzen hore a Braski dole ju rámuje ako obal.

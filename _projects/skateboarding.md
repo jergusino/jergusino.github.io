@@ -10,6 +10,6 @@ cover_alt: "Plagát Skateboarding"
 cover_raw: true
 tools: [Photoshop]
 tags: [šport, portrét]
-similar: [/projects/backrooms/, /projects/brashki/, /projects/fight-club/, /projects/obsession/, /projects/truman-show/, /projects/after-you/]
+similar: [/projects/backrooms/, /projects/brashki/, /projects/fight-club/, /projects/ill-win/, /projects/obsession/, /projects/truman-show/]
 ---
 Skejter vo vzduchu nad žiariacim skateboardom, obklopený oranžovým obrysom pohybu na fialovo-oranžovom pozadí. Nadpis The Art of Skateboarding rámuje scénu a dole je podpis autora s dátumom.
