@@ -424,7 +424,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     /* very wide, short screens: everything stays together in the middle, sized to that middle */
     --ts: min(calc(var(--T) * 3), 13vh);
     --top: min(calc(var(--F) * 7), 16vh);
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     column-gap: calc(var(--F) * 3); align-items: center;
     padding: var(--top) var(--F) 0;
     position: relative;
