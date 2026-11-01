@@ -429,11 +429,11 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
     padding: var(--top) var(--F) 0;
     position: relative;
   }
-  .project-text {order: 1;}
+  .project-text {order: 2;}
   .project-text .hero--project { padding-top: 0; }
   .project-text .hero--project .lockup { margin: 0; }
   .project-body .prose { max-width: 70ch; margin-left: 0; }
-  .project-media {order: 2; margin: 0; display: grid; justify-items: end; }
+  .project-media {order: 1; margin: 0; display: grid; justify-items: end; }
   .media-main { display: grid; justify-items: end; }
   .project-media .cover .zoom { display: block; }
   /* the poster scales like the text: with the title size, but never taller than the screen */
