@@ -10,6 +10,6 @@ cover_alt: "Plagát The World Is Yours"
 cover_raw: true
 tools: [Photoshop]
 tags: [miesto, portrét, citát]
-similar: [/projects/mars/, /projects/miami/, /projects/paris/, /projects/backrooms/, /projects/brashki/, /projects/fight-club/]
+similar: [/projects/zivot-bez-umenia/, /projects/mars/, /projects/miami/, /projects/paris/, /projects/backrooms/, /projects/brashki/]
 ---
 Plagát s postavou v obleku, ktorá stojí na farebnom glóbuse a má tvár zakrytú bielym štítkom „You“. Nad ňou stojí veta „the world is yours.“ na fialovom pokrčenom papieri.
