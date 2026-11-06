@@ -10,6 +10,6 @@ cover_alt: "Plagát Život bez umenia?"
 cover_raw: true
 tools: [Photoshop]
 tags: [hudba, citát, umenie]
-similar: [/projects/the-world-is-yours/, /projects/after-you/, /projects/friday-im-in-love/, /projects/kanye-west/, /projects/let-it-happen/, /projects/money/]
+similar: [/projects/the-world-is-yours/, /projects/after-you/, /projects/friday-im-in-love/, /projects/graduation/, /projects/kanye-west/, /projects/let-it-happen/]
 ---
 Plagát v podobe konverzácie v telefóne na zrnitom modrosivom displeji. Kontakt Majk Spirit odpovedá na otázku „život bez umenia?“ slovami „hlúposť“ a „na čo je tvor čo netvorí“.
