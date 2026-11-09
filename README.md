@@ -32,11 +32,12 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 | Field | Required | What it does |
 |---|---|---|
 | `title` | yes | Headline of the page and the row in the list |
-| `type` | yes | `plagat` (the category; new ones are added in `_data/types.yml`) |
+| `type` | yes | `plagat` or `motion` (the category; new ones are added in `_data/types.yml`) |
 | `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the project** until that day |
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |
 | `youtube` | no | Video ID. Shows a two-tone thumbnail that links to YouTube (nothing from YouTube loads until a visitor clicks) |
+| `video` / `poster` | no | Video file (MP4) shown on the project page instead of a poster, playing muted on a loop with controls; `poster` is the frame shown before it loads. Use with `type: motion` |
 | `cover` / `cover_alt` | no | Main image (shown on the project page) |
 | `thumb` | no | Smaller image for the grid card (about 720 px wide). Without it the cover is used |
 | `cover_raw` | no | `true` keeps the cover in its own colours (use it for finished posters and artwork) |

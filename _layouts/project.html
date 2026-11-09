@@ -54,6 +54,9 @@ layout: default
     <span class="cta">pozrieť na YouTube {% include arrow.svg %}</span>
   </a>
   {% endif %}
+  {% if page.video %}
+  <figure class="cover cover--video"><video src="{{ page.video | relative_url }}"{% if page.poster %} poster="{{ page.poster | relative_url }}"{% endif %} autoplay muted loop playsinline controls preload="metadata" aria-label="{{ page.cover_alt | default: page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}></video></figure>
+  {% endif %}
   {% if page.cover %}
   <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></a></figure>
   {% endif %}

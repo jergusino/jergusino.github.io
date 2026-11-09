@@ -93,7 +93,7 @@
   var title = document.querySelector('.project-text .title');
   var text = document.querySelector('.project-text');
   var prose = document.querySelector('.project-text .prose');
-  var media = document.querySelector('.project-media .cover img, .project-media .media-main');
+  var media = document.querySelector('.project-media .cover img, .project-media .cover video, .project-media .media-main');
   if (!title || !prose) return;
   function sideBySide() { return getComputedStyle(document.querySelector('.project-body')).display === 'grid'; }
   function tooBig() {
@@ -118,5 +118,7 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   var img = document.querySelector('.project-media .cover img');
   if (img && !img.complete) img.addEventListener('load', fit);
+  var vid = document.querySelector('.project-media .cover video');
+  if (vid) vid.addEventListener('loadedmetadata', fit);
   window.addEventListener('resize', later);
 })();
