@@ -1,6 +1,6 @@
 ---
 title: "Kolexy"
-type: spolupráca
+type: spolupraca
 date: 2026-11-09
 summary: "Úvodné motion video pre Kolexy, AI agenta, ktorý slovenským firmám pomáha s nezaplatenými faktúrami."
 video: /assets/img/projects/kolexy/kolexy.mp4
