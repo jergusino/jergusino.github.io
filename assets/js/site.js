@@ -104,7 +104,7 @@
   function size() {
     var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr;
-    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 38 : 46; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
+    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 48 : 66; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
   }
   function star(x, y, a, r, w, col) {
     ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath();
@@ -119,7 +119,9 @@
     var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
       var x = i * S + S / 2 - 8, y = j * S + S / 2 - 8;
-      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 230);
+      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 280);
+      var pull = inf * inf * 0.42;                       // the yellow one attracts: nearby stars drift towards it
+      x += dx * pull; y += dy * pull; d *= 1 - pull;
       var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
       var r = soft ? 4.2 : 5.5 + inf * 7;
       if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
