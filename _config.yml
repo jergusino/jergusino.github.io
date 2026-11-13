@@ -29,7 +29,6 @@ defaults:
     values:
       layout: plagat
       body_class: plagat
-      viewer: true
 
 plugins:
   - jekyll-sitemap

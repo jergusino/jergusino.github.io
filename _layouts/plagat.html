@@ -21,7 +21,7 @@ layout: default
   <figure class="cover cover--video"><video src="{{ page.video | relative_url }}"{% if page.poster %} poster="{{ page.poster | relative_url }}"{% endif %} autoplay muted loop playsinline controls preload="metadata" aria-label="{{ page.cover_alt | default: page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}></video></figure>
   {% endif %}
   {% if page.cover %}
-  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></a></figure>
+  <figure class="cover"><div class="zoom"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></div></figure>
   {% endif %}
   {% if page.gallery %}
   <div class="gallery">
@@ -80,4 +80,3 @@ layout: default
 
 
 {% assign all = site.plagaty | sort: "date" | reverse %}
-<script type="application/json" id="posters">[{% for p in all %}{% if p.cover and p.placeholder != true %}{"u":{{ p.url | relative_url | jsonify }},"t":{{ p.title | jsonify }},"a":{{ p.cover_alt | default: p.title | jsonify }},"c":{{ p.cover | relative_url | jsonify }},"bg":{{ p.color | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]</script>
