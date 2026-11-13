@@ -32,7 +32,7 @@ layout: default
 </div>
 
 <div class="project-text">
-  <p class="count"><span class="num">{% if idx < 10 %}0{% endif %}{{ idx }}</span><span class="of">/ {{ all.size }}</span></p>
+  {% assign num = all.size | minus: idx | plus: 1 %}<p class="count"><span class="num">{% if num < 10 %}0{% endif %}{{ num }}</span><span class="of">/ {{ all.size }}</span></p>
   <section class="hero--project">
     {% assign lead_text = page.lead | default: t.lead %}
     {% include lead.html text=lead_text %}
