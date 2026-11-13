@@ -18,7 +18,8 @@ summary: "Napíš mi: mail@jergusino.com"
     <li class="contact-row contact-row--mail">
       <span class="contact-label">E-mail</span>
       <a class="contact-value" href="mailto:{{ site.email }}">{{ site.email | replace: "@", '<span class="at">@</span>' }}</a>
-      <button type="button" class="contact-copy" data-copy="{{ site.email }}" hidden>kopírovať</button>
+      <a class="contact-go contact-mail-go" href="mailto:{{ site.email }}" aria-hidden="true" tabindex="-1"><span class="circ">{% include arrow.svg %}</span></a>
+      <button type="button" class="contact-copy" data-copy="{{ site.email }}" aria-label="Skopírovať e-mail" hidden><span class="circ"><svg class="ic ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><svg class="ic ic-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span></button>
     </li>
     <li class="contact-row">
       <span class="contact-label">Instagram</span>
@@ -36,15 +37,16 @@ summary: "Napíš mi: mail@jergusino.com"
 </section>
 
 <script>
-  /* "kopírovať" copies the address; the button only shows where the browser can copy */
+  /* the circle button copies the address; where the browser can't copy, the arrow opens a mail instead */
   (function () {
-    var b = document.querySelector('.contact-copy');
+    var b = document.querySelector('.contact-copy'), go = document.querySelector('.contact-mail-go'), lab = document.querySelector('.contact-row--mail .contact-label');
     if (!b || !navigator.clipboard) return;
-    b.hidden = false;
+    b.hidden = false; if (go) go.hidden = true;
+    var txt = lab.textContent;
     b.addEventListener('click', function () {
       navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
-        b.textContent = 'skopírované';
-        setTimeout(function () { b.textContent = 'kopírovať'; }, 1600);
+        b.classList.add('done'); lab.textContent = 'Skopírované'; lab.classList.add('contact-note');
+        setTimeout(function () { b.classList.remove('done'); lab.textContent = txt; lab.classList.remove('contact-note'); }, 1800);
       });
     });
   })();

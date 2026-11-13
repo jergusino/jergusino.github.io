@@ -13,6 +13,7 @@
   var sortSel = bar.querySelector('#f-sort');
   var input = bar.querySelector('input');
   var empty = document.querySelector('.empty');
+  var dds = [];
   var SORT_URL = { 'new': 'najnovsie', 'old': 'najstarsie', 'az': 'az' };
   var state = { type: 'all', tema: 'all', sort: 'new', q: '' };
 
@@ -58,7 +59,7 @@
     }).sort(sorters[state.sort]);
     while (grid.firstChild) grid.removeChild(grid.firstChild);
     list.forEach(function (c) { grid.appendChild(c); });
-    typeSel.value = state.type; temaSel.value = state.tema; sortSel.value = state.sort;
+    typeSel.value = state.type; temaSel.value = state.tema; sortSel.value = state.sort; dds.forEach(function (d) { d.sync(); });
     if (empty) empty.hidden = list.length !== 0;
   }
 
@@ -69,7 +70,43 @@
   sortSel.addEventListener('change', function () { state.sort = sortSel.value; update(); });
   input.addEventListener('input', function () { state.q = input.value; update(); });
 
+  // In-page dropdowns instead of the phone's native picker. The <select> stays as the source of truth.
+  function enhance(sel) {
+    var wrap = document.createElement('div'); wrap.className = 'dd';
+    var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+    var list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox'); list.hidden = true;
+    var label = sel.closest('label'); if (label) { label.removeAttribute('for'); }
+    Array.prototype.forEach.call(sel.options, function (o) {
+      var li = document.createElement('li'); li.setAttribute('role', 'option'); li.setAttribute('data-v', o.value); li.tabIndex = -1; li.textContent = o.textContent; list.appendChild(li);
+    });
+    sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(btn); wrap.appendChild(list); wrap.appendChild(sel);
+    sel.classList.add('dd-native'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+    function items() { return Array.prototype.slice.call(list.children); }
+    function sync() {
+      var cur = sel.options[sel.selectedIndex]; btn.textContent = cur ? cur.textContent : '';
+      items().forEach(function (li) { li.setAttribute('aria-selected', String(li.getAttribute('data-v') === sel.value)); });
+    }
+    function open() { dds.forEach(function (d) { if (d !== api) d.close(); }); list.hidden = false; wrap.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); var c = list.querySelector('[aria-selected="true"]') || list.firstChild; if (c) c.focus({ preventScroll: false }); }
+    function close() { list.hidden = true; wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    function choose(li) { sel.value = li.getAttribute('data-v'); sel.dispatchEvent(new Event('change', { bubbles: true })); sync(); close(); btn.focus(); }
+    btn.addEventListener('click', function () { list.hidden ? open() : close(); });
+    btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(); } });
+    list.addEventListener('click', function (e) { var li = e.target.closest('li'); if (li) choose(li); });
+    list.addEventListener('keydown', function (e) {
+      var it = items(), i = it.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); (it[i + 1] || it[0]).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (it[i - 1] || it[it.length - 1]).focus(); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i > -1) choose(it[i]); }
+      else if (e.key === 'Escape') { e.preventDefault(); close(); btn.focus(); }
+      else if (e.key === 'Tab') close();
+    });
+    var api = { sync: sync, close: close, wrap: wrap }; dds.push(api); sync(); return api;
+  }
+  document.addEventListener('click', function (e) { dds.forEach(function (d) { if (!d.wrap.contains(e.target)) d.close(); }); });
+  [typeSel, temaSel, sortSel].forEach(enhance);
+
   bar.hidden = false;
   readUrl();
   render();
+  dds.forEach(function (d) { d.sync(); });
 })();
