@@ -152,34 +152,3 @@
   window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
   upd();
 })();
-
-// Page transition: the yellow circle opens from where you clicked, the next page closes it again.
-(function () {
-  var w = document.querySelector('.wipe');
-  if (!w || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
-  try {
-    var st = sessionStorage.getItem('wipe');
-    sessionStorage.removeItem('wipe');
-    if (st) {
-      var p = st.split(',');
-      w.style.setProperty('--wx', p[0] + 'px'); w.style.setProperty('--wy', p[1] + 'px');
-      w.classList.add('in');
-      w.addEventListener('animationend', function () { w.classList.remove('in'); }, { once: true });
-    }
-  } catch (e) {}
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-    if (a.target && a.target !== '_self') return;
-    if (a.closest('.page-arrow')) return;                                   // swipe pages have their own motion
-    var u = new URL(a.href, location.href);
-    if (u.origin !== location.origin || (u.pathname === location.pathname) || a.hasAttribute('download')) return;
-    e.preventDefault();
-    var x = e.clientX || innerWidth / 2, y = e.clientY || innerHeight / 2;
-    w.style.setProperty('--wx', x + 'px'); w.style.setProperty('--wy', y + 'px');
-    try { sessionStorage.setItem('wipe', x + ',' + y); } catch (er) {}
-    w.classList.add('out');
-    setTimeout(function () { location.assign(a.href); }, 480);
-  });
-  window.addEventListener('pageshow', function (e) { if (e.persisted) w.classList.remove('out'); });
-})();

@@ -56,8 +56,6 @@ main:focus { outline: none; }
 .btn-t { font-weight: 500; letter-spacing: -0.01em; font-size: clamp(1.1rem, 1.5vw, 1.4rem); line-height: 1; }
 .btn:hover .circ, .btn:focus-visible .circ, .page-arrow:hover .circ, .page-arrow:focus-visible .circ, .contact-row:hover .circ { transform: translateX(6px) scale(1.08); }
 .btn:focus-visible { outline-offset: 8px; }
-.btn--ink .circ { background: var(--ink); color: var(--yellow); }                 /* on yellow: ink button */
-.closing .circ { background: var(--ink); color: var(--yellow); }
 .btn--sm .btn-t { font-size: 1.05rem; }
 .btn--sm .circ { width: 44px; height: 44px; } .btn--sm .circ .arr { width: 20px; height: 10px; }
 .btn--wide { display: flex; justify-content: center; margin: calc(var(--m) * 1.6) var(--m) 0; }
@@ -71,12 +69,7 @@ main:focus { outline: none; }
 .brand { display: block; line-height: 0; }
 .brand img { width: clamp(120px, 11vw, 168px); height: auto; }
 .logo-ink { display: none; }
-body.home .logo-paper { display: none; }
-body.home .logo-ink { display: block; }
 .nav { display: flex; gap: 10px; }
-body.home .pill { color: var(--ink); }
-body.home .pill:hover, body.home .pill:focus-visible { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
-body.home .pill[aria-current] { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
 
 /* section heads */
 .sec-head { padding: 0 var(--m); }
@@ -85,15 +78,14 @@ body.home .pill[aria-current] { background: var(--ink); color: var(--yellow); bo
 
 /* ── Home: the cover slide. Yellow surface, headline bottom-left, asterisk, circle-arrow ─ */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--ink); overflow: hidden; --ax: 76%; --ay: 36%; --as: min(32vw, 46vh); }
-.hero .yl { position: absolute; inset: 0; background: var(--yellow); color: var(--ink); clip-path: circle(150vmax at var(--ax) var(--ay)); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--m) var(--m); --text: var(--ink); --muted: var(--stone); }
+.hero .yl { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--m) var(--m); }
 .a-under, .a-big { position: absolute; width: var(--as); left: var(--ax); top: var(--ay); translate: -50% -50%; }
-.a-under { color: var(--yellow); }
-.a-big { color: var(--ink); }
-.hero-h { color: var(--ink); position: relative; z-index: 1; font-size: clamp(2.8rem, 9vw, 9.5rem); }
+.a-big { color: var(--yellow); }
+.hero-h { color: var(--paper); position: relative; z-index: 1; font-size: clamp(2.8rem, 9vw, 9.5rem); }
 .hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .hero-h .ln > span { display: block; }
-.hero-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(28px, 5vh, 56px); padding-top: 20px; border-top: 1px solid var(--ink); }
-.hero-foot .label { color: var(--ink); }
+.hero-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(28px, 5vh, 56px); padding-top: 20px; border-top: 1px solid var(--line); }
+
 
 /* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
 .wall { padding: calc(var(--m) * 2.4) 0 0; }
@@ -196,22 +188,14 @@ body.home .pill[aria-current] { background: var(--ink); color: var(--yellow); bo
 @media (max-width: 700px) { .contact-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; } .contact-label { grid-column: 1 / -1; } }
 
 /* ── Closing slide: yellow, the sign-off as headline, ink asterisk cut by the corner ─ */
-.closing { position: relative; overflow: hidden; margin-top: calc(var(--m) * 2.4); background: var(--yellow); color: var(--ink); min-height: 58vh; min-height: 58svh; padding: calc(var(--m) * 1.4) var(--m) var(--m); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(var(--m) * 0.7); --text: var(--ink); --muted: var(--stone); }
+.closing { position: relative; overflow: hidden; margin-top: calc(var(--m) * 2.4); background: var(--ink); color: var(--paper); border-top: 1px solid var(--line); min-height: 58vh; min-height: 58svh; padding: calc(var(--m) * 1.4) var(--m) var(--m); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(var(--m) * 0.7); }
 .closing > * { position: relative; z-index: 1; }
-.closing .label { color: var(--ink); position: absolute; top: calc(var(--m) * 1.4); left: var(--m); }
+.closing .label { color: var(--muted); position: absolute; top: calc(var(--m) * 1.4); left: var(--m); }
 .closing .display { font-size: clamp(2.6rem, 7.5vw, 7.5rem); }
-.closing-ast { position: absolute !important; z-index: 0 !important; width: 30vw; right: -6vw; bottom: -9vw; top: auto; color: var(--ink); }
-.closing .btn { color: var(--ink); }
-.closing .btn:hover .circ, .closing .btn:focus-visible .circ { background: var(--ink); }
+.closing-ast { position: absolute !important; z-index: 0 !important; width: 30vw; right: -6vw; bottom: -9vw; top: auto; color: var(--yellow); }
+.closing .btn { color: var(--paper); }
 body.home .closing { margin-top: calc(var(--m) * 3); }
 .spin .ast { transform: rotate(var(--spin, 0deg)); }
-
-/* ── Page transition: the yellow circle ─────────────────────────────────────── */
-.wipe { position: fixed; inset: 0; z-index: 100; background: var(--yellow); pointer-events: none; clip-path: circle(0 at var(--wx, 50%) var(--wy, 50%)); }
-.wipe.out { animation: wipe-out 0.5s var(--ease-out) both; pointer-events: all; }
-.wipe.in { animation: wipe-in 0.55s var(--ease-in) both; }
-@keyframes wipe-out { from { clip-path: circle(0 at var(--wx) var(--wy)); } to { clip-path: circle(150vmax at var(--wx) var(--wy)); } }
-@keyframes wipe-in { from { clip-path: circle(150vmax at var(--wx) var(--wy)); } to { clip-path: circle(0 at var(--wx) var(--wy)); } }
 
 /* ── Motion ─────────────────────────────────────────────────────────────────── */
 /* scroll reveal: rises from below a hard edge, staggered; no fades */
@@ -223,21 +207,16 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes land { from { transform: translateY(40px) scale(0.6); } to { transform: none; } }
 @keyframes line-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-.a-under .ast { animation: pop 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) 0.1s both; }
-.hero .yl { animation: iris 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.75s both; }
 .a-big .ast { animation: pop 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) 0.1s both; }
-.hero-h .ln > span { animation: rise 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(1.3s + var(--i, 0) * 0.12s) both; }
+.hero-h .ln > span { animation: rise 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(0.7s + var(--i, 0) * 0.12s) both; }
 .hero-h .ln:nth-child(2) > span { --i: 1; }
-.hero-foot { animation: line-in 0.7s var(--ease-out) 1.9s both; }
-.hero-foot .circ { animation: land 0.6s cubic-bezier(0.3, 1.5, 0.4, 1) 2.2s both; }
+.hero-foot { animation: line-in 0.7s var(--ease-out) 1.3s both; }
+.hero-foot .circ { animation: land 0.6s cubic-bezier(0.3, 1.5, 0.4, 1) 1.6s both; }
 .hero + .wall { scroll-margin-top: 0; }
-.js body.home .top { animation: line-in 0.5s var(--ease-out) 1.3s both; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .a-under { display: none; }
-  .hero .yl, .a-big .ast, .hero-h .ln > span, .hero-foot, .hero-foot .circ, .js body.home .top { animation: none; }
+  .a-big .ast, .hero-h .ln > span, .hero-foot, .hero-foot .circ, .js body.home .top { animation: none; }
   .js .rv, .js .rv.in { transform: none; clip-path: none; transition: none; }
-  .wipe { display: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
 }
 
@@ -255,7 +234,7 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 .viewer .arr--back { transform: scaleX(-1); }
 @media (max-width: 520px) { .viewer button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }
 
-@media print { html, body { background: #fff; color: #000; } .wipe, .closing { display: none; } }
+@media print { html, body { background: #fff; color: #000; } .closing { display: none; } }
 
 @media (max-width: 700px) {
   .hero { --as: 48vw; --ax: 72%; --ay: 24%; }
