@@ -99,7 +99,7 @@
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d'), hero = cv.parentNode;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = 0, py = 0, ptx = 0, pty = 0, hasPtr = false, run = true, t0 = performance.now();
+  var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = 0, py = 0, ptx = 0, pty = 0, hasPtr = false, yx = null, yy = 0, ya = 0, yr = 0, run = true, t0 = performance.now();
   var GREY = [88, 86, 80], LIGHT = [200, 197, 188], YEL = '#ffd60a', soft = false;
   function size() {
     var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
