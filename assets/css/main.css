@@ -93,7 +93,7 @@ main:focus { outline: none; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2em; }
 /* soft ink glow under each piece of hero text, so it reads cleanly over the asterisk field */
 .hero-h, .hero-sub, .hero-cta { position: relative; }
-.hero-h::before, .hero-sub::before, .hero-cta::before, .eyebrow::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -0.25em -0.6em; background: radial-gradient(ellipse at 45% 50%, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.82) 45%, rgba(14, 14, 14, 0) 100%); }
+.hero-h::before, .hero-sub::before, .hero-cta::before, .eyebrow::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -0.25em -0.6em; background: radial-gradient(ellipse closest-side at 50% 50%, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.82) 45%, rgba(14, 14, 14, 0) 100%); }
 .hero-h::before { inset: -0.15em -0.5em; }
 .hero-sub::before { inset: -0.7em -1.2em; }
 .hero-cta::before { inset: -1em -1.6em; }
@@ -337,6 +337,6 @@ header.top { view-transition-name: site-header; }
 
 /* a glow only where there is an element: behind the logo and behind each nav button, not the whole bar */
 body.home .brand, body.home .nav .pill { position: relative; }
-body.home .brand::before, body.home .nav .pill::before { content: ""; position: absolute; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at center, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.8) 50%, rgba(14, 14, 14, 0) 100%); }
+body.home .brand::before, body.home .nav .pill::before { content: ""; position: absolute; z-index: -1; pointer-events: none; background: radial-gradient(ellipse closest-side at 50% 50%, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.8) 50%, rgba(14, 14, 14, 0) 100%); }
 body.home .brand::before { inset: -22px -34px; }
 body.home .nav .pill::before { inset: -16px -22px; }
