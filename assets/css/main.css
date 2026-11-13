@@ -381,11 +381,12 @@ body.home .nav .pill::before { inset: -16px -22px; }
   .top .brand { flex: none; margin-right: 8px; }
 }
 
+@property --r { syntax: '<length>'; inherits: false; initial-value: 0px; }
 /* collab card: yellow circle grows from the pointer and inverts the palette */
 .bcard { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
 .bcard:hover, .bcard:focus-visible { transform: none; border-color: var(--yellow); }
-.bcard::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--yellow); pointer-events: none; clip-path: circle(0px at var(--x, 50%) var(--y, 50%)); transition: clip-path 0.85s cubic-bezier(0.55, 0, 0.25, 1); }
-.bcard:hover::before, .bcard:focus-visible::before, .bcard:active::before { clip-path: circle(700px at var(--x, 50%) var(--y, 50%)); }
+.bcard::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--yellow); pointer-events: none; --r: 0px; clip-path: circle(var(--r) at var(--x, 50%) var(--y, 50%)); transition: --r 0.85s cubic-bezier(0.55, 0, 0.25, 1); }
+.bcard:hover::before, .bcard:focus-visible::before, .bcard:active::before { --r: 700px; }
 .bcard, .bcard-what, .bcard .label, .bcard .circ { transition: color 0.35s ease 0.2s, background-color 0.35s ease 0.2s, border-color 0.35s ease; }
 .bcard-logo { transition: filter 0.35s ease 0.2s; }
 .bcard:hover, .bcard:focus-visible, .bcard:active { color: var(--ink); }
