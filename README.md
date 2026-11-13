@@ -1,6 +1,6 @@
 # Jergušino: portfolio
 
-Static website built with [Jekyll](https://jekyllrb.com) and the Jergusino brand guide (v5). Ink background, Cream name, Yellow pointers. Everything is flat and hard-edged: no gradients, shadows or fades. Slovak language.
+Static website built with [Jekyll](https://jekyllrb.com) and the new Jergušino brand: Yellow `#FFD60A`, Ink `#0E0E0E`, Paper `#F4F1EA`; Bricolage Grotesque + DM Mono; the asterisk logo. Sign-off: *Žltá medzi sivými.* The home page is a yellow surface among the ink pages. Slovak language.
 
 GitHub Pages builds it for you. There is nothing to install to publish.
 
@@ -80,31 +80,12 @@ Needs Ruby. Not needed to publish.
 
 ## Brand rules the code follows
 
-- Only `#060909` Ink, `#FAF1D6` Cream, `#FFC600` Yellow. Yellow only on pointers: arrows, the @, the bar over the S, script lead-ins, the active filter.
-- The wordmark is traced from the business card itself (`Front.png`), because the card's letters are edited versions of Slithen. It is in `_includes/wordmark.svg` (one path per letter); `assets/img/mark.svg` is the Š mark used as favicon. To regenerate after changing the card: `python3 -I tools/trace_card.py Front.png .`
-- Home is *loud* (wordmark bottom-left at F = width/70, a third or more empty Ink); the contact page (/kontakt/) lists the email and Instagram as large rows between Yellow hairlines. The nav shows the full wordmark.
-- Motion on the home page is copied frame by frame from `title-card-jergusino.mp4`: a short Ink hold, the letters rise one by one from the baseline, then the bar falls from the very top of the screen, overshoots 10% and settles. *i am* writes on beside the letters (the one addition). Hard cuts and masks, no fades. It is switched off for visitors who prefer reduced motion.
-- A click on a poster on its page opens the viewer: full size on Ink, ← → or swipe to flip through all posters, Esc to close. On a poster page ← → also go to the previous / next poster, and on a poster wall the arrow keys move between posters. A "preskočiť na obsah" link appears on the first Tab.
-- The Projects page has a category selector, a subject selector (téma), sorting (newest, oldest, A–Z) and search, all plain text in Cream with the active choice in Yellow. The choice is kept in the address, e.g. `/projects/?tema=film&zoradit=az&q=club`. Links and filters change colour on hover and focus, never opacity. On a poster, hover drops the Yellow bar of the logo onto its top edge (0.2 s, soft landing; it leaves in 0.1 s).
-
-## Fonts and licences, please read
-
-- **Borisna** is a *demo* font by Koplexs Studio: free for private, non-profit use only. The site currently uses it as a personal site. If the portfolio is used to get paid work, buy the commercial licence (koplexsstudio@gmail.com) before that.
-- **Slithen** came without a licence file. Check its terms where you got it.
-- **Edwardian Script ITC** is © International Typeface Corporation / Microsoft. The file allows editable embedding, but it is a commercial font, so check that your licence covers web use.
-- The fonts in `assets/fonts/` were extended with the Slovak letters Č Ľ Ť Ň Ď Ž ľ ť ď by copying carons and apostrophes from existing letters. `tools/build_assets.py` regenerates them from the original files. Check Slovak text with `ĺ`, `ŕ`, `Ĺ`, `Ŕ`: those four letters are not in these fonts.
-
-## Files
-
-```
-_config.yml          site settings
-_data/types.yml      project types
-_projects/           one Markdown file per project
-_templates/          project template (not published)
-_layouts/ _includes/ page templates, wordmark, header
-assets/              css, js, fonts, images
-tools/               new-project.sh, twotone.py, build_assets.py (fonts), trace_card.py (wordmark)
-```
+- Colours `--ink`, `--paper`, `--yellow` (+ `--paper-soft`, `--ash`, `--line`) in `assets/css/main.css`. Yellow is the highlighter: one moment per view, yellow text only on Ink.
+- Fonts (`assets/fonts/`, open source, SIL OFL): Bricolage Grotesque ExtraBold for headlines, Medium for text; DM Mono for small caps labels.
+- Logo: `assets/img/logo-paper.svg` / `logo-ink.svg`, `_includes/asterisk.svg`, `_includes/wordmark.svg` (one path per letter), `favicon.svg`.
+- Home intro is the title card rebuilt in CSS (asterisk pops in, yellow circle opens, letters rise, sign-off writes on, asterisk turns a notch). Off for `prefers-reduced-motion`.
+- Posters keep their own colours (the old two-tone filter is gone). Hover pops a yellow circle with an arrow into the poster's corner.
+- Slovak typography: non-breaking space after one-letter words (k s v z o u a i) in new copy.
 
 ## Návštevnosť (Google Analytics)
 
