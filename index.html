@@ -1,13 +1,17 @@
 ---
 layout: default
 body_class: home
-description: "som Jergušino. Dizajn a plagáty."
+description: "Jergušino. Žltá medzi sivými. Dizajn a plagáty."
 ---
 <section class="hero hero--home">
   <h1 class="sr">Jergušino</h1>
-  <div class="lockup">
-    {% include lead.html text="som" hidden=true %}
-    <div class="wm-mask">{% include wordmark.svg %}</div>
+  <div class="a-under">{% include asterisk.svg %}</div>
+  <div class="yl">
+    <div class="a-big">{% include asterisk.svg %}</div>
+    <p class="tag">Žltá medzi sivými.</p>
+    <div class="lockup">
+      <div class="wm-mask">{% include wordmark.svg %}</div>
+    </div>
   </div>
 </section>
 
@@ -23,21 +27,3 @@ description: "som Jergušino. Dizajn a plagáty."
 </section>
 
 <a class="all" href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a>
-
-<script>
-  /* the bar falls from the very top of the screen: measure how far that is, in the wordmark's own units */
-  (function () {
-    var m = document.querySelector('.wm-mask'), b = document.querySelector('.wm-bar');
-    if (!m || !b) return;
-    function set() {
-      var r = m.getBoundingClientRect();
-      var k = r.width / 1020;                       /* screen px per drawing unit */
-      b.style.setProperty('--drop', '-' + ((r.top + window.scrollY) / k + 50).toFixed(1) + 'px');
-      /* same speed on every screen: the bar travels at about 1000 px/s on average, so a longer fall just takes longer */
-      var travel = (r.top + window.scrollY) + 50 * k;                  /* px from above the screen to the landing */
-      b.style.setProperty('--dur', (travel / 1000 / 0.65).toFixed(2) + 's');   /* the fall is the first 65% of the animation */
-    }
-    set();
-    window.addEventListener('resize', set);
-  })();
-</script>

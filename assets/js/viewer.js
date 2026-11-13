@@ -14,7 +14,7 @@
   var lastFocus = null;
 
   function arrow(cls) {
-    return '<svg class="' + cls + '" viewBox="0 0 24 12" width="24" height="12" aria-hidden="true" focusable="false"><path d="M0 5h18V0l6 6-6 6V7H0z"/></svg>';
+    return '<svg class="' + cls + '" viewBox="0 0 48 24" width="24" height="12" aria-hidden="true" focusable="false"><path d="M2 12h40M31 2l11 10-11 10" fill="none" stroke="currentColor" stroke-width="5"/></svg>';
   }
 
   var v = document.createElement('div');
