@@ -1,0 +1,14 @@
+---
+layout: default
+title: Spolupráce
+body_class: spoluprace
+permalink: /spoluprace/
+summary: "Značky, s ktorými som spolupracoval: príspevky, reely a motion."
+---
+<section class="sec-head sec-head--page">
+  <p class="label">Značky</p>
+  <h1 class="h h--xl">Spolupráce</h1>
+</section>
+<section class="brands-wall">
+  {% for b in site.data.brands %}{% include brand-card.html b=b %}{% endfor %}
+</section>

@@ -1,0 +1,10 @@
+{% comment %} One brand as a card. Usage: include brand-card.html b=brand {% endcomment %}
+{% assign b = include.b %}
+{% assign reels = 0 %}{% for p in b.posts %}{% if p.kind == "reel" %}{% assign reels = reels | plus: 1 %}{% endif %}{% endfor %}
+{% assign posts = b.posts.size | minus: reels %}
+<a class="bcard rv" href="{{ '/spoluprace/' | append: b.slug | append: '/' | relative_url }}">
+  <span class="bcard-top"><span class="label">{{ b.year }} · {{ b.did | join: " · " }}</span></span>
+  <img class="bcard-logo" src="{{ b.logo | relative_url }}" alt="{{ b.name | escape }}" loading="lazy">
+  <span class="bcard-what">{{ b.what }}</span>
+  <span class="bcard-foot"><span class="label">{{ posts }}&nbsp;{% if posts == 1 %}príspevok{% else %}príspevky{% endif %} · {{ reels }}&nbsp;{% if reels == 1 %}reel{% else %}reely{% endif %}</span><span class="circ">{% include arrow.svg %}</span></span>
+</a>

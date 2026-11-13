@@ -14,18 +14,16 @@ description: "Jergušino. Dizajn a plagáty."
       <a class="cta cta--ghost" href="{{ '/kontakt/' | relative_url }}">Napíš mi</a>
     </div>
   </div>
-  {% assign brands = site.projects | where: "brand", true | sort: "date" | reverse %}
-  {% if brands.size > 0 %}
   <div class="brands" aria-label="Značky, s ktorými som spolupracoval">
     <p class="label">Spolupráca so značkami</p>
     <ul class="brands-list">
-      {% for p in brands %}
-      <li><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}">{% if p.brand_logo %}<img src="{{ p.brand_logo | relative_url }}" alt="{{ p.title | escape }}" loading="lazy">{% else %}<span class="wordmark">{{ p.title }}</span>{% endif %}</a></li>
+      {% for b in site.data.brands %}
+      <li><a href="{{ '/spoluprace/' | append: b.slug | append: '/' | relative_url }}" aria-label="{{ b.name | escape }}"><img src="{{ b.logo | relative_url }}" alt="{{ b.name | escape }}" loading="lazy"></a></li>
       {% endfor %}
     </ul>
   </div>
-  {% endif %}
 </section>
+
 
 <section class="wall" id="projekty">
   <div class="sec-head">
@@ -34,4 +32,14 @@ description: "Jergušino. Dizajn a plagáty."
   </div>
   {% include project-grid.html limit=8 %}
   <a class="btn btn--wide rv" href="{{ '/projects/' | relative_url }}"><span class="btn-t">Všetky projekty</span><span class="circ">{% include arrow.svg %}</span></a>
+</section>
+
+<section class="coll" id="spoluprace">
+  <div class="sec-head">
+    <p class="label rv">02 · značky</p>
+    <h2 class="h rv">Spolupráce</h2>
+  </div>
+  <div class="brands-wall">
+    {% for b in site.data.brands %}{% include brand-card.html b=b %}{% endfor %}
+  </div>
 </section>

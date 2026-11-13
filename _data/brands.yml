@@ -1,0 +1,21 @@
+# Brands I've worked with. One entry per brand; its page lives at /spoluprace/<slug>/.
+# Edit the texts freely. Posts are public Instagram posts (kind: p = post, reel = reel; id = the part of the URL after /p/ or /reel/).
+- slug: kolexy
+  name: Kolexy
+  logo: /assets/img/brands/kolexy.svg
+  year: 2026
+  what: "AI agent, ktorý firmám pomáha s nezaplatenými faktúrami"
+  did: [Motion video, Príspevky, Reely]
+  instagram: https://www.instagram.com/trykolexy/
+  handle: "@trykolexy"
+  project: /projects/kolexy/
+  zadanie: "Kolexy je slovenský startup s AI agentom, ktorý firmám pomáha s nezaplatenými faktúrami. Potrebovali úvodné video a obsah pre sociálne siete."
+  riesenie: "Motion video s ilustračnou ukážkou aplikácie a k tomu príspevky a reely pre ich Instagram, v jednom vizuálnom jazyku."
+  vysledok: "6 príspevkov a reelov na @trykolexy a úvodné motion video."
+  posts:
+    - { kind: reel, id: DfrQAcSxFEQ }
+    - { kind: p,    id: Dfm_OmiEfdQ }
+    - { kind: reel, id: DfkgFwiymLj }
+    - { kind: reel, id: Dfh1VPFIo3O }
+    - { kind: reel, id: Dfe4FeXIU6n }
+    - { kind: p,    id: Dfc4zn_CBpE }

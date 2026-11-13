@@ -32,6 +32,7 @@
 
   <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
   {% if page.viewer %}<script src="{{ '/assets/js/viewer.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}
+  {% if page.body_class == 'brand-page' %}<script src="{{ '/assets/js/embed.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}
   {% if page.filter %}<script src="{{ '/assets/js/filter.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>{% endif %}
 </body>
 </html>

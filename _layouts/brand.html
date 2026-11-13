@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{% assign b = site.data.brands | where: "slug", page.brand | first %}
+<article class="bpage">
+  <header class="brand-head">
+    <p class="label"><a href="{{ '/spoluprace/' | relative_url }}">Spolupráce</a> · {{ b.year }}</p>
+    <img class="brand-logo" src="{{ b.logo | relative_url }}" alt="{{ b.name | escape }}">
+    <p class="brand-what">{{ b.what }}</p>
+    <ul class="brand-did">{% for d in b.did %}<li>{{ d }}</li>{% endfor %}</ul>
+  </header>
+
+  <section class="brief">
+    <div class="brief-i rv"><p class="label">Zadanie</p><p>{{ b.zadanie }}</p></div>
+    <div class="brief-i rv"><p class="label">Riešenie</p><p>{{ b.riesenie }}</p></div>
+    <div class="brief-i rv"><p class="label">Výsledok</p><p>{{ b.vysledok }}</p></div>
+  </section>
+
+  <section class="posts">
+    <div class="sec-head"><p class="label">Na Instagrame</p><h2 class="h">Príspevky a reely</h2></div>
+    <ul class="post-grid">
+      {% for p in b.posts %}
+      <li class="post rv">
+        <button type="button" class="post-btn" data-embed="https://www.instagram.com/{{ p.kind }}/{{ p.id }}/embed/" data-h="{% if p.kind == 'reel' %}760{% else %}700{% endif %}" aria-label="Zobraziť {% if p.kind == 'reel' %}reel{% else %}príspevok{% endif %} {{ forloop.index }}">
+          <span class="label">{% if p.kind == "reel" %}Reel{% else %}Príspevok{% endif %} {{ forloop.index }}</span>
+          <span class="post-play"><span class="circ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="post-cta">Zobraziť</span>
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="post-note">Príspevky sa načítajú z Instagramu až po kliknutí.</p>
+    <a class="btn" href="{{ b.instagram }}" rel="noopener" target="_blank"><span class="btn-t">Všetko na {{ b.handle }}</span><span class="circ">{% include arrow.svg %}</span></a>
+    {% if b.project %}<a class="btn btn--ghost" href="{{ b.project | relative_url }}"><span class="btn-t">Motion video</span><span class="circ">{% include arrow.svg %}</span></a>{% endif %}
+  </section>
+</article>
