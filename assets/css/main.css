@@ -219,6 +219,14 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 /* scroll reveal: rises from below a hard edge, staggered; no fades */
 .js .rv { transform: translateY(28px); }
 .js .rv.in { transform: none; transition: transform 0.7s var(--ease-out) var(--d, 0s); }
+/* variants: tags blur in, headings rise word by word */
+.js .bf { opacity: 0; filter: blur(10px); transform: translateY(8px); }
+.js .bf.in { opacity: 1; filter: blur(0); transform: none; transition: opacity 0.8s var(--ease-out) var(--d, 0s), filter 0.8s var(--ease-out) var(--d, 0s), transform 0.8s var(--ease-out) var(--d, 0s); }
+.js .wds .wd { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.js .wds .wd > span { display: inline-block; transform: translateY(112%); }
+.js .wds.in .wd > span { transform: none; transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(var(--i, 0) * 0.07s); }
+.js .pcard.rv { transform: translateY(28px) scale(0.96); }
+.js .pcard.rv.in { transform: none; }
 /* cover: the title card, in CSS. Asterisk pops in on ink, a yellow circle opens from it, lines rise, button lands, asterisk turns a notch. */
 @keyframes pop { 0% { transform: scale(0) rotate(-120deg); } 100% { transform: none; } }
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
@@ -226,13 +234,19 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 @keyframes line-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 .hero-h .ln > span { animation: rise 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(0.2s + var(--i, 0) * 0.12s) both; }
 .hero-h .ln:nth-child(2) > span { --i: 1; }
- .eyebrow, .hero-sub, .hero-cta { animation: line-in 0.7s var(--ease-out) 0.7s both; }
+@keyframes blur-in { from { opacity: 0; filter: blur(12px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: none; } }
+.eyebrow { animation: blur-in 0.9s var(--ease-out) 0.15s both; }
+.hero-sub { animation: blur-in 1s var(--ease-out) 0.75s both; }
+.cta { animation: pop-in 0.6s cubic-bezier(0.3, 1.4, 0.4, 1) 1.1s both; }
+.cta--ghost { animation-delay: 1.25s; }
 .hero + .wall { scroll-margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-h .ln > span, .eyebrow, .hero-sub, .hero-cta, .js body.home .top { animation: none; }
+  .hero-h .ln > span, .eyebrow, .hero-sub, .cta, .js body.home .top { animation: none; }
   .reel-track { animation: none; }
-  .js .rv, .js .rv.in { transform: none; transition: none; }
+  .js .rv, .js .rv.in, .js .bf, .js .bf.in { transform: none; opacity: 1; filter: none; transition: none; }
+  .js .wds .wd > span { transform: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
 }
 

@@ -198,3 +198,40 @@
   if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { run = en[0].isIntersecting; }, { threshold: 0 }).observe(hero);
   if (!reduce && !soft) requestAnimationFrame(loop);
 })();
+
+// Variety: small tags and labels blur into focus; headings rise word by word. (Skipped for reduced motion.)
+(function () {
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  var targets = [];
+  document.querySelectorAll('.sec-head .label, .closing .label, .chip, .cap, .meta dt, .count, .ctl-l, .lead').forEach(function (e) {
+    if (e.closest('.hero')) return;
+    e.classList.add('bf'); targets.push(e);
+  });
+  function words(el) {
+    var i = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.nodeValue.split(/(\s+)/).forEach(function (w) {
+            if (!w) return;
+            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var o = document.createElement('span'); o.className = 'wd'; var n = document.createElement('span'); n.textContent = w; n.style.setProperty('--i', i++); o.appendChild(n); frag.appendChild(o);
+          });
+          node.replaceChild(frag, c);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+      });
+    })(el);
+    el.classList.add('wds'); el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    Array.prototype.forEach.call(el.querySelectorAll('.wd'), function (w) { w.setAttribute('aria-hidden', 'true'); });
+  }
+  document.querySelectorAll('.h, .closing .display').forEach(function (e) { e.classList.remove('rv'); e.style.transform = ''; words(e); targets.push(e); });
+  var io = new IntersectionObserver(function (en) {
+    var n = 0;
+    en.forEach(function (x) { if (!x.isIntersecting) return; if (x.target.classList.contains('bf')) x.target.style.setProperty('--d', (n++ * 0.05) + 's'); x.target.classList.add('in'); io.unobserve(x.target); });
+  }, { rootMargin: '0px 0px -6% 0px' });
+  targets.forEach(function (e) { io.observe(e); });
+  function sweep() { targets.forEach(function (e) { if (!e.classList.contains('in') && e.getBoundingClientRect().top < innerHeight * 1.05) e.classList.add('in'); }); }   // safety net: nothing stays hidden
+  window.addEventListener('scroll', sweep, { passive: true }); window.addEventListener('load', sweep); setTimeout(sweep, 1400);
+})();
