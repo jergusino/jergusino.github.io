@@ -15,7 +15,7 @@ summary: "Dizajn a plagáty od Jergušina."
   {% assign present = "" %}{% assign n = 0 %}
   {% for t in site.data.types %}
     {% assign has = false %}
-    {% for p in site.projects %}{% if p.type == t.key and p.placeholder != true %}{% assign has = true %}{% endif %}{% endfor %}
+    {% for p in site.projects %}{% if p.type == t.key and p.placeholder != true and p.type != 'spolupraca' %}{% assign has = true %}{% endif %}{% endfor %}
     {% if has %}{% assign present = present | append: t.key | append: "," %}{% assign n = n | plus: 1 %}{% endif %}
   {% endfor %}
   <div class="controls" hidden>

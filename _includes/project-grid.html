@@ -1,7 +1,7 @@
 {% assign items = site.projects | sort: "date" | reverse %}
 <ul class="pgrid">
   {% for p in items limit: include.limit %}
-  {% unless p.placeholder %}
+  {% unless p.placeholder or p.type == 'spolupraca' %}
   {% assign th = p.thumb | default: p.cover %}
   {% if th %}
   <li class="pcard rv" data-type="{{ p.type }}" data-tags="{{ p.tags | join: ' ' }}" data-date="{{ p.date | date: '%Y%m%d' }}" data-title="{{ p.title | escape }}" data-search="{{ p.title | append: ' ' | append: p.type | append: ' ' | append: p.summary | downcase | escape }}">

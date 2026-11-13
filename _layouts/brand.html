@@ -21,15 +21,14 @@ layout: default
     <ul class="post-grid">
       {% for p in b.posts %}
       <li class="post rv">
-        <button type="button" class="post-btn" data-embed="https://www.instagram.com/{{ p.kind }}/{{ p.id }}/embed/" data-h="{% if p.kind == 'reel' %}760{% else %}700{% endif %}" aria-label="Zobraziť {% if p.kind == 'reel' %}reel{% else %}príspevok{% endif %} {{ forloop.index }}">
-          <span class="label">{% if p.kind == "reel" %}Reel{% else %}Príspevok{% endif %} {{ forloop.index }}</span>
-          <span class="post-play"><span class="circ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="post-cta">Zobraziť</span>
-        </button>
+        <a class="post-btn" href="https://www.instagram.com/{{ p.kind }}/{{ p.id }}/" target="_blank" rel="noopener" aria-label="Otvoriť {% if p.kind == 'reel' %}reel{% else %}príspevok{% endif %} na Instagrame">
+          <span class="label">{% if p.kind == "reel" %}Reel{% else %}Príspevok{% endif %} · {{ forloop.index }}</span>
+          <span class="post-play"><span class="circ">{% if p.kind == "reel" %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>{% else %}{% include arrow.svg %}{% endif %}</span></span>
+          <span class="post-cta">Otvoriť na Instagrame</span>
+        </a>
       </li>
       {% endfor %}
     </ul>
-    <p class="post-note">Príspevky sa načítajú z Instagramu až po kliknutí.</p>
     <a class="btn" href="{{ b.instagram }}" rel="noopener" target="_blank"><span class="btn-t">Všetko na {{ b.handle }}</span><span class="circ">{% include arrow.svg %}</span></a>
     {% if b.project %}<a class="btn btn--ghost" href="{{ b.project | relative_url }}"><span class="btn-t">Motion video</span><span class="circ">{% include arrow.svg %}</span></a>{% endif %}
   </section>

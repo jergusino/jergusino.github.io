@@ -362,7 +362,7 @@ body.home .nav .pill::before { inset: -16px -22px; }
 .brief-i p:last-child { margin: 10px 0 0; color: var(--paper); }
 .posts .sec-head { padding: 0; margin-bottom: 24px; }
 .post-grid { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--gap); align-items: start; }
-.post-btn { width: 100%; aspect-ratio: 4 / 5; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 22px; background: none; color: var(--paper); border: 2px solid var(--line); border-radius: var(--r-card, 22px); cursor: pointer; font: inherit; text-align: left; transition: border-color 0.2s; }
+.post-btn { text-decoration: none; width: 100%; aspect-ratio: 3 / 2; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 20px; background: none; color: var(--paper); border: 2px solid var(--line); border-radius: var(--r-card, 22px); cursor: pointer; font: inherit; text-align: left; transition: border-color 0.2s; }
 .post-btn:hover, .post-btn:focus-visible { border-color: var(--yellow); outline: none; }
 .post-btn:hover .circ { background: var(--yellow); color: var(--ink); }
 .post-play { align-self: center; }

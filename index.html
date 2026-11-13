@@ -25,21 +25,21 @@ description: "Jergušino. Dizajn a plagáty."
 </section>
 
 
-<section class="wall" id="projekty">
-  <div class="sec-head">
-    <p class="label rv">01 · výber</p>
-    <h2 class="h rv">Projekty</h2>
-  </div>
-  {% include project-grid.html limit=8 %}
-  <a class="btn btn--wide rv" href="{{ '/projects/' | relative_url }}"><span class="btn-t">Všetky projekty</span><span class="circ">{% include arrow.svg %}</span></a>
-</section>
-
 <section class="coll" id="spoluprace">
   <div class="sec-head">
-    <p class="label rv">02 · značky</p>
+    <p class="label rv">01 · značky</p>
     <h2 class="h rv">Spolupráce</h2>
   </div>
   <div class="brands-wall">
     {% for b in site.data.brands %}{% include brand-card.html b=b %}{% endfor %}
   </div>
+</section>
+
+<section class="wall" id="projekty">
+  <div class="sec-head">
+    <p class="label rv">02 · výber</p>
+    <h2 class="h rv">Projekty</h2>
+  </div>
+  {% include project-grid.html limit=8 %}
+  <a class="btn btn--wide rv" href="{{ '/projects/' | relative_url }}"><span class="btn-t">Všetky projekty</span><span class="circ">{% include arrow.svg %}</span></a>
 </section>
