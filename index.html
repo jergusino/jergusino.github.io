@@ -1,29 +1,25 @@
 ---
 layout: default
 body_class: home
-description: "Jergušino. Žltá medzi sivými. Dizajn a plagáty."
+description: "Jergušino. Dizajn a plagáty."
 ---
-<section class="hero hero--home">
-  <h1 class="sr">Jergušino</h1>
-  <div class="a-under">{% include asterisk.svg %}</div>
+<section class="hero">
+  <div class="a-under" aria-hidden="true">{% include asterisk.svg %}</div>
   <div class="yl">
-    <div class="a-big">{% include asterisk.svg %}</div>
-    <p class="tag">Žltá medzi sivými.</p>
-    <div class="lockup">
-      <div class="wm-mask">{% include wordmark.svg %}</div>
+    <div class="a-big spin" aria-hidden="true">{% include asterisk.svg %}</div>
+    <h1 class="display hero-h"><span class="ln"><span>Dizajn</span></span><span class="ln"><span>a&nbsp;plagáty.</span></span></h1>
+    <div class="hero-foot">
+      <p class="label">Grafický dizajnér</p>
+      <a class="btn btn--ink" href="#projekty"><span class="btn-t">Projekty</span><span class="circ">{% include arrow.svg %}</span></a>
     </div>
   </div>
 </section>
 
-<section class="hero hero--page hero--project hero--projects hero--in-home">
-  <div class="lockup">
-    {% include lead.html text="moje" %}
-    <h1 class="title">Projekty</h1>
+<section class="wall" id="projekty">
+  <div class="sec-head">
+    <p class="label rv">01 · výber</p>
+    <h2 class="h rv">Projekty</h2>
   </div>
+  {% include project-grid.html limit=8 %}
+  <a class="btn btn--wide rv" href="{{ '/projects/' | relative_url }}"><span class="btn-t">Všetky projekty</span><span class="circ">{% include arrow.svg %}</span></a>
 </section>
-
-<section class="list wall">
-  {% include project-grid.html limit=18 %}
-</section>
-
-<a class="all" href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a>

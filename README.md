@@ -83,8 +83,10 @@ Needs Ruby. Not needed to publish.
 - Colours `--ink`, `--paper`, `--yellow` (+ `--paper-soft`, `--ash`, `--line`) in `assets/css/main.css`. Yellow is the highlighter: one moment per view, yellow text only on Ink.
 - Fonts (`assets/fonts/`, open source, SIL OFL): Bricolage Grotesque ExtraBold for headlines, Medium for text; DM Mono for small caps labels.
 - Logo: `assets/img/logo-paper.svg` / `logo-ink.svg`, `_includes/asterisk.svg`, `_includes/wordmark.svg` (one path per letter), `favicon.svg`.
-- Home intro is the title card rebuilt in CSS (asterisk pops in, yellow circle opens, letters rise, sign-off writes on, asterisk turns a notch). Off for `prefers-reduced-motion`.
-- Posters keep their own colours (the old two-tone filter is gone). Hover pops a yellow circle with an arrow into the poster's corner.
+- Layout follows the carousel system: top row (logo + pill nav), one big headline per section, DM Mono labels, 22/28 px panels, circle-arrow buttons, 6 px pills. Surfaces: yellow cover (home) and closing slide (every page, sign-off as headline), ink content, yellow contact page with ink panels.
+- Home intro = the title card in CSS: asterisk pops in, yellow circle opens, headline lines rise, button lands. Off for `prefers-reduced-motion`.
+- Poster wall: hover one poster and the rest goes grey (yellow among grey), the hovered one gets a yellow circle-arrow. Project pages: number `NN / total`, headline, chips, prev/next as circle buttons.
+- Motion: scroll reveal (`.rv`), asterisks turn on scroll (`.spin`), yellow circle page transition (`.wipe`, in `assets/js/site.js`).
 - Slovak typography: non-breaking space after one-letter words (k s v z o u a i) in new copy.
 
 ## Návštevnosť (Google Analytics)

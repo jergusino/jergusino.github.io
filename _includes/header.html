@@ -1,11 +1,10 @@
 <header class="top">
-  {% if page.url != "/" %}
-  <a class="top-mark" href="{{ '/' | relative_url }}" aria-label="Jergušino, domov">
-    <img src="{{ '/assets/img/logo-paper.svg' | relative_url }}" alt="" width="570" height="112">
+  <a class="brand" href="{{ '/' | relative_url }}" aria-label="Jergušino, domov">
+    <img class="logo-paper" src="{{ '/assets/img/logo-paper.svg' | relative_url }}" alt="" width="570" height="112">
+    <img class="logo-ink" src="{{ '/assets/img/logo-ink.svg' | relative_url }}" alt="" width="570" height="112">
   </a>
-  {% endif %}
-  <nav class="top-nav" aria-label="Hlavná navigácia">
-    <a href="{{ '/projects/' | relative_url }}"{% if page.body_class == "projects" %} aria-current="page"{% endif %}>projekty {% include arrow.svg %}</a>
-    <a href="{{ '/kontakt/' | relative_url }}"{% if page.body_class == "kontakt-page" %} aria-current="page"{% endif %}>kontakt</a>
+  <nav class="nav" aria-label="Hlavná navigácia">
+    <a class="pill" href="{{ '/projects/' | relative_url }}"{% if page.body_class == "projects" %} aria-current="page"{% endif %}>Projekty</a>
+    <a class="pill" href="{{ '/kontakt/' | relative_url }}"{% if page.body_class == "kontakt-page" %} aria-current="page"{% endif %}>Kontakt</a>
   </nav>
 </header>

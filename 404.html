@@ -5,22 +5,17 @@ body_class: notfound
 permalink: /404.html
 sitemap: false
 ---
-<section class="hero hero--page hero--project">
-  <div class="lockup">
-    {% include lead.html text="ups" %}
-    <h1 class="title">404</h1>
-  </div>
+<section class="sec-head sec-head--page">
+  <p class="label">Ups</p>
+  <h1 class="h h--xl">404.</h1>
 </section>
 <article class="prose">
-  <p class="big">Táto stránka neexistuje. Možno sa presunula, alebo je v adrese preklep.</p>
-  <ul class="links big">
-    <li><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></li>
-    <li><a href="{{ '/' | relative_url }}">domov {% include arrow.svg %}</a></li>
-  </ul>
+  <p class="big">Táto stránka neexistuje. Možno sa presunula, alebo je v&nbsp;adrese preklep.</p>
+  <p class="btnrow"><a class="btn" href="{{ '/projects/' | relative_url }}"><span class="circ">{% include arrow.svg %}</span><span class="btn-t">Všetky projekty</span></a><a class="pill" href="{{ '/' | relative_url }}">Domov</a></p>
 </article>
 
 <section class="similar" aria-labelledby="new-h">
-  <h2 id="new-h" class="similar-h">najnovšie plagáty</h2>
+  <h2 id="new-h" class="h">Najnovšie plagáty</h2>
   {% assign items = site.projects | sort: "date" | reverse %}
   <ul class="pgrid pgrid--flat">
     {% for p in items limit: 6 %}{% if p.thumb %}

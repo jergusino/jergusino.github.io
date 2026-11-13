@@ -20,12 +20,15 @@
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 </head>
 <body class="{{ page.body_class }}">
+  <script>document.documentElement.classList.add("js")</script>
+  <div class="wipe" aria-hidden="true"></div>
   <a class="skip" href="#top">preskočiť na obsah</a>
   {% include header.html %}
 
   <main id="top" tabindex="-1">
     {{ content }}
   </main>
+  {% unless page.no_closing %}{% include closing.html %}{% endunless %}
 
 
   <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
