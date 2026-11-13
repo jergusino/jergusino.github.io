@@ -84,7 +84,7 @@ Needs Ruby. Not needed to publish.
 - Fonts (`assets/fonts/`, open source, SIL OFL): Bricolage Grotesque ExtraBold for headlines, Medium for text; DM Mono for small caps labels.
 - Logo: `assets/img/logo-paper.svg` / `logo-ink.svg`, `_includes/asterisk.svg`, `_includes/wordmark.svg` (one path per letter), `favicon.svg`.
 - Layout follows the carousel system: top row (logo + pill nav), one headline per section, DM Mono labels, 22/28 px panels, circle-arrow buttons, 6 px pills. Every page background is ink; yellow is only an accent or signal (asterisk, circle buttons, active filter, the project number).
-- Home intro: the yellow asterisk pops in on ink, the headline lines rise, the button lands. Off for `prefers-reduced-motion`.
+- Home hero: a canvas field of grey asterisks (script at the end of `assets/js/site.js`); the one nearest the pointer is yellow and they turn and grow around it. Headline, one yellow CTA, and a reel of real posters. Static for `prefers-reduced-motion`.
 - Poster wall: hover one poster and the rest goes grey (yellow among grey), the hovered one gets a yellow circle-arrow. Project pages: number `NN / total`, headline, chips, prev/next as circle buttons.
 - Motion: scroll reveal (`.rv`) and asterisks that turn on scroll (`.spin`).
 - Slovak typography: non-breaking space after one-letter words (k s v z o u a i) in new copy.

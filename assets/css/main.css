@@ -76,16 +76,34 @@ main:focus { outline: none; }
 .sec-head .label { margin-bottom: 1.1em; }
 .sec-head--page { padding-top: clamp(110px, 17vh, 190px); padding-bottom: calc(var(--m) * 1.1); }
 
-/* ── Home: the cover slide. Yellow surface, headline bottom-left, asterisk, circle-arrow ─ */
-.hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--ink); overflow: hidden; --ax: 76%; --ay: 36%; --as: min(32vw, 46vh); }
-.hero .yl { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--m) var(--m); }
-.a-under, .a-big { position: absolute; width: var(--as); left: var(--ax); top: var(--ay); translate: -50% -50%; }
-.a-big { color: var(--yellow); }
-.hero-h { color: var(--paper); position: relative; z-index: 1; font-size: clamp(2.8rem, 9vw, 9.5rem); }
-.hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+/* ── Home hero: a field of grey asterisks, one of them yellow and following you. Headline, one clear CTA, a reel of real work. ─ */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--ink); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.field { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero-in { position: relative; z-index: 1; padding: clamp(120px, 20vh, 220px) var(--m) clamp(28px, 5vh, 56px); max-width: 64rem; pointer-events: none; }
+.hero-in a { pointer-events: auto; }
+.eyebrow { display: inline-flex; align-items: center; gap: 0.7em; padding: 0.55em 0.9em 0.5em; border: 1px solid var(--line); border-radius: 999px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper-soft); background: var(--ink); margin-bottom: 1.6em; }
+.eyebrow .dot { width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--yellow); }
+.hero-h { font-size: clamp(2.4rem, 6.4vw, 6.4rem); line-height: 1; letter-spacing: -0.04em; color: var(--paper); }
+.hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .hero-h .ln > span { display: block; }
-.hero-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(28px, 5vh, 56px); padding-top: 20px; border-top: 1px solid var(--line); }
-
+.hero-sub { max-width: 30em; margin-top: 1.4em; color: var(--paper-soft); background: var(--ink); display: inline-block; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2em; }
+.cta { display: inline-flex; align-items: center; gap: 0.7em; padding: 1em 1.5em 0.95em; border-radius: 999px; background: var(--yellow); color: var(--ink); font-weight: 500; font-size: 1.05rem; line-height: 1; transition: transform 0.2s var(--ease-out), background 0.1s, color 0.1s; }
+.cta .arr { width: 1.3em; height: 0.65em; margin: 0; transition: transform 0.2s var(--ease-out); }
+.cta:hover, .cta:focus-visible { transform: translateY(-2px); }
+.cta:hover .arr, .cta:focus-visible .arr { transform: translateX(4px); }
+.cta--ghost { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); }
+.cta--ghost:hover, .cta--ghost:focus-visible { box-shadow: inset 0 0 0 2px var(--paper); }
+/* reel: real posters drifting by, pauses on hover */
+.reel { position: relative; z-index: 1; overflow: hidden; padding: 0 0 var(--m); background: var(--ink); border-top: 1px solid var(--line); padding-top: 16px; }
+.reel-track { list-style: none; display: flex; gap: 14px; width: max-content; animation: reel 70s linear infinite; }
+.reel:hover .reel-track { animation-play-state: paused; }
+.reel-track li { flex: none; width: clamp(96px, 9vw, 140px); }
+.reel-track a { display: block; aspect-ratio: 7 / 10; border-radius: 14px; overflow: hidden; background: var(--line); }
+.reel-track img { width: 100%; height: 100%; object-fit: cover; }
+.reel-track a:hover img { transform: scale(1.04); transition: transform 0.3s var(--ease-out); }
+@keyframes reel { to { transform: translateX(-50%); } }
+@media (max-width: 700px) { .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
 
 /* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
 .wall { padding: calc(var(--m) * 2.4) 0 0; }
@@ -202,20 +220,18 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 .js .rv { transform: translateY(24px); clip-path: inset(0 0 100% 0); }
 .js .rv.in { transform: none; clip-path: inset(-20% -5% -20% -5%); transition: transform 0.7s var(--ease-out) var(--d, 0s), clip-path 0.7s var(--ease-out) var(--d, 0s); }
 /* cover: the title card, in CSS. Asterisk pops in on ink, a yellow circle opens from it, lines rise, button lands, asterisk turns a notch. */
-@keyframes iris { from { clip-path: circle(0 at var(--ax) var(--ay)); } to { clip-path: circle(150vmax at var(--ax) var(--ay)); } }
 @keyframes pop { 0% { transform: scale(0) rotate(-120deg); } 100% { transform: none; } }
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes land { from { transform: translateY(40px) scale(0.6); } to { transform: none; } }
 @keyframes line-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-.a-big .ast { animation: pop 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) 0.1s both; }
-.hero-h .ln > span { animation: rise 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(0.7s + var(--i, 0) * 0.12s) both; }
+.hero-h .ln > span { animation: rise 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(0.2s + var(--i, 0) * 0.12s) both; }
 .hero-h .ln:nth-child(2) > span { --i: 1; }
-.hero-foot { animation: line-in 0.7s var(--ease-out) 1.3s both; }
-.hero-foot .circ { animation: land 0.6s cubic-bezier(0.3, 1.5, 0.4, 1) 1.6s both; }
+ .eyebrow, .hero-sub, .hero-cta { animation: line-in 0.7s var(--ease-out) 0.7s both; }
 .hero + .wall { scroll-margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .a-big .ast, .hero-h .ln > span, .hero-foot, .hero-foot .circ, .js body.home .top { animation: none; }
+  .hero-h .ln > span, .eyebrow, .hero-sub, .hero-cta, .js body.home .top { animation: none; }
+  .reel-track { animation: none; }
   .js .rv, .js .rv.in { transform: none; clip-path: none; transition: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
 }
@@ -237,7 +253,6 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 @media print { html, body { background: #fff; color: #000; } .closing { display: none; } }
 
 @media (max-width: 700px) {
-  .hero { --as: 48vw; --ax: 72%; --ay: 24%; }
   .hero-h { font-size: 13vw; }
   .closing .display { font-size: 11vw; }
   .closing-ast { width: 44vw; right: -14vw; bottom: -18vw; }

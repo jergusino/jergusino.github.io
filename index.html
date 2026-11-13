@@ -4,13 +4,23 @@ body_class: home
 description: "Jergušino. Dizajn a plagáty."
 ---
 <section class="hero">
-  <div class="yl">
-    <div class="a-big spin" aria-hidden="true">{% include asterisk.svg %}</div>
-    <h1 class="display hero-h"><span class="ln"><span>Dizajn</span></span><span class="ln"><span>a&nbsp;plagáty.</span></span></h1>
-    <div class="hero-foot">
-      <p class="label">Grafický dizajnér</p>
-      <a class="btn btn--ink" href="#projekty"><span class="btn-t">Projekty</span><span class="circ">{% include arrow.svg %}</span></a>
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Portfólio {{ site.time | date: "%Y" }}</p>
+    <h1 class="display hero-h"><span class="ln"><span>Dizajn a&nbsp;plagáty,</span></span><span class="ln"><span>ktoré nezapadnú.</span></span></h1>
+    <p class="hero-sub">Som grafický dizajnér. Plagáty, vizuály a&nbsp;spolupráce. Pozri si, čo som urobil, alebo mi napíš.</p>
+    <div class="hero-cta">
+      <a class="cta" href="#projekty">Pozri projekty {% include arrow.svg %}</a>
+      <a class="cta cta--ghost" href="{{ '/kontakt/' | relative_url }}">Napíš mi</a>
     </div>
+  </div>
+  {% assign reel = site.projects | sort: "date" | reverse %}
+  <div class="reel" aria-label="Výber plagátov">
+    <ul class="reel-track">
+      {% for n in (1..2) %}{% for p in reel limit: 12 %}{% if p.thumb and p.placeholder != true %}
+      <li{% if n == 2 %} aria-hidden="true"{% endif %}><a href="{{ p.url | relative_url }}"{% if n == 2 %} tabindex="-1"{% endif %} aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1020" loading="lazy"></a></li>
+      {% endif %}{% endfor %}{% endfor %}
+    </ul>
   </div>
 </section>
 

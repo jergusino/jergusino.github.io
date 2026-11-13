@@ -152,3 +152,47 @@
   window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
   upd();
 })();
+
+// Home hero: a field of grey asterisks. They sway slowly; near the pointer they turn and grow, and the one
+// closest to it is the yellow one (yellow among grey). Without a pointer a slow path drives it.
+(function () {
+  var cv = document.querySelector('.field');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d'), hero = cv.parentNode;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = -9999, py = -9999, hasPtr = false, run = true, t0 = performance.now();
+  var GREY = [58, 57, 53], LIGHT = [150, 148, 140], YEL = '#ffd60a';
+  function size() {
+    var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr;
+    S = W < 700 ? 48 : 64; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
+  }
+  function star(x, y, a, r, w, col) {
+    ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath();
+    for (var k = 0; k < 3; k++) { var t = a + k * Math.PI / 3, dx = Math.sin(t) * r, dy = -Math.cos(t) * r; ctx.moveTo(x - dx, y - dy); ctx.lineTo(x + dx, y + dy); }
+    ctx.stroke();
+  }
+  function frame(now) {
+    var t = (now - t0) / 1000;
+    if (!hasPtr) { px = W * (0.62 + 0.28 * Math.sin(t * 0.5)); py = H * (0.38 + 0.22 * Math.sin(t * 0.37 + 1)); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
+    for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
+      var x = i * S + (S - (W % S)) / 2 * 0 + S / 2 - 8, y = j * S + S / 2 - 8;
+      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = Math.max(0, 1 - d / 230);
+      var a = (reduce ? 0 : t * 0.25) + Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
+      var r = 7 + inf * 9;
+      if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
+      var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
+      star(x, y, a, r, 3.2 + inf * 1.6, 'rgb(' + c.join(',') + ')');
+    }
+    star(bx, by, ba, br + 3, 6, YEL);
+  }
+  function loop(now) { if (run && !document.hidden) frame(now); if (!reduce) requestAnimationFrame(loop); }
+  size(); frame(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) frame(performance.now()); });
+  hero.addEventListener('pointermove', function (e) { var r = hero.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; hasPtr = true; });
+  hero.addEventListener('pointerleave', function () { hasPtr = false; });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { run = en[0].isIntersecting; }, { threshold: 0 }).observe(hero);
+  if (!reduce) requestAnimationFrame(loop);
+})();
