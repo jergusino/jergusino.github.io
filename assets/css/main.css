@@ -112,7 +112,7 @@ main:focus { outline: none; }
 .brands-list a { display: flex; align-items: center; min-height: 44px; color: var(--ash); transition: color 0.2s, transform 0.25s var(--ease-out); }
 .brands-list a:hover, .brands-list a:focus-visible { color: var(--yellow); transform: translateY(-2px); }
 .brands-list .wordmark { font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.04em; line-height: 1; }
-.brands-list img { display: block; height: clamp(40px, 4.4vw, 56px); margin: -8px 0; width: auto; filter: grayscale(1) brightness(0) invert(0.6); transition: filter 0.2s; }
+.brands-list img { display: block; height: clamp(28px, 3vw, 38px); margin: -6px 0; width: auto; filter: grayscale(1) brightness(0) invert(0.6); transition: filter 0.2s; }
 .brands-list a:hover img, .brands-list a:focus-visible img { filter: grayscale(1) brightness(0) invert(1); }
 @media (max-width: 700px) { .field { opacity: 0.5; } .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
 
