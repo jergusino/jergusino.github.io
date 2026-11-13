@@ -139,8 +139,10 @@
   function loop(now) { if (run && !document.hidden) frame(now); if (!reduce && !soft) requestAnimationFrame(loop); }
   size(); px = W * 0.76; py = H * 0.34; frame(performance.now());
   window.addEventListener('resize', function () { size(); if (reduce || soft) frame(performance.now()); });
-  hero.addEventListener('pointermove', function (e) { var r = hero.getBoundingClientRect(); ptx = e.clientX - r.left; pty = e.clientY - r.top; hasPtr = true; });
-  hero.addEventListener('pointerleave', function () { hasPtr = false; });
+  window.addEventListener('pointermove', function (e) {   // on the whole window, so the star keeps following over the navbar too
+    if (e.pointerType === 'touch') return;
+    var r = hero.getBoundingClientRect(); ptx = e.clientX - r.left; pty = e.clientY - r.top; hasPtr = true; });
+  document.documentElement.addEventListener('pointerleave', function () { hasPtr = false; });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { run = en[0].isIntersecting; }, { threshold: 0 }).observe(hero);
   if (!reduce && !soft) requestAnimationFrame(loop);
 })();
