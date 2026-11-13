@@ -14,7 +14,7 @@ layout: default
   {% if page.youtube %}
   <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
     <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
-    <span class="cta">Pozrieť na YouTube {% include arrow.svg %}</span>
+    <span class="btn"><span class="btn-t">Pozrieť na YouTube</span><span class="circ">{% include arrow.svg %}</span></span>
   </a>
   {% endif %}
   {% if page.video %}

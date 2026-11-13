@@ -10,8 +10,8 @@ description: "Jergušino. Dizajn a plagáty."
     <h1 class="display hero-h"><span class="ln"><span>Dizajn a&nbsp;plagáty,</span></span><span class="ln"><span>ktoré nezapadnú.</span></span></h1>
     <p class="hero-sub">Som grafický dizajnér. Plagáty, vizuály a&nbsp;spolupráce. Pozri si, čo som urobil, alebo mi napíš.</p>
     <div class="hero-cta">
-      <a class="cta" href="#projekty">Pozri projekty {% include arrow.svg %}</a>
-      <a class="cta cta--ghost" href="{{ '/kontakt/' | relative_url }}">Napíš mi</a>
+      <a class="btn" href="#projekty"><span class="btn-t">Pozri projekty</span><span class="circ">{% include arrow.svg %}</span></a>
+      <a class="btn btn--ghost" href="{{ '/kontakt/' | relative_url }}"><span class="btn-t">Napíš mi</span><span class="circ">{% include arrow.svg %}</span></a>
     </div>
   </div>
   {% assign reel = site.projects | sort: "date" | reverse %}

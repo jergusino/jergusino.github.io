@@ -58,6 +58,8 @@ main:focus { outline: none; }
 .btn:focus-visible { outline-offset: 8px; }
 .btn--sm .btn-t { font-size: 1.05rem; }
 .btn--sm .circ { width: 44px; height: 44px; } .btn--sm .circ .arr { width: 20px; height: 10px; }
+.btn--ghost .circ { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); }
+.btn--ghost:hover .circ, .btn--ghost:focus-visible .circ { background: var(--yellow); color: var(--ink); box-shadow: none; }
 .btn--wide { display: flex; justify-content: center; margin: calc(var(--m) * 1.6) var(--m) 0; }
 .pill { display: inline-block; padding: 0.7em 1.05em 0.62em; border: 2px solid currentColor; border-radius: var(--r-label); color: var(--text); transition: background 0.1s, color 0.1s, border-color 0.1s; cursor: pointer; background: none; }
 .pill:hover, .pill:focus-visible { background: var(--text); color: var(--surface); border-color: var(--text); }
@@ -87,13 +89,7 @@ main:focus { outline: none; }
 .hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .hero-h .ln > span { display: block; }
 .hero-sub { max-width: 30em; margin-top: 1.4em; color: var(--paper-soft); background: var(--ink); display: inline-block; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2em; }
-.cta { display: inline-flex; align-items: center; gap: 0.7em; padding: 1em 1.5em 0.95em; border-radius: 999px; background: var(--yellow); color: var(--ink); font-weight: 500; font-size: 1.05rem; line-height: 1; transition: transform 0.2s var(--ease-out), background 0.1s, color 0.1s; }
-.cta .arr { width: 1.3em; height: 0.65em; margin: 0; transition: transform 0.2s var(--ease-out); }
-.cta:hover, .cta:focus-visible { transform: translateY(-2px); }
-.cta:hover .arr, .cta:focus-visible .arr { transform: translateX(4px); }
-.cta--ghost { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); }
-.cta--ghost:hover, .cta--ghost:focus-visible { box-shadow: inset 0 0 0 2px var(--paper); }
+.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 36px; margin-top: 2em; }
 /* reel: real posters drifting by, pauses on hover */
 .reel { position: relative; z-index: 1; overflow: hidden; padding: 0 0 var(--m); background: var(--ink); border-top: 1px solid var(--line); padding-top: 16px; }
 .reel-track { list-style: none; display: flex; gap: 14px; width: max-content; animation: reel 70s linear infinite; }
@@ -150,8 +146,8 @@ main:focus { outline: none; }
 .project-media img { border-radius: var(--r-panel); max-height: 78vh; max-height: 78svh; width: auto; max-width: 100%; }
 .project-media video { display: block; max-width: 100%; max-height: 78svh; aspect-ratio: 9 / 16; border-radius: var(--r-panel); background: var(--ink); }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--gap); margin-top: var(--gap); }
-.yt { display: block; } .yt .cta { display: inline-block; margin-top: 0.8em; font-family: var(--mono); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--paper); }
-.yt:hover .cta { color: var(--yellow); }
+.yt { display: block; } .yt .btn { margin-top: 1em; }
+.yt:hover .circ { transform: translateX(6px) scale(1.08); }
 .project-text { align-self: end; max-width: 46rem; }
 .count { display: flex; align-items: baseline; gap: 12px; margin-bottom: calc(var(--m) * 0.6); color: var(--muted); }
 .count .num { font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.4rem); letter-spacing: -0.03em; color: var(--yellow); line-height: 1; }   /* the one yellow moment on the page */
@@ -238,12 +234,12 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 @keyframes pop-in { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: none; } }
 .eyebrow { animation: blur-in 0.9s var(--ease-out) 0.15s both; }
 .hero-sub { animation: blur-in 1s var(--ease-out) 0.75s both; }
-.cta { animation: pop-in 0.6s cubic-bezier(0.3, 1.4, 0.4, 1) 1.1s both; }
-.cta--ghost { animation-delay: 1.25s; }
+.hero-cta .btn { animation: pop-in 0.6s cubic-bezier(0.3, 1.4, 0.4, 1) 1.1s both; }
+.hero-cta .btn--ghost { animation-delay: 1.25s; }
 .hero + .wall { scroll-margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-h .ln > span, .eyebrow, .hero-sub, .cta, .js body.home .top { animation: none; }
+  .hero-h .ln > span, .eyebrow, .hero-sub, .hero-cta .btn, .js body.home .top { animation: none; }
   .reel-track { animation: none; }
   .js .rv, .js .rv.in, .js .bf, .js .bf.in { transform: none; opacity: 1; filter: none; transition: none; }
   .js .wds .wd > span { transform: none; }
