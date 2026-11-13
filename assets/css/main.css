@@ -340,5 +340,3 @@ body.home .brand, body.home .nav .pill { position: relative; }
 body.home .brand::before, body.home .nav .pill::before { content: ""; position: absolute; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at center, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.8) 50%, rgba(14, 14, 14, 0) 100%); }
 body.home .brand::before { inset: -22px -34px; }
 body.home .nav .pill::before { inset: -16px -22px; }
-body.home .brand::before, body.home .nav .pill::before { transition: opacity 0.25s; }
-body.home .brand:hover::before, body.home .nav .pill:hover::before { opacity: 0; }   /* so the yellow star stays visible under the pointer */
