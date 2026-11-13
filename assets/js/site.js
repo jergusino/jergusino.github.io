@@ -162,11 +162,11 @@
   var ctx = cv.getContext('2d'), hero = cv.parentNode;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = 0, py = 0, ptx = 0, pty = 0, hasPtr = false, run = true, t0 = performance.now();
-  var GREY = [58, 57, 53], LIGHT = [150, 148, 140], YEL = '#ffd60a', soft = false;
+  var GREY = [88, 86, 80], LIGHT = [200, 197, 188], YEL = '#ffd60a', soft = false;
   function size() {
     var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr;
-    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 56 : 64; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
+    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 38 : 46; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
   }
   function star(x, y, a, r, w, col) {
     ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath();
@@ -182,11 +182,11 @@
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
       var x = i * S + (S - (W % S)) / 2 * 0 + S / 2 - 8, y = j * S + S / 2 - 8;
       var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 230);
-      var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
-      var r = soft ? 5 + inf * 6 : 7 + inf * 9;
+      var a = Math.PI / 4 + Math.sin(i * 0.5 + j * 0.4) * 0.25 + inf * inf * 1.6;      // turned 45°
+      var r = soft ? 4.2 : 5.5 + inf * 7;
       if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
-      star(x, y, a, r, soft ? 2.4 : 3.2 + inf * 1.6, soft ? 'rgb(40,39,36)' : 'rgb(' + c.join(',') + ')');
+      star(x, y, a, r, soft ? 2.2 : 2.6 + inf * 1.4, soft ? 'rgb(70,68,63)' : 'rgb(' + c.join(',') + ')');
     }
     if (!soft) star(bx, by, ba, br + 3, 6, YEL);   // phones and touch screens: only the quiet grey grid, no yellow star
   }
