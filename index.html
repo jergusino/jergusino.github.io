@@ -14,14 +14,17 @@ description: "Jergušino. Dizajn a plagáty."
       <a class="cta cta--ghost" href="{{ '/kontakt/' | relative_url }}">Napíš mi</a>
     </div>
   </div>
-  {% assign reel = site.projects | sort: "date" | reverse %}
-  <div class="reel" aria-label="Výber plagátov">
-    <ul class="reel-track">
-      {% for n in (1..2) %}{% for p in reel limit: 12 %}{% if p.thumb and p.placeholder != true %}
-      <li{% if n == 2 %} aria-hidden="true"{% endif %}><a href="{{ p.url | relative_url }}"{% if n == 2 %} tabindex="-1"{% endif %} aria-label="{{ p.title | escape }}"><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1020" loading="lazy"></a></li>
-      {% endif %}{% endfor %}{% endfor %}
+  {% assign brands = site.projects | where: "brand", true | sort: "date" | reverse %}
+  {% if brands.size > 0 %}
+  <div class="brands" aria-label="Značky, s ktorými som spolupracoval">
+    <p class="label">Spolupráca so značkami</p>
+    <ul class="brands-list">
+      {% for p in brands %}
+      <li><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}">{% if p.brand_logo %}<img src="{{ p.brand_logo | relative_url }}" alt="{{ p.title | escape }}" loading="lazy">{% else %}<span class="wordmark">{{ p.title }}</span>{% endif %}</a></li>
+      {% endfor %}
     </ul>
   </div>
+  {% endif %}
 </section>
 
 <section class="wall" id="projekty">

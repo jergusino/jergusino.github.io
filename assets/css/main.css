@@ -97,15 +97,15 @@ main:focus { outline: none; }
 .cta:hover .arr, .cta:focus-visible .arr { transform: translateX(4px); }
 .cta--ghost { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); }
 .cta--ghost:hover, .cta--ghost:focus-visible { box-shadow: inset 0 0 0 2px var(--paper); }
-/* reel: real posters drifting by, pauses on hover */
-.reel { position: relative; z-index: 1; overflow: hidden; padding: 0 0 var(--m); background: var(--ink); border-top: 1px solid var(--line); padding-top: 16px; }
-.reel-track { list-style: none; display: flex; gap: 14px; width: max-content; animation: reel 70s linear infinite; }
-.reel:hover .reel-track { animation-play-state: paused; }
-.reel-track li { flex: none; width: clamp(96px, 9vw, 140px); }
-.reel-track a { display: block; aspect-ratio: 7 / 10; border-radius: 14px; overflow: hidden; background: var(--line); }
-.reel-track img { width: 100%; height: 100%; object-fit: cover; }
-.reel-track a:hover img { transform: scale(1.04); transition: transform 0.3s var(--ease-out); }
-@keyframes reel { to { transform: translateX(-50%); } }
+/* brand strip: the brands I've worked with, quiet until hovered */
+.brands { position: relative; z-index: 1; display: flex; align-items: center; gap: 20px 48px; flex-wrap: wrap; padding: 28px var(--m) 32px; background: var(--ink); border-top: 1px solid var(--line); }
+.brands .label { margin: 0; }
+.brands-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 48px; }
+.brands-list a { display: flex; align-items: center; min-height: 44px; color: var(--ash); transition: color 0.2s, transform 0.25s var(--ease-out); }
+.brands-list a:hover, .brands-list a:focus-visible { color: var(--yellow); transform: translateY(-2px); }
+.brands-list .wordmark { font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.04em; line-height: 1; }
+.brands-list img { display: block; height: clamp(26px, 3vw, 36px); width: auto; filter: grayscale(1) brightness(0) invert(0.6); transition: filter 0.2s; }
+.brands-list a:hover img, .brands-list a:focus-visible img { filter: grayscale(1) brightness(0) invert(1); }
 @media (max-width: 700px) { .field { opacity: 0.5; } .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
 
 /* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
@@ -265,7 +265,6 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-h .ln > span, .eyebrow, .hero-sub, .cta, .js body.home .top { animation: none; }
-  .reel-track { animation: none; }
   .js .rv, .js .rv.in, .js .bf, .js .bf.in { transform: none; opacity: 1; filter: none; transition: none; }
   .js .wds .wd > span { transform: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
