@@ -335,5 +335,8 @@ header.top { view-transition-name: site-header; }
 ::view-transition-group(site-header) { animation-duration: 0s; }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 
-/* same glow behind the logo and nav where they sit on the asterisk field */
-body.home .top::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -34px -40px -34px -40px; background: linear-gradient(to bottom, rgba(14, 14, 14, 0.92) 0%, rgba(14, 14, 14, 0.7) 55%, rgba(14, 14, 14, 0) 100%); }
+/* a glow only where there is an element: behind the logo and behind each nav button, not the whole bar */
+body.home .brand, body.home .nav .pill { position: relative; }
+body.home .brand::before, body.home .nav .pill::before { content: ""; position: absolute; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at center, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.8) 50%, rgba(14, 14, 14, 0) 100%); }
+body.home .brand::before { inset: -22px -34px; }
+body.home .nav .pill::before { inset: -16px -22px; }
