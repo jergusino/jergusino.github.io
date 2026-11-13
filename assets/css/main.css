@@ -394,3 +394,14 @@ body.home .nav .pill::before { inset: -16px -22px; }
 .brand-show { display: grid; place-items: center; min-height: clamp(220px, 38vw, 420px); margin: clamp(32px, 5vw, 56px) 0 0; background: var(--yellow); border-radius: var(--r-panel, 28px); }
 .brand-show img { width: min(62%, 460px); height: auto; filter: brightness(0); }
 .bpage > .btn { margin-top: 8px; }
+
+/* collab card: ambient yellow glow drifting at rest, works without hover */
+.bcard { position: relative; overflow: hidden; isolation: isolate; }
+.bcard::before { content: ""; position: absolute; z-index: -1; width: 70%; aspect-ratio: 1; right: -20%; top: -30%; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(255, 214, 10, 0.22), transparent); animation: bglow 6s ease-in-out infinite alternate; }
+@keyframes bglow { from { transform: translate(0, 0) scale(0.85); opacity: 0.5; } to { transform: translate(-30%, 60%) scale(1.15); opacity: 1; } }
+.bcard:active { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+.bcard:active .bcard-logo { filter: brightness(0); }
+.bcard:active .bcard-what, .bcard:active .label { color: var(--ink); }
+.bcard:active .circ { background: var(--ink); color: var(--yellow); }
+.bcard:hover::before, .bcard:focus-visible::before { opacity: 0; animation: none; }
+@media (prefers-reduced-motion: reduce) { .bcard::before { animation: none; } }
