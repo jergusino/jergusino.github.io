@@ -274,3 +274,20 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
   .closing .display { font-size: 11vw; }
   .closing-ast { width: 44vw; right: -14vw; bottom: -18vw; }
 }
+
+/* phones: calmer chrome, one-row scrolling filters, comfortable tap targets */
+@media (max-width: 700px) {
+  .nav { gap: 8px; }
+  .nav .pill { font-size: 0.92rem; padding: 0.85em 1.15em 0.8em; min-height: 44px; display: inline-flex; align-items: center; }
+  .brand img { width: 112px; }
+  .ctl { flex-wrap: nowrap; overflow-x: auto; gap: 8px; margin-left: calc(var(--m) * -1); margin-right: calc(var(--m) * -1); padding: 0 var(--m); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .ctl::-webkit-scrollbar { display: none; }
+  .ctl > * { flex: none; }
+  .ctl-l { margin-right: 2px; }
+  .ctl button { min-height: 44px; padding: 0.7em 1em 0.62em; }
+  .ctl-search { flex-wrap: wrap; overflow: visible; }
+  .ctl-search input { width: 100%; min-height: 48px; }
+  .hero-cta { gap: 12px; }
+  .hero-sub { font-size: 1rem; }
+  .pcard .cap { font-size: 0.7rem; }
+}
