@@ -27,15 +27,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--ink); color-scheme: dark; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-html:has(body.kontakt-page) { background: var(--yellow); }
-body { margin: 0; background: var(--surface); color: var(--text-soft); font-family: var(--f); font-weight: 500; font-size: clamp(1.0625rem, 0.98rem + 0.3vw, 1.3rem); line-height: 1.4; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-body.kontakt-page { --surface: var(--yellow); --text: var(--ink); --text-soft: var(--ink); --muted: var(--stone); --hair: var(--ink); color-scheme: light; }
+body { margin: 0; background: var(--surface); color: var(--text-soft); font-family: var(--f); font-weight: 500; font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.2rem); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 h1, h2, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
 img { display: block; max-width: 100%; height: auto; }
 ::selection { background: var(--yellow); color: var(--ink); }
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
-body.kontakt-page :focus-visible, .on-yellow :focus-visible { outline-color: var(--ink); }
+.on-yellow :focus-visible { outline-color: var(--ink); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .ast { display: block; width: 100%; height: auto; overflow: visible; }
 .skip { position: absolute; z-index: 90; left: var(--m); top: -10em; background: var(--yellow); color: var(--ink); padding: 0.4em 0.8em; border-radius: var(--r-label); font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -45,22 +43,22 @@ main:focus { outline: none; }
 /* ── type roles ─────────────────────────────────────────────────────────────── */
 .label, .pill, .cap, .count, .meta dt, .chip, .pg-t small, .contact-label, .v-bar, .ctl-l { font-family: var(--mono); font-weight: 400; font-size: clamp(0.72rem, 0.7rem + 0.12vw, 0.85rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.2; }
 .label { color: var(--muted); }
-.display { font-family: var(--f); font-weight: 800; letter-spacing: -0.055em; line-height: 0.9; color: var(--text); font-size: clamp(3.4rem, 13.5vw, 15rem); }
-.h { font-family: var(--f); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; color: var(--text); font-size: clamp(2.2rem, 6vw, 6.5rem); }
-.h--xl { font-size: clamp(3.4rem, 13vw, 14rem); letter-spacing: -0.055em; line-height: 0.9; }
+.display { font-family: var(--f); font-weight: 800; letter-spacing: -0.04em; line-height: 0.98; color: var(--text); font-size: clamp(2.6rem, 8vw, 8.5rem); }
+.h { font-family: var(--f); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; color: var(--text); font-size: clamp(1.8rem, 3.6vw, 3.6rem); }
+.h--xl { font-size: clamp(2.6rem, 7vw, 7rem); letter-spacing: -0.04em; line-height: 0.98; }
 
 /* ── buttons: circle with an arrow (primary), pill label (secondary) ─────────── */
-.circ { display: inline-grid; place-items: center; flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--yellow); color: var(--ink); transition: transform 0.2s var(--ease-out), background 0.1s; }
-.circ .arr { width: 26px; height: 13px; margin: 0; }
+.circ { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--yellow); color: var(--ink); transition: transform 0.2s var(--ease-out), background 0.1s; }
+.circ .arr { width: 22px; height: 11px; margin: 0; }
 .arr { display: inline-block; width: 1.1em; height: 0.55em; vertical-align: 0.02em; margin-left: 0.25em; }
 .circ--back .arr { transform: scaleX(-1); }
 .btn { display: inline-flex; align-items: center; gap: 18px; color: var(--text); }
-.btn-t { font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.5rem, 2.6vw, 2.6rem); line-height: 1; }
+.btn-t { font-weight: 500; letter-spacing: -0.01em; font-size: clamp(1.1rem, 1.5vw, 1.4rem); line-height: 1; }
 .btn:hover .circ, .btn:focus-visible .circ, .page-arrow:hover .circ, .page-arrow:focus-visible .circ, .contact-row:hover .circ { transform: translateX(6px) scale(1.08); }
 .btn:focus-visible { outline-offset: 8px; }
 .btn--ink .circ { background: var(--ink); color: var(--yellow); }                 /* on yellow: ink button */
-body.kontakt-page .circ, .closing .circ { background: var(--ink); color: var(--yellow); }
-.btn--sm .btn-t { font-size: 1.15rem; letter-spacing: -0.02em; font-weight: 500; }
+.closing .circ { background: var(--ink); color: var(--yellow); }
+.btn--sm .btn-t { font-size: 1.05rem; }
 .btn--sm .circ { width: 44px; height: 44px; } .btn--sm .circ .arr { width: 20px; height: 10px; }
 .btn--wide { display: flex; justify-content: center; margin: calc(var(--m) * 1.6) var(--m) 0; }
 .pill { display: inline-block; padding: 0.7em 1.05em 0.62em; border: 2px solid currentColor; border-radius: var(--r-label); color: var(--text); transition: background 0.1s, color 0.1s, border-color 0.1s; cursor: pointer; background: none; }
@@ -73,12 +71,12 @@ body.kontakt-page .circ, .closing .circ { background: var(--ink); color: var(--y
 .brand { display: block; line-height: 0; }
 .brand img { width: clamp(120px, 11vw, 168px); height: auto; }
 .logo-ink { display: none; }
-body.home .logo-paper, body.kontakt-page .logo-paper { display: none; }
-body.home .logo-ink, body.kontakt-page .logo-ink { display: block; }
+body.home .logo-paper { display: none; }
+body.home .logo-ink { display: block; }
 .nav { display: flex; gap: 10px; }
-body.home .pill, body.kontakt-page .pill { color: var(--ink); }
-body.home .pill:hover, body.kontakt-page .pill:hover, body.home .pill:focus-visible, body.kontakt-page .pill:focus-visible { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
-body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+body.home .pill { color: var(--ink); }
+body.home .pill:hover, body.home .pill:focus-visible { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+body.home .pill[aria-current] { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
 
 /* section heads */
 .sec-head { padding: 0 var(--m); }
@@ -86,19 +84,19 @@ body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { backgroun
 .sec-head--page { padding-top: clamp(110px, 17vh, 190px); padding-bottom: calc(var(--m) * 1.1); }
 
 /* ── Home: the cover slide. Yellow surface, headline bottom-left, asterisk, circle-arrow ─ */
-.hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--ink); overflow: hidden; --ax: 76%; --ay: 36%; --as: min(48vw, 66vh); }
+.hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--ink); overflow: hidden; --ax: 76%; --ay: 36%; --as: min(32vw, 46vh); }
 .hero .yl { position: absolute; inset: 0; background: var(--yellow); color: var(--ink); clip-path: circle(150vmax at var(--ax) var(--ay)); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--m) var(--m); --text: var(--ink); --muted: var(--stone); }
 .a-under, .a-big { position: absolute; width: var(--as); left: var(--ax); top: var(--ay); translate: -50% -50%; }
 .a-under { color: var(--yellow); }
 .a-big { color: var(--ink); }
-.hero-h { color: var(--ink); position: relative; z-index: 1; font-size: clamp(3.6rem, 15.5vw, 17rem); }
+.hero-h { color: var(--ink); position: relative; z-index: 1; font-size: clamp(2.8rem, 9vw, 9.5rem); }
 .hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .hero-h .ln > span { display: block; }
-.hero-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(20px, 3vh, 40px); padding-top: 20px; border-top: 2px solid var(--ink); }
+.hero-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(28px, 5vh, 56px); padding-top: 20px; border-top: 1px solid var(--ink); }
 .hero-foot .label { color: var(--ink); }
 
 /* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
-.wall { padding: calc(var(--m) * 2) 0 0; }
+.wall { padding: calc(var(--m) * 2.4) 0 0; }
 .wall .sec-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 8px; margin-bottom: calc(var(--m) * 0.9); }
 .wall .sec-head .label { margin: 0 0 0.8em; order: 2; }
 .list.wall { padding-top: 0; }
@@ -109,8 +107,8 @@ body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { backgroun
 .cap span:first-child { color: var(--paper-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* the idea in one hover: yellow among the grey. Hover one poster and the rest of the wall goes grey. */
 @media (hover: hover) {
-  .pgrid:has(.pcard a:hover) .pcard:not(:hover) img { filter: grayscale(1) contrast(0.9) brightness(0.7); }
-  .pcard a:hover img { transform: scale(1.04); }
+  .pgrid:has(.pcard a:hover) .pcard:not(:hover) img { filter: grayscale(0.85) brightness(0.8); }
+  .pcard a:hover img { transform: scale(1.02); }
   .pcard:hover .cap span:first-child { color: var(--yellow); }
 }
 .pcard a::after { content: ""; position: absolute; z-index: 1; right: 12px; bottom: 12px; width: 52px; height: 52px; border-radius: 50%;
@@ -146,12 +144,12 @@ body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { backgroun
 .yt:hover .cta { color: var(--yellow); }
 .project-text { align-self: end; max-width: 46rem; }
 .count { display: flex; align-items: baseline; gap: 12px; margin-bottom: calc(var(--m) * 0.6); color: var(--muted); }
-.count .num { font-weight: 500; font-size: clamp(2.4rem, 5vw, 5rem); letter-spacing: -0.03em; color: var(--yellow); line-height: 1; }   /* the one yellow moment on the page */
+.count .num { font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.4rem); letter-spacing: -0.03em; color: var(--yellow); line-height: 1; }   /* the one yellow moment on the page */
 .hero--project .lead, .lead { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1em; }
-.title { font-weight: 800; font-size: clamp(2.8rem, 7.2vw, 8rem); line-height: 0.92; letter-spacing: -0.05em; color: var(--paper); overflow-wrap: anywhere; }
+.title { font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 4.6rem); line-height: 1; letter-spacing: -0.035em; color: var(--paper); overflow-wrap: anywhere; }
 .prose { margin-top: calc(var(--m) * 0.8); }
 .prose > * + * { margin-top: 1em; }
-.prose p { max-width: 36em; }
+.prose p { max-width: 34em; line-height: 1.65; }
 .prose a:not(.btn) { color: var(--paper); text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .prose code { font-family: var(--mono); font-size: 0.9em; border-bottom: 2px solid var(--line); }
 .prose h2, .prose h3 { font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; color: var(--paper); margin-top: 2em; font-size: 1.8rem; }
@@ -166,7 +164,7 @@ body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { backgroun
 .pager { display: flex; justify-content: space-between; gap: 24px; padding: calc(var(--m) * 1.6) var(--m) 0; }
 .page-arrow { display: flex; align-items: center; gap: 16px; color: var(--paper); max-width: 48%; }
 .page-arrow--next { margin-left: auto; text-align: right; }
-.pg-t { font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.2rem, 2.2vw, 2rem); line-height: 1.05; display: block; overflow: hidden; }
+.pg-t { font-weight: 500; font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.2; display: block; overflow: hidden; }
 .pg-t small { display: block; color: var(--muted); font-weight: 400; margin-bottom: 0.5em; }
 .page-arrow:hover .pg-t { color: var(--yellow); }
 .page-arrow .circ { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); }
@@ -184,26 +182,25 @@ body.home .pill[aria-current], body.kontakt-page .pill[aria-current] { backgroun
 }
 
 /* ── Contact: yellow surface, ink panels with big values and circle-arrow buttons ─ */
-.k-ast { position: absolute; z-index: 0; top: 130px; right: -7vw; width: 34vw; color: var(--ink); pointer-events: none; }
+.k-ast { display: none; }
 .contact { position: relative; z-index: 1; padding: 0 var(--m) calc(var(--m) * 2); }
-.contact-intro { margin-bottom: calc(var(--m) * 0.7); font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--ink); }
+.contact-intro { margin-bottom: calc(var(--m) * 0.6); color: var(--paper-soft); }
 .contact-list { list-style: none; display: grid; gap: var(--gap); }
-.contact-row { display: grid; grid-template-columns: minmax(7em, 14%) minmax(0, 1fr) auto; align-items: center; gap: var(--gap); padding: clamp(18px, 2.4vw, 36px) clamp(20px, 3vw, 44px); background: var(--ink); color: var(--paper); border-radius: var(--r-panel); }
+.contact-row { display: grid; grid-template-columns: minmax(7em, 14%) minmax(0, 1fr) auto; align-items: center; gap: var(--gap); padding: clamp(16px, 2vw, 28px) clamp(20px, 2.6vw, 36px); border: 2px solid var(--line); color: var(--paper); border-radius: var(--r-panel); }
 .contact-label { color: var(--ash); }
-.contact-value { font-weight: 800; letter-spacing: -0.045em; line-height: 1; font-size: clamp(1.7rem, 5.2vw, 5.4rem); overflow-wrap: anywhere; color: var(--paper); }
+.contact-value { font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; font-size: clamp(1.4rem, 3vw, 2.8rem); overflow-wrap: anywhere; color: var(--paper); }
 .contact-row:hover .contact-value { color: var(--yellow); }
 .contact-copy { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 0.9em 0.52em; cursor: pointer; }
 .contact-copy:hover, .contact-copy:focus-visible { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
 .contact-go { display: block; }
-body.kontakt-page .contact-go .circ { background: var(--yellow); color: var(--ink); }
-@media (max-width: 700px) { .contact-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; } .contact-label { grid-column: 1 / -1; } .k-ast { width: 62vw; right: -18vw; top: 110px; } }
+@media (max-width: 700px) { .contact-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; } .contact-label { grid-column: 1 / -1; } }
 
 /* ── Closing slide: yellow, the sign-off as headline, ink asterisk cut by the corner ─ */
-.closing { position: relative; overflow: hidden; margin-top: calc(var(--m) * 2.4); background: var(--yellow); color: var(--ink); min-height: 88vh; min-height: 88svh; padding: calc(var(--m) * 1.4) var(--m) var(--m); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(var(--m) * 0.7); --text: var(--ink); --muted: var(--stone); }
+.closing { position: relative; overflow: hidden; margin-top: calc(var(--m) * 2.4); background: var(--yellow); color: var(--ink); min-height: 58vh; min-height: 58svh; padding: calc(var(--m) * 1.4) var(--m) var(--m); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(var(--m) * 0.7); --text: var(--ink); --muted: var(--stone); }
 .closing > * { position: relative; z-index: 1; }
 .closing .label { color: var(--ink); position: absolute; top: calc(var(--m) * 1.4); left: var(--m); }
-.closing .display { font-size: clamp(3.4rem, 13vw, 15rem); }
-.closing-ast { position: absolute !important; z-index: 0 !important; width: 44vw; right: -12vw; bottom: -18vw; top: auto; color: var(--ink); }
+.closing .display { font-size: clamp(2.6rem, 7.5vw, 7.5rem); }
+.closing-ast { position: absolute !important; z-index: 0 !important; width: 30vw; right: -6vw; bottom: -9vw; top: auto; color: var(--ink); }
 .closing .btn { color: var(--ink); }
 .closing .btn:hover .circ, .closing .btn:focus-visible .circ { background: var(--ink); }
 body.home .closing { margin-top: calc(var(--m) * 3); }
@@ -218,7 +215,7 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 
 /* ── Motion ─────────────────────────────────────────────────────────────────── */
 /* scroll reveal: rises from below a hard edge, staggered; no fades */
-.js .rv { transform: translateY(48px); clip-path: inset(0 0 100% 0); }
+.js .rv { transform: translateY(24px); clip-path: inset(0 0 100% 0); }
 .js .rv.in { transform: none; clip-path: inset(-20% -5% -20% -5%); transition: transform 0.7s var(--ease-out) var(--d, 0s), clip-path 0.7s var(--ease-out) var(--d, 0s); }
 /* cover: the title card, in CSS. Asterisk pops in on ink, a yellow circle opens from it, lines rise, button lands, asterisk turns a notch. */
 @keyframes iris { from { clip-path: circle(0 at var(--ax) var(--ay)); } to { clip-path: circle(150vmax at var(--ax) var(--ay)); } }
@@ -261,8 +258,8 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 @media print { html, body { background: #fff; color: #000; } .wipe, .closing { display: none; } }
 
 @media (max-width: 700px) {
-  .hero { --as: 72vw; --ax: 68%; --ay: 30%; }
-  .hero-h { font-size: 19.5vw; }
-  .closing .display { font-size: 17vw; }
-  .closing-ast { width: 52vw; right: -16vw; bottom: -30vw; }
+  .hero { --as: 48vw; --ax: 72%; --ay: 24%; }
+  .hero-h { font-size: 13vw; }
+  .closing .display { font-size: 11vw; }
+  .closing-ast { width: 44vw; right: -14vw; bottom: -18vw; }
 }
