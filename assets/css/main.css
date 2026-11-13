@@ -69,7 +69,10 @@ main:focus { outline: none; }
 .brand { display: block; line-height: 0; }
 .brand img { width: clamp(120px, 11vw, 168px); height: auto; }
 .logo-ink { display: none; }
-.nav { display: flex; gap: 10px; }
+.nav { display: flex; gap: 12px; }
+.nav .pill { font-family: var(--sans, inherit); font-weight: 500; font-size: 1.05rem; letter-spacing: 0; text-transform: none; line-height: 1; padding: 1em 1.5em 0.95em; border: 0; border-radius: 999px; color: var(--paper); box-shadow: inset 0 0 0 2px var(--line); transition: transform 0.2s var(--ease-out), box-shadow 0.1s, background 0.1s, color 0.1s; }
+.nav .pill:hover, .nav .pill:focus-visible { background: none; color: var(--paper); box-shadow: inset 0 0 0 2px var(--paper); transform: translateY(-2px); }
+.nav .pill[aria-current] { background: var(--yellow); color: var(--ink); box-shadow: none; }
 
 /* section heads */
 .sec-head { padding: 0 var(--m); }
