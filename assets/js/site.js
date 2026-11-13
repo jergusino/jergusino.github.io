@@ -29,57 +29,60 @@
   var prev = document.querySelector('.page-arrow--prev');
   var next = document.querySelector('.page-arrow--next');
   var main = document.querySelector('main');
-  if (!prev || !next || !main) return;
+  if (!prev || !next || !main || window.top !== window) return;   // (not inside the neighbour previews)
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var EASE_IN = 'cubic-bezier(0.6, 0, 1, 1)', EASE_OUT = 'cubic-bezier(0.2, 0, 0, 1)';
 
-  // arriving from a swipe: slide in from the side we came towards
-  try {
-    var came = sessionStorage.getItem('swipe-in');
-    sessionStorage.removeItem('swipe-in');
-    if (came && !reduce) {
-      main.style.transform = 'translateX(' + (came === 'next' ? '' : '-') + '14vw)'; main.style.opacity = '0';
-      requestAnimationFrame(function () { requestAnimationFrame(function () {
-        main.style.transition = 'transform 0.3s ' + EASE_OUT + ', opacity 0.25s ease-out';
-        main.style.transform = ''; main.style.opacity = '';
-        setTimeout(function () { main.style.transition = ''; }, 350);
-      }); });
-    }
-  } catch (e) {}
+  // arriving from a swipe: the neighbouring page was already sitting next to this one, so just land (no second slide)
+  try { sessionStorage.removeItem('swipe-in-pending'); } catch (e) {}
 
-  [prev, next].forEach(function (a) { var l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.href; document.head.appendChild(l); });
+  var header = document.querySelector('header.top');
+  var panes = {};   // the neighbouring pages, parked just off-screen on either side
+  function pane(which, a) {
+    if (panes[which]) return panes[which];
+    var f = document.createElement('iframe');
+    f.src = a.href; f.tabIndex = -1; f.setAttribute('aria-hidden', 'true'); f.setAttribute('scrolling', 'no');
+    f.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;border:0;background:#0E0E0E;z-index:4;pointer-events:none;visibility:hidden;transform:translateX(' + (which === 'next' ? '100%' : '-100%') + ')';
+    document.body.appendChild(f); panes[which] = f; return f;
+  }
   var x0 = null, y0 = 0, t0 = 0, dx = 0, mode = null;
   function set(x, anim) {
-    main.style.transition = anim ? 'transform ' + anim : 'none';
-    main.style.transform = x ? 'translateX(' + x + 'px)' : '';
-    main.style.opacity = x ? String(Math.max(0.35, 1 - Math.abs(x) / (window.innerWidth * 0.9))) : '';
+    var tr = anim ? 'transform ' + anim : 'none', w = window.innerWidth;
+    main.style.transition = tr; main.style.transform = x ? 'translateX(' + x + 'px)' : '';
+    if (header) { header.style.transition = tr; header.style.transform = x ? 'translateX(' + x + 'px)' : ''; }
+    [['next', w], ['prev', -w]].forEach(function (k) {
+      var f = panes[k[0]]; if (!f) return;
+      f.style.visibility = x && ((k[0] === 'next' && x < 0) || (k[0] === 'prev' && x > 0)) ? 'visible' : 'hidden';
+      f.style.transition = tr; f.style.transform = 'translateX(' + (k[1] + x) + 'px)';
+    });
   }
   document.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1 || document.documentElement.classList.contains('viewer-open')) { x0 = null; return; }
     x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now(); dx = 0; mode = null;
+    pane('next', next); pane('prev', prev);
   }, { passive: true });
   document.addEventListener('touchmove', function (e) {
     if (x0 === null) return;
     var mx = e.touches[0].clientX - x0, my = e.touches[0].clientY - y0;
     if (!mode) {
-      if (Math.abs(mx) < 6 && Math.abs(my) < 6) return;
-      mode = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+      if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+      mode = Math.abs(mx) > Math.abs(my) * 1.2 ? 'x' : 'y';
     }
     if (mode !== 'x') return;
     e.preventDefault();
     dx = mx;
-    if (!reduce) set(dx * 0.7);
+    if (!reduce) set(dx * 0.9);
   }, { passive: false });
   document.addEventListener('touchend', function () {
     if (x0 === null || mode !== 'x') { x0 = null; return; }
     x0 = null;
-    var w = window.innerWidth, fast = Math.abs(dx) / Math.max(1, Date.now() - t0) > 0.35;
-    if (Math.abs(dx) > w / 5 || (fast && Math.abs(dx) > 28)) {
+    var w = window.innerWidth, fast = Math.abs(dx) / Math.max(1, Date.now() - t0) > 0.5;
+    if (Math.abs(dx) > w / 3 || (fast && Math.abs(dx) > 40)) {
       var go = dx < 0 ? 'next' : 'prev';
       try { sessionStorage.setItem('swipe-in', go); } catch (e) {}
       if (reduce) { location.assign((go === 'next' ? next : prev).href); return; }
-      set((dx < 0 ? -1 : 1) * w * 0.25, '0.12s ' + EASE_IN);
-      location.assign((go === 'next' ? next : prev).href);   // straight away: the next page is already prefetched
+      set((dx < 0 ? -1 : 1) * w, '0.2s ' + EASE_IN);
+      setTimeout(function () { location.assign((go === 'next' ? next : prev).href); }, 190);
     } else {
       set(0, '0.3s ' + EASE_OUT);
     }
