@@ -3,34 +3,34 @@ layout: default
 title: Kontakt
 body_class: kontakt-page
 permalink: /kontakt/
+no_closing: true
 summary: "Napíš mi: mail@jergusino.com"
 ---
-<section class="hero hero--page hero--project">
-  <div class="lockup">
-    {% include lead.html text="napíš mi" %}
-    <h1 class="title">Kontakt</h1>
-  </div>
+<section class="sec-head sec-head--page">
+  <p class="label">Spolupráca · plagát na objednávku · otázka</p>
+  <h1 class="h h--xl">Napíš mi.</h1>
 </section>
+<div class="k-ast spin" aria-hidden="true">{% include asterisk.svg %}</div>
 
 <section class="contact">
-  <p class="contact-intro">Spolupráca, plagát na objednávku alebo len otázka. Najrýchlejšie ma zastihneš mailom.</p>
+  <p class="contact-intro">Najrýchlejšie ma zastihneš mailom.</p>
 
   <ul class="contact-list">
     <li class="contact-row contact-row--mail">
-      <span class="contact-label">e-mail</span>
+      <span class="contact-label">E-mail</span>
       <a class="contact-value" href="mailto:{{ site.email }}">{{ site.email | replace: "@", '<span class="at">@</span>' }}</a>
       <button type="button" class="contact-copy" data-copy="{{ site.email }}" hidden>kopírovať</button>
     </li>
     <li class="contact-row">
-      <span class="contact-label">instagram</span>
+      <span class="contact-label">Instagram</span>
       <a class="contact-value" href="{{ site.instagram }}" target="_blank" rel="me noopener"><span class="at">@</span>{{ site.handle | remove_first: "@" }}</a>
-      <a class="contact-go" href="{{ site.instagram }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1">{% include arrow.svg %}</a>
+      <a class="contact-go" href="{{ site.instagram }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1"><span class="circ">{% include arrow.svg %}</span></a>
     </li>
     {% for s in site.social %}
     <li class="contact-row">
       <span class="contact-label">{{ s.label }}</span>
       <a class="contact-value" href="{{ s.url }}" target="_blank" rel="me noopener">{{ s.url | remove_first: "https://" | remove_first: "www." }}</a>
-      <a class="contact-go" href="{{ s.url }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1">{% include arrow.svg %}</a>
+      <a class="contact-go" href="{{ s.url }}" target="_blank" rel="me noopener" aria-hidden="true" tabindex="-1"><span class="circ">{% include arrow.svg %}</span></a>
     </li>
     {% endfor %}
   </ul>

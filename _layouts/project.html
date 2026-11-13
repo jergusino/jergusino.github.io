@@ -2,63 +2,26 @@
 layout: default
 ---
 {% assign t = site.data.types | where: "key", page.type | first %}
-{% assign u = page.title | upcase %}
-{% assign accents = "Á,Ä,Č,Ď,É,Í,Ľ,Ĺ,Ň,Ó,Ô,Ŕ,Š,Ť,Ú,Ý,Ž" | split: "," %}
-{% assign acc = "" %}
-{% for c in accents %}{% if u contains c %}{% assign acc = "has-accent" %}{% endif %}{% endfor %}
-
 {% assign all = site.projects | sort: "date" | reverse %}
-{% assign prev = nil %}{% assign next = nil %}{% assign last = nil %}{% assign found = false %}
-{% for p in all %}{% if found and next == nil %}{% assign next = p %}{% endif %}{% if p.url == page.url %}{% assign found = true %}{% assign prev = last %}{% endif %}{% assign last = p %}{% endfor %}
+{% assign prev = nil %}{% assign next = nil %}{% assign last = nil %}{% assign found = false %}{% assign idx = 0 %}
+{% for p in all %}{% if found and next == nil %}{% assign next = p %}{% endif %}{% if p.url == page.url %}{% assign found = true %}{% assign prev = last %}{% assign idx = forloop.index %}{% endif %}{% assign last = p %}{% endfor %}
 {% if prev == nil %}{% assign prev = all | last %}{% endif %}
 {% if next == nil %}{% assign next = all | first %}{% endif %}
 
 <div class="project-body">
-  {% if all.size > 1 %}<a class="page-arrow page-arrow--prev" href="{{ prev.url | relative_url }}" rel="prev" aria-label="Predchádzajúci projekt: {{ prev.title | escape }}"><svg class="arr arr--back" viewBox="0 0 48 24" width="24" height="12" aria-hidden="true" focusable="false"><path d="M2 12h40M31 2l11 10-11 10" fill="none" stroke="currentColor" stroke-width="5"/></svg></a>{% endif %}
- 
-<div class="project-text">
-<section class="hero hero--page hero--project {{ acc }}">
-  <div class="lockup">
-    {% assign lead_text = page.lead | default: t.lead %}
-    {% include lead.html text=lead_text %}
-    <h1 class="title">{{ page.title }}</h1>
-  </div>
-</section>
-
-<article class="prose">
-  {% if page.placeholder %}
-  <p class="note">Zástupný projekt. Nahraď ho vlastným: uprav súbor <code>{{ page.path }}</code>.</p>
-  {% endif %}
-
-  <dl class="meta">
-    <dt>rok</dt><dd>{{ page.date | date: "%Y" }}</dd>
-    {% if page.tools %}<dt>nástroje</dt><dd>{{ page.tools | join: ", " }}</dd>{% endif %}
-  </dl>
-
-
-  {{ content }}
-
-  {% if page.links %}
-  <ul class="links">
-    {% for l in page.links %}<li><a href="{{ l.url }}" rel="noopener">{{ l.label }} {% include arrow.svg %}</a></li>{% endfor %}
-  </ul>
-  {% endif %}
-</article>
-</div>
-  
 <div class="project-media">
   <div class="media-main">
   {% if page.youtube %}
   <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
     <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
-    <span class="cta">pozrieť na YouTube {% include arrow.svg %}</span>
+    <span class="cta">Pozrieť na YouTube {% include arrow.svg %}</span>
   </a>
   {% endif %}
   {% if page.video %}
   <figure class="cover cover--video"><video src="{{ page.video | relative_url }}"{% if page.poster %} poster="{{ page.poster | relative_url }}"{% endif %} autoplay muted loop playsinline controls preload="metadata" aria-label="{{ page.cover_alt | default: page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}></video></figure>
   {% endif %}
   {% if page.cover %}
-  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"{% if page.cover_raw %} class="raw"{% endif %}></a></figure>
+  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></a></figure>
   {% endif %}
   {% if page.gallery %}
   <div class="gallery">
@@ -67,15 +30,40 @@ layout: default
   {% endif %}
   </div>
 </div>
- 
-  {% if all.size > 1 %}<a class="page-arrow page-arrow--next" href="{{ next.url | relative_url }}" rel="next" aria-label="Ďalší projekt: {{ next.title | escape }}"><svg class="arr" viewBox="0 0 48 24" width="24" height="12" aria-hidden="true" focusable="false"><path d="M2 12h40M31 2l11 10-11 10" fill="none" stroke="currentColor" stroke-width="5"/></svg></a>{% endif %}
+
+<div class="project-text">
+  <p class="count"><span class="num">{% if idx < 10 %}0{% endif %}{{ idx }}</span><span class="of">/ {{ all.size }}</span></p>
+  <section class="hero--project">
+    {% assign lead_text = page.lead | default: t.lead %}
+    {% include lead.html text=lead_text %}
+    <h1 class="title">{{ page.title }}</h1>
+  </section>
+  <article class="prose">
+    {% if page.placeholder %}<p class="note">Zástupný projekt. Nahraď ho vlastným: uprav súbor <code>{{ page.path }}</code>.</p>{% endif %}
+    <dl class="meta">
+      <dt>Rok</dt><dd>{{ page.date | date: "%Y" }}</dd>
+      {% if page.tools %}<dt>Nástroje</dt><dd>{% for tl in page.tools %}<span class="chip">{{ tl }}</span>{% endfor %}</dd>{% endif %}
+    </dl>
+    {{ content }}
+    {% if page.links %}
+    <ul class="links">
+      {% for l in page.links %}<li><a class="btn btn--sm" href="{{ l.url }}" rel="noopener"><span class="btn-t">{{ l.label }}</span><span class="circ">{% include arrow.svg %}</span></a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </article>
 </div>
+</div>
+
+<nav class="pager" aria-label="Ďalšie projekty">
+  <a class="page-arrow page-arrow--prev" href="{{ prev.url | relative_url }}" rel="prev" aria-label="Predchádzajúci projekt: {{ prev.title | escape }}"><span class="circ circ--back">{% include arrow.svg %}</span><span class="pg-t"><small>Späť</small>{{ prev.title }}</span></a>
+  <a class="page-arrow page-arrow--next" href="{{ next.url | relative_url }}" rel="next" aria-label="Ďalší projekt: {{ next.title | escape }}"><span class="pg-t"><small>Ďalší</small>{{ next.title }}</span><span class="circ">{% include arrow.svg %}</span></a>
+</nav>
 
 {% assign pool = site.projects | where: "type", page.type | sort: "date" | reverse %}
 {% if page.similar or pool.size > 1 %}
 {% assign n = 0 %}{% assign seen = false %}{% assign done = false %}
 <section class="similar" aria-labelledby="similar-h">
-  <h2 id="similar-h" class="similar-h">podobné práce</h2>
+  <h2 id="similar-h" class="h">Podobné práce</h2>
   <ul class="pgrid pgrid--flat">
     {% if page.similar %}{% for u in page.similar limit: 6 %}{% assign p = site.projects | where: "url", u | first %}{% if p %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
@@ -89,7 +77,7 @@ layout: default
 </section>
 {% endif %}
 
-<p class="back"><a href="{{ '/projects/' | relative_url }}">všetky projekty {% include arrow.svg %}</a></p>
+
 
 {% assign all = site.projects | sort: "date" | reverse %}
 <script type="application/json" id="posters">[{% for p in all %}{% if p.cover and p.placeholder != true %}{"u":{{ p.url | relative_url | jsonify }},"t":{{ p.title | jsonify }},"a":{{ p.cover_alt | default: p.title | jsonify }},"c":{{ p.cover | relative_url | jsonify }},"bg":{{ p.color | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]</script>

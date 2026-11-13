@@ -122,3 +122,64 @@
   if (vid) vid.addEventListener('loadedmetadata', fit);
   window.addEventListener('resize', later);
 })();
+
+// Scroll reveal: elements marked .rv rise into place as they enter the screen, in a short stagger.
+(function () {
+  var els = document.querySelectorAll('.rv');
+  if (!els.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    var n = 0;
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.style.setProperty('--d', (n++ * 0.06) + 's');
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  els.forEach(function (e) { io.observe(e); });
+  // the filter on /projects/ re-orders cards: make sure none stay hidden
+  document.addEventListener('click', function () { setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight) e.classList.add('in'); }); }, 30); });
+})();
+
+// The big asterisks turn as you scroll (a notch every 120 px of scroll).
+(function () {
+  var els = document.querySelectorAll('.spin');
+  if (!els.length || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var tick = false;
+  function upd() { tick = false; var d = (window.scrollY * 0.12) % 360; els.forEach(function (e) { e.style.setProperty('--spin', d + 'deg'); }); }
+  window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  upd();
+})();
+
+// Page transition: the yellow circle opens from where you clicked, the next page closes it again.
+(function () {
+  var w = document.querySelector('.wipe');
+  if (!w || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  try {
+    var st = sessionStorage.getItem('wipe');
+    sessionStorage.removeItem('wipe');
+    if (st) {
+      var p = st.split(',');
+      w.style.setProperty('--wx', p[0] + 'px'); w.style.setProperty('--wy', p[1] + 'px');
+      w.classList.add('in');
+      w.addEventListener('animationend', function () { w.classList.remove('in'); }, { once: true });
+    }
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    if (a.target && a.target !== '_self') return;
+    if (a.closest('.page-arrow')) return;                                   // swipe pages have their own motion
+    var u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || (u.pathname === location.pathname) || a.hasAttribute('download')) return;
+    e.preventDefault();
+    var x = e.clientX || innerWidth / 2, y = e.clientY || innerHeight / 2;
+    w.style.setProperty('--wx', x + 'px'); w.style.setProperty('--wy', y + 'px');
+    try { sessionStorage.setItem('wipe', x + ',' + y); } catch (er) {}
+    w.classList.add('out');
+    setTimeout(function () { location.assign(a.href); }, 480);
+  });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) w.classList.remove('out'); });
+})();
