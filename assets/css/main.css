@@ -1,152 +1,79 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   Jergušino: stylesheet. Built from the brand guide (v5).
-   Three colours, three fonts, nothing else.
-   No gradients, shadows, blur, transparency or fades: colour changes are hard.
+   Jergušino: stylesheet. Brand: yellow #FFD60A, ink #0E0E0E, paper #F4F1EA.
+   Bricolage Grotesque (headlines, text) + DM Mono (labels). Flat colour, no gradients or shadows.
+   One yellow moment per view; yellow text only on ink.
    ───────────────────────────────────────────────────────────────────────────── */
-
-/* Fonts ─ Slithen (headlines), Borisna (text), Edwardian Script ITC (script lead-ins).
-   Put Edwardian.woff2 / .woff / .ttf into assets/fonts/ (see README). */
-@font-face {
-  font-family: "Slithen";
-  src: url("../fonts/Slithen.woff") format("woff"), url("../fonts/Slithen.ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Borisna";
-  src: url("../fonts/Borisna.woff") format("woff"), url("../fonts/Borisna.ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Edwardian";
-  src: url("../fonts/Edwardian.woff2") format("woff2"), url("../fonts/Edwardian.woff") format("woff"),
-    url("../fonts/Edwardian.ttf") format("truetype");
-  font-display: swap;
-  /* pin the metrics so the gap above the wordmark is identical in every browser */
-  ascent-override: 85.06%;
-  descent-override: 32.81%;
-  line-gap-override: 0%;
-}
+@font-face { font-family: "Bricolage Grotesque"; src: url("../fonts/BricolageGrotesque-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("../fonts/BricolageGrotesque-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("../fonts/DMMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("../fonts/DMMono-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 
 :root {
-  /* colour */
-  --ink: #060909;
-  --cream: #faf1d6;
-  --yellow: #ffc600;
+  --ink: #0e0e0e; --paper: #f4f1ea; --yellow: #ffd60a;
+  --paper-soft: #d9d6cc; --ash: #a8a59c; --line: #3a3935;
 
-  /* space and type tokens, all worked out from the width W (guide, section 5) */
-  /* --W: the width the layout uses. The full screen width, except on very wide, short screens
-     (wider than 1.9 x the height), where everything stays in a centred column of that size. */
   --W: min(100vw, 190vh);
   --W: min(100vw, 190svh);
-  --F: max(12px, calc(var(--W) / 70));       /* frame: outer margin of loud layouts */
-  --G: calc(var(--F) * 1.4);                 /* gap: script to the thing it introduces */
-  --F4: max(20px, calc(var(--W) * 4 / 70));  /* margin of text-heavy layouts (4F) */
-  --T: calc(var(--W) / 21);                  /* text token; headlines use 2T to 4T */
+  --F: max(14px, calc(var(--W) / 70));       /* frame: outer margin */
+  --G: calc(var(--F) * 1.4);
+  --F4: max(20px, calc(var(--W) * 4 / 70));
+  --T: calc(var(--W) / 21);
+  --r-card: 14px; --r-panel: 28px;
 
-  --f-head: "Slithen", "Impact", "Arial Narrow", sans-serif;
-  --f-text: "Borisna", Georgia, "Times New Roman", serif;
-  --f-script: "Edwardian", "Edwardian Script ITC", "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
-
-  --body: clamp(1.0625rem, 0.95rem + 0.3vw, 1.375rem);   /* never below 17px */
+  --f-head: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --f-text: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "DM Mono", ui-monospace, Menlo, monospace;
+  --body: clamp(1.0625rem, 0.95rem + 0.3vw, 1.375rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-
 html { background: var(--ink); color-scheme: dark; -webkit-text-size-adjust: 100%; }
-
-body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--f-text);
-  font-size: var(--body);
-  line-height: 1.3;
-  -webkit-font-smoothing: antialiased;
-}
-
+body { margin: 0; background: var(--ink); color: var(--paper-soft); font-family: var(--f-text); font-weight: 500; font-size: var(--body); line-height: 1.35; -webkit-font-smoothing: antialiased; }
 h1, h2, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
 img { display: block; max-width: 100%; height: auto; }
 ::selection { background: var(--yellow); color: var(--ink); }
 
-/* Links: Cream with a Yellow marker. Hover and focus change colour, never opacity. */
-a { color: var(--cream); text-decoration: none; }
+a { color: var(--paper); text-decoration: none; }
 a:hover, a:focus-visible { color: var(--yellow); }
 :focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; }
-.arr { display: inline-block; width: 1.2em; height: 0.6em; fill: var(--yellow); vertical-align: 0.02em; margin-left: 0.2em; }
-
+.arr { display: inline-block; width: 1.1em; height: 0.55em; vertical-align: 0.02em; margin-left: 0.25em; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ast { display: block; width: 100%; height: auto; overflow: visible; }
 
-/* Images are two-tone: every pixel is Ink or Cream. Own brand artwork opts out with .raw */
-.prose img, .yt img, .cover img, .gallery img { filter: url(#twotone); }
-.prose img.raw, .cover img.raw, .gallery img.raw { filter: none; }
-
-/* ── Header: the mark top-left, a small text group top-right ───────────────── */
-.top {
-  position: absolute;
-  z-index: 2;
-  top: var(--F);
-  left: var(--F);
-  right: var(--F);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+/* header: logo top-left, a small text group top-right */
+.top { position: absolute; z-index: 2; top: var(--F); left: var(--F); right: var(--F); display: flex; justify-content: space-between; align-items: flex-start; font-family: var(--f-mono); font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; }
 .top-mark { display: block; line-height: 0; }
 .top-mark img { width: 150px; height: auto; }
 .top-nav { margin-left: auto; text-align: right; }
 .top-nav a { display: block; }
 .top-nav a[aria-current] { color: var(--yellow); }
+body.home .top-nav a, body.home .top-nav a:hover { color: var(--ink); }
 
-/* ── Hero: loud, one big thing, anchored bottom-left at F ──────────────────── */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; }
-.hero--page { min-height: 72vh; min-height: 72svh; --title-size: calc(var(--T) * 3); }
-.hero--projects { --title-size: calc(var(--T) * 4); }
-/* one project: no tall empty stage, the title sits just under the header and the text follows */
+.hero--page { min-height: 72vh; min-height: 72svh; --title-size: calc(var(--T) * 2.6); }
+.hero--projects { --title-size: calc(var(--T) * 3.4); }
 .hero--project { min-height: 0; padding-top: calc(var(--F) * 7); }
 .hero--project .lockup { position: static; margin: 0 var(--F); }
-body.project .prose { margin-top: calc(var(--F) * 0.9 - 0.9em); }   /* (pulls up past the empty line space of the big title and the details) */   /* the details sit close under the title… */
-body.project .prose .meta + * { margin-top: calc(var(--F) * 3.2); }   /* …and the description stands apart */
+body.project .prose { margin-top: calc(var(--F) * 0.9 - 0.9em); }
+body.project .prose .meta + * { margin-top: calc(var(--F) * 3.2); }
 body.project .back { margin-top: calc(var(--F) * 2); }
-
 .lockup { position: absolute; left: var(--F); right: var(--F); bottom: var(--F); }
 
-/* script lead-in: yellow, lowercase, left-aligned, G above what it introduces */
-.lead {
-  font-family: var(--f-script);
-  color: var(--yellow);
-  line-height: 1;
-  white-space: nowrap;
-  --d: 0.011em;                                     /* how far the deepest letter dips below the baseline */
-}
-.lead.desc { --d: 0.328em; }                        /* g j p q y f */
+/* label above a headline: DM Mono caps, yellow on ink */
+.lead { font-family: var(--f-mono); font-weight: 400; font-size: clamp(0.8rem, 0.9vw, 1rem); letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); line-height: 1; white-space: nowrap; margin-bottom: calc(var(--G) * 0.8); }
+.title { font-family: var(--f-head); font-weight: 800; font-size: var(--title-size); line-height: 0.95; letter-spacing: -0.045em; color: var(--paper); overflow-wrap: anywhere; }
 
-/* home: the primary lockup (i am + JERGUSINO). Wordmark = W - 2F wide, 0.257 x as tall. */
-.hero--home { --wm-h: calc((var(--W) - 2 * var(--F)) * 0.257); }
-.hero--home .lead {
-  font-size: calc(var(--wm-h) * 0.771);           /* 0.29 x wordmark height, i-dot to baseline */
-  margin-bottom: calc(var(--G) + var(--d) - 0.24em);
-}
-.wm-mask { line-height: 0; clip-path: inset(-100vh 0 0 0); }   /* clips the letters below the baseline, leaves the sky open for the bar */
-.wordmark { display: block; width: 100%; height: auto; overflow: visible; }
-.wm-l { fill: var(--cream); fill-rule: evenodd; }
-.wm-bar { fill: var(--yellow); }
-
-/* pages: script + Slithen headline */
-.title {
-  font-family: var(--f-head);
-  font-weight: 400;
-  font-size: var(--title-size);
-  line-height: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 0;
-  color: var(--cream);
-  overflow-wrap: anywhere;
-}
-.hero--page .lead {
-  font-size: calc(var(--title-size) * 0.54);       /* 0.29 x cap height of the headline */
-  margin-bottom: calc(var(--G) + var(--d) - 0.24em + var(--acc, 0px));
-}
-.hero--page.has-accent { --acc: calc(var(--title-size) * 0.28); }   /* clear of Š, Č, Ž... */
+/* ── Home hero: a yellow surface among the grey ───────────────────────────── */
+.hero--home { background: var(--ink); overflow: hidden; --as: min(36vw, 48vh); --ax: 76%; --ay: 31%; }
+.hero--home .yl { position: absolute; inset: 0; background: var(--yellow); color: var(--ink); clip-path: circle(150vmax at var(--ax) var(--ay)); }
+.hero--home .a-big { position: absolute; width: var(--as); left: var(--ax); top: var(--ay); translate: -50% -50%; color: var(--ink); }
+.hero--home .a-under { position: absolute; width: var(--as); left: var(--ax); top: var(--ay); translate: -50% -50%; color: var(--yellow); }
+.hero--home .lockup { bottom: var(--F); }
+.hero--home .wm-mask { line-height: 0; overflow: hidden; }
+.wordmark { display: block; width: 100%; height: auto; }
+.wm-l { fill: var(--ink); }
+.hero--home .tag { position: absolute; z-index: 1; left: var(--F); top: var(--F); font-family: var(--f-mono); font-size: clamp(0.9rem, 1.6vw, 1.8rem); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.hero--home .intro { display: none; }
 
 /* ── Quiet break between sections: one centred line ────────────────────────── */
 .quiet-break { padding: calc(var(--F) * 8) 0 calc(var(--F) * 3); display: grid; place-items: center; }
@@ -158,14 +85,14 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .controls { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em calc(var(--F) * 3); padding: 0 0 calc(var(--F) * 2); margin-top: calc(var(--F) * 2); }
 .controls[hidden], .empty[hidden] { display: none; }
 .ctl { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2em 1.2em; }
-.ctl-l { color: var(--yellow); }                     /* Yellow marks what is a pointer: the caption of each control */
+.ctl-l { font-family: var(--f-mono); font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ash); }
 .ctl button {
-  font: inherit; color: var(--cream); background: none; border: 0; padding: 0; cursor: pointer; border-radius: 0;
+  font: inherit; color: var(--paper); background: none; border: 0; padding: 0.05em 0.5em; margin: 0 -0.5em; cursor: pointer; border-radius: 6px;
 }
 .ctl button:hover, .ctl button:focus-visible { color: var(--yellow); }
-.ctl button[aria-pressed="true"] { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.25em; }
+.ctl button[aria-pressed="true"] { color: var(--ink); background: var(--yellow); border-radius: 6px; padding: 0.05em 0.5em; }
 .ctl-search input {
-  font: inherit; color: var(--cream); background: none; border: 0; border-bottom: 2px solid var(--cream); border-radius: 0;
+  font: inherit; color: var(--paper); background: none; border: 0; border-bottom: 2px solid var(--paper); border-radius: 0;
   padding: 0 0 0.1em; width: 11em; max-width: 100%; caret-color: var(--yellow); outline: none; -webkit-appearance: none; appearance: none;
 }
 .ctl-search input:hover, .ctl-search input:focus { border-bottom-color: var(--yellow); }
@@ -182,15 +109,13 @@ body.project .back { margin-top: calc(var(--F) * 2); }
   padding-bottom: calc((var(--W) - 2 * var(--F)) / var(--cols) * 0.72 + var(--F));        /* room for the half-card the even columns hang down */
 }
 .pcard:nth-child(even) { transform: translateY(calc(50% + var(--F) / 2)); }
-.pcard a { display: block; position: relative; overflow: hidden; aspect-ratio: 7 / 10; }
+.pcard a { display: block; position: relative; overflow: hidden; aspect-ratio: 7 / 10; border-radius: var(--r-card); }
 .pcard img { display: block; width: 100%; height: 100%; object-fit: cover; }
-/* hover: the Yellow bar of the logo drops onto the top edge of the poster (hard-edged, no fade);
-   it leaves faster than it comes (exits accelerate). Touch screens skip it. */
+/* hover: a yellow circle with an ink arrow pops into the bottom-right corner (hard, no fade) */
 .pcard a::before {
-  content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0;
-  height: calc(var(--F) * 1.1); background: var(--yellow);
-  transform: translateY(-110%);
-  transition: transform 0.1s cubic-bezier(0.6, 0, 1, 1);
+  content: ""; position: absolute; z-index: 1; right: 10px; bottom: 10px; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 24'%3E%3Cpath d='M6 12h30M26 3l10 9-10 9' fill='none' stroke='%230E0E0E' stroke-width='5'/%3E%3C/svg%3E") center / 26px no-repeat;
+  transform: scale(0); transition: transform 0.1s cubic-bezier(0.6, 0, 1, 1);
 }
 .pcard a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 6px; }
 .pcard a:focus-visible::before { transform: none; }
@@ -221,25 +146,25 @@ body.project .back { margin-top: calc(var(--F) * 2); }
 .prose { margin: var(--F4) 0 0 var(--F); max-width: min(70ch, calc(var(--W) - 2 * var(--F4))); }
 .prose > * + * { margin-top: 1em; }
 .prose a { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
-.prose a:hover, .prose a:focus-visible { color: var(--cream); }
-.prose code { font-family: var(--f-text); border-bottom: 2px solid var(--cream); }
-.prose h2, .prose h3 { font-family: var(--f-head); font-weight: 400; text-transform: uppercase; line-height: 0.9; font-size: calc(var(--T) * 1.2); margin-top: 2em; }
+.prose a:hover, .prose a:focus-visible { color: var(--paper); }
+.prose code { font-family: var(--f-mono); font-size: 0.9em; border-bottom: 2px solid var(--line); }
+.prose h2, .prose h3 { font-family: var(--f-head); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; font-size: calc(var(--T) * 1); margin-top: 2em; }
 
-.note { border-left: 6px solid var(--cream); padding-left: 1em; }
+.note { border-left: 6px solid var(--yellow); padding-left: 1em; }
 
 .meta { display: grid; grid-template-columns: max-content 1fr; gap: 0.2em 1.5em; }
-.meta dt { color: var(--cream); }
+.meta dt { font-family: var(--f-mono); font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ash); align-self: center; }
 .meta dd { margin: 0; }
 
 .yt { display: block; margin-top: 2em; }
-.yt .cta { display: inline-block; margin-top: 0.6em; color: var(--cream); }
+.yt .cta { display: inline-block; margin-top: 0.6em; color: var(--paper); }
 .yt:hover .cta, .yt:focus-visible .cta { color: var(--yellow); }
 .cover, .gallery { margin-top: 2em; }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--F); }
 
 .links { list-style: none; margin-top: 2em; }
 .links li + li { margin-top: 0.4em; }
-.prose .links a { color: var(--cream); text-decoration: none; }
+.prose .links a { color: var(--paper); text-decoration: none; }
 .prose .links a:hover, .prose .links a:focus-visible { color: var(--yellow); }
 
 .back { margin: calc(var(--F) * 3) 0 0 var(--F); }
@@ -248,16 +173,16 @@ body.project .back { margin-top: calc(var(--F) * 2); }
    One column at the F edge, Cream text, Yellow only on the pointers (@, arrows, the active copy). */
 .contact { padding: calc(var(--F) * 2) var(--F) calc(var(--F) * 2); }
 .contact-intro { max-width: 34ch; font-size: clamp(1.1rem, min(2vw, 3.4vh), 2rem); line-height: 1.3; margin-bottom: calc(var(--F) * 3); }
-.contact-list { list-style: none; border-top: 1px solid var(--yellow); }
+.contact-list { list-style: none; border-top: 2px solid var(--line); }
 .contact-row {
   display: grid; grid-template-columns: minmax(7em, 14%) minmax(0, 1fr) auto; align-items: baseline; gap: var(--F);
-  padding: calc(var(--F) * 1.2) 0; border-bottom: 1px solid var(--yellow);
+  padding: calc(var(--F) * 1.2) 0; border-bottom: 2px solid var(--line);
 }
-.contact-label { font-family: var(--f-script); color: var(--yellow); font-size: clamp(1.4rem, min(2.6vw, 4.4vh), 2.8rem); line-height: 1; }
-.contact-value { font-size: clamp(1.5rem, min(4.4vw, 7vh), 5rem); line-height: 1.05; overflow-wrap: anywhere; }
+.contact-label { font-family: var(--f-mono); color: var(--ash); letter-spacing: 0.08em; text-transform: uppercase; font-size: clamp(0.8rem, 1vw, 1.1rem); line-height: 1; }
+.contact-value { font-weight: 800; letter-spacing: -0.04em; font-size: clamp(1.5rem, min(4.4vw, 7vh), 5rem); line-height: 1.05; overflow-wrap: anywhere; }
 .contact-value .at { color: var(--yellow); }
 .contact-copy, .contact-go {
-  font: inherit; font-size: clamp(1rem, 1.4vw, 1.4rem); color: var(--cream); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
+  font: inherit; font-size: clamp(1rem, 1.4vw, 1.4rem); color: var(--paper); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
 }
 .contact-copy:hover, .contact-copy:focus-visible, .contact-go:hover { color: var(--yellow); }
 .contact-go .arr { width: clamp(1.6rem, 2.4vw, 2.6rem); height: auto; margin: 0; }
@@ -267,23 +192,22 @@ body.project .back { margin-top: calc(var(--F) * 2); }
   .contact-label { grid-column: 1 / -1; }
 }
 
-/* ── Motion: the title-card animation, copied frame by frame from title-card-jergusino.mp4 ──
-   0.11 s of Ink, then the letters rise one by one from the baseline (a new one every 0.02 s,
-   each 0.2 s), and at 0.48 s the bar drops from the very top of the screen, overshoots 10 %
-   and settles with an ease-out. "i am" is the one addition: it writes on beside the letters. */
-@keyframes write { from { clip-path: inset(-25% 100% -25% -5%); } to { clip-path: inset(-25% -5% -25% -5%); } }
+/* ── Motion: the title card, rebuilt in CSS. Ink screen, the yellow asterisk pops in, a yellow circle opens
+   from it and fills the screen, the letters rise one by one, the sign-off writes on, the asterisk turns a notch.
+   Same timings as title-card-jergusino.mp4 (4.8 s). Off for visitors who prefer reduced motion. */
+@keyframes iris { from { clip-path: circle(0 at var(--ax) var(--ay)); } to { clip-path: circle(150vmax at var(--ax) var(--ay)); } }
+@keyframes pop { 0% { transform: scale(0) rotate(-120deg); } 100% { transform: none; } }
+@keyframes turn { to { transform: rotate(60deg); } }
 @keyframes rise { from { transform: translateY(101%); } to { transform: none; } }
-@keyframes drop {                                    /* --drop is set in index.html: the bar starts above the top of the screen */
-  0%   { transform: translateY(var(--drop, -140%)); animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1); }   /* ease out: fast from the top, soft landing */
-  65%  { transform: translateY(4.6px); animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1); }                  /* 10% overshoot of the 46 px bar */
-  100% { transform: none; }
-}
-.hero--home .lead { animation: write 0.45s cubic-bezier(0.35, 0, 0.45, 1) 0.15s both; }
-.hero--home .wm-l { transform-box: fill-box; animation: rise 0.2s cubic-bezier(0.2, 0, 0, 1) calc(0.11s + var(--i) * 0.02s) both; }
-.hero--home .wm-bar { transform-box: fill-box; animation: drop var(--dur, 0.9s) linear 0.48s both; }
-
+@keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -2% 0 0); } }
+.hero--home .a-under { animation: pop 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) 0.1s both; }
+.hero--home .yl { animation: iris 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.75s both; }
+.hero--home .a-big { animation: pop 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) 0.1s both, turn 0.9s cubic-bezier(0.65, 0, 0.35, 1) 3s both; }
+.hero--home .wm-l { transform-box: fill-box; animation: rise 0.75s cubic-bezier(0.2, 0.9, 0.2, 1) calc(1.35s + var(--i) * 0.055s) both; }
+.hero--home .tag { animation: write 0.65s steps(18, end) 2.2s both; }
 @media (prefers-reduced-motion: reduce) {
-  .hero--home .lead, .hero--home .wm-l, .hero--home .wm-bar { animation: none; }
+  .hero--home .a-under { display: none; }
+  .hero--home .yl, .hero--home .a-big, .hero--home .wm-l, .hero--home .tag { animation: none; }
 }
 
 /* ── Phones ────────────────────────────────────────────────────────────────── */
@@ -309,6 +233,7 @@ body.project .back { margin-top: calc(var(--F) * 2); }
   font-size: clamp(1.4rem, 2.4vw, 2.6rem); line-height: 1; text-align: center;
 }
 .all svg { width: 0.9em; height: auto; flex: none; }
+.all { font-weight: 800; letter-spacing: -0.03em; }
 .hero--in-home { padding-top: calc(var(--F) * 10); padding-bottom: calc(var(--F) * 2); }   /* a section title in the middle of the page, no header above it */
 
 /* project page: facts and the way back are as big as the "všetky projekty" line on the home page */
@@ -317,7 +242,7 @@ body.project .back svg { width: 0.9em; height: auto; vertical-align: -0.05em; ma
 
 /* similar work at the bottom of a project page: one flat row, no stagger */
 .similar { padding: 0 var(--F); margin-top: calc(var(--F) * 8); }
-.similar-h { font: inherit; font-size: clamp(1.4rem, 2.4vw, 2.6rem); line-height: 1.15; margin-bottom: calc(var(--F) * 2); }
+.similar-h { font: inherit; font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.4rem, 2.4vw, 2.6rem); line-height: 1.15; margin-bottom: calc(var(--F) * 2); }
 .pgrid--flat { padding-bottom: 0; }
 .pgrid--flat .pcard { transform: none !important; }
 @media (max-width: 1279px) { .pgrid--flat .pcard:nth-child(n+6) { display: none; } }
@@ -338,25 +263,25 @@ body.notfound .similar { margin-top: calc(var(--F) * 6); }
 body.notfound .links svg { width: 0.9em; height: auto; margin-left: 0.2em; }
 
 /* ── Poster viewer: the poster full size on Ink, flip with arrows, close returns ───────────── */
-.cover .zoom { display: block; cursor: zoom-in; }
+.cover .zoom { background: transparent !important; display: block; cursor: zoom-in; border-radius: var(--r-panel); overflow: hidden; }
 .viewer {
   position: fixed; inset: 0; z-index: 50; background: var(--ink);
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
 }
 .viewer[hidden] { display: none; }
 html.viewer-open, html.viewer-open body { overflow: hidden; }
-.v-bar { display: flex; align-items: baseline; justify-content: space-between; gap: var(--F); padding: var(--F); font-size: clamp(1.1rem, 1.6vw, 1.6rem); }
-.v-title { color: var(--cream); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.v-count { color: var(--cream); }
+.v-bar { font-family: var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: baseline; justify-content: space-between; gap: var(--F); padding: var(--F); font-size: clamp(1.1rem, 1.6vw, 1.6rem); }
+.v-title { color: var(--paper); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v-count { color: var(--paper); }
 .v-stage { position: relative; min-height: 0; margin: 0 var(--F); touch-action: pan-y; }
 .v-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; -webkit-user-select: none; user-select: none; }
 .viewer button {
-  font: inherit; color: var(--cream); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
+  font: inherit; color: var(--paper); background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer;
   display: inline-flex; align-items: center; gap: 0.4em;
 }
 .viewer button:hover, .viewer button:focus-visible { color: var(--yellow); }
 .viewer button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
-.viewer .arr { width: 1.3em; height: auto; fill: var(--yellow); }
+.viewer .arr { width: 1.3em; height: auto; }
 .viewer .arr--back { transform: scaleX(-1); }
 /* motion work: the video sits where a poster would, same height rules */
 .project-media .cover video { display: block; max-width: 100%; width: auto; height: auto; aspect-ratio: 9 / 16; max-height: calc((100vh - var(--F) * 2) * 0.8); max-height: calc((100svh - var(--F) * 2) * 0.8); margin: 0; background: var(--ink); }
@@ -369,13 +294,12 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
    screen height, so the info and the whole poster always fit on screen. */
 body.project { --ts: min(calc(var(--T) * 3), 13vh); }                 /* base size; the poster follows it */
 body.project .hero--page { --title-size: calc(var(--ts) * 1.8); }   /* the title is 180% of the base */
-body.project .hero--page .lead { font-size: calc(var(--ts) * 1.2 * 0.54); }   /* the lead keeps its size */
 body.project .meta, body.project .back { font-size: clamp(1.1rem, min(2.4vw, 4vh), 2.6rem); }
 body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95rem, min(var(--body), 2.8vh), 1.375rem); }
 @media (max-width: 520px) { body.project { --ts: min(calc(var(--T) * 3.4), 13vh); } }
 
 .project-media { margin: calc(var(--F) * 2) var(--F) 0; }
-.project-media img { display: block; max-width: 100%; height: auto; }
+.project-media img { border-radius: var(--r-panel); display: block; max-width: 100%; height: auto; }
 .media-main > :first-child { margin-top: 0; }
 .project-media .cover img { max-height: calc((100vh - var(--F) * 2) * 0.8); max-height: calc((100svh - var(--F) * 2) * 0.8); width: auto; max-width: 100%; margin: 0; }
 .project-media .cover .zoom { width: fit-content; max-width: 100%; }
@@ -384,13 +308,14 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
 /* previous / next arrows. On screens with empty bars at the sides (wider than 1.9 x the height) they
    always stand in those bars. Otherwise they are hidden and cut on in front of the content when the
    mouse comes to the left or right edge of the screen. Phones and tablets swipe instead. */
-.page-arrow { display: none; color: var(--yellow); }
-.page-arrow .arr { width: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem); height: auto; margin: 0; fill: currentColor; vertical-align: 0; }
+.page-arrow { display: none; color: var(--paper); }
+.page-arrow .arr { width: clamp(1.6rem, min(2.6vw, 4.5vh), 2.8rem); height: auto; margin: 0; vertical-align: 0; }
+.page-arrow:hover, .page-arrow:focus-visible { color: var(--yellow); }
 @media (min-width: 900px) and (hover: hover) {
   .page-arrow {
     display: flex; align-items: center; justify-content: center;
     position: fixed; z-index: 4; top: 0; bottom: 0; width: max(48px, 5vw);
-    overflow: hidden; color: var(--yellow); outline: none;
+    overflow: hidden; color: var(--paper); outline: none;
   }
   .page-arrow--prev { left: 0; }
   .page-arrow--next { right: 0; }
@@ -418,7 +343,7 @@ body.project .prose { font-size: min(var(--body), 2.8vh); font-size: clamp(0.95r
   .page-arrow::before { display: none; }
   .page-arrow--prev .arr, .page-arrow--prev:hover .arr { transform: scaleX(-1); }
   .page-arrow--next .arr, .page-arrow--next:hover .arr { transform: none; }
-  .page-arrow:hover { color: var(--cream); }
+  .page-arrow:hover { color: var(--yellow); }
 }
 
 @media (min-width: 900px) {
@@ -452,3 +377,5 @@ main { max-width: var(--W); margin: 0 auto; }
 .top { left: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); right: max(var(--F), calc((100% - var(--W)) / 2 + var(--F))); }
 main { padding-bottom: calc(var(--F) * 6); }   /* no footer: a little Ink after the last thing on the page */
 body.project { overflow-x: clip; }   /* the page slides sideways on a swipe without a sideways scrollbar */
+
+@media (max-width: 640px) { .hero--home { --as: min(62vw, 44vh); --ax: 68%; --ay: 30%; } }
