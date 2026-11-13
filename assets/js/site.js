@@ -179,12 +179,10 @@
     px += (tx - px) * 0.14; py += (ty - py) * 0.14;                       // it glides to the pointer, and back
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
     var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
-    var N = Math.ceil(Math.max(W, H) / S) + 2, K = Math.SQRT1_2, cx0 = W / 2, cy0 = H / 2;
-    for (var i = -N; i <= N; i++) for (var j = -N; j <= N; j++) {
-      var x = cx0 + (i - j) * S * K, y = cy0 + (i + j) * S * K;                  // the whole grid turned 45°
-      if (x < -S || x > W + S || y < -S || y > H + S) continue;
+    for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
+      var x = i * S + S / 2 - 8, y = j * S + S / 2 - 8;
       var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 230);
-      var a = -Math.PI / 4 + Math.sin(i * 0.5 + j * 0.4) * 0.25 + inf * inf * 1.6;      // each star turned back -45°
+      var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
       var r = soft ? 4.2 : 5.5 + inf * 7;
       if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
