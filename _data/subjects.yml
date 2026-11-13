@@ -1,4 +1,4 @@
-# Subjects for the "téma" filter on the Projects page. `key` matches a word in a project's `tags:`.
+# Subjects for the "téma" filter on the Posters page. `key` matches a word in a poster's `tags:`.
 # Only subjects that at least one project has are shown.
 - key: film
   label: filmy

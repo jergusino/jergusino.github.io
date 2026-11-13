@@ -168,18 +168,18 @@ main:focus { outline: none; }
 .ctl-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
 
 /* ── Project page: the content slide. Number, headline, body, chips; poster in a panel ─ */
-.project-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--m) * 1.2); align-items: start; padding: clamp(110px, 16vh, 170px) var(--m) 0; }
-.project-media .cover { margin: 0; }
-.project-media .cover .zoom { display: block; cursor: zoom-in; border-radius: var(--r-panel); overflow: hidden; background: transparent; width: fit-content; max-width: 100%; }
-.project-media img { border-radius: var(--r-panel); max-height: 78vh; max-height: 78svh; width: auto; max-width: 100%; }
-.project-media video { display: block; max-width: 100%; max-height: 78svh; aspect-ratio: 9 / 16; border-radius: var(--r-panel); background: var(--ink); }
+.poster-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--m) * 1.2); align-items: start; padding: clamp(110px, 16vh, 170px) var(--m) 0; }
+.poster-media .cover { margin: 0; }
+.poster-media .cover .zoom { display: block; cursor: zoom-in; border-radius: var(--r-panel); overflow: hidden; background: transparent; width: fit-content; max-width: 100%; }
+.poster-media img { border-radius: var(--r-panel); max-height: 78vh; max-height: 78svh; width: auto; max-width: 100%; }
+.poster-media video { display: block; max-width: 100%; max-height: 78svh; aspect-ratio: 9 / 16; border-radius: var(--r-panel); background: var(--ink); }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--gap); margin-top: var(--gap); }
 .yt { display: block; } .yt .cta { display: inline-block; margin-top: 0.8em; font-family: var(--mono); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--paper); }
 .yt:hover .cta { color: var(--yellow); }
-.project-text { align-self: end; max-width: 46rem; }
+.poster-text { align-self: end; max-width: 46rem; }
 .count { display: flex; align-items: baseline; gap: 12px; margin-bottom: calc(var(--m) * 0.6); color: var(--muted); }
 .count .num { font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.4rem); letter-spacing: -0.03em; color: var(--yellow); line-height: 1; }   /* the one yellow moment on the page */
-.hero--project .lead, .lead { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1em; }
+.hero--poster .lead, .lead { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1em; }
 .title { font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 4.6rem); line-height: 1; letter-spacing: -0.035em; color: var(--paper); overflow-wrap: anywhere; }
 .prose { margin-top: calc(var(--m) * 0.8); }
 .prose > * + * { margin-top: 1em; }
@@ -194,7 +194,7 @@ main:focus { outline: none; }
 .chip { display: inline-block; padding: 0.5em 0.8em 0.42em; border: 2px solid var(--line); border-radius: var(--r-label); color: var(--paper); }
 .links { list-style: none; display: flex; flex-wrap: wrap; gap: 20px 28px; margin-top: 2em !important; }
 
-/* pager: previous / next as circle buttons with the project title under a mono label */
+/* pager: previous / next as circle buttons with the poster title under a mono label */
 .pager { display: flex; justify-content: space-between; gap: 24px; padding: calc(var(--m) * 1.6) var(--m) 0; }
 .page-arrow { display: flex; align-items: center; gap: 16px; color: var(--paper); max-width: 48%; }
 .page-arrow--next { margin-left: auto; text-align: right; }
@@ -210,9 +210,9 @@ main:focus { outline: none; }
 @media (max-width: 1100px) { .pgrid--flat { grid-template-columns: repeat(3, minmax(0, 1fr)); } .pgrid--flat .pcard:nth-child(n+4) { display: none; } }
 @media (max-width: 700px) { .pgrid--flat { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pgrid--flat .pcard:nth-child(n+3) { display: none; } }
 @media (max-width: 899px) {
-  .project-body { grid-template-columns: 1fr; gap: calc(var(--m) * 0.9); }
-  .project-text { order: 1; align-self: start; } .project-media { order: 2; }
-  .project-media img, .project-media video { max-height: none; }
+  .poster-body { grid-template-columns: 1fr; gap: calc(var(--m) * 0.9); }
+  .poster-text { order: 1; align-self: start; } .poster-media { order: 2; }
+  .poster-media img, .poster-media video { max-height: none; }
 }
 
 /* ── Contact: yellow surface, ink panels with big values and circle-arrow buttons ─ */

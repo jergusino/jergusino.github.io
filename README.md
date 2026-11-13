@@ -15,17 +15,17 @@ The site uses the custom domain **jergusino.com** (the `CNAME` file). Cloudflare
 
 If the repository has another name (for example `portfolio`), set `baseurl: "/portfolio"` and `url: "https://jergusino.github.io"` in `_config.yml`.
 
-## Add a project
+## Add a poster
 
-Every project is one file in `_projects/`. The easy way:
+Every poster is one file in `_posters/`. The easy way:
 
 ```bash
-tools/new-project.sh "Názov projektu"
+tools/new-poster.sh "Názov plagátu"
 ```
 
-It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/projects/`, newest first; a click opens its page. No other file needs to change.
+It creates `_posters/nazov-plagatu.md` from `_templates/poster.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/posters/`, newest first; a click opens its page. No other file needs to change.
 
-(No Mac/Linux shell? Copy `_templates/project.md` into `_projects/` by hand and rename it.)
+(No Mac/Linux shell? Copy `_templates/poster.md` into `_posters/` by hand and rename it.)
 
 ### Front matter
 
@@ -33,37 +33,37 @@ It creates `_projects/nazov-projektu.md` from `_templates/project.md`. Open it, 
 |---|---|---|
 | `title` | yes | Headline of the page and the row in the list |
 | `type` | yes | `plagat` or `spolupraca` (the category; new ones are added in `_data/types.yml`) |
-| `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the project** until that day |
+| `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the poster** until that day |
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |
 | `youtube` | no | Video ID. Shows a two-tone thumbnail that links to YouTube (nothing from YouTube loads until a visitor clicks) |
-| `video` / `poster` | no | Video file (MP4) shown on the project page instead of a poster, playing muted on a loop with controls; `poster` is the frame shown before it loads. Used for client work (`type: spolupraca`) |
-| `cover` / `cover_alt` | no | Main image (shown on the project page) |
+| `video` / `poster` | no | Video file (MP4) shown on the poster page instead of a poster, playing muted on a loop with controls; `poster` is the frame shown before it loads. Used for client work (`type: spolupraca`) |
+| `cover` / `cover_alt` | no | Main image (shown on the poster page) |
 | `thumb` | no | Smaller image for the grid card (about 720 px wide). Without it the cover is used |
 | `cover_raw` | no | `true` keeps the cover in its own colours (use it for finished posters and artwork) |
 | `tools` | no | List, e.g. `[Remotion, Premiere]` |
 | `links` | no | List of `label` + `url`, shown as arrows under the text |
 | `gallery` | no | List of `src` + `alt` |
-| `tags` | no | Subject words (film, hudba, auto, miesto...). The "téma" filter on /projects/ uses the ones listed in `_data/subjects.yml`; search also looks in them |
-| `color` | no | The poster's edge colour, shown while the image loads. `python3 tools/poster_colors.py` fills it in for every project |
-| `similar` | no | Up to 6 project addresses (`/projects/name/`) shown as "podobné práce" at the bottom. Without it the page shows other work of the same type |
-| `placeholder` | no | `true` marks a sample project. Delete the line (or the file) for real work |
+| `tags` | no | Subject words (film, hudba, auto, miesto...). The "téma" filter on /posters/ uses the ones listed in `_data/subjects.yml`; search also looks in them |
+| `color` | no | The poster's edge colour, shown while the image loads. `python3 tools/poster_colors.py` fills it in for every poster |
+| `similar` | no | Up to 6 poster addresses (`/posters/name/`) shown as "podobné práce" at the bottom. Without it the page shows other work of the same type |
+| `placeholder` | no | `true` marks a sample poster. Delete the line (or the file) for real work |
 
 The text under the front matter is Markdown.
 
 ### Images
 
-Put images in `assets/img/projects/<project>/`. By the brand guide, photos are **two-tone**: the site turns every image into pure Ink and Cream automatically, in the browser. Your own artwork that already uses the brand colours (a poster, a motion frame) would lose its Yellow, so mark it as raw:
+Put images in `assets/img/posters/<poster>/`. By the brand guide, photos are **two-tone**: the site turns every image into pure Ink and Cream automatically, in the browser. Your own artwork that already uses the brand colours (a poster, a motion frame) would lose its Yellow, so mark it as raw:
 
 ```markdown
-![Plagát](/assets/img/projects/nazov/plagat.png){: .raw}
+![Plagát](/assets/img/posters/nazov/plagat.png){: .raw}
 ```
 
 `tools/twotone.py` converts a file for real if you need it elsewhere (social posts).
 
-### New project type
+### New poster type
 
-Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/projects/` picks it up.
+Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/posters/` picks it up.
 
 ## Change the basics
 
@@ -83,7 +83,7 @@ Needs Ruby. Not needed to publish.
 - Colours `--ink`, `--paper`, `--yellow` (+ `--paper-soft`, `--ash`, `--line`) in `assets/css/main.css`. Yellow is the highlighter: one moment per view, yellow text only on Ink.
 - Fonts (`assets/fonts/`, open source, SIL OFL): Bricolage Grotesque ExtraBold for headlines, Medium for text; DM Mono for small caps labels.
 - Logo: `assets/img/logo-paper.svg` / `logo-ink.svg`, `_includes/asterisk.svg`, `_includes/wordmark.svg` (one path per letter), `favicon.svg`.
-- Layout follows the carousel system: top row (logo + pill nav), one headline per section, DM Mono labels, 22/28 px panels, circle-arrow buttons, 6 px pills. Every page background is ink; yellow is only an accent or signal (asterisk, circle buttons, active filter, the project number).
+- Layout follows the carousel system: top row (logo + pill nav), one headline per section, DM Mono labels, 22/28 px panels, circle-arrow buttons, 6 px pills. Every page background is ink; yellow is only an accent or signal (asterisk, circle buttons, active filter, the poster number).
 - Home hero: a canvas field of grey asterisks (script at the end of `assets/js/site.js`); the one nearest the pointer is yellow and they turn and grow around it. Headline, one yellow CTA, and a brand strip (projects with `brand: true` in their front matter; optional `brand_logo: /path.svg`, otherwise the name is set as a wordmark). Static for `prefers-reduced-motion`.
 - Poster wall: hover one poster and the rest goes grey (yellow among grey), the hovered one gets a yellow circle-arrow. Project pages: number `NN / total`, headline, chips, prev/next as circle buttons.
 - Motion: scroll reveal (`.rv`) and asterisks that turn on scroll (`.spin`).

@@ -1,6 +1,6 @@
-# Project types. `key` goes into a project's front matter as `type:`.
-# `lead` is the yellow script line above the title on the project page (3 words at most, lowercase).
-# New categories: add a block here, then use its key as `type:` in a project.
+# Poster types. `key` goes into a poster's front matter as `type:`.
+# `lead` is the yellow script line above the title on the poster page (3 words at most, lowercase).
+# New categories: add a block here, then use its key as `type:` in a poster.
 - key: plagat
   label: plagát
   lead: plagát

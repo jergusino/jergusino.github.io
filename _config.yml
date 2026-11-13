@@ -18,21 +18,22 @@ google_analytics: "G-V0Z8P5FQHC"   # Google Analytics 4 Measurement ID, e.g. "G-
 social: []
 
 collections:
-  projects:
+  posters:
     output: true
-    permalink: /projects/:name/
+    permalink: /posters/:name/
 
 defaults:
   - scope:
       path: ""
-      type: projects
+      type: posters
     values:
-      layout: project
-      body_class: project
+      layout: poster
+      body_class: poster
       viewer: true
 
 plugins:
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 markdown: kramdown
 kramdown:

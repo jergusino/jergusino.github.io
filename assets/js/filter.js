@@ -38,7 +38,7 @@
 
   function readUrl() {
     var p = new URLSearchParams(location.search);
-    var hash = decodeURIComponent(location.hash.replace('#', ''));        // older links: /projects/#plagat
+    var hash = decodeURIComponent(location.hash.replace('#', ''));        // older links: /posters/#plagat
     var t = p.get('druh') || hash;
     if (t && has(typeSel, t)) state.type = t;
     var tema = p.get('tema');
