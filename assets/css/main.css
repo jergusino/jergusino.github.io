@@ -312,3 +312,18 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
 /* the address stays on one line and shrinks to fit instead of breaking */
 .contact-row--mail .contact-value { white-space: nowrap; overflow-wrap: normal; font-size: clamp(1.05rem, 5.4vw, 2.8rem); }
 @media (min-width: 701px) { .contact-row--mail .contact-value { font-size: clamp(1.4rem, 3vw, 2.8rem); } }
+
+/* no blue tap flash on phones; focus rings only for keyboard users */
+* { -webkit-tap-highlight-color: transparent; }
+a, button, summary, [role="option"] { -webkit-touch-callout: none; touch-action: manipulation; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* clean page transitions: a quick crossfade with a small lift; header stays put (browsers without support just navigate normally) */
+@view-transition { navigation: auto; }
+header.top { view-transition-name: site-header; }
+::view-transition-old(root) { animation: vt-out 0.22s ease both; }
+::view-transition-new(root) { animation: vt-in 0.38s var(--ease-out) 0.06s both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
+::view-transition-group(site-header) { animation-duration: 0s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
