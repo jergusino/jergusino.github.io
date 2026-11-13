@@ -139,6 +139,7 @@
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   els.forEach(function (e) { io.observe(e); });
+  setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight * 1.2) e.classList.add('in'); }); }, 1500);   // safety net
   // the filter on /projects/ re-orders cards: make sure none stay hidden
   document.addEventListener('click', function () { setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight) e.classList.add('in'); }); }, 30); });
 })();
@@ -161,11 +162,11 @@
   var ctx = cv.getContext('2d'), hero = cv.parentNode;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = -9999, py = -9999, hasPtr = false, run = true, t0 = performance.now();
-  var GREY = [58, 57, 53], LIGHT = [150, 148, 140], YEL = '#ffd60a';
+  var GREY = [58, 57, 53], LIGHT = [150, 148, 140], YEL = '#ffd60a', soft = false;
   function size() {
     var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr;
-    S = W < 700 ? 48 : 64; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
+    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 56 : 64; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
   }
   function star(x, y, a, r, w, col) {
     ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath();
@@ -179,14 +180,14 @@
     var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
       var x = i * S + (S - (W % S)) / 2 * 0 + S / 2 - 8, y = j * S + S / 2 - 8;
-      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = Math.max(0, 1 - d / 230);
+      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = Math.max(0, 1 - d / (soft ? 150 : 230)) * (soft ? 0.5 : 1);
       var a = (reduce ? 0 : t * 0.25) + Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
-      var r = 7 + inf * 9;
+      var r = soft ? 5 + inf * 6 : 7 + inf * 9;
       if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
-      star(x, y, a, r, 3.2 + inf * 1.6, 'rgb(' + c.join(',') + ')');
+      star(x, y, a, r, soft ? 2.4 + inf : 3.2 + inf * 1.6, 'rgb(' + c.join(',') + ')');
     }
-    star(bx, by, ba, br + 3, 6, YEL);
+    star(bx, by, ba, br + (soft ? 1 : 3), soft ? 3.6 : 6, YEL);
   }
   function loop(now) { if (run && !document.hidden) frame(now); if (!reduce) requestAnimationFrame(loop); }
   size(); frame(performance.now());

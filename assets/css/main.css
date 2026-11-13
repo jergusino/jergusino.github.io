@@ -103,7 +103,7 @@ main:focus { outline: none; }
 .reel-track img { width: 100%; height: 100%; object-fit: cover; }
 .reel-track a:hover img { transform: scale(1.04); transition: transform 0.3s var(--ease-out); }
 @keyframes reel { to { transform: translateX(-50%); } }
-@media (max-width: 700px) { .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
+@media (max-width: 700px) { .field { opacity: 0.5; } .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
 
 /* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
 .wall { padding: calc(var(--m) * 2.4) 0 0; }
@@ -217,8 +217,8 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 
 /* ── Motion ─────────────────────────────────────────────────────────────────── */
 /* scroll reveal: rises from below a hard edge, staggered; no fades */
-.js .rv { transform: translateY(24px); clip-path: inset(0 0 100% 0); }
-.js .rv.in { transform: none; clip-path: inset(-20% -5% -20% -5%); transition: transform 0.7s var(--ease-out) var(--d, 0s), clip-path 0.7s var(--ease-out) var(--d, 0s); }
+.js .rv { transform: translateY(28px); }
+.js .rv.in { transform: none; transition: transform 0.7s var(--ease-out) var(--d, 0s); }
 /* cover: the title card, in CSS. Asterisk pops in on ink, a yellow circle opens from it, lines rise, button lands, asterisk turns a notch. */
 @keyframes pop { 0% { transform: scale(0) rotate(-120deg); } 100% { transform: none; } }
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
@@ -232,7 +232,7 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
   html { scroll-behavior: auto; }
   .hero-h .ln > span, .eyebrow, .hero-sub, .hero-cta, .js body.home .top { animation: none; }
   .reel-track { animation: none; }
-  .js .rv, .js .rv.in { transform: none; clip-path: none; transition: none; }
+  .js .rv, .js .rv.in { transform: none; transition: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
 }
 
