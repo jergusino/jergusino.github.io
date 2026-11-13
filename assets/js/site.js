@@ -95,7 +95,7 @@
   var prose = document.querySelector('.project-text .prose');
   var media = document.querySelector('.project-media .cover img, .project-media .cover video, .project-media .media-main');
   if (!title || !prose) return;
-  function sideBySide() { return getComputedStyle(document.querySelector('.project-body')).display === 'grid'; }
+  function sideBySide() { return window.matchMedia('(min-width: 900px)').matches; }
   function tooBig() {
     if (sideBySide() && media && media.getBoundingClientRect().height > 0) {
       return text.getBoundingClientRect().height > media.getBoundingClientRect().height;
@@ -105,8 +105,9 @@
   }
   function fit() {
     title.style.fontSize = '';
+    if (!sideBySide()) return;   // stacked (phones): the page scrolls, so the title keeps its full size
     var size = parseFloat(getComputedStyle(title).fontSize);
-    var min = size * 0.45;
+    var min = size * 0.7;
     while (tooBig() && size > min) {
       size *= 0.95;
       title.style.fontSize = size + 'px';
