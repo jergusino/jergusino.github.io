@@ -99,12 +99,12 @@
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext('2d'), hero = cv.parentNode;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = 0, py = 0, ptx = 0, pty = 0, hasPtr = false, yx = null, yy = 0, ya = 0, yr = 0, run = true, t0 = performance.now();
+  var W = 0, H = 0, dpr = 1, S = 64, cols = 0, rows = 0, px = 0, py = 0, ptx = 0, pty = 0, hasPtr = false, yw = [], bestIdx = -1, run = true, t0 = performance.now();
   var GREY = [88, 86, 80], LIGHT = [200, 197, 188], YEL = '#ffd60a', soft = false;
   function size() {
     var r = hero.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr;
-    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 48 : 66; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1;
+    soft = W < 700 || (window.matchMedia && matchMedia('(pointer: coarse)').matches); S = soft ? 48 : 66; cols = Math.ceil(W / S) + 1; rows = Math.ceil(H / S) + 1; yw = [];
   }
   function star(x, y, a, r, w, col) {
     ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath();
@@ -118,19 +118,23 @@
     var k = 1 - Math.pow(0.001, dt);                                       // frame-rate independent glide (about 0.1 per frame at 60fps)
     px += (tx - px) * k; py += (ty - py) * k;                       // it glides to the pointer, and back
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    var best = 1e9, bi = -1;
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
-      var x = i * S + S / 2 - 8, y = j * S + S / 2 - 8;
+      var x = i * S + S / 2 - 8, y = j * S + S / 2 - 8, idx = i * rows + j;
       var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 280);
       var pull = inf * inf * 0.42;                       // the yellow one attracts: nearby stars drift towards it
       x += dx * pull; y += dy * pull; d *= 1 - pull;
       var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
       var r = soft ? 4.2 : 5.5 + inf * 7;
+      if (d < best) { best = d; bi = idx; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
-      ctx.globalAlpha = soft ? 1 : Math.min(1, Math.max(0, (d - 14) / 34));   // a star fades out as it reaches the yellow one instead of popping
       star(x, y, a, r, soft ? 2.2 : 2.6 + inf * 1.4, soft ? 'rgb(70,68,63)' : 'rgb(' + c.join(',') + ')');
+      if (!soft) {                                       // yellow stays on the grid; passing it to the next star is a soft cross-fade
+        var w = yw[idx] || 0; w += ((idx === bestIdx ? 1 : 0) - w) * 0.16; yw[idx] = w;
+        if (w > 0.02) { ctx.globalAlpha = w; star(x, y, a, r + 3 * w, 2.6 + 3.4 * w, YEL); ctx.globalAlpha = 1; }
+      }
     }
-    ctx.globalAlpha = 1;
-    if (!soft) star(px, py, (px + py) * 0.004 + t * 0.3, 16, 7, YEL);   // phones and touch screens: only the quiet grey grid, no yellow star
+    bestIdx = bi;
   }
   function loop(now) { if (run && !document.hidden) frame(now); if (!reduce && !soft) requestAnimationFrame(loop); }
   size(); px = W * 0.76; py = H * 0.34; frame(performance.now());
