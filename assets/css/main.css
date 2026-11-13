@@ -251,7 +251,7 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
 /* variants: tags blur in, headings rise word by word */
 .js .bf { opacity: 0; filter: blur(10px); transform: translateY(8px); }
 .js .bf.in { opacity: 1; filter: blur(0); transform: none; transition: opacity 0.8s var(--ease-out) var(--d, 0s), filter 0.8s var(--ease-out) var(--d, 0s), transform 0.8s var(--ease-out) var(--d, 0s); }
-.js .wds .wd { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.js .wds .wd { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.2em 0 0.12em; margin: -0.2em 0 -0.12em; }
 .js .wds .wd > span { display: inline-block; transform: translateY(112%); }
 .js .wds.in .wd > span { transform: none; transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) calc(var(--i, 0) * 0.07s); }
 .js .pcard.rv { transform: translateY(28px) scale(0.96); }
