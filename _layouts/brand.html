@@ -5,10 +5,14 @@ layout: default
 <article class="bpage">
   <header class="brand-head">
     <p class="label"><a href="{{ '/spoluprace/' | relative_url }}">Spolupráce</a> · {{ b.year }}</p>
-    <img class="brand-logo" src="{{ b.logo | relative_url }}" alt="{{ b.name | escape }}">
+    <h1 class="brand-name">{{ b.name }}</h1>
     <p class="brand-what">{{ b.what }}</p>
     <ul class="brand-did">{% for d in b.did %}<li>{{ d }}</li>{% endfor %}</ul>
   </header>
+
+  <div class="brand-show rv" role="img" aria-label="{{ b.name | escape }}">
+    <img src="{{ b.logo | relative_url }}" alt="">
+  </div>
 
   <section class="brief">
     <div class="brief-i rv"><p class="label">Zadanie</p><p>{{ b.zadanie }}</p></div>
@@ -16,19 +20,5 @@ layout: default
     <div class="brief-i rv"><p class="label">Výsledok</p><p>{{ b.vysledok }}</p></div>
   </section>
 
-  <section class="posts">
-    <div class="sec-head"><p class="label">Na Instagrame</p><h2 class="h">Príspevky a reely</h2></div>
-    <ul class="post-grid">
-      {% for p in b.posts %}
-      <li class="post rv">
-        <a class="post-btn" href="https://www.instagram.com/{{ p.kind }}/{{ p.id }}/" target="_blank" rel="noopener" aria-label="Otvoriť {% if p.kind == 'reel' %}reel{% else %}príspevok{% endif %} na Instagrame">
-          <span class="label">{% if p.kind == "reel" %}Reel{% else %}Príspevok{% endif %} · {{ forloop.index }}</span>
-          <span class="post-play"><span class="circ">{% if p.kind == "reel" %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>{% else %}{% include arrow.svg %}{% endif %}</span></span>
-          <span class="post-cta">Otvoriť na Instagrame</span>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-    <a class="btn" href="{{ b.instagram }}" rel="noopener" target="_blank"><span class="btn-t">Všetko na {{ b.handle }}</span><span class="circ">{% include arrow.svg %}</span></a>
-  </section>
+  <a class="btn" href="{{ b.instagram }}" rel="noopener" target="_blank"><span class="btn-t">{{ b.handle }} na Instagrame</span><span class="circ">{% include arrow.svg %}</span></a>
 </article>
