@@ -140,12 +140,18 @@ main:focus { outline: none; }
 .ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ctl-l { color: var(--muted); margin-right: 6px; }
 .dd { position: relative; }
+.dd::after { content: ""; position: absolute; right: 1.1em; top: 50%; width: 7px; height: 7px; margin-top: -6px; border-right: 2px solid var(--paper); border-bottom: 2px solid var(--paper); transform: rotate(45deg); transition: transform 0.3s var(--ease-out), margin-top 0.3s var(--ease-out); pointer-events: none; }
+.dd.open::after { transform: rotate(225deg); margin-top: -2px; }
 .dd-native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.dd-btn { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; color: var(--paper); background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F4F1EA' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 1em center; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 2.8em 0.52em 0.9em; min-height: 44px; min-width: 9em; cursor: pointer; transition: border-color 0.1s; }
+.dd-btn { transition: border-color 0.1s, transform 0.15s var(--ease-out); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; color: var(--paper); background: var(--ink); border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 2.8em 0.52em 0.9em; min-height: 44px; min-width: 9em; cursor: pointer; transition: border-color 0.1s; }
+.dd-btn:active { transform: scale(0.97); }
 .dd-btn:hover, .dd-btn:focus-visible, .dd.open .dd-btn { border-color: var(--paper); outline: none; }
-.dd-list { list-style: none; position: absolute; z-index: 20; left: 0; top: calc(100% + 6px); min-width: 100%; max-height: min(50vh, 20rem); overflow-y: auto; background: var(--ink); border: 2px solid var(--paper); border-radius: 14px; padding: 6px; }
-.dd-list li { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; padding: 0.85em 1em 0.78em; border-radius: 8px; cursor: pointer; color: var(--paper); }
-.dd-list li:hover, .dd-list li:focus-visible { background: var(--line); outline: none; }
+.dd-list { list-style: none; position: absolute; z-index: 20; left: 0; top: calc(100% + 6px); min-width: 100%; max-height: min(50vh, 20rem); overflow-y: auto; background: var(--ink); border: 2px solid var(--paper); border-radius: 14px; padding: 6px; transform-origin: top left; visibility: hidden; opacity: 0; transform: translateY(-10px) scale(0.96); clip-path: inset(0 0 100% 0 round 14px); transition: opacity 0.18s ease, transform 0.22s ease, clip-path 0.22s ease, visibility 0s 0.22s; }
+.dd.open .dd-list { visibility: visible; opacity: 1; transform: none; clip-path: inset(0 0 0 0 round 14px); transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1.1), clip-path 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), visibility 0s; }
+.dd.open .dd-list li { animation: dd-in 0.32s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 0.03s + 0.05s); }
+@keyframes dd-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+.dd-list li { transition: background 0.12s, color 0.12s, padding-left 0.2s var(--ease-out); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; padding: 0.85em 1em 0.78em; border-radius: 8px; cursor: pointer; color: var(--paper); }
+.dd-list li:hover, .dd-list li:focus-visible { background: var(--line); outline: none; padding-left: 1.3em; }
 .dd-list li[aria-selected="true"] { background: var(--yellow); color: var(--ink); }
 .ctl-search input { min-height: 44px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 0.9em 0.52em; width: 13em; max-width: 100%; caret-color: var(--yellow); outline: none; -webkit-appearance: none; appearance: none; }
 .ctl-search input:hover, .ctl-search input:focus { border-color: var(--paper); }
@@ -263,6 +269,7 @@ body.home .closing { margin-top: calc(var(--m) * 3); }
   .js .rv, .js .rv.in, .js .bf, .js .bf.in { transform: none; opacity: 1; filter: none; transition: none; }
   .js .wds .wd > span { transform: none; }
   .pcard img, .circ, .pcard a::after { transition: none; }
+  .dd-list, .dd::after { transition: none; } .dd.open .dd-list li { animation: none; }
 }
 
 /* ── Poster viewer ──────────────────────────────────────────────────────────── */

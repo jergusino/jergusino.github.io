@@ -74,10 +74,10 @@
   function enhance(sel) {
     var wrap = document.createElement('div'); wrap.className = 'dd';
     var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
-    var list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox'); list.hidden = true;
+    var list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox');
     var label = sel.closest('label'); if (label) { label.removeAttribute('for'); }
     Array.prototype.forEach.call(sel.options, function (o) {
-      var li = document.createElement('li'); li.setAttribute('role', 'option'); li.setAttribute('data-v', o.value); li.tabIndex = -1; li.textContent = o.textContent; list.appendChild(li);
+      var li = document.createElement('li'); li.setAttribute('role', 'option'); li.setAttribute('data-v', o.value); li.tabIndex = -1; li.textContent = o.textContent; li.style.setProperty('--i', list.children.length); list.appendChild(li);
     });
     sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(btn); wrap.appendChild(list); wrap.appendChild(sel);
     sel.classList.add('dd-native'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
@@ -86,10 +86,10 @@
       var cur = sel.options[sel.selectedIndex]; btn.textContent = cur ? cur.textContent : '';
       items().forEach(function (li) { li.setAttribute('aria-selected', String(li.getAttribute('data-v') === sel.value)); });
     }
-    function open() { dds.forEach(function (d) { if (d !== api) d.close(); }); list.hidden = false; wrap.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); var c = list.querySelector('[aria-selected="true"]') || list.firstChild; if (c) c.focus({ preventScroll: false }); }
-    function close() { list.hidden = true; wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    function open() { dds.forEach(function (d) { if (d !== api) d.close(); }); wrap.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); var c = list.querySelector('[aria-selected="true"]') || list.firstChild; if (c) c.focus({ preventScroll: false }); }
+    function close() { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
     function choose(li) { sel.value = li.getAttribute('data-v'); sel.dispatchEvent(new Event('change', { bubbles: true })); sync(); close(); btn.focus(); }
-    btn.addEventListener('click', function () { list.hidden ? open() : close(); });
+    btn.addEventListener('click', function () { wrap.classList.contains('open') ? close() : open(); });
     btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(); } });
     list.addEventListener('click', function (e) { var li = e.target.closest('li'); if (li) choose(li); });
     list.addEventListener('keydown', function (e) {
