@@ -411,5 +411,8 @@ body.home .nav .pill::before { inset: -16px -22px; }
   .top.open .nav { opacity: 1; transform: none; visibility: visible; pointer-events: auto; transition: opacity 0.2s, transform 0.25s cubic-bezier(0.2, 0.9, 0.2, 1); }
   .nav .pill { font-size: 1.05rem; padding: 1em 1.3em 0.95em; justify-content: flex-start; }
   body.home .nav .pill::before { display: none; }
+  .nav .pill { box-shadow: none; }
+  .nav .pill:hover, .nav .pill:focus-visible { box-shadow: none; transform: none; background: rgba(244, 241, 234, 0.08); }
+  .nav .pill[aria-current], .nav .pill[aria-current]:hover { background: var(--yellow); }
 }
 @media (max-width: 340px) { .pgrid { grid-template-columns: minmax(0, 1fr); } }
