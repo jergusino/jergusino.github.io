@@ -8,26 +8,22 @@
   if (!bar || !grid) return;
 
   var cards = Array.prototype.slice.call(grid.children);
-  var typeBtns = bar.querySelectorAll('[data-filter]');
-  var temaBtns = bar.querySelectorAll('[data-tema]');
-  var sortBtns = bar.querySelectorAll('[data-sort]');
+  var typeSel = bar.querySelector('#f-type');
+  var temaSel = bar.querySelector('#f-tema');
+  var sortSel = bar.querySelector('#f-sort');
   var input = bar.querySelector('input');
   var empty = document.querySelector('.empty');
   var SORT_URL = { 'new': 'najnovsie', 'old': 'najstarsie', 'az': 'az' };
   var state = { type: 'all', tema: 'all', sort: 'new', q: '' };
 
   function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
-  function has(btns, attr, v) { return Array.prototype.some.call(btns, function (b) { return b.getAttribute(attr) === v; }); }
+  function has(sel, v) { return Array.prototype.some.call(sel.options, function (o) { return o.value === v; }); }
 
   var sorters = {
     'new': function (a, b) { return b.getAttribute('data-date') - a.getAttribute('data-date'); },
     'old': function (a, b) { return a.getAttribute('data-date') - b.getAttribute('data-date'); },
     'az': function (a, b) { return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'), 'sk'); }
   };
-
-  function pressed(btns, attr, value) {
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute(attr) === value)); });
-  }
 
   function writeUrl() {
     var p = new URLSearchParams();
@@ -43,9 +39,9 @@
     var p = new URLSearchParams(location.search);
     var hash = decodeURIComponent(location.hash.replace('#', ''));        // older links: /projects/#plagat
     var t = p.get('druh') || hash;
-    if (t && has(typeBtns, 'data-filter', t)) state.type = t;
+    if (t && has(typeSel, t)) state.type = t;
     var tema = p.get('tema');
-    if (tema && has(temaBtns, 'data-tema', tema)) state.tema = tema;
+    if (tema && has(temaSel, tema)) state.tema = tema;
     var z = p.get('zoradit');
     Object.keys(SORT_URL).forEach(function (k) { if (SORT_URL[k] === z) state.sort = k; });
     state.q = p.get('q') || '';
@@ -62,23 +58,15 @@
     }).sort(sorters[state.sort]);
     while (grid.firstChild) grid.removeChild(grid.firstChild);
     list.forEach(function (c) { grid.appendChild(c); });
-    pressed(typeBtns, 'data-filter', state.type);
-    pressed(temaBtns, 'data-tema', state.tema);
-    pressed(sortBtns, 'data-sort', state.sort);
+    typeSel.value = state.type; temaSel.value = state.tema; sortSel.value = state.sort;
     if (empty) empty.hidden = list.length !== 0;
   }
 
   function update() { writeUrl(); render(); }
 
-  typeBtns.forEach(function (b) {
-    b.addEventListener('click', function () { state.type = b.getAttribute('data-filter'); update(); });
-  });
-  temaBtns.forEach(function (b) {
-    b.addEventListener('click', function () { state.tema = b.getAttribute('data-tema'); update(); });
-  });
-  sortBtns.forEach(function (b) {
-    b.addEventListener('click', function () { state.sort = b.getAttribute('data-sort'); update(); });
-  });
+  typeSel.addEventListener('change', function () { state.type = typeSel.value; update(); });
+  temaSel.addEventListener('change', function () { state.tema = temaSel.value; update(); });
+  sortSel.addEventListener('change', function () { state.sort = sortSel.value; update(); });
   input.addEventListener('input', function () { state.q = input.value; update(); });
 
   bar.hidden = false;

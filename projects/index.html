@@ -19,22 +19,28 @@ summary: "Dizajn a plagáty od Jergušina."
     {% if has %}{% assign present = present | append: t.key | append: "," %}{% assign n = n | plus: 1 %}{% endif %}
   {% endfor %}
   <div class="controls" hidden>
-    <div class="ctl" role="group" aria-label="Kategória">
+    <label class="ctl ctl-sel">
       <span class="ctl-l">kategória</span>
-      <button type="button" data-filter="all" aria-pressed="true">všetko</button>
-      {% for t in site.data.types %}{% assign k = t.key | append: "," %}{% if present contains k %}<button type="button" data-filter="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endif %}{% endfor %}
-    </div>
-    <div class="ctl" role="group" aria-label="Téma">
+      <select id="f-type" name="f-type">
+      <option value="all">všetko</option>
+      {% for t in site.data.types %}{% assign k = t.key | append: "," %}{% if present contains k %}<option value="{{ t.key }}">{{ t.label }}</option>{% endif %}{% endfor %}
+    </select>
+    </label>
+    <label class="ctl ctl-sel">
       <span class="ctl-l">téma</span>
-      <button type="button" data-tema="all" aria-pressed="true">všetko</button>
-      {% for t in site.data.subjects %}{% assign has = false %}{% for p in site.projects %}{% if p.tags contains t.key %}{% assign has = true %}{% endif %}{% endfor %}{% if has %}<button type="button" data-tema="{{ t.key }}" aria-pressed="false">{{ t.label }}</button>{% endif %}{% endfor %}
-    </div>
-    <div class="ctl" role="group" aria-label="Zoradenie">
+      <select id="f-tema" name="f-tema">
+      <option value="all">všetko</option>
+      {% for t in site.data.subjects %}{% assign has = false %}{% for p in site.projects %}{% if p.tags contains t.key %}{% assign has = true %}{% endif %}{% endfor %}{% if has %}<option value="{{ t.key }}">{{ t.label }}</option>{% endif %}{% endfor %}
+    </select>
+    </label>
+    <label class="ctl ctl-sel">
       <span class="ctl-l">zoradiť</span>
-      <button type="button" data-sort="new" aria-pressed="true">najnovšie</button>
-      <button type="button" data-sort="old" aria-pressed="false">najstaršie</button>
-      <button type="button" data-sort="az" aria-pressed="false">A–Z</button>
-    </div>
+      <select id="f-sort" name="f-sort">
+      <option value="new">najnovšie</option>
+      <option value="old">najstaršie</option>
+      <option value="az">A–Z</option>
+    </select>
+    </label>
     <label class="ctl ctl-search">
       <span class="ctl-l">hľadať</span>
       <input type="search" name="q" autocomplete="off" spellcheck="false" aria-label="Hľadať v projektoch">

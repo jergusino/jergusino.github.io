@@ -139,10 +139,10 @@ main:focus { outline: none; }
 .controls { display: flex; flex-wrap: wrap; gap: 14px 40px; padding: 0 var(--m) calc(var(--m) * 0.9); }
 .ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ctl-l { color: var(--muted); margin-right: 6px; }
-.ctl button { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 0.9em 0.52em; cursor: pointer; transition: background 0.1s, border-color 0.1s, color 0.1s; }
-.ctl button:hover, .ctl button:focus-visible { border-color: var(--paper); }
-.ctl button[aria-pressed="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
-.ctl-search input { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 0.9em 0.52em; width: 13em; max-width: 100%; caret-color: var(--yellow); outline: none; -webkit-appearance: none; appearance: none; }
+.ctl-sel select { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F4F1EA' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 1em center; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 2.6em 0.52em 0.9em; min-height: 44px; cursor: pointer; -webkit-appearance: none; appearance: none; transition: border-color 0.1s; }
+.ctl-sel select:hover, .ctl-sel select:focus-visible { border-color: var(--paper); outline: none; }
+.ctl-sel option { text-transform: none; letter-spacing: 0; }
+.ctl-search input { min-height: 44px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.6em 0.9em 0.52em; width: 13em; max-width: 100%; caret-color: var(--yellow); outline: none; -webkit-appearance: none; appearance: none; }
 .ctl-search input:hover, .ctl-search input:focus { border-color: var(--paper); }
 .ctl-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
 
@@ -280,14 +280,21 @@ html.viewer-open, html.viewer-open body { overflow: hidden; }
   .nav { gap: 8px; }
   .nav .pill { font-size: 0.92rem; padding: 0.85em 1.15em 0.8em; min-height: 44px; display: inline-flex; align-items: center; }
   .brand img { width: 112px; }
-  .ctl { flex-wrap: nowrap; overflow-x: auto; gap: 8px; margin-left: calc(var(--m) * -1); margin-right: calc(var(--m) * -1); padding: 0 var(--m); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .ctl::-webkit-scrollbar { display: none; }
-  .ctl > * { flex: none; }
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ctl { display: grid; gap: 6px; }
+  .ctl-sel select { width: 100%; }
   .ctl-l { margin-right: 2px; }
-  .ctl button { min-height: 44px; padding: 0.7em 1em 0.62em; }
-  .ctl-search { flex-wrap: wrap; overflow: visible; }
   .ctl-search input { width: 100%; min-height: 48px; }
   .hero-cta { gap: 12px; }
   .hero-sub { font-size: 1rem; }
   .pcard .cap { font-size: 0.7rem; }
+}
+
+/* the address stays on one line and shrinks to fit instead of breaking */
+.contact-row--mail .contact-value { white-space: nowrap; overflow-wrap: normal; font-size: clamp(1.15rem, 6.2vw, 2.8rem); }
+@media (min-width: 701px) { .contact-row--mail .contact-value { font-size: clamp(1.4rem, 3vw, 2.8rem); } }
+@media (max-width: 700px) {
+  .contact-row--mail .contact-label { grid-column: 1; grid-row: 1; }
+  .contact-row--mail .contact-copy { grid-column: 2; grid-row: 1; justify-self: end; }
+  .contact-row--mail .contact-value { grid-column: 1 / -1; grid-row: 2; font-size: clamp(1.2rem, 6.4vw, 2rem); }
 }
