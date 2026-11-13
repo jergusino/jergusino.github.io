@@ -27,10 +27,10 @@
 // taller than the poster, so the poster sits in the same place on every poster page; stacked
 // (phones) it must fit on the screen.
 (function () {
-  var title = document.querySelector('.poster-text .title');
-  var text = document.querySelector('.poster-text');
-  var prose = document.querySelector('.poster-text .prose');
-  var media = document.querySelector('.poster-media .cover img, .poster-media .cover video, .poster-media .media-main');
+  var title = document.querySelector('.plagat-text .title');
+  var text = document.querySelector('.plagat-text');
+  var prose = document.querySelector('.plagat-text .prose');
+  var media = document.querySelector('.plagat-media .cover img, .plagat-media .cover video, .plagat-media .media-main');
   if (!title || !prose) return;
   function sideBySide() { return window.matchMedia('(min-width: 900px)').matches; }
   function tooBig() {
@@ -54,9 +54,9 @@
   function later() { clearTimeout(t); t = setTimeout(fit, 80); }
   fit();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-  var img = document.querySelector('.poster-media .cover img');
+  var img = document.querySelector('.plagat-media .cover img');
   if (img && !img.complete) img.addEventListener('load', fit);
-  var vid = document.querySelector('.poster-media .cover video');
+  var vid = document.querySelector('.plagat-media .cover video');
   if (vid) vid.addEventListener('loadedmetadata', fit);
   window.addEventListener('resize', later);
 })();
@@ -78,7 +78,7 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   els.forEach(function (e) { io.observe(e); });
   setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight * 1.2) e.classList.add('in'); }); }, 1500);   // safety net
-  // the filter on /posters/ re-orders cards: make sure none stay hidden
+  // the filter on /plagaty/ re-orders cards: make sure none stay hidden
   document.addEventListener('click', function () { setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight) e.classList.add('in'); }); }, 30); });
 })();
 

@@ -17,15 +17,15 @@ If the repository has another name (for example `portfolio`), set `baseurl: "/po
 
 ## Add a poster
 
-Every poster is one file in `_posters/`. The easy way:
+Every poster is one file in `_plagaty/`. The easy way:
 
 ```bash
-tools/new-poster.sh "Názov plagátu"
+tools/new-plagat.sh "Názov plagátu"
 ```
 
-It creates `_posters/nazov-plagatu.md` from `_templates/poster.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/posters/`, newest first; a click opens its page. No other file needs to change.
+It creates `_plagaty/nazov-plagatu.md` from `_templates/plagat.md`. Open it, fill it in, commit and push. The project appears as a card in the grid on the home page and on `/plagaty/`, newest first; a click opens its page. No other file needs to change.
 
-(No Mac/Linux shell? Copy `_templates/poster.md` into `_posters/` by hand and rename it.)
+(No Mac/Linux shell? Copy `_templates/plagat.md` into `_plagaty/` by hand and rename it.)
 
 ### Front matter
 
@@ -44,26 +44,26 @@ It creates `_posters/nazov-plagatu.md` from `_templates/poster.md`. Open it, fil
 | `tools` | no | List, e.g. `[Remotion, Premiere]` |
 | `links` | no | List of `label` + `url`, shown as arrows under the text |
 | `gallery` | no | List of `src` + `alt` |
-| `tags` | no | Subject words (film, hudba, auto, miesto...). The "téma" filter on /posters/ uses the ones listed in `_data/subjects.yml`; search also looks in them |
+| `tags` | no | Subject words (film, hudba, auto, miesto...). The "téma" filter on /plagaty/ uses the ones listed in `_data/subjects.yml`; search also looks in them |
 | `color` | no | The poster's edge colour, shown while the image loads. `python3 tools/poster_colors.py` fills it in for every poster |
-| `similar` | no | Up to 6 poster addresses (`/posters/name/`) shown as "podobné práce" at the bottom. Without it the page shows other work of the same type |
+| `similar` | no | Up to 6 poster addresses (`/plagaty/name/`) shown as "podobné práce" at the bottom. Without it the page shows other work of the same type |
 | `placeholder` | no | `true` marks a sample poster. Delete the line (or the file) for real work |
 
 The text under the front matter is Markdown.
 
 ### Images
 
-Put images in `assets/img/posters/<poster>/`. By the brand guide, photos are **two-tone**: the site turns every image into pure Ink and Cream automatically, in the browser. Your own artwork that already uses the brand colours (a poster, a motion frame) would lose its Yellow, so mark it as raw:
+Put images in `assets/img/plagaty/<poster>/`. By the brand guide, photos are **two-tone**: the site turns every image into pure Ink and Cream automatically, in the browser. Your own artwork that already uses the brand colours (a poster, a motion frame) would lose its Yellow, so mark it as raw:
 
 ```markdown
-![Plagát](/assets/img/posters/nazov/plagat.png){: .raw}
+![Plagát](/assets/img/plagaty/nazov/plagat.png){: .raw}
 ```
 
 `tools/twotone.py` converts a file for real if you need it elsewhere (social posts).
 
 ### New poster type
 
-Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/posters/` picks it up.
+Add a block to `_data/types.yml` (`key`, `label`, `lead`). The filter on `/plagaty/` picks it up.
 
 ## Change the basics
 

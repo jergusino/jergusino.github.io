@@ -11,12 +11,12 @@ sitemap: false
 </section>
 <article class="prose">
   <p class="big">Táto stránka neexistuje. Možno sa presunula, alebo je v&nbsp;adrese preklep.</p>
-  <p class="btnrow"><a class="btn" href="{{ '/posters/' | relative_url }}"><span class="circ">{% include arrow.svg %}</span><span class="btn-t">Všetky plagáty</span></a><a class="pill" href="{{ '/' | relative_url }}">Domov</a></p>
+  <p class="btnrow"><a class="btn" href="{{ '/plagaty/' | relative_url }}"><span class="circ">{% include arrow.svg %}</span><span class="btn-t">Všetky plagáty</span></a><a class="pill" href="{{ '/' | relative_url }}">Domov</a></p>
 </article>
 
 <section class="similar" aria-labelledby="new-h">
   <h2 id="new-h" class="h">Najnovšie plagáty</h2>
-  {% assign items = site.posters | sort: "date" | reverse %}
+  {% assign items = site.plagaty | sort: "date" | reverse %}
   <ul class="pgrid pgrid--flat">
     {% for p in items limit: 6 %}{% if p.thumb %}
     <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>

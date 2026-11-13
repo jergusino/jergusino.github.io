@@ -116,7 +116,7 @@ main:focus { outline: none; }
 .brands-list a:hover img, .brands-list a:focus-visible img { filter: grayscale(1) brightness(0) invert(1); }
 @media (max-width: 700px) { .field { opacity: 0.5; } .hero-h { font-size: 11vw; } .hero-in { padding-top: 110px; } }
 
-/* ── Project wall: even grid of posters in 22 px panels, captions as mono labels ─ */
+/* ── Poster wall: even grid of posters in 22 px panels, captions as mono labels ─ */
 .wall { padding: calc(var(--m) * 2.4) 0 0; }
 .wall .sec-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 8px; margin-bottom: calc(var(--m) * 0.9); }
 .wall .sec-head .label { margin: 0 0 0.8em; order: 2; }
@@ -168,18 +168,18 @@ main:focus { outline: none; }
 .ctl-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
 
 /* ── Project page: the content slide. Number, headline, body, chips; poster in a panel ─ */
-.poster-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--m) * 1.2); align-items: start; padding: clamp(110px, 16vh, 170px) var(--m) 0; }
-.poster-media .cover { margin: 0; }
-.poster-media .cover .zoom { display: block; cursor: zoom-in; border-radius: var(--r-panel); overflow: hidden; background: transparent; width: fit-content; max-width: 100%; }
-.poster-media img { border-radius: var(--r-panel); max-height: 78vh; max-height: 78svh; width: auto; max-width: 100%; }
-.poster-media video { display: block; max-width: 100%; max-height: 78svh; aspect-ratio: 9 / 16; border-radius: var(--r-panel); background: var(--ink); }
+.plagat-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--m) * 1.2); align-items: start; padding: clamp(110px, 16vh, 170px) var(--m) 0; }
+.plagat-media .cover { margin: 0; }
+.plagat-media .cover .zoom { display: block; cursor: zoom-in; border-radius: var(--r-panel); overflow: hidden; background: transparent; width: fit-content; max-width: 100%; }
+.plagat-media img { border-radius: var(--r-panel); max-height: 78vh; max-height: 78svh; width: auto; max-width: 100%; }
+.plagat-media video { display: block; max-width: 100%; max-height: 78svh; aspect-ratio: 9 / 16; border-radius: var(--r-panel); background: var(--ink); }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--gap); margin-top: var(--gap); }
 .yt { display: block; } .yt .cta { display: inline-block; margin-top: 0.8em; font-family: var(--mono); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--paper); }
 .yt:hover .cta { color: var(--yellow); }
-.poster-text { align-self: end; max-width: 46rem; }
+.plagat-text { align-self: end; max-width: 46rem; }
 .count { display: flex; align-items: baseline; gap: 12px; margin-bottom: calc(var(--m) * 0.6); color: var(--muted); }
 .count .num { font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.4rem); letter-spacing: -0.03em; color: var(--yellow); line-height: 1; }   /* the one yellow moment on the page */
-.hero--poster .lead, .lead { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1em; }
+.hero--plagat .lead, .lead { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1em; }
 .title { font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 4.6rem); line-height: 1; letter-spacing: -0.035em; color: var(--paper); overflow-wrap: anywhere; }
 .prose { margin-top: calc(var(--m) * 0.8); }
 .prose > * + * { margin-top: 1em; }
@@ -210,9 +210,9 @@ main:focus { outline: none; }
 @media (max-width: 1100px) { .pgrid--flat { grid-template-columns: repeat(3, minmax(0, 1fr)); } .pgrid--flat .pcard:nth-child(n+4) { display: none; } }
 @media (max-width: 700px) { .pgrid--flat { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pgrid--flat .pcard:nth-child(n+3) { display: none; } }
 @media (max-width: 899px) {
-  .poster-body { grid-template-columns: 1fr; gap: calc(var(--m) * 0.9); }
-  .poster-text { order: 1; align-self: start; } .poster-media { order: 2; }
-  .poster-media img, .poster-media video { max-height: none; }
+  .plagat-body { grid-template-columns: 1fr; gap: calc(var(--m) * 0.9); }
+  .plagat-text { order: 1; align-self: start; } .plagat-media { order: 2; }
+  .plagat-media img, .plagat-media video { max-height: none; }
 }
 
 /* ── Contact: yellow surface, ink panels with big values and circle-arrow buttons ─ */

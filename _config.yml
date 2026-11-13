@@ -18,17 +18,17 @@ google_analytics: "G-V0Z8P5FQHC"   # Google Analytics 4 Measurement ID, e.g. "G-
 social: []
 
 collections:
-  posters:
+  plagaty:
     output: true
-    permalink: /posters/:name/
+    permalink: /plagaty/:name/
 
 defaults:
   - scope:
       path: ""
-      type: posters
+      type: plagaty
     values:
-      layout: poster
-      body_class: poster
+      layout: plagat
+      body_class: plagat
       viewer: true
 
 plugins:

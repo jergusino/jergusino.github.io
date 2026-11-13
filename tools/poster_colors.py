@@ -6,7 +6,7 @@ import re
 
 from PIL import Image
 
-for f in sorted(glob.glob('_posters/*.md')):
+for f in sorted(glob.glob('_plagaty/*.md')):
     txt = open(f, encoding='utf-8').read()
     m = re.search(r'^thumb: (\S+)', txt, re.M) or re.search(r'^cover: (\S+)', txt, re.M)
     if not m:

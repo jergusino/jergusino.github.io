@@ -1,0 +1,83 @@
+---
+layout: default
+---
+{% assign t = site.data.types | where: "key", page.type | first %}
+{% assign all = site.plagaty | sort: "date" | reverse %}
+{% assign prev = nil %}{% assign next = nil %}{% assign last = nil %}{% assign found = false %}{% assign idx = 0 %}
+{% for p in all %}{% if found and next == nil %}{% assign next = p %}{% endif %}{% if p.url == page.url %}{% assign found = true %}{% assign prev = last %}{% assign idx = forloop.index %}{% endif %}{% assign last = p %}{% endfor %}
+{% if prev == nil %}{% assign prev = all | last %}{% endif %}
+{% if next == nil %}{% assign next = all | first %}{% endif %}
+
+<div class="plagat-body">
+<div class="plagat-media">
+  <div class="media-main">
+  {% if page.youtube %}
+  <a class="yt" href="https://youtu.be/{{ page.youtube }}" rel="noopener">
+    <img src="https://i.ytimg.com/vi/{{ page.youtube }}/hqdefault.jpg" alt="Náhľad videa {{ page.title }}" loading="lazy">
+    <span class="cta">Pozrieť na YouTube {% include arrow.svg %}</span>
+  </a>
+  {% endif %}
+  {% if page.video %}
+  <figure class="cover cover--video"><video src="{{ page.video | relative_url }}"{% if page.poster %} poster="{{ page.poster | relative_url }}"{% endif %} autoplay muted loop playsinline controls preload="metadata" aria-label="{{ page.cover_alt | default: page.title | escape }}"{% if page.color %} style="background-color: {{ page.color }}"{% endif %}></video></figure>
+  {% endif %}
+  {% if page.cover %}
+  <figure class="cover"><a class="zoom" href="{{ page.cover | relative_url }}" aria-label="Zväčšiť plagát {{ page.title | escape }}"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></a></figure>
+  {% endif %}
+  {% if page.gallery %}
+  <div class="gallery">
+    {% for g in page.gallery %}<img src="{{ g.src | relative_url }}" alt="{{ g.alt }}" loading="lazy">{% endfor %}
+  </div>
+  {% endif %}
+  </div>
+</div>
+
+<div class="plagat-text">
+  {% assign num = all.size | minus: idx | plus: 1 %}<p class="count"><span class="num">{% if num < 10 %}0{% endif %}{{ num }}</span><span class="of">/ {{ all.size }}</span></p>
+  <section class="hero--plagat">
+    {% assign lead_text = page.lead | default: t.lead %}
+    {% include lead.html text=lead_text %}
+    <h1 class="title">{{ page.title }}</h1>
+  </section>
+  <article class="prose">
+    {% if page.placeholder %}<p class="note">Zástupný projekt. Nahraď ho vlastným: uprav súbor <code>{{ page.path }}</code>.</p>{% endif %}
+    <dl class="meta">
+      <dt>Rok</dt><dd>{{ page.date | date: "%Y" }}</dd>
+      {% if page.tools %}<dt>Nástroje</dt><dd>{% for tl in page.tools %}<span class="chip">{{ tl }}</span>{% endfor %}</dd>{% endif %}
+    </dl>
+    {{ content }}
+    {% if page.links %}
+    <ul class="links">
+      {% for l in page.links %}<li><a class="btn btn--sm" href="{{ l.url }}" rel="noopener"><span class="btn-t">{{ l.label }}</span><span class="circ">{% include arrow.svg %}</span></a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </article>
+</div>
+</div>
+
+<nav class="pager" aria-label="Ďalšie plagáty">
+  <a class="page-arrow page-arrow--prev" href="{{ prev.url | relative_url }}" rel="prev" aria-label="Predchádzajúci projekt: {{ prev.title | escape }}"><span class="circ circ--back">{% include arrow.svg %}</span><span class="pg-t"><small>Späť</small>{{ prev.title }}</span></a>
+  <a class="page-arrow page-arrow--next" href="{{ next.url | relative_url }}" rel="next" aria-label="Ďalší projekt: {{ next.title | escape }}"><span class="pg-t"><small>Ďalší</small>{{ next.title }}</span><span class="circ">{% include arrow.svg %}</span></a>
+</nav>
+
+{% assign pool = site.plagaty | where: "type", page.type | sort: "date" | reverse %}
+{% if page.similar or pool.size > 1 %}
+{% assign n = 0 %}{% assign seen = false %}{% assign done = false %}
+<section class="similar" aria-labelledby="similar-h">
+  <h2 id="similar-h" class="h">Podobné práce</h2>
+  <ul class="pgrid pgrid--flat">
+    {% if page.similar %}{% for u in page.similar limit: 6 %}{% assign p = site.plagaty | where: "url", u | first %}{% if p %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
+    {% else %}
+    {% for p in pool %}{% if seen and n < 6 and p.thumb %}{% assign n = n | plus: 1 %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% if p.url == page.url %}{% assign seen = true %}{% endif %}{% endfor %}
+    {% for p in pool %}{% if p.url == page.url %}{% assign done = true %}{% endif %}{% if done == false and n < 6 and p.thumb %}{% assign n = n | plus: 1 %}
+    <li class="pcard"><a href="{{ p.url | relative_url }}" aria-label="{{ p.title | escape }}"{% if p.color %} style="background-color: {{ p.color }}"{% endif %}><img src="{{ p.thumb | relative_url }}" alt="{{ p.cover_alt | default: p.title | escape }}" width="720" height="1020" loading="lazy"></a></li>{% endif %}{% endfor %}
+    {% endif %}
+  </ul>
+</section>
+{% endif %}
+
+
+
+{% assign all = site.plagaty | sort: "date" | reverse %}
+<script type="application/json" id="posters">[{% for p in all %}{% if p.cover and p.placeholder != true %}{"u":{{ p.url | relative_url | jsonify }},"t":{{ p.title | jsonify }},"a":{{ p.cover_alt | default: p.title | jsonify }},"c":{{ p.cover | relative_url | jsonify }},"bg":{{ p.color | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]</script>
