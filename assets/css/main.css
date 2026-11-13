@@ -371,17 +371,13 @@ body.home .nav .pill::before { inset: -16px -22px; }
 }
 
 @property --r { syntax: '<length>'; inherits: false; initial-value: 0px; }
-/* collab card: yellow circle grows from the pointer and inverts the palette */
-.bcard { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
-.bcard:hover, .bcard:focus-visible { transform: none; border-color: var(--yellow); }
-.bcard::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--yellow); pointer-events: none; --r: 0px; clip-path: circle(var(--r) at var(--x, 50%) var(--y, 50%)); transition: --r 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+/* collab card: the outline fills yellow in a circle growing from the pointer */
+.bcard { position: relative; -webkit-tap-highlight-color: transparent; }
+.bcard:hover, .bcard:focus-visible { transform: none; border-color: var(--line); }
+.bcard::before { content: ""; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: var(--yellow); pointer-events: none; --r: 0px; clip-path: circle(var(--r) at var(--x, 50%) var(--y, 50%)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); transition: --r 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .bcard:hover::before, .bcard:focus-visible::before, .bcard:active::before { --r: 520px; }
-.bcard, .bcard-what, .bcard .label, .bcard .circ { transition: color 0.25s ease 0.05s, background-color 0.25s ease 0.05s, border-color 0.25s ease; }
-.bcard-logo { transition: filter 0.25s ease 0.05s; }
-.bcard:hover, .bcard:focus-visible, .bcard:active { color: var(--ink); }
-.bcard:hover .bcard-logo, .bcard:focus-visible .bcard-logo, .bcard:active .bcard-logo { filter: brightness(0); }
-.bcard:hover .bcard-what, .bcard:hover .label, .bcard:focus-visible .bcard-what, .bcard:active .bcard-what, .bcard:active .label { color: var(--ink); }
-.bcard:hover .circ, .bcard:focus-visible .circ, .bcard:active .circ { background: var(--ink); color: var(--yellow); }
+.bcard .circ { transition: background-color 0.25s ease 0.1s, color 0.25s ease 0.1s; }
+.bcard:hover .circ, .bcard:focus-visible .circ, .bcard:active .circ { background: var(--yellow); color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .bcard::before { transition: none; } }
 
 /* hamburger: below 560px the nav collapses into a menu panel */
