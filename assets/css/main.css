@@ -381,21 +381,15 @@ body.home .nav .pill::before { inset: -16px -22px; }
   .top .brand { flex: none; margin-right: 8px; }
 }
 
-/* collab card: fills yellow on hover */
-.bcard { transition: background-color 0.45s var(--ease-out, ease), color 0.45s var(--ease-out, ease), border-color 0.45s var(--ease-out, ease); }
-.bcard-logo { transition: filter 0.45s var(--ease-out, ease); }
-.bcard-what, .bcard .label { transition: color 0.45s var(--ease-out, ease); }
-.bcard .circ { transition: background-color 0.45s var(--ease-out, ease), color 0.45s var(--ease-out, ease); }
-.bcard:hover, .bcard:focus-visible { transform: none; background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
-.bcard:hover .bcard-logo, .bcard:focus-visible .bcard-logo { filter: brightness(0); }
-.bcard:hover .bcard-what, .bcard:focus-visible .bcard-what { color: var(--ink); }
-.bcard:hover .label, .bcard:focus-visible .label { color: var(--ink); }
-.bcard:hover .circ, .bcard:focus-visible .circ { background: var(--ink); color: var(--yellow); }
-.brand-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.brand-show { display: grid; place-items: center; min-height: clamp(220px, 38vw, 420px); margin: clamp(32px, 5vw, 56px) 0 0; background: var(--yellow); border-radius: var(--r-panel, 28px); }
-.brand-show img { width: min(62%, 460px); height: auto; filter: brightness(0); }
-.bpage > .btn { margin-top: 8px; }
-.bcard:active { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
-.bcard:active .bcard-logo { filter: brightness(0); }
-.bcard:active .bcard-what, .bcard:active .label { color: var(--ink); }
-.bcard:active .circ { background: var(--ink); color: var(--yellow); }
+/* collab card: yellow circle grows from the pointer and inverts the palette */
+.bcard { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+.bcard:hover, .bcard:focus-visible { transform: none; border-color: var(--yellow); }
+.bcard::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--yellow); pointer-events: none; clip-path: circle(0px at var(--x, 50%) var(--y, 50%)); transition: clip-path 0.85s cubic-bezier(0.55, 0, 0.25, 1); }
+.bcard:hover::before, .bcard:focus-visible::before, .bcard:active::before { clip-path: circle(700px at var(--x, 50%) var(--y, 50%)); }
+.bcard, .bcard-what, .bcard .label, .bcard .circ { transition: color 0.35s ease 0.2s, background-color 0.35s ease 0.2s, border-color 0.35s ease; }
+.bcard-logo { transition: filter 0.35s ease 0.2s; }
+.bcard:hover, .bcard:focus-visible, .bcard:active { color: var(--ink); }
+.bcard:hover .bcard-logo, .bcard:focus-visible .bcard-logo, .bcard:active .bcard-logo { filter: brightness(0); }
+.bcard:hover .bcard-what, .bcard:hover .label, .bcard:focus-visible .bcard-what, .bcard:active .bcard-what, .bcard:active .label { color: var(--ink); }
+.bcard:hover .circ, .bcard:focus-visible .circ, .bcard:active .circ { background: var(--ink); color: var(--yellow); }
+@media (prefers-reduced-motion: reduce) { .bcard::before { transition: none; } }
