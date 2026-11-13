@@ -181,20 +181,20 @@
     var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
       var x = i * S + (S - (W % S)) / 2 * 0 + S / 2 - 8, y = j * S + S / 2 - 8;
-      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = Math.max(0, 1 - d / (soft ? 150 : 230)) * (soft ? 0.5 : 1);
+      var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 230);
       var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
       var r = soft ? 5 + inf * 6 : 7 + inf * 9;
       if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
-      star(x, y, a, r, soft ? 2.4 + inf : 3.2 + inf * 1.6, 'rgb(' + c.join(',') + ')');
+      star(x, y, a, r, soft ? 2.4 : 3.2 + inf * 1.6, soft ? 'rgb(40,39,36)' : 'rgb(' + c.join(',') + ')');
     }
-    star(bx, by, ba, br + (soft ? 1 : 3), soft ? 3.6 : 6, YEL);
+    if (!soft) star(bx, by, ba, br + 3, 6, YEL);   // phones and touch screens: only the quiet grey grid, no yellow star
   }
-  function loop(now) { if (run && !document.hidden) frame(now); if (!reduce) requestAnimationFrame(loop); }
+  function loop(now) { if (run && !document.hidden) frame(now); if (!reduce && !soft) requestAnimationFrame(loop); }
   size(); px = W * 0.76; py = H * 0.34; frame(performance.now());
-  window.addEventListener('resize', function () { size(); if (reduce) frame(performance.now()); });
+  window.addEventListener('resize', function () { size(); if (reduce || soft) frame(performance.now()); });
   hero.addEventListener('pointermove', function (e) { var r = hero.getBoundingClientRect(); ptx = e.clientX - r.left; pty = e.clientY - r.top; hasPtr = true; });
   hero.addEventListener('pointerleave', function () { hasPtr = false; });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { run = en[0].isIntersecting; }, { threshold: 0 }).observe(hero);
-  if (!reduce) requestAnimationFrame(loop);
+  if (!reduce && !soft) requestAnimationFrame(loop);
 })();
