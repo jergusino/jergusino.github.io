@@ -114,9 +114,10 @@
   function frame(now) {
     var t = (now - t0) / 1000;
     var tx = hasPtr ? ptx : W * 0.76, ty = hasPtr ? pty : H * 0.34;      // at rest the yellow one sits still, top right of the headline
-    px += (tx - px) * 0.14; py += (ty - py) * 0.14;                       // it glides to the pointer, and back
+    var dt = Math.min(0.05, Math.max(0.001, (now - (frame.last || now)) / 1000)); frame.last = now;
+    var k = 1 - Math.pow(0.001, dt);                                       // frame-rate independent glide (about 0.1 per frame at 60fps)
+    px += (tx - px) * k; py += (ty - py) * k;                       // it glides to the pointer, and back
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-    var best = 1e9, bx = 0, by = 0, ba = 0, br = 0;
     for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
       var x = i * S + S / 2 - 8, y = j * S + S / 2 - 8;
       var dx = px - x, dy = py - y, d = Math.sqrt(dx * dx + dy * dy), inf = soft ? 0 : Math.max(0, 1 - d / 280);
@@ -124,11 +125,12 @@
       x += dx * pull; y += dy * pull; d *= 1 - pull;
       var a = Math.sin(i * 0.5 + j * 0.4) * 0.5 + inf * inf * 1.6;
       var r = soft ? 4.2 : 5.5 + inf * 7;
-      if (d < best) { best = d; bx = x; by = y; ba = a; br = r; }
       var c = GREY.map(function (g, n) { return Math.round(g + (LIGHT[n] - g) * inf); });
+      ctx.globalAlpha = soft ? 1 : Math.min(1, Math.max(0, (d - 14) / 34));   // a star fades out as it reaches the yellow one instead of popping
       star(x, y, a, r, soft ? 2.2 : 2.6 + inf * 1.4, soft ? 'rgb(70,68,63)' : 'rgb(' + c.join(',') + ')');
     }
-    if (!soft) star(bx, by, ba, br + 3, 6, YEL);   // phones and touch screens: only the quiet grey grid, no yellow star
+    ctx.globalAlpha = 1;
+    if (!soft) star(px, py, (px + py) * 0.004 + t * 0.3, 16, 7, YEL);   // phones and touch screens: only the quiet grey grid, no yellow star
   }
   function loop(now) { if (run && !document.hidden) frame(now); if (!reduce && !soft) requestAnimationFrame(loop); }
   size(); px = W * 0.76; py = H * 0.34; frame(performance.now());
