@@ -345,7 +345,7 @@ body.home .nav .pill::before { inset: -16px -22px; }
 .coll { padding: var(--gap) var(--m) 0; }
 .brands-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: var(--gap); padding: 0 var(--m) var(--gap); }
 .coll .brands-wall { padding: 0; }
-.bcard { display: flex; flex-direction: column; gap: 22px; min-height: 300px; padding: 26px; border-radius: var(--r-panel, 28px); border: 2px solid var(--line); color: var(--paper); transition: border-color 0.2s, transform 0.3s var(--ease-out); }
+.bcard { position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; gap: 22px; min-height: 300px; padding: 26px; border-radius: var(--r-panel, 28px); border: 2px solid var(--line); color: var(--paper); transition: border-color 0.2s, transform 0.3s var(--ease-out); }
 .bcard:hover, .bcard:focus-visible { border-color: var(--paper); transform: translateY(-4px); }
 .bcard-logo { display: block; height: clamp(40px, 4vw, 56px); width: auto; max-width: 100%; margin-top: auto; align-self: flex-start; }
 .bcard-what { color: var(--paper-soft); max-width: 24em; }
@@ -380,3 +380,12 @@ body.home .nav .pill::before { inset: -16px -22px; }
   .brand img { flex: none; width: 82px; }
   .top .brand { flex: none; margin-right: 8px; }
 }
+
+/* collab card: slow sheen + hover nudge */
+.bcard::before { content: ""; position: absolute; inset: -40% auto -40% -60%; width: 45%; z-index: -1; pointer-events: none; background: linear-gradient(100deg, transparent, rgba(255, 214, 10, 0.09), transparent); transform: skewX(-18deg); animation: bsheen 7s var(--ease-out, ease) infinite; }
+.bcard-logo { transition: transform 0.4s var(--ease-out, ease); }
+.bcard .circ { transition: background 0.2s, color 0.2s, transform 0.4s var(--ease-out, ease); }
+.bcard:hover .bcard-logo { transform: translateX(6px); }
+.bcard:hover .circ { transform: rotate(-45deg); }
+@keyframes bsheen { 0%, 70% { left: -60%; } 100% { left: 130%; } }
+@media (prefers-reduced-motion: reduce) { .bcard::before { animation: none; } .bcard:hover .bcard-logo, .bcard:hover .circ { transform: none; } }
