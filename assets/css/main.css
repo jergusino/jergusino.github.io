@@ -89,8 +89,16 @@ main:focus { outline: none; }
 .hero-h { font-size: clamp(2.4rem, 6.4vw, 6.4rem); line-height: 1; letter-spacing: -0.04em; color: var(--paper); }
 .hero-h .ln { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .hero-h .ln > span { display: block; }
-.hero-sub { max-width: 30em; margin-top: 1.4em; color: var(--paper-soft); background: var(--ink); display: inline-block; }
+.hero-sub { max-width: 30em; margin-top: 1.4em; color: var(--paper-soft); display: inline-block; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2em; }
+/* soft ink glow under each piece of hero text, so it reads cleanly over the asterisk field */
+.hero-h, .hero-sub, .hero-cta { position: relative; }
+.hero-h::before, .hero-sub::before, .hero-cta::before, .eyebrow::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -0.25em -0.6em; background: radial-gradient(ellipse at 45% 50%, rgba(14, 14, 14, 0.94) 0%, rgba(14, 14, 14, 0.82) 45%, rgba(14, 14, 14, 0) 100%); }
+.hero-h::before { inset: -0.15em -0.5em; }
+.hero-sub::before { inset: -0.7em -1.2em; }
+.hero-cta::before { inset: -1em -1.6em; }
+.eyebrow { position: relative; background: rgba(14, 14, 14, 0.85); }
+.eyebrow::before { inset: -0.9em -1.4em; border-radius: 0; z-index: -1; }
 .cta { display: inline-flex; align-items: center; gap: 0.7em; padding: 1em 1.5em 0.95em; border-radius: 999px; background: var(--yellow); color: var(--ink); font-weight: 500; font-size: 1.05rem; line-height: 1; transition: transform 0.2s var(--ease-out), background 0.1s, color 0.1s; }
 .cta .arr { width: 1.3em; height: 0.65em; margin: 0; transition: transform 0.2s var(--ease-out); }
 .cta:hover, .cta:focus-visible { transform: translateY(-2px); }
@@ -326,3 +334,6 @@ header.top { view-transition-name: site-header; }
 @keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
 ::view-transition-group(site-header) { animation-duration: 0s; }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* same glow behind the logo and nav where they sit on the asterisk field */
+body.home .top::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -34px -40px -34px -40px; background: linear-gradient(to bottom, rgba(14, 14, 14, 0.92) 0%, rgba(14, 14, 14, 0.7) 55%, rgba(14, 14, 14, 0) 100%); }
