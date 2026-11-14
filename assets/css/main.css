@@ -188,6 +188,10 @@ main:focus { outline: none; }
 .prose code { font-family: var(--mono); font-size: 0.9em; border-bottom: 2px solid var(--line); }
 .prose h2, .prose h3 { font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; color: var(--paper); margin-top: 2em; font-size: 1.8rem; }
 .prose img { border-radius: var(--r-panel); }
+.page-text { padding: 0 var(--m) calc(var(--m) * 2); }
+.page-text .label { margin-top: 2.4em; }
+.contact-privacy { margin-top: calc(var(--m) * 0.9); color: var(--paper-soft); font-size: 0.95rem; }
+.contact-privacy a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .note { border-left: 6px solid var(--yellow); padding-left: 1em; }
 .meta { display: grid; grid-template-columns: max-content 1fr; gap: 12px 28px; align-items: center; padding: 18px 0; border-top: 2px solid var(--line); border-bottom: 2px solid var(--line); }
 .meta dt { color: var(--muted); } .meta dd { margin: 0; color: var(--paper); font-size: 1.1rem; display: flex; flex-wrap: wrap; gap: 8px; }

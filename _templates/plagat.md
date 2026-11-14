@@ -5,6 +5,7 @@ date: 2026-01-01       # rok sa zobrazí v zozname; projekt s budúcim dátumom 
 summary: "Jedna veta, ktorá sa ukáže v náhľade odkazu."
 # lead: "nový"         # voliteľné: malý žltý štítok nad názvom (max. 3 slová, malé písmená)
 # youtube: VIDEO_ID    # ID z adresy youtube.com/watch?v=ID
+# youtube_thumb: /assets/img/plagaty/NAZOV/yt.jpg   # náhľad videa ulož sem, nie z YouTube
 # cover: /assets/img/plagaty/nazov/cover.jpg
 # cover_alt: "Popis obrázka"
 # tools: [Remotion, Premiere]

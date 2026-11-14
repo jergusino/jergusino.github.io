@@ -36,7 +36,8 @@ It creates `_plagaty/nazov-plagatu.md` from `_templates/plagat.md`. Open it, fil
 | `date` | yes | `YYYY-MM-DD`. Sets the order and the year. **A future date hides the poster** until that day |
 | `summary` | no | One sentence for link previews |
 | `lead` | no | Yellow script line over the title (3 words at most, lowercase). Default: the type name |
-| `youtube` | no | Video ID. Shows a two-tone thumbnail that links to YouTube (nothing from YouTube loads until a visitor clicks) |
+| `youtube` | no | Video ID. Shows a link to the video on YouTube. Nothing from YouTube loads on the page; for a picture, save the thumbnail into the poster's folder and set `youtube_thumb` |
+| `youtube_thumb` | no | Local image for the YouTube link (e.g. `/assets/img/plagaty/nazov/yt.jpg`). Never link the image from YouTube's servers |
 | `video` / `poster` | no | Video file (MP4) shown on the poster page instead of a poster, playing muted on a loop with controls; `poster` is the frame shown before it loads. Used for client work (`type: spolupraca`) |
 | `cover` / `cover_alt` | no | Main image (shown on the poster page) |
 | `thumb` | no | Smaller image for the grid card (about 720 px wide). Without it the cover is used |
@@ -89,10 +90,6 @@ Needs Ruby. Not needed to publish.
 - Motion: scroll reveal (`.rv`) and asterisks that turn on scroll (`.spin`).
 - Slovak typography: non-breaking space after one-letter words (k s v z o u a i) in new copy.
 
-## Návštevnosť (Google Analytics)
+## Privacy
 
-1. V Google Analytics (analytics.google.com) vytvor účet a „Web data stream“ pre `https://jergusino.com`.
-2. Skopíruj Measurement ID (vyzerá ako `G-XXXXXXXXXX`).
-3. Vlož ho do `_config.yml` ako `google_analytics: "G-XXXXXXXXXX"` a pushni.
-
-Skript sa načíta len na živej stránke (nie pri lokálnom náhľade) a bez cookies, takže netreba cookie lištu.
+The site loads nothing from other servers: fonts and images are self-hosted, there is no analytics and no cookies, so no cookie banner is needed. Keep it that way: don't add Google Fonts, Google Analytics, embeds or other third-party scripts (each one sends the visitor's IP address to that company, which needs consent in the EU). What the site and the newsletter do with personal data is written on `/sukromie/` (`sukromie/index.html`); update it if that changes.
