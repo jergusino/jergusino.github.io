@@ -10,7 +10,7 @@ cover_alt: "Plagát Porsche 911"
 cover_raw: true
 tools: [Photoshop]
 tags: [značka, vozidlo, auto]
-similar: [/plagaty/le-mans/, /plagaty/yamaha/, /plagaty/darkstar/, /plagaty/kofola/, /plagaty/lack/]
+similar: [/plagaty/le-mans/, /plagaty/yamaha/, /plagaty/darkstar/, /plagaty/kofola/, /plagaty/lack/, /plagaty/after-you/]
 redirect_from: [/projects/porsche-911/, /posters/porsche-911/]
 ---
 Biely plagát s dlhým čiernym číslom 911 a nápisom Porsche vedľa tmavého kabrioletu. Modrá silueta auta vľavo a krátky popis modelu dole dopĺňajú čistú kompozíciu.

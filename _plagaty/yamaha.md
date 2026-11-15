@@ -10,7 +10,7 @@ cover_alt: "Plagát Yamaha"
 cover_raw: true
 tools: [Photoshop]
 tags: [značka, vozidlo, motoršport]
-similar: [/plagaty/le-mans/, /plagaty/porsche-911/, /plagaty/darkstar/, /plagaty/kofola/, /plagaty/lack/]
+similar: [/plagaty/le-mans/, /plagaty/porsche-911/, /plagaty/darkstar/, /plagaty/kofola/, /plagaty/lack/, /plagaty/after-you/]
 redirect_from: [/projects/yamaha/, /posters/yamaha/]
 ---
 Fialovo-ružový motorkár sa nakláňa v zákrute, pred sivou fotografiou pretekárskej trate. Nad ním visí dlhé čierne písmo Yamaha, ktoré akoby vytvára pruhy rýchlosti.
