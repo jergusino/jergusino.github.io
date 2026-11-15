@@ -20,7 +20,7 @@
     - { kind: p,    id: Dfc4zn_CBpE }
 - slug: norder
   name: CrossFit NØRDER
-  logo: /assets/img/brands/norder.png
+  logo: /assets/img/brands/norder.svg
   year: 2026
   what: "CrossFit box v Bratislave, ktorý učí funkčný tréning podľa metodiky CrossFit"
   did: [Príspevok]
@@ -29,4 +29,5 @@
   zadanie: "CrossFit NØRDER je CrossFit box v Bratislave. Potrebovali obsah pre svoj Instagram."
   riesenie: "Príspevok pre ich Instagram, v jednom vizuálnom jazyku."
   vysledok: "1 príspevok na @crossfitnorder."
-  posts: []
+  posts:
+    - { kind: p }   # static post, no link yet
