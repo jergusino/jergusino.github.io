@@ -341,7 +341,7 @@ body.home .nav .pill::before { inset: -16px -22px; }
 .bcard { display: flex; flex-direction: column; gap: 22px; min-height: 300px; padding: 26px; border-radius: var(--r-panel, 28px); border: 2px solid var(--line); color: var(--paper); transition: border-color 0.2s, transform 0.3s var(--ease-out); }
 .bcard:hover, .bcard:focus-visible { border-color: var(--paper); transform: translateY(-4px); }
 .bcard-logo { display: block; height: clamp(40px, 4vw, 56px); width: auto; max-width: 100%; margin-top: auto; align-self: flex-start; }
-.bcard-what { color: var(--paper-soft); max-width: 24em; }
+.bcard-what { color: var(--paper-soft); max-width: 24em; min-height: 3lh; }
 .bcard-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .bcard:hover .circ { background: var(--yellow); color: var(--ink); }
 .bpage { padding: clamp(120px, 18vh, 200px) var(--m) var(--gap); max-width: 80rem; }
