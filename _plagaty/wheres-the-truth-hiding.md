@@ -1,7 +1,7 @@
 ---
 title: "Where's the Truth Hiding?"
 type: plagat
-date: 2026-11-15
+date: 2026-11-14
 summary: "Plagát so šiestimi čiernobielymi zrnitými detailmi očí s červenými zreničkami pod nadpisom Where's the Truth Hiding? s červeným otáznikom."
 cover: /assets/img/plagaty/wheres-the-truth-hiding/cover.jpg
 thumb: /assets/img/plagaty/wheres-the-truth-hiding/thumb.jpg
