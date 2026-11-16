@@ -243,7 +243,7 @@ main:focus { outline: none; }
 /* ── Closing slide: yellow, the sign-off as headline, ink asterisk cut by the corner ─ */
 .closing { position: relative; overflow: hidden; margin-top: calc(var(--m) * 2.4); background: var(--ink); color: var(--paper); border-top: 1px solid var(--line); min-height: 58vh; min-height: 58svh; padding: calc(var(--m) * 1.4) var(--m) var(--m); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(var(--m) * 0.7); }
 .closing > * { position: relative; z-index: 1; }
-.closing .label { color: var(--muted); position: absolute; top: calc(var(--m) * 1.4); left: var(--m); }
+.closing .label { color: var(--muted); margin-bottom: auto; }
 .closing .display { font-size: clamp(2.6rem, 7.5vw, 7.5rem); }
 .closing-ast { position: absolute !important; z-index: 0 !important; width: 30vw; right: -6vw; bottom: -9vw; top: auto; color: var(--yellow); }
 .closing .btn { color: var(--paper); }
