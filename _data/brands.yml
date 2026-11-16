@@ -31,3 +31,16 @@
   vysledok: "1 príspevok na @crossfitnorder."
   posts:
     - { kind: p }   # static post, no link yet
+- slug: laland
+  name: LaLand Café & Events
+  logo: /assets/img/brands/laland.svg
+  year: 2026
+  what: "Rodinná kaviareň v Petržalke s detským kútikom a priestorom na oslavy a eventy"
+  did: [Príspevok]
+  instagram: https://www.instagram.com/laland_cafe/
+  handle: "@laland_cafe"
+  zadanie: "LaLand Café & Events je rodinná kaviareň v Petržalke s detským kútikom, ktorá je súčasťou sveta LaLand. Potrebovali obsah pre svoj Instagram."
+  riesenie: "Príspevok pre ich Instagram, v jednom vizuálnom jazyku."
+  vysledok: "1 príspevok na @laland_cafe."
+  posts:
+    - { kind: p }   # static post, no link yet
