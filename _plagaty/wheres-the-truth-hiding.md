@@ -9,6 +9,6 @@ color: "#e3e3e3"
 cover_alt: "Plagát Where's the Truth Hiding?"
 cover_raw: true
 tags: [portrét, spoločnosť, kolaž]
-similar: [/plagaty/the-end/, /plagaty/backrooms/, /plagaty/brashki/, /plagaty/fight-club/, /plagaty/ill-win/, /plagaty/obsession/]
+similar: [/plagaty/the-end/, /plagaty/maj-svoje-oci-otvorene/, /plagaty/backrooms/, /plagaty/brashki/, /plagaty/fight-club/, /plagaty/ill-win/]
 ---
 Šesť detailov očí je usporiadaných do troch radov a každé má červenú zreničku, ktorá vyniká na sivom a čiernom pozadí. Nad nimi stojí nadpis „WHERE’S THE TRUTH HIDING?“ s červeným otáznikom na papierovej textúre.

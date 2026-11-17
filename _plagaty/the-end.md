@@ -10,7 +10,7 @@ cover_alt: "Plagát The End"
 cover_raw: true
 tools: [Photoshop]
 tags: [hudba, kolaž, spoločnosť]
-similar: [/plagaty/wheres-the-truth-hiding/, /plagaty/after-you/, /plagaty/friday-im-in-love/, /plagaty/graduation/, /plagaty/kanye-west/, /plagaty/let-it-happen/]
+similar: [/plagaty/wheres-the-truth-hiding/, /plagaty/maj-svoje-oci-otvorene/, /plagaty/after-you/, /plagaty/friday-im-in-love/, /plagaty/graduation/, /plagaty/kanye-west/]
 redirect_from: [/projects/the-end/, /posters/the-end/]
 ---
 Kolážový plagát s veľkým červeným otáznikom a otázkou „Is this the end really?“ uprostred nálepiek, varovaní a čiarových kódov. Parodická tabuľka „Pure Hip Hop Nutrition Facts“ a nápis „You are the product“ kritizujú konzum a systém.

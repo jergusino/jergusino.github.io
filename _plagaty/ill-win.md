@@ -10,7 +10,7 @@ cover_alt: "Plagát I'll Win"
 cover_raw: true
 tools: [Photoshop]
 tags: [portrét, typografia]
-similar: [/plagaty/backrooms/, /plagaty/brashki/, /plagaty/fight-club/, /plagaty/obsession/, /plagaty/skateboarding/, /plagaty/the-world-is-yours/]
+similar: [/plagaty/maj-svoje-oci-otvorene/, /plagaty/backrooms/, /plagaty/brashki/, /plagaty/fight-club/, /plagaty/obsession/, /plagaty/skateboarding/]
 redirect_from: [/projects/ill-win/, /posters/ill-win/]
 ---
 Typografický plagát s obrovským nápisom I'll Win a farebným okom v strede na pokrčenom papieri. Čierne pätkové písmo sa okolo oka zvlní, ružovo-modrá zrnitá štruktúra mu dodáva hrozivý a odhodlaný výraz.
