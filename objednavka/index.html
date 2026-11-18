@@ -16,7 +16,8 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
   <p class="order-intro">Vyplň údaje a pošli. Ozvem sa ti mailom s cenou, poštovným a platbou. Zatiaľ nič neplatíš.</p>
 
   <form class="order-form" id="order-form" action="{{ '/objednavka/' | relative_url }}" method="post" novalidate data-endpoint="{{ site.order_endpoint }}" data-mail="{{ site.email }}">
-    <div class="order-grid">
+    <div class="order-split">
+    <div class="order-grid order-col order-col--product">
       <fieldset class="ofield ofield--wide pick"><legend class="ofield-l">Plagát <span class="pick-name" id="pick-name"></span></legend>
         <div class="pick-wrap">
           <div class="pick-row" id="pick-row">
@@ -39,6 +40,10 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
         </div>
       </div>
 
+    </div>
+
+    <div class="order-col order-col--details">
+    <div class="order-grid">
       <fieldset class="ofield ofield--wide ship">
         <legend class="ship-h"><span class="ofield-l">Doručenie</span></legend>
         <div class="stamp" aria-hidden="true"><img id="stamp-img" src="" alt=""></div>
@@ -64,6 +69,8 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
     <p class="order-msg" id="order-msg" role="status" aria-live="polite" hidden></p>
 
     <button class="btn btn--sm" type="submit"><span class="btn-t">Odoslať objednávku</span><span class="circ">{% include arrow.svg %}</span></button>
+    </div>
+    </div>
   </form>
 
   <div class="order-done" id="order-done" hidden>

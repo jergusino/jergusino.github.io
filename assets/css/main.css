@@ -487,3 +487,13 @@ fieldset.ship { position: relative; padding: clamp(18px, 2.4vw, 32px); border: 2
 .stamp { position: absolute; top: clamp(18px, 2.4vw, 32px); right: clamp(18px, 2.4vw, 32px); width: 78px; padding: 5px; background: var(--paper); transform: rotate(4deg); border: 4px dotted var(--surface); outline: 2px solid var(--paper); outline-offset: -6px; }
 .stamp img { width: 100%; aspect-ratio: 720 / 1018; object-fit: cover; }
 @media (max-width: 640px) { .ship-grid { max-width: 100%; margin-top: 70px; } .stamp { width: 62px; } .papers, .qty-box { min-height: 0; } .pick-row { --w: 120px; } }
+
+/* desktop: product on the left, delivery + contact on the right */
+@media (min-width: 1000px) {
+  .order { max-width: none; }
+  .order-split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: start; }
+  .order-col--product { position: sticky; top: 24px; }
+  .order-col--product .pick-wrap { margin: 0; }
+  .order-col--product .pick-row { padding-top: 10px; }
+  fieldset.ship { margin-top: 0.75em; }
+}
