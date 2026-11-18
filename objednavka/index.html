@@ -17,17 +17,19 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
 
   <form class="order-form" id="order-form" action="{{ '/objednavka/' | relative_url }}" method="post" novalidate data-endpoint="{{ site.order_endpoint }}" data-mail="{{ site.email }}">
     <div class="order-grid">
-      <label class="ofield ofield--wide"><span class="ofield-l">Plagát</span>
-        <select name="poster" required>
-          {% for p in posters %}{% assign slug = p.name | remove: ".md" %}<option value="{{ p.title | escape }}" data-slug="{{ slug }}">{{ p.title }}</option>{% endfor %}
-        </select>
-      </label>
-      <label class="ofield"><span class="ofield-l">Formát</span>
-        <select name="size" required>{% for s in site.data.print.sizes %}<option>{{ s }}</option>{% endfor %}</select>
-      </label>
-      <label class="ofield"><span class="ofield-l">Počet kusov</span>
-        <input name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required>
-      </label>
+      <fieldset class="ofield ofield--wide pick"><legend class="ofield-l">Plagát <span class="pick-name" id="pick-name"></span></legend>
+        <div class="pick-row">
+          {% for p in posters %}{% assign slug = p.name | remove: ".md" %}<label class="pick-card"{% if p.color %} style="--c: {{ p.color }}"{% endif %}><input type="radio" name="poster" value="{{ p.title | escape }}" data-slug="{{ slug }}" required{% if forloop.first %} checked{% endif %}><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1018" loading="lazy"><span class="sr">{{ p.title }}</span></label>{% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="ofield"><legend class="ofield-l">Formát</legend>
+        <div class="seg">
+          {% for s in site.data.print.sizes %}<label class="seg-opt"><input type="radio" name="size" value="{{ s.name }}" required{% if forloop.first %} checked{% endif %}><span class="paper" style="--s: {{ s.scale }}"><i></i></span><span class="seg-t"><b>{{ s.name }}</b><small>{{ s.dims }}</small></span></label>{% endfor %}
+        </div>
+      </fieldset>
+      <div class="ofield"><label class="ofield-l" for="qty">Počet kusov</label>
+        <div class="step"><button type="button" class="step-b" data-d="-1" aria-label="Menej">−</button><input id="qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required><button type="button" class="step-b" data-d="1" aria-label="Viac">+</button></div>
+      </div>
 
       <label class="ofield"><span class="ofield-l">Meno a priezvisko</span>
         <input name="name" type="text" autocomplete="name" required maxlength="120">
@@ -77,8 +79,20 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
   (function () {
     var f = document.getElementById('order-form'), msg = document.getElementById('order-msg'), done = document.getElementById('order-done');
     if (!f) return;
-    var sel = f.elements.poster, want = new URLSearchParams(location.search).get('plagat');
-    if (want) Array.prototype.forEach.call(sel.options, function (o) { if (o.getAttribute('data-slug') === want) sel.value = o.value; });
+    var want = new URLSearchParams(location.search).get('plagat'), nameEl = document.getElementById('pick-name');
+    var radios = Array.prototype.slice.call(f.querySelectorAll('input[name=poster]'));
+    radios.forEach(function (r) { if (r.getAttribute('data-slug') === want) r.checked = true; });
+    function showPick(scroll) {
+      var r = f.querySelector('input[name=poster]:checked'); if (!r) return;
+      nameEl.textContent = '· ' + r.value;
+      if (scroll) { var c = r.parentElement, row = c.parentElement; row.scrollLeft = c.offsetLeft - (row.clientWidth - c.offsetWidth) / 2; }
+    }
+    radios.forEach(function (r) { r.addEventListener('change', function () { showPick(false); }); });
+    showPick(true);
+    var q = f.elements.qty;
+    f.querySelectorAll('.step-b').forEach(function (b) { b.addEventListener('click', function () {
+      q.value = Math.min(20, Math.max(1, (parseInt(q.value, 10) || 1) + +b.dataset.d));
+    }); });
 
     function say(t) { msg.textContent = t; msg.hidden = !t; }
     function mailto(d) {
