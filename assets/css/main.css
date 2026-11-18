@@ -447,10 +447,10 @@ fieldset.ofield legend { padding: 0; margin-bottom: 0.5em; }
 .pick-row { --w: clamp(120px, 12.4vw, 160px); display: flex; align-items: center; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px calc(50% - var(--w) / 2) 18px; scrollbar-width: none; cursor: grab; user-select: none; -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
 .pick-row::-webkit-scrollbar { display: none; }
 .pick-row.drag { cursor: grabbing; scroll-snap-type: none; }
-.pick-card { position: relative; margin: 8px 0; flex: none; width: var(--w); aspect-ratio: 720 / 1018; border-radius: 10px; overflow: hidden; background: var(--c, var(--line)); scroll-snap-align: center; cursor: inherit; transform: scale(0.82); opacity: 0.45; transition: transform 0.3s var(--ease-out), opacity 0.3s; }
+.pick-card { position: relative; margin: 8px 0; flex: none; width: var(--w); aspect-ratio: 720 / 1018; border-radius: 10px; overflow: hidden; background: var(--c, var(--line)); scroll-snap-align: center; cursor: inherit; transform: scale(0.8); opacity: 0.4; will-change: transform; }
 .pick-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .pick-card input { position: absolute; opacity: 0; pointer-events: none; }
-.pick-card.is-on { transform: scale(1.05); opacity: 1; box-shadow: 0 0 0 3px var(--yellow); }
+.pick-card.is-on { box-shadow: 0 0 0 3px var(--yellow); }
 .pick-card:has(input:focus-visible) { outline: 3px solid var(--paper); outline-offset: 6px; }
 .pick-hint { margin-top: 2px; text-align: center; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stone); }
 

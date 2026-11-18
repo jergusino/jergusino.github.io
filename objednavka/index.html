@@ -79,33 +79,53 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
     if (!f) return;
     var want = new URLSearchParams(location.search).get('plagat');
     var row = document.getElementById('pick-row'), nameEl = document.getElementById('pick-name'), stampImg = document.getElementById('stamp-img');
-    var cards = Array.prototype.slice.call(row.querySelectorAll('.pick-card'));
-    function radio(c) { return c.querySelector('input'); }
-    function center(c, smooth) { row.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - row.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' }); }
-    function select(c) {
-      var r = radio(c); if (!r.checked) r.checked = true;
-      cards.forEach(function (k) { k.classList.toggle('is-on', k === c); });
+    var cards = Array.prototype.slice.call(row.querySelectorAll('.pick-card')), n = cards.length;
+    cards.forEach(function (c, i) { c.dataset.i = i; });
+    // loop: a copy of all posters before and after the real ones
+    function copy(c) { var k = c.cloneNode(true); k.querySelector('input').remove(); k.setAttribute('aria-hidden', 'true'); k.classList.add('ghost'); return k; }
+    var before = cards.map(copy), after = cards.map(copy);
+    before.forEach(function (k) { row.insertBefore(k, cards[0]); });
+    after.forEach(function (k) { row.appendChild(k); });
+    var all = Array.prototype.slice.call(row.querySelectorAll('.pick-card'));
+    function radio(i) { return cards[i].querySelector('input'); }
+    function cx(c) { return c.offsetLeft + c.offsetWidth / 2; }
+    function center(c, smooth) { row.scrollTo({ left: cx(c) - row.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' }); }
+    var cur = -1;
+    function select(i) {
+      if (i === cur) return; cur = i;
+      var r = radio(i); r.checked = true;
       nameEl.textContent = '· ' + r.value; stampImg.src = r.dataset.thumb;
     }
-    function nearest() {
-      var mid = row.scrollLeft + row.clientWidth / 2, best = cards[0], d = 1e9;
-      cards.forEach(function (c) { var x = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (x < d) { d = x; best = c; } });
-      return best;
+    function frame() {
+      var setW = cards[n - 1].offsetLeft - cards[0].offsetLeft + (cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : 0);
+      var mid = row.scrollLeft + row.clientWidth / 2;
+      // keep the view inside the middle copy, so it never runs out
+      if (mid < cx(cards[0]) - setW / 2) { row.scrollLeft += setW; s0 += setW; mid += setW; }
+      else if (mid > cx(cards[n - 1]) + setW / 2) { row.scrollLeft -= setW; s0 -= setW; mid -= setW; }
+      var step = cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : 1, best = null, bd = 1e9;
+      all.forEach(function (c) {
+        var d = Math.abs(cx(c) - mid) / step, t = Math.min(d, 1.5) / 1.5;
+        c.style.transform = 'scale(' + (1.05 - t * 0.25) + ')'; c.style.opacity = 1 - t * 0.6;
+        if (d < bd) { bd = d; best = c; }
+      });
+      all.forEach(function (c) { c.classList.toggle('is-on', c === best); });
+      select(+best.dataset.i);
     }
-    var start = cards.filter(function (c) { return radio(c).dataset.slug === want; })[0] || cards[Math.floor(cards.length / 2)];
-    select(start); requestAnimationFrame(function () { center(start, false); });
-    var t; row.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(function () { if (!dragging) select(nearest()); }, 60); }, { passive: true });
+    var raf = 0; row.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; frame(); }); }, { passive: true });
+    var start = cards.filter(function (c) { return c.querySelector('input').dataset.slug === want; })[0] || cards[Math.floor(n / 2)];
+    requestAnimationFrame(function () { center(start, false); frame(); });
+    addEventListener('resize', function () { center(cards[cur], false); });
 
     // mouse drag (touch scrolls natively)
     var dragging = false, moved = 0, x0 = 0, s0 = 0;
     row.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button) return; dragging = true; moved = 0; x0 = e.clientX; s0 = row.scrollLeft; row.classList.add('drag'); row.setPointerCapture(e.pointerId); });
     row.addEventListener('pointermove', function (e) { if (!dragging) return; moved = Math.max(moved, Math.abs(e.clientX - x0)); row.scrollLeft = s0 - (e.clientX - x0); });
-    function end() { if (!dragging) return; dragging = false; row.classList.remove('drag'); var c = nearest(); select(c); center(c, true); }
+    function end() { if (!dragging) return; dragging = false; row.classList.remove('drag'); var b = row.querySelector('.is-on'); if (b) center(b, true); }
     row.addEventListener('pointerup', end); row.addEventListener('pointercancel', end);
-    cards.forEach(function (c) {
-      c.addEventListener('click', function (e) { e.preventDefault(); if (moved > 6) { moved = 0; return; } select(c); center(c, true); radio(c).focus({ preventScroll: true }); });
-      radio(c).addEventListener('change', function () { select(c); center(c, true); });
+    all.forEach(function (c) {
+      c.addEventListener('click', function (e) { e.preventDefault(); if (moved > 6) { moved = 0; return; } center(c, true); if (!c.classList.contains('ghost')) c.querySelector('input').focus({ preventScroll: true }); });
     });
+    cards.forEach(function (c) { c.querySelector('input').addEventListener('change', function () { center(c, true); }); });
 
     // format
     var dims = document.getElementById('size-dims');
