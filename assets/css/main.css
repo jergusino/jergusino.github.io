@@ -442,7 +442,8 @@ fieldset.ofield legend { padding: 0; margin-bottom: 0.5em; }
 
 /* poster picker: center-snap carousel, the middle one is selected */
 .pick-name { color: var(--paper); text-transform: none; letter-spacing: 0; }
-.pick-wrap { position: relative; margin: 0 calc(var(--m) * -1); }
+.pick { grid-template-columns: minmax(0, 1fr); }
+.pick-wrap { position: relative; min-width: 0; margin: 0 calc(var(--m) * -1); }
 .pick-row { --w: clamp(120px, 12.4vw, 160px); display: flex; align-items: center; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px calc(50% - var(--w) / 2) 18px; scrollbar-width: none; cursor: grab; user-select: none; -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
 .pick-row::-webkit-scrollbar { display: none; }
 .pick-row.drag { cursor: grabbing; scroll-snap-type: none; }
