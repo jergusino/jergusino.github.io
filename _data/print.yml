@@ -1,9 +1,13 @@
 # Print options for the order form (/objednavka/). Edit freely.
-# `scale` sets the size of the paper icon (1 = biggest).
+# `scale` = icon size relative to the biggest paper (1).
 sizes:
+  - name: A4
+    dims: "21 × 29,7 cm"
+    scale: 0.5
   - name: A3
     dims: "29,7 × 42 cm"
     scale: 0.71
   - name: A2
     dims: "42 × 59,4 cm"
     scale: 1
+default_size: A3

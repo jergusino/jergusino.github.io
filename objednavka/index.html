@@ -18,45 +18,43 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
   <form class="order-form" id="order-form" action="{{ '/objednavka/' | relative_url }}" method="post" novalidate data-endpoint="{{ site.order_endpoint }}" data-mail="{{ site.email }}">
     <div class="order-grid">
       <fieldset class="ofield ofield--wide pick"><legend class="ofield-l">Plagát <span class="pick-name" id="pick-name"></span></legend>
-        <div class="pick-row">
-          {% for p in posters %}{% assign slug = p.slug %}<label class="pick-card"{% if p.color %} style="--c: {{ p.color }}"{% endif %}><input type="radio" name="poster" value="{{ p.title | escape }}" data-slug="{{ slug }}" required{% if forloop.first %} checked{% endif %}><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1018" loading="lazy"><span class="sr">{{ p.title }}</span></label>{% endfor %}
+        <div class="pick-wrap">
+          <div class="pick-row" id="pick-row">
+            {% for p in posters %}<label class="pick-card"{% if p.color %} style="--c: {{ p.color }}"{% endif %}><input type="radio" name="poster" value="{{ p.title | escape }}" data-slug="{{ p.slug }}" data-thumb="{{ p.thumb | relative_url }}" required{% if forloop.first %} checked{% endif %}><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1018" loading="lazy" draggable="false"><span class="sr">{{ p.title }}</span></label>{% endfor %}
+          </div>
+        </div>
+        <p class="pick-hint">Potiahni alebo klikni. Vybraný je ten v strede.</p>
+      </fieldset>
+
+      <fieldset class="ofield sizes"><legend class="ofield-l">Formát <span class="pick-name" id="size-dims"></span></legend>
+        <div class="papers">
+          {% for s in site.data.print.sizes %}<label class="paper-opt" style="--s: {{ s.scale }}"><input type="radio" name="size" value="{{ s.name }}" data-dims="{{ s.dims }}" required{% if s.name == site.data.print.default_size %} checked{% endif %}><span class="sheet"><b>{{ s.name }}</b></span></label>{% endfor %}
         </div>
       </fieldset>
-      <fieldset class="ofield"><legend class="ofield-l">Formát</legend>
-        <div class="seg">
-          {% for s in site.data.print.sizes %}<label class="seg-opt"><input type="radio" name="size" value="{{ s.name }}" required{% if forloop.first %} checked{% endif %}><span class="paper" style="--s: {{ s.scale }}"><i></i></span><span class="seg-t"><b>{{ s.name }}</b><small>{{ s.dims }}</small></span></label>{% endfor %}
+
+      <div class="ofield qty"><label class="ofield-l" for="qty">Počet kusov</label>
+        <div class="qty-box">
+          <div class="stack" id="stack" aria-hidden="true"></div>
+          <div class="step"><button type="button" class="step-b" data-d="-1" aria-label="Menej">−</button><input id="qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required><button type="button" class="step-b" data-d="1" aria-label="Viac">+</button></div>
         </div>
-      </fieldset>
-      <div class="ofield"><label class="ofield-l" for="qty">Počet kusov</label>
-        <div class="step"><button type="button" class="step-b" data-d="-1" aria-label="Menej">−</button><input id="qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required><button type="button" class="step-b" data-d="1" aria-label="Viac">+</button></div>
       </div>
 
-      <label class="ofield"><span class="ofield-l">Meno a priezvisko</span>
-        <input name="name" type="text" autocomplete="name" required maxlength="120">
-      </label>
-      <label class="ofield"><span class="ofield-l">E-mail</span>
-        <input name="email" type="email" autocomplete="email" required maxlength="160">
-      </label>
-      <label class="ofield"><span class="ofield-l">Telefón <em>(nepovinné)</em></span>
-        <input name="phone" type="tel" autocomplete="tel" maxlength="40">
-      </label>
-      <label class="ofield"><span class="ofield-l">Krajina</span>
-        <input name="country" type="text" autocomplete="country-name" value="Slovensko" required maxlength="60">
-      </label>
+      <fieldset class="ofield ofield--wide ship">
+        <legend class="ship-h"><span class="ofield-l">Doručenie</span></legend>
+        <div class="stamp" aria-hidden="true"><img id="stamp-img" src="" alt=""></div>
+        <p class="ship-to label">Adresát</p>
+        <div class="ship-grid">
+          <label class="ofield ofield--wide"><span class="ofield-l">Meno a priezvisko</span><input name="name" type="text" autocomplete="name" required maxlength="120"></label>
+          <label class="ofield ofield--wide"><span class="ofield-l">Ulica a číslo</span><input name="street" type="text" autocomplete="street-address" required maxlength="160"></label>
+          <label class="ofield ofield--zip"><span class="ofield-l">PSČ</span><input name="zip" type="text" autocomplete="postal-code" required maxlength="20"></label>
+          <label class="ofield"><span class="ofield-l">Mesto</span><input name="city" type="text" autocomplete="address-level2" required maxlength="80"></label>
+          <label class="ofield ofield--wide"><span class="ofield-l">Krajina</span><input name="country" type="text" autocomplete="country-name" value="Slovensko" required maxlength="60"></label>
+        </div>
+      </fieldset>
 
-      <label class="ofield ofield--wide"><span class="ofield-l">Ulica a číslo</span>
-        <input name="street" type="text" autocomplete="street-address" required maxlength="160">
-      </label>
-      <label class="ofield"><span class="ofield-l">PSČ</span>
-        <input name="zip" type="text" autocomplete="postal-code" required maxlength="20">
-      </label>
-      <label class="ofield"><span class="ofield-l">Mesto</span>
-        <input name="city" type="text" autocomplete="address-level2" required maxlength="80">
-      </label>
-
-      <label class="ofield ofield--wide"><span class="ofield-l">Poznámka <em>(nepovinné)</em></span>
-        <textarea name="note" rows="3" maxlength="600"></textarea>
-      </label>
+      <label class="ofield"><span class="ofield-l">E-mail</span><input name="email" type="email" autocomplete="email" required maxlength="160"></label>
+      <label class="ofield"><span class="ofield-l">Telefón <em>(nepovinné)</em></span><input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+      <label class="ofield ofield--wide"><span class="ofield-l">Poznámka <em>(nepovinné)</em></span><textarea name="note" rows="3" maxlength="600"></textarea></label>
     </div>
 
     <label class="trap" aria-hidden="true">Nechaj prázdne <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
@@ -79,20 +77,52 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
   (function () {
     var f = document.getElementById('order-form'), msg = document.getElementById('order-msg'), done = document.getElementById('order-done');
     if (!f) return;
-    var want = new URLSearchParams(location.search).get('plagat'), nameEl = document.getElementById('pick-name');
-    var radios = Array.prototype.slice.call(f.querySelectorAll('input[name=poster]'));
-    radios.forEach(function (r) { if (r.getAttribute('data-slug') === want) r.checked = true; });
-    function showPick(scroll) {
-      var r = f.querySelector('input[name=poster]:checked'); if (!r) return;
-      nameEl.textContent = '· ' + r.value;
-      if (scroll) { var c = r.parentElement, row = c.parentElement; row.scrollLeft = c.offsetLeft - (row.clientWidth - c.offsetWidth) / 2; }
+    var want = new URLSearchParams(location.search).get('plagat');
+    var row = document.getElementById('pick-row'), nameEl = document.getElementById('pick-name'), stampImg = document.getElementById('stamp-img');
+    var cards = Array.prototype.slice.call(row.querySelectorAll('.pick-card'));
+    function radio(c) { return c.querySelector('input'); }
+    function center(c, smooth) { row.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - row.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' }); }
+    function select(c) {
+      var r = radio(c); if (!r.checked) r.checked = true;
+      cards.forEach(function (k) { k.classList.toggle('is-on', k === c); });
+      nameEl.textContent = '· ' + r.value; stampImg.src = r.dataset.thumb;
     }
-    radios.forEach(function (r) { r.addEventListener('change', function () { showPick(false); }); });
-    showPick(true);
-    var q = f.elements.qty;
+    function nearest() {
+      var mid = row.scrollLeft + row.clientWidth / 2, best = cards[0], d = 1e9;
+      cards.forEach(function (c) { var x = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (x < d) { d = x; best = c; } });
+      return best;
+    }
+    var start = cards.filter(function (c) { return radio(c).dataset.slug === want; })[0] || cards[Math.floor(cards.length / 2)];
+    select(start); requestAnimationFrame(function () { center(start, false); });
+    var t; row.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(function () { if (!dragging) select(nearest()); }, 60); }, { passive: true });
+
+    // mouse drag (touch scrolls natively)
+    var dragging = false, moved = 0, x0 = 0, s0 = 0;
+    row.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button) return; dragging = true; moved = 0; x0 = e.clientX; s0 = row.scrollLeft; row.classList.add('drag'); row.setPointerCapture(e.pointerId); });
+    row.addEventListener('pointermove', function (e) { if (!dragging) return; moved = Math.max(moved, Math.abs(e.clientX - x0)); row.scrollLeft = s0 - (e.clientX - x0); });
+    function end() { if (!dragging) return; dragging = false; row.classList.remove('drag'); var c = nearest(); select(c); center(c, true); }
+    row.addEventListener('pointerup', end); row.addEventListener('pointercancel', end);
+    cards.forEach(function (c) {
+      c.addEventListener('click', function (e) { e.preventDefault(); if (moved > 6) { moved = 0; return; } select(c); center(c, true); radio(c).focus({ preventScroll: true }); });
+      radio(c).addEventListener('change', function () { select(c); center(c, true); });
+    });
+
+    // format
+    var dims = document.getElementById('size-dims');
+    function showSize() { var r = f.querySelector('input[name=size]:checked'); dims.textContent = r ? '· ' + r.dataset.dims : ''; }
+    f.querySelectorAll('input[name=size]').forEach(function (r) { r.addEventListener('change', showSize); }); showSize();
+
+    // quantity + sheet stack
+    var q = f.elements.qty, stack = document.getElementById('stack');
+    function drawStack() {
+      var n = Math.min(Math.max(parseInt(q.value, 10) || 1, 1), 20), shown = Math.min(n, 6), h = '';
+      for (var i = 0; i < shown; i++) h += '<i style="--i:' + i + '"></i>';
+      stack.innerHTML = h; stack.style.setProperty('--n', shown);
+    }
     f.querySelectorAll('.step-b').forEach(function (b) { b.addEventListener('click', function () {
-      q.value = Math.min(20, Math.max(1, (parseInt(q.value, 10) || 1) + +b.dataset.d));
+      q.value = Math.min(20, Math.max(1, (parseInt(q.value, 10) || 1) + +b.dataset.d)); drawStack();
     }); });
+    q.addEventListener('input', drawStack); drawStack();
 
     function say(t) { msg.textContent = t; msg.hidden = !t; }
     function mailto(d) {

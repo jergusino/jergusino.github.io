@@ -440,37 +440,49 @@ fieldset.ofield legend { padding: 0; margin-bottom: 0.5em; }
 .order-done[hidden], .order-form[hidden], .order-msg[hidden] { display: none; }
 @media (max-width: 640px) { .order-grid { grid-template-columns: 1fr; } }
 
-/* poster picker: a row of thumbnails */
+/* poster picker: center-snap carousel, the middle one is selected */
 .pick-name { color: var(--paper); text-transform: none; letter-spacing: 0; }
-.pick-row { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(92px, 11vw, 132px); gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth; padding: 6px 4px 14px; margin: 0 -4px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-.pick-card { position: relative; display: block; aspect-ratio: 720 / 1018; border-radius: 10px; overflow: hidden; background: var(--c, var(--line)); cursor: pointer; scroll-snap-align: center; box-shadow: inset 0 0 0 2px var(--line); transition: transform 0.2s var(--ease-out), box-shadow 0.15s, opacity 0.15s; opacity: 0.55; }
-.pick-card img { width: 100%; height: 100%; object-fit: cover; }
+.pick-wrap { position: relative; margin: 0 calc(var(--m) * -1); }
+.pick-row { --w: clamp(120px, 12.4vw, 160px); display: flex; align-items: center; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px calc(50% - var(--w) / 2) 18px; scrollbar-width: none; cursor: grab; user-select: none; -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+.pick-row::-webkit-scrollbar { display: none; }
+.pick-row.drag { cursor: grabbing; scroll-snap-type: none; }
+.pick-card { position: relative; margin: 8px 0; flex: none; width: var(--w); aspect-ratio: 720 / 1018; border-radius: 10px; overflow: hidden; background: var(--c, var(--line)); scroll-snap-align: center; cursor: inherit; transform: scale(0.82); opacity: 0.45; transition: transform 0.3s var(--ease-out), opacity 0.3s; }
+.pick-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .pick-card input { position: absolute; opacity: 0; pointer-events: none; }
-.pick-card:hover { opacity: 0.9; transform: translateY(-3px); }
-.pick-card:has(input:checked) { opacity: 1; box-shadow: 0 0 0 3px var(--yellow); transform: translateY(-3px); }
-.pick-card:has(input:checked)::after { content: "✓"; position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; background: var(--yellow); color: var(--ink); display: grid; place-items: center; font-size: 0.85rem; font-weight: 800; }
-.pick-card:has(input:focus-visible) { outline: 3px solid var(--paper); outline-offset: 3px; }
+.pick-card.is-on { transform: scale(1.05); opacity: 1; box-shadow: 0 0 0 3px var(--yellow); }
+.pick-card:has(input:focus-visible) { outline: 3px solid var(--paper); outline-offset: 6px; }
+.pick-hint { margin-top: 2px; text-align: center; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stone); }
 
-/* format: cards with a paper icon drawn to scale */
-.seg { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; }
-.seg-opt { display: flex; align-items: center; gap: 14px; padding: 12px 14px; min-height: 76px; border: 2px solid var(--line); border-radius: var(--r-label); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-.seg-opt input { position: absolute; opacity: 0; pointer-events: none; }
-.seg-opt:hover { border-color: var(--paper); }
-.seg-opt:has(input:checked) { border-color: var(--yellow); background: rgba(255, 214, 10, 0.07); }
-.seg-opt:has(input:focus-visible) { outline: 3px solid var(--yellow); outline-offset: 3px; }
-.paper { flex: none; width: 34px; height: 48px; display: grid; place-items: end start; }
-.paper i { display: block; width: calc(34px * var(--s)); height: calc(48px * var(--s)); border: 2px solid var(--ash); border-radius: 3px; position: relative; transition: border-color 0.15s, background 0.15s; }
-.paper i::after { content: ""; position: absolute; inset: 22% 22% 40%; border-radius: 1px; background: var(--ash); opacity: 0.5; }
-.seg-opt:has(input:checked) .paper i { border-color: var(--yellow); background: var(--yellow); }
-.seg-opt:has(input:checked) .paper i::after { background: var(--ink); opacity: 0.6; }
-.seg-t { display: grid; line-height: 1.15; }
-.seg-t b { font-weight: 800; font-size: 1.25rem; color: var(--paper); letter-spacing: -0.02em; }
-.seg-t small { font-family: var(--mono); font-size: 0.72rem; color: var(--ash); letter-spacing: 0.04em; }
+/* format: the papers themselves, drawn to scale, folded corner */
+.papers { display: flex; align-items: flex-end; gap: clamp(10px, 1.6vw, 22px); min-height: 150px; }
+.paper-opt { --W: 96px; cursor: pointer; display: block; }
+.paper-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.sheet { position: relative; display: grid; place-items: center; width: calc(var(--W) * var(--s)); aspect-ratio: 1 / 1.414; background: transparent; border: 2px solid var(--ash); border-radius: 3px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); transition: transform 0.2s var(--ease-out), background 0.15s, border-color 0.15s; }
+.sheet::after { content: ""; position: absolute; top: -2px; right: -2px; width: 18px; height: 18px; background: linear-gradient(225deg, transparent 50%, var(--ash) 50%, var(--ash) calc(50% + 2px), var(--line) calc(50% + 2px)); }
+.sheet b { font-weight: 800; letter-spacing: -0.03em; color: var(--paper); font-size: calc(1rem + 1rem * var(--s)); }
+.paper-opt:hover .sheet { border-color: var(--paper); transform: translateY(-4px); }
+.paper-opt:has(input:checked) .sheet { background: var(--yellow); border-color: var(--yellow); transform: translateY(-4px); }
+.paper-opt:has(input:checked) .sheet::after { background: linear-gradient(225deg, transparent 50%, #b89a00 50%); }
+.paper-opt:has(input:checked) .sheet b { color: var(--ink); }
+.paper-opt:has(input:focus-visible) .sheet { outline: 3px solid var(--paper); outline-offset: 4px; }
 
-/* quantity stepper */
-.step { display: grid; grid-template-columns: 56px minmax(0, 1fr) 56px; min-height: 76px; border: 2px solid var(--line); border-radius: var(--r-label); overflow: hidden; }
+/* quantity: a stack of sheets + stepper */
+.qty-box { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 18px; min-height: 150px; }
+.stack { position: relative; width: 70px; height: 96px; }
+.stack i { position: absolute; left: 0; bottom: 0; width: 64px; height: 90px; border-radius: 3px; background: var(--ink); border: 2px solid var(--ash); transform: translate(calc(var(--i) * 4px), calc(var(--i) * -4px)) rotate(calc((var(--i) - 2) * 1.5deg)); transition: transform 0.25s var(--ease-out); }
+.stack i:last-child { background: var(--yellow); border-color: var(--yellow); }
+.step { display: grid; grid-template-columns: 56px minmax(0, 1fr) 56px; min-height: 64px; border: 2px solid var(--line); border-radius: var(--r-label); overflow: hidden; }
 .step:focus-within { border-color: var(--paper); }
 .ofield .step input { border: 0; border-radius: 0; text-align: center; font-weight: 800; font-size: 1.5rem; min-height: 0; -moz-appearance: textfield; }
 .step input::-webkit-inner-spin-button, .step input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .step-b { border: 0; background: none; color: var(--paper); font: inherit; font-size: 1.6rem; cursor: pointer; transition: background 0.15s, color 0.15s; }
 .step-b:hover { background: var(--yellow); color: var(--ink); }
+
+/* address: a shipping label with the chosen poster as the stamp */
+fieldset.ship { position: relative; padding: clamp(18px, 2.4vw, 32px); border: 2px dashed var(--ash); border-radius: var(--r-panel); margin-top: 12px; }
+.ship-h { position: absolute; top: -0.75em; left: 24px; padding: 0 10px; background: var(--surface); }
+.ship-to { margin-bottom: 14px; }
+.ship-grid { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: var(--gap); max-width: calc(100% - 110px); }
+.stamp { position: absolute; top: clamp(18px, 2.4vw, 32px); right: clamp(18px, 2.4vw, 32px); width: 78px; padding: 5px; background: var(--paper); transform: rotate(4deg); border: 4px dotted var(--surface); outline: 2px solid var(--paper); outline-offset: -6px; }
+.stamp img { width: 100%; aspect-ratio: 720 / 1018; object-fit: cover; }
+@media (max-width: 640px) { .ship-grid { max-width: 100%; margin-top: 70px; } .stamp { width: 62px; } .papers, .qty-box { min-height: 0; } .pick-row { --w: 120px; } }
