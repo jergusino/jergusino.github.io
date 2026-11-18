@@ -1,0 +1,112 @@
+---
+layout: default
+title: Objednávka
+body_class: order-page
+permalink: /objednavka/
+no_closing: true
+summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti mailom."
+---
+{% assign posters = site.plagaty | sort: "title" %}
+<section class="sec-head sec-head--page">
+  <p class="label">Fyzický výtlačok plagátu</p>
+  <h1 class="h h--xl">Objednávka.</h1>
+</section>
+
+<section class="order">
+  <p class="order-intro">Vyplň údaje a pošli. Ozvem sa ti mailom s cenou, poštovným a platbou. Zatiaľ nič neplatíš.</p>
+
+  <form class="order-form" id="order-form" action="{{ '/objednavka/' | relative_url }}" method="post" novalidate data-endpoint="{{ site.order_endpoint }}" data-mail="{{ site.email }}">
+    <div class="order-grid">
+      <label class="field field--wide"><span class="field-l">Plagát</span>
+        <select name="poster" required>
+          {% for p in posters %}{% assign slug = p.name | remove: ".md" %}<option value="{{ p.title | escape }}" data-slug="{{ slug }}">{{ p.title }}</option>{% endfor %}
+        </select>
+      </label>
+      <label class="field"><span class="field-l">Formát</span>
+        <select name="size" required>{% for s in site.data.print.sizes %}<option>{{ s }}</option>{% endfor %}</select>
+      </label>
+      <label class="field"><span class="field-l">Počet kusov</span>
+        <input name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required>
+      </label>
+
+      <label class="field"><span class="field-l">Meno a priezvisko</span>
+        <input name="name" type="text" autocomplete="name" required maxlength="120">
+      </label>
+      <label class="field"><span class="field-l">E-mail</span>
+        <input name="email" type="email" autocomplete="email" required maxlength="160">
+      </label>
+      <label class="field"><span class="field-l">Telefón <em>(nepovinné)</em></span>
+        <input name="phone" type="tel" autocomplete="tel" maxlength="40">
+      </label>
+      <label class="field"><span class="field-l">Krajina</span>
+        <input name="country" type="text" autocomplete="country-name" value="Slovensko" required maxlength="60">
+      </label>
+
+      <label class="field field--wide"><span class="field-l">Ulica a číslo</span>
+        <input name="street" type="text" autocomplete="street-address" required maxlength="160">
+      </label>
+      <label class="field"><span class="field-l">PSČ</span>
+        <input name="zip" type="text" autocomplete="postal-code" required maxlength="20">
+      </label>
+      <label class="field"><span class="field-l">Mesto</span>
+        <input name="city" type="text" autocomplete="address-level2" required maxlength="80">
+      </label>
+
+      <label class="field field--wide"><span class="field-l">Poznámka <em>(nepovinné)</em></span>
+        <textarea name="note" rows="3" maxlength="600"></textarea>
+      </label>
+    </div>
+
+    <label class="trap" aria-hidden="true">Nechaj prázdne <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+
+    <label class="check"><input name="consent" type="checkbox" required><span>Súhlasím, že údaje použiješ len na vybavenie tejto objednávky. <a href="{{ '/sukromie/' | relative_url }}">Súkromie</a></span></label>
+
+    <p class="order-msg" id="order-msg" role="status" aria-live="polite" hidden></p>
+
+    <button class="btn btn--sm" type="submit"><span class="btn-t">Odoslať objednávku</span><span class="circ">{% include arrow.svg %}</span></button>
+  </form>
+
+  <div class="order-done" id="order-done" hidden>
+    <p class="h">Odoslané.</p>
+    <p class="order-intro">Ďakujem. Ozvem sa ti na tvoj e-mail s cenou a platbou.</p>
+    <a class="btn btn--sm" href="{{ '/plagaty/' | relative_url }}"><span class="btn-t">Späť na plagáty</span><span class="circ">{% include arrow.svg %}</span></a>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var f = document.getElementById('order-form'), msg = document.getElementById('order-msg'), done = document.getElementById('order-done');
+    if (!f) return;
+    var sel = f.elements.poster, want = new URLSearchParams(location.search).get('plagat');
+    if (want) Array.prototype.forEach.call(sel.options, function (o) { if (o.getAttribute('data-slug') === want) sel.value = o.value; });
+
+    function say(t) { msg.textContent = t; msg.hidden = !t; }
+    function mailto(d) {
+      var body = ['Plagát: ' + d.poster, 'Formát: ' + d.size + ', počet: ' + d.qty, 'Meno: ' + d.name, 'E-mail: ' + d.email, d.phone ? 'Telefón: ' + d.phone : '',
+        'Adresa: ' + d.street + ', ' + d.zip + ' ' + d.city + ', ' + d.country, d.note ? 'Poznámka: ' + d.note : ''].filter(Boolean).join('\n');
+      return 'mailto:' + f.dataset.mail + '?subject=' + encodeURIComponent('Objednávka: ' + d.poster + ' ×' + d.qty + ' (' + d.size + ')') + '&body=' + encodeURIComponent(body);
+    }
+
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!f.checkValidity()) { f.reportValidity(); return; }
+      var fd = new FormData(f), d = {}; fd.forEach(function (v, k) { d[k] = String(v).trim(); });
+      if (d.website) return;                                   // bot trap
+      var ep = f.dataset.endpoint;
+      if (!ep) { location.href = mailto(d); return; }           // no endpoint yet: fall back to a mail
+      var btn = f.querySelector('button[type=submit]'); btn.disabled = true; say('Odosielam…');
+      fetch(ep, { method: 'POST', body: new URLSearchParams(d) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j.ok) throw new Error(j.error || 'fail');
+          f.hidden = true; say(''); done.hidden = false; done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+        .catch(function () {
+          btn.disabled = false;
+          msg.innerHTML = '';
+          msg.append('Nepodarilo sa odoslať. Skús znova, alebo ');
+          var a = document.createElement('a'); a.href = mailto(d); a.textContent = 'pošli objednávku mailom'; msg.append(a, '.'); msg.hidden = false;
+        });
+    });
+  })();
+</script>

@@ -411,3 +411,29 @@ body.home .nav .pill::before { inset: -16px -22px; }
   .nav .pill[aria-current], .nav .pill[aria-current]:hover { background: var(--yellow); }
 }
 @media (max-width: 340px) { .pgrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── order form (/objednavka/) ─────────────────────────────────────────────── */
+.order { padding: 0 var(--m) calc(var(--m) * 2); max-width: 64rem; }
+.order-intro { margin-bottom: calc(var(--m) * 0.6); color: var(--paper-soft); }
+.order-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.field { display: grid; gap: 0.5em; align-content: start; }
+.field--wide { grid-column: 1 / -1; }
+.field-l { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ash); }
+.field-l em { font-style: normal; color: var(--stone); }
+.field input, .field select, .field textarea { font: inherit; font-size: 1.05rem; color: var(--paper); background: none; border: 2px solid var(--line); border-radius: var(--r-label); padding: 0.7em 0.9em; min-height: 48px; width: 100%; caret-color: var(--yellow); outline: none; -webkit-appearance: none; appearance: none; }
+.field select { background-image: linear-gradient(45deg, transparent 50%, var(--ash) 50%), linear-gradient(135deg, var(--ash) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 2.4em; }
+.field select option { background: var(--ink); color: var(--paper); }
+.field textarea { resize: vertical; }
+.field input:hover, .field select:hover, .field textarea:hover, .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--paper); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.check { display: flex; gap: 0.8em; align-items: flex-start; margin: calc(var(--m) * 0.5) 0; color: var(--paper-soft); font-size: 0.95rem; }
+.check input { flex: none; width: 22px; height: 22px; margin-top: 0.15em; accent-color: var(--yellow); }
+.check a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+.order-msg { margin-bottom: 1.2em; color: var(--paper); }
+.order-msg a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+.order button.btn, .order-done .btn { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+.order button.btn:disabled { opacity: 0.5; cursor: progress; }
+.order-done { display: grid; gap: var(--gap); justify-items: start; }
+.order-done[hidden], .order-form[hidden], .order-msg[hidden] { display: none; }
+@media (max-width: 640px) { .order-grid { grid-template-columns: 1fr; } }

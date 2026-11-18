@@ -10,6 +10,10 @@ handle: "@jergusino"
 instagram: "https://www.instagram.com/jergusino/"
 email: "mail@jergusino.com"
 
+# Order form (/objednavka/). Paste the Apps Script web-app URL here (see tools/order-endpoint.gs).
+# Empty = the form falls back to opening a mail.
+order_endpoint: ""
+
 # More links for the contact page, shown under Instagram. Empty for now.
 # Add one line per link, e.g.:
 #   - label: youtube

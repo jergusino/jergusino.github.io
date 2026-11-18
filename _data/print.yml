@@ -1,0 +1,4 @@
+# Print options for the order form (/objednavka/). Edit freely: one size per line.
+sizes:
+  - A3
+  - A2
