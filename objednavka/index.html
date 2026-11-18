@@ -29,7 +29,7 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
 
       <fieldset class="ofield sizes"><legend class="ofield-l">Formát <span class="pick-name" id="size-dims"></span></legend>
         <div class="papers">
-          {% for s in site.data.print.sizes %}<label class="paper-opt" style="--s: {{ s.scale }}"><input type="radio" name="size" value="{{ s.name }}" data-dims="{{ s.dims }}" required{% if s.name == site.data.print.default_size %} checked{% endif %}><span class="sheet"><b>{{ s.name }}</b></span></label>{% endfor %}
+          {% for s in site.data.print.sizes %}<label class="paper-opt" style="--s: {{ s.scale }}"><input type="radio" name="size" value="{{ s.name }}" data-dims="{{ s.dims }}" required{% if s.name == site.data.print.default_size %} checked{% endif %}><span class="sheet"><svg viewBox="0 0 100 141" aria-hidden="true"><path d="M2 2H78L98 22V139H2Z"/><path d="M78 2V22H98"/></svg><b>{{ s.name }}</b></span></label>{% endfor %}
         </div>
       </fieldset>
 
@@ -96,7 +96,17 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
     var all = Array.prototype.slice.call(row.querySelectorAll('.pick-card'));
     function radio(i) { return cards[i].querySelector('input'); }
     function cx(c) { return c.offsetLeft + c.offsetWidth / 2; }
-    function center(c, smooth) { row.scrollTo({ left: cx(c) - row.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' }); }
+    var anim = 0;
+    function glide(to, ms) {
+      cancelAnimationFrame(anim); row.classList.add('drag');
+      var from = row.scrollLeft, t0 = performance.now(); ms = ms || 520;
+      (function tick(now) {
+        var k = Math.min((now - t0) / ms, 1), e = 1 - Math.pow(1 - k, 4);
+        row.scrollLeft = from + (to - from) * e;
+        if (k < 1) anim = requestAnimationFrame(tick); else row.classList.remove('drag');
+      })(t0);
+    }
+    function center(c, smooth) { var to = cx(c) - row.clientWidth / 2; if (smooth) glide(to); else row.scrollLeft = to; }
     var cur = -1;
     function select(i) {
       if (i === cur) return; cur = i;
@@ -107,8 +117,8 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
       var setW = cards[n - 1].offsetLeft - cards[0].offsetLeft + (cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : 0);
       var mid = row.scrollLeft + row.clientWidth / 2;
       // keep the view inside the middle copy, so it never runs out
-      if (mid < cx(cards[0]) - setW / 2) { row.scrollLeft += setW; s0 += setW; mid += setW; }
-      else if (mid > cx(cards[n - 1]) + setW / 2) { row.scrollLeft -= setW; s0 -= setW; mid -= setW; }
+      if (mid < cx(cards[0]) - setW / 2) { cancelAnimationFrame(anim); row.classList.toggle('drag', dragging); row.scrollLeft += setW; s0 += setW; mid += setW; }
+      else if (mid > cx(cards[n - 1]) + setW / 2) { cancelAnimationFrame(anim); row.classList.toggle('drag', dragging); row.scrollLeft -= setW; s0 -= setW; mid -= setW; }
       var step = cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : 1, best = null, bd = 1e9;
       all.forEach(function (c) {
         var d = Math.abs(cx(c) - mid) / step, t = Math.min(d, 1.5) / 1.5;
@@ -125,9 +135,20 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
 
     // mouse drag (touch scrolls natively)
     var dragging = false, moved = 0, x0 = 0, s0 = 0;
-    row.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button) return; dragging = true; moved = 0; x0 = e.clientX; s0 = row.scrollLeft; row.classList.add('drag'); row.setPointerCapture(e.pointerId); });
-    row.addEventListener('pointermove', function (e) { if (!dragging) return; moved = Math.max(moved, Math.abs(e.clientX - x0)); row.scrollLeft = s0 - (e.clientX - x0); });
-    function end() { if (!dragging) return; dragging = false; row.classList.remove('drag'); var b = row.querySelector('.is-on'); if (b) center(b, true); }
+    var vx = 0, lx = 0, lt = 0;
+    row.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button) return; cancelAnimationFrame(anim); dragging = true; moved = 0; x0 = lx = e.clientX; lt = performance.now(); vx = 0; s0 = row.scrollLeft; row.classList.add('drag'); row.setPointerCapture(e.pointerId); });
+    row.addEventListener('pointermove', function (e) {
+      if (!dragging) return; var now = performance.now(), dt = Math.max(now - lt, 1);
+      vx = 0.8 * ((e.clientX - lx) / dt) + 0.2 * vx; lx = e.clientX; lt = now;
+      moved = Math.max(moved, Math.abs(e.clientX - x0)); row.scrollLeft = s0 - (e.clientX - x0);
+    });
+    function end() {
+      if (!dragging) return; dragging = false;
+      if (performance.now() - lt > 80) vx = 0;                   // held still before letting go
+      var step = cards[1].offsetLeft - cards[0].offsetLeft, mid = row.scrollLeft + row.clientWidth / 2 - vx * 260;
+      var best = all[0], bd = 1e9; all.forEach(function (c) { var d = Math.abs(cx(c) - mid); if (d < bd) { bd = d; best = c; } });
+      glide(cx(best) - row.clientWidth / 2, 420 + Math.min(Math.abs(vx) * 200, 380));
+    }
     row.addEventListener('pointerup', end); row.addEventListener('pointercancel', end);
     all.forEach(function (c) {
       c.addEventListener('click', function (e) { e.preventDefault(); if (moved > 6) { moved = 0; return; } center(c, true); if (!c.classList.contains('ghost')) c.querySelector('input').focus({ preventScroll: true }); });

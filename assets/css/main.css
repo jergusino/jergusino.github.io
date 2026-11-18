@@ -458,13 +458,13 @@ fieldset.ofield legend { padding: 0; margin-bottom: 0.5em; }
 .papers { display: flex; align-items: flex-end; gap: clamp(10px, 1.6vw, 22px); min-height: 150px; }
 .paper-opt { --W: 96px; cursor: pointer; display: block; }
 .paper-opt input { position: absolute; opacity: 0; pointer-events: none; }
-.sheet { position: relative; display: grid; place-items: center; width: calc(var(--W) * var(--s)); aspect-ratio: 1 / 1.414; background: transparent; border: 2px solid var(--ash); border-radius: 3px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); transition: transform 0.2s var(--ease-out), background 0.15s, border-color 0.15s; }
-.sheet::after { content: ""; position: absolute; top: -2px; right: -2px; width: 18px; height: 18px; background: linear-gradient(225deg, transparent 50%, var(--ash) 50%, var(--ash) calc(50% + 2px), var(--line) calc(50% + 2px)); }
-.sheet b { font-weight: 800; letter-spacing: -0.03em; color: var(--paper); font-size: calc(1rem + 1rem * var(--s)); }
-.paper-opt:hover .sheet { border-color: var(--paper); transform: translateY(-4px); }
-.paper-opt:has(input:checked) .sheet { background: var(--yellow); border-color: var(--yellow); transform: translateY(-4px); }
-.paper-opt:has(input:checked) .sheet::after { background: linear-gradient(225deg, transparent 50%, #b89a00 50%); }
-.paper-opt:has(input:checked) .sheet b { color: var(--ink); }
+.sheet { position: relative; display: grid; place-items: center; width: calc(var(--W) * var(--s)); aspect-ratio: 100 / 141; transition: transform 0.25s var(--ease-out); }
+.sheet svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ash); stroke-width: 3; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: stroke 0.15s; }
+.sheet b { position: relative; font-weight: 800; letter-spacing: -0.03em; color: var(--ash); font-size: calc(1rem + 1rem * var(--s)); transition: color 0.15s; }
+.paper-opt:hover .sheet { transform: translateY(-4px); }
+.paper-opt:hover .sheet svg { stroke: var(--paper); } .paper-opt:hover .sheet b { color: var(--paper); }
+.paper-opt:has(input:checked) .sheet { transform: translateY(-4px); }
+.paper-opt:has(input:checked) .sheet svg { stroke: var(--yellow); } .paper-opt:has(input:checked) .sheet b { color: var(--yellow); }
 .paper-opt:has(input:focus-visible) .sheet { outline: 3px solid var(--paper); outline-offset: 4px; }
 
 /* quantity: a stack of sheets + stepper */
@@ -483,10 +483,11 @@ fieldset.ofield legend { padding: 0; margin-bottom: 0.5em; }
 fieldset.ship { position: relative; padding: clamp(18px, 2.4vw, 32px); border: 2px dashed var(--ash); border-radius: var(--r-panel); margin-top: 12px; }
 .ship-h { position: absolute; top: -0.75em; left: 24px; padding: 0 10px; background: var(--surface); }
 .ship-to { margin-bottom: 14px; }
-.ship-grid { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: var(--gap); max-width: calc(100% - 110px); }
-.stamp { position: absolute; top: clamp(18px, 2.4vw, 32px); right: clamp(18px, 2.4vw, 32px); width: 78px; padding: 5px; background: var(--paper); transform: rotate(4deg); border: 4px dotted var(--surface); outline: 2px solid var(--paper); outline-offset: -6px; }
+.ship-grid { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: var(--gap); }
+.ship-to { padding-right: 80px; }
+.stamp { position: absolute; z-index: 1; top: -26px; right: 22px; width: 58px; padding: 5px; background: var(--paper); transform: rotate(4deg); border: 4px dotted var(--surface); outline: 2px solid var(--paper); outline-offset: -6px; }
 .stamp img { width: 100%; aspect-ratio: 720 / 1018; object-fit: cover; }
-@media (max-width: 640px) { .ship-grid { max-width: 100%; margin-top: 70px; } .stamp { width: 62px; } .papers, .qty-box { min-height: 0; } .pick-row { --w: 120px; } }
+@media (max-width: 640px) { .ship-grid { grid-template-columns: 6.5em minmax(0, 1fr); } .stamp { width: 50px; right: 16px; } .papers, .qty-box { min-height: 0; } .pick-row { --w: 120px; } }
 
 /* desktop: product on the left, delivery + contact on the right */
 @media (min-width: 1000px) {
