@@ -1,5 +1,5 @@
 {% assign items = site.plagaty | sort: "date" | reverse %}
-<ul class="pgrid">
+<ul class="pgrid{% if include.class %} {{ include.class }}{% endif %}">
   {% for p in items limit: include.limit %}
   {% unless p.placeholder or p.type == 'spolupraca' %}
   {% assign th = p.thumb | default: p.cover %}

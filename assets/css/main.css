@@ -142,6 +142,13 @@ main:focus { outline: none; }
 @media (max-width: 700px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .circ { width: 56px; height: 56px; } }
 @media (min-width: 1300px) { .pgrid:not(.pgrid--flat) { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 @media (min-width: 1700px) { .pgrid:not(.pgrid--flat) { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+/* home: show exactly 2 rows = 2 × the column count above (home renders 12 = 2 × 6 max) */
+.pgrid--2rows .pcard:nth-child(n+13) { display: none; }
+@media (width < 1700px) { .pgrid--2rows .pcard:nth-child(n+11) { display: none; } }
+@media (width < 1300px) { .pgrid--2rows .pcard:nth-child(n+9) { display: none; } }
+@media (max-width: 1100px) { .pgrid--2rows .pcard:nth-child(n+7) { display: none; } }
+@media (max-width: 700px) { .pgrid--2rows .pcard:nth-child(n+5) { display: none; } }
+@media (max-width: 340px) { .pgrid--2rows .pcard:nth-child(n+3) { display: none; } }
 .empty { padding: var(--m); }
 .empty[hidden], .controls[hidden] { display: none; }
 
