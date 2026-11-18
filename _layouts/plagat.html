@@ -45,6 +45,15 @@ layout: default
       {% if page.tools %}<dt>Nástroje</dt><dd>{% for tl in page.tools %}<span class="chip">{{ tl }}</span>{% endfor %}</dd>{% endif %}
     </dl>
     {{ content }}
+    {% unless page.no_buy %}
+    {% comment %} Buy button: mail by default. Set `shop: <url>` in a poster's front matter to link to a shop instead; `no_buy: true` hides it. {% endcomment %}
+    {% capture buy_subject %}Výtlačok plagátu: {{ page.title }}{% endcapture %}
+    {% capture buy_body %}Ahoj, mám záujem o fyzický výtlačok plagátu „{{ page.title }}“.{% endcapture %}
+    {% if page.shop %}{% assign buy_href = page.shop %}{% else %}{% capture buy_href %}mailto:{{ site.email }}?subject={{ buy_subject | uri_escape }}&body={{ buy_body | uri_escape }}{% endcapture %}{% endif %}
+    <ul class="links links--buy">
+      <li><a class="btn btn--sm" href="{{ buy_href }}"{% if page.shop %} rel="noopener"{% endif %}><span class="btn-t">Kúpiť výtlačok</span><span class="circ">{% include arrow.svg %}</span></a></li>
+    </ul>
+    {% endunless %}
     {% if page.links %}
     <ul class="links">
       {% for l in page.links %}<li><a class="btn btn--sm" href="{{ l.url }}" rel="noopener"><span class="btn-t">{{ l.label }}</span><span class="circ">{% include arrow.svg %}</span></a></li>{% endfor %}

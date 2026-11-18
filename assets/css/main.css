@@ -204,6 +204,7 @@ main:focus { outline: none; }
 .meta dt { color: var(--muted); } .meta dd { margin: 0; color: var(--paper); font-size: 1.1rem; display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { display: inline-block; padding: 0.5em 0.8em 0.42em; border: 2px solid var(--line); border-radius: var(--r-label); color: var(--paper); }
 .links { list-style: none; display: flex; flex-wrap: wrap; gap: 20px 28px; margin-top: 2em !important; }
+.links--buy + .links { margin-top: 1.2em !important; }
 
 /* pager: previous / next as circle buttons with the poster title under a mono label */
 .pager { display: flex; justify-content: space-between; gap: 24px; padding: calc(var(--m) * 1.6) var(--m) 0; }
