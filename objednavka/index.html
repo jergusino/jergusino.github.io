@@ -17,42 +17,42 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
 
   <form class="order-form" id="order-form" action="{{ '/objednavka/' | relative_url }}" method="post" novalidate data-endpoint="{{ site.order_endpoint }}" data-mail="{{ site.email }}">
     <div class="order-grid">
-      <label class="field field--wide"><span class="field-l">Plagát</span>
+      <label class="ofield ofield--wide"><span class="ofield-l">Plagát</span>
         <select name="poster" required>
           {% for p in posters %}{% assign slug = p.name | remove: ".md" %}<option value="{{ p.title | escape }}" data-slug="{{ slug }}">{{ p.title }}</option>{% endfor %}
         </select>
       </label>
-      <label class="field"><span class="field-l">Formát</span>
+      <label class="ofield"><span class="ofield-l">Formát</span>
         <select name="size" required>{% for s in site.data.print.sizes %}<option>{{ s }}</option>{% endfor %}</select>
       </label>
-      <label class="field"><span class="field-l">Počet kusov</span>
+      <label class="ofield"><span class="ofield-l">Počet kusov</span>
         <input name="qty" type="number" min="1" max="20" value="1" inputmode="numeric" required>
       </label>
 
-      <label class="field"><span class="field-l">Meno a priezvisko</span>
+      <label class="ofield"><span class="ofield-l">Meno a priezvisko</span>
         <input name="name" type="text" autocomplete="name" required maxlength="120">
       </label>
-      <label class="field"><span class="field-l">E-mail</span>
+      <label class="ofield"><span class="ofield-l">E-mail</span>
         <input name="email" type="email" autocomplete="email" required maxlength="160">
       </label>
-      <label class="field"><span class="field-l">Telefón <em>(nepovinné)</em></span>
+      <label class="ofield"><span class="ofield-l">Telefón <em>(nepovinné)</em></span>
         <input name="phone" type="tel" autocomplete="tel" maxlength="40">
       </label>
-      <label class="field"><span class="field-l">Krajina</span>
+      <label class="ofield"><span class="ofield-l">Krajina</span>
         <input name="country" type="text" autocomplete="country-name" value="Slovensko" required maxlength="60">
       </label>
 
-      <label class="field field--wide"><span class="field-l">Ulica a číslo</span>
+      <label class="ofield ofield--wide"><span class="ofield-l">Ulica a číslo</span>
         <input name="street" type="text" autocomplete="street-address" required maxlength="160">
       </label>
-      <label class="field"><span class="field-l">PSČ</span>
+      <label class="ofield"><span class="ofield-l">PSČ</span>
         <input name="zip" type="text" autocomplete="postal-code" required maxlength="20">
       </label>
-      <label class="field"><span class="field-l">Mesto</span>
+      <label class="ofield"><span class="ofield-l">Mesto</span>
         <input name="city" type="text" autocomplete="address-level2" required maxlength="80">
       </label>
 
-      <label class="field field--wide"><span class="field-l">Poznámka <em>(nepovinné)</em></span>
+      <label class="ofield ofield--wide"><span class="ofield-l">Poznámka <em>(nepovinné)</em></span>
         <textarea name="note" rows="3" maxlength="600"></textarea>
       </label>
     </div>
