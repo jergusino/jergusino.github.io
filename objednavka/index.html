@@ -19,7 +19,7 @@ summary: "Objednaj si fyzický výtlačok plagátu. Vyplň údaje a ozvem sa ti 
     <div class="order-grid">
       <fieldset class="ofield ofield--wide pick"><legend class="ofield-l">Plagát <span class="pick-name" id="pick-name"></span></legend>
         <div class="pick-row">
-          {% for p in posters %}{% assign slug = p.name | remove: ".md" %}<label class="pick-card"{% if p.color %} style="--c: {{ p.color }}"{% endif %}><input type="radio" name="poster" value="{{ p.title | escape }}" data-slug="{{ slug }}" required{% if forloop.first %} checked{% endif %}><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1018" loading="lazy"><span class="sr">{{ p.title }}</span></label>{% endfor %}
+          {% for p in posters %}{% assign slug = p.slug %}<label class="pick-card"{% if p.color %} style="--c: {{ p.color }}"{% endif %}><input type="radio" name="poster" value="{{ p.title | escape }}" data-slug="{{ slug }}" required{% if forloop.first %} checked{% endif %}><img src="{{ p.thumb | relative_url }}" alt="" width="720" height="1018" loading="lazy"><span class="sr">{{ p.title }}</span></label>{% endfor %}
         </div>
       </fieldset>
       <fieldset class="ofield"><legend class="ofield-l">Formát</legend>
