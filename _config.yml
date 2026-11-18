@@ -12,7 +12,7 @@ email: "mail@jergusino.com"
 
 # Order form (/objednavka/). Paste the Apps Script web-app URL here (see tools/order-endpoint.gs).
 # Empty = the form falls back to opening a mail.
-order_endpoint: ""
+order_endpoint: "https://script.google.com/macros/s/AKfycbwthT3ss4e_CmtbgO2aQzr8tULvKznAqb7kwJC7q9m113UMT2ZJPyF5zxo6gcZlK670/exec"
 
 # More links for the contact page, shown under Instagram. Empty for now.
 # Add one line per link, e.g.:
