@@ -44,3 +44,16 @@
   vysledok: "1 príspevok na @laland_cafe."
   posts:
     - { kind: p }   # static post, no link yet
+
+- slug: tally
+  name: Tally
+  logo: /assets/img/brands/tally.svg
+  year: 2026
+  what: "Aplikácia, ktorá ti pripomína, koľko scrolluješ"
+  did: [Správa Instagram účtu]
+  instagram: https://www.instagram.com/try_tally/
+  handle: "@try_tally"
+  zadanie: "Tally je aplikácia, ktorá pomáha s scrollovaním a pripomína ti, koľko času a obsahu si už prešiel. Potrebovali niekoho, kto im vedie celý Instagram účet."
+  riesenie: "Kompletná správa Instagram účtu: obsah a jeho vedenie v jednom vizuálnom jazyku."
+  vysledok: "Správa celého účtu @try_tally."
+  posts: []
