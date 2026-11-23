@@ -10,13 +10,12 @@
   "d1_databases": [
     { "binding": "DB", "database_name": "newsletter-signups", "database_id": "9bf14243-b6ec-4a55-b522-ad196aa045f7" }
   ],
-  // Sender must be on a domain onboarded in Email Service > Email Sending.
-  "send_email": [{ "name": "EMAIL", "allowed_sender_addresses": ["noreply@jergusino.com"] }],
   "vars": {
     "SITE": "https://jergusino.com",
     "API": "https://api.jergusino.com",
     "FROM": "noreply@jergusino.com",
     "OWNER": "mail@jergusino.com"
   }
-  // Secret: npx wrangler secret put TOKEN_SECRET
+  // Secrets: npx wrangler secret put BREVO_API_KEY  and  npx wrangler secret put TOKEN_SECRET
+  // Sender noreply@jergusino.com must be on the domain authenticated in Brevo (DKIM records already exist).
 }

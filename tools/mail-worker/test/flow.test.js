@@ -1,20 +1,25 @@
-// End-to-end check against a running `npx wrangler dev --var API:http://localhost:8787` (local D1, simulated mail).
-// Run: npm test   (BASE and LOG can be overridden by env vars)
-import { test } from 'node:test';
+// End-to-end check against a running local Worker:
+//   npx wrangler dev --var API:http://localhost:8787 --var MAIL_API_URL:http://localhost:9999/send
+// The test hosts the fake Brevo endpoint on :9999 and reads every mail the Worker sends from it.
+// Run: npm test   (BASE can be overridden by an env var)
+import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import http from 'node:http';
 
 const BASE = process.env.BASE || 'http://localhost:8787';
-const MAILDIR = process.env.MAILDIR || '.wrangler/tmp/email';   // where wrangler dev writes simulated mails
-
-function newestMailText() {
-  const files = [];
-  const walk = d => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : p.includes('email-text') && files.push(p); } };
-  walk(MAILDIR);
-  files.sort((a, b) => statSync(a).mtimeMs - statSync(b).mtimeMs);
-  return readFileSync(files.at(-1), 'utf8');
-}
+const sent = [];
+const mockBrevo = http.createServer((req, res) => {
+  let b = '';
+  req.on('data', c => (b += c));
+  req.on('end', () => {
+    sent.push(JSON.parse(b || '{}'));
+    res.writeHead(201, { 'content-type': 'application/json' }).end('{"messageId":"test"}');
+  });
+});
+before(() => new Promise(r => mockBrevo.listen(9999, r)));
+after(() => mockBrevo.close());
+const lastMail = () => sent.at(-1);
+const mailText = () => lastMail().textContent;
 const form = o => ({ method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Origin: 'https://jergusino.com' }, body: new URLSearchParams(o) });
 const post = async (path, o) => (await fetch(BASE + path, form(o))).json();
 
@@ -40,7 +45,7 @@ test('double opt-in: subscribe -> confirm page -> confirm', async () => {
   const email = `test+${Date.now()}@jergusino.com`;
   assert.deepEqual(await post('/subscribe', { email, consent: 'on', list: 'font-tool', source: 'test' }), { ok: true });
   await new Promise(r => setTimeout(r, 800));
-  const mail = newestMailText();
+  const mail = mailText();
   assert.match(mail, /font tool/);
   const links = [...mail.matchAll(/\/confirm\?t=([A-Za-z0-9_-]+)/g)].map(m => m[1]);
   assert.ok(links.length, 'confirm link in simulated mail');
@@ -55,7 +60,7 @@ test('double opt-in: subscribe -> confirm page -> confirm', async () => {
   assert.match(await done.text(), /Si na zozname/);
 
   await new Promise(r => setTimeout(r, 500));
-  const freebie = newestMailText();                                // confirming also mails the freebie
+  const freebie = mailText();                                // confirming also mails the freebie
   assert.match(freebie, /jergusino\.com\/font-tool\/tool\//);
   assert.match(freebie, /Odhlásiť sa: .*\/unsubscribe\?e=/);
 

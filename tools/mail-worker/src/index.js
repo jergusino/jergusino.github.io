@@ -11,8 +11,8 @@
  *   GET  /                   health check
  *   cron (hourly)            deletes pending signups older than 48 h (promise on /sukromie/)
  *
- * Bindings: DB (D1 newsletter-signups), EMAIL (send_email). Vars: SITE, API, FROM, OWNER.
- * Secret: TOKEN_SECRET (signs unsubscribe links).
+ * Bindings: DB (D1 newsletter-signups). Vars: SITE, API, FROM, OWNER. Optional MAIL_API_URL (tests only).
+ * Secrets: BREVO_API_KEY (sends mail via Brevo's transactional API), TOKEN_SECRET (signs unsubscribe links).
  */
 
 // Lists people can join. `consent` is the wording stored when the form sends no consent_text.
@@ -131,7 +131,7 @@ async function subscribe(p, env) {
 
   const link = `${env.API}/confirm?t=${token}`;
   try {
-    await env.EMAIL.send({
+    await sendMail(env, {
       to: email,
       from: { email: env.FROM, name: 'Jergušino' },
       replyTo: env.OWNER,
@@ -158,7 +158,7 @@ async function subscribe(p, env) {
       }),
     });
   } catch (err) {
-    console.error('send failed', err && err.code, err && err.message);
+    console.error('send failed', err && err.message);
     await db.prepare('DELETE FROM pending WHERE email = ? AND list = ?').bind(email, list).run();
     return { ok: false, error: 'mail' };
   }
@@ -213,7 +213,7 @@ async function sendFreebie(env, email, list, cfg) {
   const fb = cfg.freebie;
   try {
     const unsub = await unsubscribeUrl(env, email, list);
-    await env.EMAIL.send({
+    await sendMail(env, {
       to: email,
       from: { email: env.FROM, name: 'Jergušino' },
       replyTo: env.OWNER,
@@ -230,7 +230,7 @@ async function sendFreebie(env, email, list, cfg) {
     });
     return true;
   } catch (err) {
-    console.error('freebie send failed', err && err.code, err && err.message);
+    console.error('freebie send failed', err && err.message);
     return false;
   }
 }
@@ -290,7 +290,7 @@ async function order(p, env) {
   body.push('', 'Odpoveď na tento mail ide zákazníkovi.');
 
   try {
-    await env.EMAIL.send({
+    await sendMail(env, {
       to: env.OWNER,
       from: { email: env.FROM, name: 'Objednávky jergusino.com' },
       replyTo: d.email,
@@ -298,13 +298,32 @@ async function order(p, env) {
       text: body.join('\n'),
     });
   } catch (err) {
-    console.error('order send failed', err && err.code, err && err.message);
+    console.error('order send failed', err && err.message);
     return { ok: false, error: 'mail' };
   }
   return { ok: true };
 }
 
 // ── helpers ─────────────────────────────────────────────────────────────────────────────
+
+/** Sends one mail through Brevo's transactional API (free tier). Throws on any non-2xx answer. */
+async function sendMail(env, { to, from, replyTo, subject, text, html }) {
+  const body = {
+    sender: { email: from.email, name: from.name },
+    to: [{ email: to }],
+    subject,
+    textContent: text,
+    htmlContent: html,
+  };
+  if (replyTo) body.replyTo = { email: replyTo };
+  const r = await fetch(env.MAIL_API_URL || 'https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`mail ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  return r.json().catch(() => ({}));
+}
 
 async function params(req) {
   const type = req.headers.get('content-type') || '';
