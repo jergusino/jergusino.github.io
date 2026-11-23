@@ -6,3 +6,8 @@ Gemfile.lock
 node_modules/
 vendor/
 .DS_Store
+
+# mail worker
+tools/mail-worker/node_modules/
+tools/mail-worker/.wrangler/
+tools/mail-worker/.dev.vars

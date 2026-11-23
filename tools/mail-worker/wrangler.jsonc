@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jergusino-mail",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-23",
+  "observability": { "enabled": true },
+  "routes": [{ "pattern": "api.jergusino.com", "custom_domain": true }],
+  "workers_dev": true,
+  "triggers": { "crons": ["17 * * * *"] },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "newsletter-signups", "database_id": "9bf14243-b6ec-4a55-b522-ad196aa045f7" }
+  ],
+  // Sender must be on a domain onboarded in Email Service > Email Sending.
+  "send_email": [{ "name": "EMAIL", "allowed_sender_addresses": ["noreply@jergusino.com"] }],
+  "vars": {
+    "SITE": "https://jergusino.com",
+    "API": "https://api.jergusino.com",
+    "FROM": "noreply@jergusino.com",
+    "OWNER": "mail@jergusino.com"
+  }
+  // Secret: npx wrangler secret put TOKEN_SECRET
+}

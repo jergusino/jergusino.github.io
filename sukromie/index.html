@@ -24,15 +24,15 @@ summary: "Čo robím s tvojimi údajmi na jergusino.com a v newsletteri."
   <p>Tvoju adresu a&nbsp;správu použijem len na to, aby som ti odpovedal, a&nbsp;neposielam ti potom nič, o&nbsp;čo si nepožiadal.</p>
 
   <h2>Objednávka výtlačku</h2>
-  <p>Keď vyplníš objednávkový formulár, uložím a&nbsp;použijem tvoje meno, e-mail, prípadne telefón, adresu doručenia a&nbsp;poznámku len na vybavenie objednávky a&nbsp;doručenie. Formulár sa po odoslaní spojí so službou Google Apps Script (Google, USA, v&nbsp;rámci EU-US Data Privacy Framework), ktorá mi objednávku pošle e-mailom. Právny základ je plnenie zmluvy a&nbsp;kroky pred jej uzavretím (čl. 6 ods. 1 písm. b&nbsp;GDPR). Údaje nikomu nedávam, okrem prepravcu, ktorý potrebuje adresu. Zmažem ich, keď už ich nepotrebujem na objednávku a&nbsp;zákonné účtovné povinnosti.</p>
+  <p>Keď vyplníš objednávkový formulár, uložím a&nbsp;použijem tvoje meno, e-mail, prípadne telefón, adresu doručenia a&nbsp;poznámku len na vybavenie objednávky a&nbsp;doručenie. Formulár sa po odoslaní spojí so službou Cloudflare Workers (Cloudflare, USA, v&nbsp;rámci EU-US Data Privacy Framework), ktorá mi objednávku pošle e-mailom cez Cloudflare Email Service. Objednávku si neukladá, len ju prepošle. Právny základ je plnenie zmluvy a&nbsp;kroky pred jej uzavretím (čl. 6 ods. 1 písm. b&nbsp;GDPR). Údaje nikomu nedávam, okrem prepravcu, ktorý potrebuje adresu. Zmažem ich, keď už ich nepotrebujem na objednávku a&nbsp;zákonné účtovné povinnosti.</p>
 
   <h2>Newsletter</h2>
   <p>Keď sa prihlásiš, uložím si tvoj e-mail, čas prihlásenia, stránku, z&nbsp;ktorej si sa prihlásil, a&nbsp;znenie súhlasu, ktorý si zaškrtol. Používam ich len na to, aby som ti posielal súbory zadarmo a&nbsp;krátky e-mail raz týždenne. Právny základ je tvoj súhlas (čl. 6 ods. 1 písm. a&nbsp;GDPR). Prihlásiť sa môžeš od 16 rokov.</p>
-  <p>Zoznam je v&nbsp;tabuľke v&nbsp;mojom účte Google (Google, USA, v&nbsp;rámci EU-US Data Privacy Framework). E-maily odchádzajú cez Brevo (Francúzsko) alebo Gmail. Nikomu inému tvoj e-mail nedávam ani nepredávam.</p>
+  <p>Zoznam je v&nbsp;databáze Cloudflare D1 v&nbsp;mojom účte Cloudflare (Cloudflare, USA, v&nbsp;rámci EU-US Data Privacy Framework). Potvrdzovací e-mail odchádza cez Cloudflare Email Service, newsletter cez Brevo (Francúzsko). Nikomu inému tvoj e-mail nedávam ani nepredávam.</p>
   <p>Údaje mám, kým sa neodhlásiš. Prihlásenie, ktoré do 48 hodín nepotvrdíš, zmažem. Odhlásiť sa môžeš jedným klikom cez odkaz v&nbsp;každom e-maile alebo mi napíš.</p>
 
   <h2>Tvoje práva</h2>
   <p>Môžeš chcieť vedieť, čo o&nbsp;tebe mám, dať to opraviť alebo vymazať a&nbsp;súhlas kedykoľvek odvolať. Stačí napísať na <a href="mailto:{{ site.email }}">{{ site.email }}</a>. Ak si myslíš, že s&nbsp;tvojimi údajmi zaobchádzam zle, môžeš sa sťažovať na <a href="https://dataprotection.gov.sk" rel="noopener">Úrad na ochranu osobných údajov SR</a>.</p>
 
-  <p class="label">Aktualizované 18. 11. 2026</p>
+  <p class="label">Aktualizované 23. 11. 2026</p>
 </article>

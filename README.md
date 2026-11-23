@@ -90,6 +90,10 @@ Needs Ruby. Not needed to publish.
 - Motion: scroll reveal (`.rv`) and asterisks that turn on scroll (`.spin`).
 - Slovak typography: non-breaking space after one-letter words (k s v z o u a i) in new copy.
 
+## Order form and newsletter mail
+
+The order form (`/objednavka/`) and the newsletter / wishlist signups talk to a Cloudflare Worker at `https://api.jergusino.com` (code and setup in `tools/mail-worker/`). It mails orders to `mail@jergusino.com` and sends the "potvrď prihlásenie" mail (double opt-in, link valid 48 hours). Signups live in the Cloudflare D1 database `newsletter-signups`.
+
 ## Privacy
 
 The site loads nothing from other servers: fonts and images are self-hosted, there is no analytics and no cookies, so no cookie banner is needed. Keep it that way: don't add Google Fonts, Google Analytics, embeds or other third-party scripts (each one sends the visitor's IP address to that company, which needs consent in the EU). What the site and the newsletter do with personal data is written on `/sukromie/` (`sukromie/index.html`); update it if that changes.
