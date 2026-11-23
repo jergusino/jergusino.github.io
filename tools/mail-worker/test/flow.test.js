@@ -54,6 +54,11 @@ test('double opt-in: subscribe -> confirm page -> confirm', async () => {
   assert.equal(done.status, 200);
   assert.match(await done.text(), /Si na zozname/);
 
+  await new Promise(r => setTimeout(r, 500));
+  const freebie = newestMailText();                                // confirming also mails the freebie
+  assert.match(freebie, /jergusino\.com\/font-tool\/tool\//);
+  assert.match(freebie, /Odhlásiť sa: .*\/unsubscribe\?e=/);
+
   const again = await fetch(BASE + '/confirm', form({ t }));
   assert.equal(again.status, 410);                               // token is single-use
   assert.deepEqual(await post('/subscribe', { email, consent: 'on', list: 'font-tool' }), { ok: true });   // already confirmed: no-op

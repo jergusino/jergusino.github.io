@@ -26,11 +26,27 @@ export const LISTS = {
     name: 'Font tool',
     consent: 'Súhlasil s posielaním súborov a noviniek e-mailom',
     what: 'font tool a newsletter: súbory zadarmo a krátky e-mail raz týždenne',
+    freebie: {
+      subject: 'Tvoj Font Tool od Jergušina',
+      label: 'Súbory zadarmo · Font Tool',
+      title: 'Tvoj Font Tool.',
+      text: 'Nahraj doň font (.ttf alebo .otf) a tool doň dorobí chýbajúce slovenské písmená z jeho vlastných častí. Font sa spracuje priamo v tvojom prehliadači.',
+      cta: 'otvoriť Font Tool',
+      url: 'https://jergusino.com/font-tool/tool/',
+    },
   },
   'palette-pack': {
     name: 'Palette pack',
     consent: 'Súhlasil s posielaním súborov a noviniek e-mailom',
     what: 'palette pack a newsletter: súbory zadarmo a krátky e-mail raz týždenne',
+    freebie: {
+      subject: 'Tvoje palety FARBY od Jergušina',
+      label: 'Súbory zadarmo · Palette pack',
+      title: 'Tvoje palety.',
+      text: '12 paliet, ktoré spolu fungujú, každá s 5 farbami a ich HEX a RGB kódmi. Na stránke si stiahneš PDF a kliknutím na farbu skopíruješ jej kód.',
+      cta: 'stiahnuť palety',
+      url: 'https://jergusino.com/palette-pack/pack/',
+    },
   },
   'tally-wishlist': {
     name: 'Tally',
@@ -133,7 +149,13 @@ async function subscribe(p, env) {
         'Jergušino',
         `${env.SITE}/sukromie/`,
       ].join('\n'),
-      html: mailHtml(cfg, link),
+      html: mailShell(env, {
+        label: cfg.name,
+        title: 'Potvrď prihlásenie.',
+        text: `Niekto (dúfam, že ty) prihlásil túto adresu na: ${esc(cfg.what)}.`,
+        cta: { text: 'potvrdiť e-mail', url: link },
+        note: `Odkaz platí ${PENDING_HOURS} hodín. Ak si sa neprihlásil ty, ignoruj tento e-mail a adresu zmažem.`,
+      }),
     });
   } catch (err) {
     console.error('send failed', err && err.code, err && err.message);
@@ -174,11 +196,43 @@ async function confirm(token, env) {
     db.prepare('DELETE FROM pending WHERE id = ?').bind(row.id),
   ]);
   const cfg = LISTS[row.list] || LISTS.newsletter;
+  const fb = cfg.freebie;
+  const mailed = fb ? await sendFreebie(env, row.email, row.list, cfg) : false;
+  const next = fb
+    ? `<p>${mailed ? 'Poslal som ti to aj e-mailom. ' : ''}Tu je to hneď:</p><p><a class="cta" href="${fb.url}">${esc(fb.cta)} →</a></p>`
+    : `<p>${row.list === 'tally-wishlist' ? 'Napíšem ti, keď bude Tally dostupné.' : 'Ďakujem. Prvý e-mail príde čoskoro.'}</p>`;
   return page(env, 'Potvrdené', `
     <p class="label">${esc(cfg.name)}</p>
     <h1>Hotovo. Si na zozname.</h1>
-    <p>${row.list === 'tally-wishlist' ? 'Napíšem ti, keď bude Tally dostupné.' : 'Ďakujem. Prvý e-mail príde čoskoro.'}</p>
+    ${next}
     <p><a href="${env.SITE}/">← späť na jergusino.com</a></p>`);
+}
+
+/** The "súbory zadarmo" mail, sent right after the address is confirmed. Never throws: the page shows the link anyway. */
+async function sendFreebie(env, email, list, cfg) {
+  const fb = cfg.freebie;
+  try {
+    const unsub = await unsubscribeUrl(env, email, list);
+    await env.EMAIL.send({
+      to: email,
+      from: { email: env.FROM, name: 'Jergušino' },
+      replyTo: env.OWNER,
+      subject: fb.subject,
+      text: ['Ahoj,', '', `${fb.cta}: ${fb.url}`, '', fb.text, '', 'Odkaz si ulož, funguje stále.', '', 'Jergušino', '', `Odhlásiť sa: ${unsub}`].join('\n'),
+      html: mailShell(env, {
+        label: fb.label,
+        title: fb.title,
+        text: esc(fb.text),
+        cta: { text: fb.cta, url: fb.url },
+        note: 'Odkaz si ulož, funguje stále.',
+        unsub,
+      }),
+    });
+    return true;
+  } catch (err) {
+    console.error('freebie send failed', err && err.code, err && err.message);
+    return false;
+  }
 }
 
 /** Signed unsubscribe link for an address + list (use it in mails you send to the list). */
@@ -333,22 +387,49 @@ main{max-width:480px;width:100%}h1{font-size:clamp(30px,8vw,44px);line-height:1.
 .label{font:12px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--ash);margin:0}
 a{color:var(--paper)}b{color:var(--yellow);font-weight:600;word-break:break-all}
 button{margin-top:12px;font:600 16px system-ui,sans-serif;background:var(--yellow);color:var(--ink);border:0;border-radius:999px;padding:14px 28px;cursor:pointer}
-button:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+a.cta{display:inline-block;margin-top:4px;font:600 16px system-ui,sans-serif;background:var(--yellow);color:var(--ink);border-radius:999px;padding:14px 28px;text-decoration:none}
+button:focus-visible,a.cta:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 </style></head><body><main>${inner}</main></body></html>`, {
     status,
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' },
   });
 }
 
-function mailHtml(cfg, link) {
-  return `<!doctype html><html lang="sk"><body style="margin:0;background:#F4F1EA;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#0E0E0E">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#0E0E0E;border-radius:22px">
-<tr><td style="padding:32px 28px;color:#F4F1EA">
-<p style="margin:0 0 8px;font:12px monospace;letter-spacing:1px;text-transform:uppercase;color:#8A877F">${esc(cfg.name)}</p>
-<h1 style="margin:0 0 16px;font-size:30px;line-height:1.1">Potvrď prihlásenie.</h1>
-<p style="margin:0 0 24px;font-size:16px;line-height:1.5">Niekto (dúfam, že ty) prihlásil túto adresu na: ${esc(cfg.what)}.</p>
-<a href="${link}" style="display:inline-block;background:#FFD60A;color:#0E0E0E;text-decoration:none;font-weight:bold;padding:14px 28px;border-radius:999px">Potvrdiť e-mail</a>
-<p style="margin:24px 0 0;font-size:13px;line-height:1.5;color:#8A877F">Odkaz platí ${PENDING_HOURS} hodín. Ak si sa neprihlásil ty, ignoruj tento e-mail a adresu zmažem.</p>
+// ── mail design: the site's look (ink surface, paper text, one yellow moment, mono labels, circle-arrow button) ──
+const C = { ink: '#0E0E0E', paper: '#F4F1EA', soft: '#D9D6CC', ash: '#A8A59C', line: '#3A3935', yellow: '#FFD60A' };
+const SANS = "'Bricolage Grotesque','Helvetica Neue',Helvetica,Arial,sans-serif";
+const MONO = "'DM Mono',Menlo,Consolas,'Courier New',monospace";
+
+/** `text` and `note` are HTML (escape user data before passing it in). Table layout + inline styles for mail clients.
+ *  Web fonts load where supported (Apple Mail, iOS); Gmail falls back to Helvetica/Arial at the same weights. */
+function mailShell(env, { label, title, text, cta, note, unsub }) {
+  const site = env.SITE;
+  const button = cta ? `
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:36px 0 0"><tr>
+<td style="padding:0 16px 0 0;vertical-align:middle"><a href="${cta.url}" style="font:500 20px/1.1 ${SANS};letter-spacing:-0.01em;color:${C.paper};text-decoration:none">${esc(cta.text)}</a></td>
+<td style="vertical-align:middle"><a href="${cta.url}" style="display:block;width:52px;height:52px;border-radius:26px;background:${C.yellow};color:${C.ink};text-align:center;text-decoration:none;font:700 24px/52px Arial,Helvetica,sans-serif" aria-label="${esc(cta.text)}">&rarr;</a></td>
+</tr></table>` : '';
+  const foot = [note ? `<p style="margin:0 0 10px;font:400 13px/1.5 ${MONO};letter-spacing:0.04em;color:${C.ash}">${note}</p>` : '',
+    `<p style="margin:0;font:400 12px/1.5 ${MONO};letter-spacing:0.08em;text-transform:uppercase;color:${C.ash}"><a href="${site}/" style="color:${C.ash};text-decoration:none">jergusino.com</a>${unsub ? ` &nbsp;·&nbsp; <a href="${unsub}" style="color:${C.ash}">odhlásiť sa</a>` : ''}</p>`].join('');
+  return `<!doctype html>
+<html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="supported-color-schemes" content="dark">
+<title>${esc(title)}</title>
+<style>
+@font-face{font-family:'Bricolage Grotesque';font-weight:800;src:url(${site}/assets/fonts/BricolageGrotesque-ExtraBold.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-weight:500;src:url(${site}/assets/fonts/BricolageGrotesque-Medium.woff2) format('woff2')}
+@font-face{font-family:'DM Mono';font-weight:400;src:url(${site}/assets/fonts/DMMono-Regular.woff2) format('woff2')}
+@media (max-width:480px){.pad{padding:28px 22px !important}.ttl{font-size:38px !important}}
+</style></head>
+<body style="margin:0;padding:0;background:${C.ink}">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:${C.ink}">${esc(title)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.ink}"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px"><tr><td class="pad" style="padding:36px 32px 32px">
+<a href="${site}/" style="text-decoration:none"><img src="${site}/assets/img/email/logo-paper.png" width="150" height="30" alt="Jergušino" style="display:block;border:0;width:150px;height:30px;font:800 22px/30px ${SANS};color:${C.paper}"></a>
+<p style="margin:56px 0 14px;font:400 12px/1.2 ${MONO};letter-spacing:0.08em;text-transform:uppercase;color:${C.ash}">${esc(label)}</p>
+<h1 class="ttl" style="margin:0 0 22px;font:800 46px/0.98 ${SANS};letter-spacing:-0.04em;color:${C.paper}">${esc(title)}</h1>
+<p style="margin:0;font:500 18px/1.6 ${SANS};color:${C.soft}">${text}</p>${button}
+<div style="margin:44px 0 20px;border-top:1px solid ${C.line};font-size:0;line-height:0">&nbsp;</div>
+${foot}
 </td></tr></table></td></tr></table></body></html>`;
 }
