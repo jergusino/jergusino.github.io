@@ -4,30 +4,20 @@ body_class: home
 description: "Jergušino. Plagáty a vizuály, ktoré vyniknú."
 ---
 <section class="hero">
-  <canvas class="field" aria-hidden="true"></canvas>
   <div class="hero-in">
-    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Portfólio {{ site.time | date: "%Y" }}</p>
-    <h1 class="display hero-h"><span class="ln"><span>Plagáty a&nbsp;vizuály,</span></span><span class="ln"><span>ktoré vyniknú.</span></span></h1>
+    <h1 class="display hero-h">Plagáty a&nbsp;vizuály, ktoré vyniknú.</h1>
     <p class="hero-sub">Som grafický dizajnér. Robím plagáty a&nbsp;vizuály, pre značky aj pre radosť. Pozri sa, čo som urobil, alebo sa mi ozvi.</p>
     <div class="hero-cta">
       <a class="cta" href="#projekty">Pozri sa na&nbsp;plagáty {% include arrow.svg %}</a>
       <a class="cta cta--ghost" href="{{ '/kontakt/' | relative_url }}">Napíš mi</a>
     </div>
   </div>
-  <div class="brands" aria-label="Značky, s ktorými som spolupracoval">
-    <p class="label">Spolupráca so značkami</p>
-    <ul class="brands-list">
-      {% for b in site.data.brands %}
-      <li><a href="{{ '/spoluprace/' | append: b.slug | append: '/' | relative_url }}" aria-label="{{ b.name | escape }}"><img src="{{ b.logo | relative_url }}" alt="{{ b.name | escape }}" loading="lazy"></a></li>
-      {% endfor %}
-    </ul>
-  </div>
 </section>
 
 
 <section class="coll" id="spoluprace">
   <div class="sec-head">
-    <h2 class="h rv">Spolupráce</h2>
+    <h2 class="h">Spolupráce</h2>
   </div>
   <div class="brands-wall">
     {% for b in site.data.brands %}{% include brand-card.html b=b %}{% endfor %}
@@ -36,8 +26,8 @@ description: "Jergušino. Plagáty a vizuály, ktoré vyniknú."
 
 <section class="wall" id="projekty">
   <div class="sec-head">
-    <h2 class="h rv">Plagáty</h2>
+    <h2 class="h">Plagáty</h2>
   </div>
   {% include plagat-grid.html limit=12 class="pgrid--2rows" %}
-  <a class="btn btn--wide rv" href="{{ '/plagaty/' | relative_url }}"><span class="btn-t">Všetky plagáty</span><span class="circ">{% include arrow.svg %}</span></a>
+  <a class="btn btn--wide" href="{{ '/plagaty/' | relative_url }}"><span class="btn-t">Všetky plagáty</span><span class="circ">{% include arrow.svg %}</span></a>
 </section>
